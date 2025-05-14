@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-13 10:26+0000\n"
+"POT-Creation-Date: 2025-05-07 20:35+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
 "Last-Translator: Naser mars, 2025\n"
 "Language-Team: Persian (https://app.transifex.com/flectra/teams/41243/fa/)\n"
@@ -1520,7 +1520,7 @@ msgstr "دسته‌بندی کارکنان"
 
 #. module: hr_holidays
 #. flectra-python
-#: code:addons/hr_holidays/models/hr_employee.py:0
+#: code:addons/hr_holidays/models/hr_employee_base.py:0
 #, python-format
 msgid ""
 "Changing this working schedule results in the affected employee(s) not "
@@ -3120,7 +3120,7 @@ msgstr "فقط یک مسئول و یا مدیر می تواند درخواست �
 
 #. module: hr_holidays
 #. flectra-python
-#: code:addons/hr_holidays/models/hr_employee.py:0
+#: code:addons/hr_holidays/models/hr_employee_base.py:0
 #, python-format
 msgid "Operation not supported"
 msgstr "عملیات پشتیبانی نمی شود"

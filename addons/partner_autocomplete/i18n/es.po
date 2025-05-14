@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-26 21:55+0000\n"
+"POT-Creation-Date: 2025-05-07 20:36+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
 "Last-Translator: Larissa Manderfeld, 2025\n"
 "Language-Team: Spanish (https://app.transifex.com/flectra/teams/41243/es/)\n"
@@ -37,15 +37,6 @@ msgstr "Comprar más créditos"
 #: model:ir.model,name:partner_autocomplete.model_res_company
 msgid "Companies"
 msgstr "Compañías"
-
-#. module: partner_autocomplete
-#. flectra-python
-#: code:addons/partner_autocomplete/models/res_company.py:0
-#, python-format
-msgid "Company auto-completed by Flectra Partner Autocomplete Service"
-msgstr ""
-"Empresa autocompletada por el servicio de autocompletado de contactos de "
-"Flectra"
 
 #. module: partner_autocomplete
 #: model:ir.model.fields,field_description:partner_autocomplete.field_res_company__partner_gid
@@ -156,15 +147,7 @@ msgid "Partner Autocomplete: Sync with remote DB"
 msgstr "Autocompletar contacto: sincronización con la base de datos remota"
 
 #. module: partner_autocomplete
-#. flectra-python
-#: code:addons/partner_autocomplete/models/res_partner.py:0
-#, python-format
-msgid "Partner created by Flectra Partner Autocomplete Service"
-msgstr "Contacto creado por el servicio de autocompletado de contacto de Flectra"
-
-#. module: partner_autocomplete
 #. flectra-javascript
-#: code:addons/partner_autocomplete/static/src/xml/partner_autocomplete.xml:0
 #: code:addons/partner_autocomplete/static/src/xml/partner_autocomplete.xml:0
 #, python-format
 msgid "Search Worldwide 🌎"
@@ -195,5 +178,6 @@ msgstr "Modo de prueba"
 #. module: partner_autocomplete
 #. flectra-python
 #: code:addons/partner_autocomplete/models/res_partner.py:0
+#, python-format
 msgid "Unable to enrich company (no credit was consumed)."
 msgstr "No se puede enriquecer a la empresa (no se ha consumido crédito)."

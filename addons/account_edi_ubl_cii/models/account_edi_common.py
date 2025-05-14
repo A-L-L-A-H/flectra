@@ -1,7 +1,7 @@
 from flectra import _, models, Command
 from flectra.addons.base.models.res_bank import sanitize_account_number
 from flectra.exceptions import UserError, ValidationError
-from flectra.tools import float_repr, find_xml_value
+from flectra.tools import float_is_zero, float_repr, find_xml_value
 from flectra.tools.float_utils import float_round
 from flectra.tools.misc import clean_context, formatLang
 from flectra.tools.zeep import Client
@@ -55,7 +55,7 @@ EAS_MAPPING = {
     'CY': {'9928': 'vat'},
     'CZ': {'9929': 'vat'},
     'DE': {'9930': 'vat'},
-    'DK': {'0184': 'vat', '0198': 'vat'},
+    'DK': {'0184': 'company_registry', '0198': 'vat'},
     'EE': {'9931': 'vat'},
     'ES': {'9920': 'vat'},
     'FI': {'0216': None},
@@ -654,7 +654,8 @@ class AccountEdiCommon(models.AbstractModel):
         discount = 0
         amount_fixed_taxes = sum(d['tax_amount'] * billed_qty for d in fixed_taxes_list)
         if billed_qty * price_unit != 0 and price_subtotal is not None:
-            discount = 100 * (1 - (price_subtotal - amount_fixed_taxes) / (billed_qty * price_unit))
+            inferred_discount = 100 * (1 - (price_subtotal - amount_fixed_taxes) / (billed_qty * price_unit))
+            discount = inferred_discount if not float_is_zero(inferred_discount, 2) else 0.0
 
         # Sometimes, the xml received is very bad; e.g.:
         #   * unit price = 0, qty = 0, but price_subtotal = -200
