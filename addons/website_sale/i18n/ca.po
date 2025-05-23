@@ -31,7 +31,7 @@
 # RGB Consulting <flectra@rgbconsulting.com>, 2024
 # Quim - coopdevs <quim.rebull@coopdevs.org>, 2024
 # Óscar Fonseca <tecnico@pyming.com>, 2024
-# Xavier, 2025
+# Harcogourmet, 2025
 # Juande Gutierrez <juni55mcyt@gmail.com>, 2025
 # Wil Flectra, 2025
 # Noemi Pla, 2025

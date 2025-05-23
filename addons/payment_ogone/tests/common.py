@@ -1,13 +1,13 @@
 # Part of Flectra. See LICENSE file for full copyright and licensing details.
 
 from flectra.addons.payment.tests.common import PaymentCommon
-from flectra.addons.account.tests.common import AccountTestInvoicingCommon
 
-class OgoneCommon(AccountTestInvoicingCommon, PaymentCommon):
+
+class OgoneCommon(PaymentCommon):
 
     @classmethod
-    def setUpClass(cls, chart_template_ref=None):
-        super().setUpClass(chart_template_ref=chart_template_ref)
+    def setUpClass(cls):
+        super().setUpClass()
 
         cls.ogone = cls._prepare_provider('ogone', update_values={
             'ogone_pspid': 'dummy',

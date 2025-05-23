@@ -1347,7 +1347,7 @@ msgstr "Dünya Çapında Evde Yaşam: William'ın Hikayesi"
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal
 msgid "Lightning Talks"
-msgstr ""
+msgstr "Hızlı Sunumlar"
 
 #. module: website_event_track
 #: model_terms:event.track,description:website_event_track.event_7_track_19
@@ -1729,7 +1729,7 @@ msgstr "Reddedildi"
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal
 msgid "Regular Talks"
-msgstr ""
+msgstr "Standart Sunumlar"
 
 #. module: website_event_track
 #: model:ir.model.fields,help:website_event_track.field_event_track__track_start_relative
@@ -1870,7 +1870,7 @@ msgstr "Hoparlör Fotoğrafı"
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal
 msgid "Speaker Profile"
-msgstr ""
+msgstr "Konuşmacı Profili"
 
 #. module: website_event_track
 #. flectra-python
@@ -1953,7 +1953,7 @@ msgstr "Etiketler"
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal
 msgid "Talk Intro"
-msgstr ""
+msgstr "Sunum Tanıtımı"
 
 #. module: website_event_track
 #. flectra-python
@@ -2057,6 +2057,8 @@ msgid ""
 "These are 30 minutes talks on many different topics. Most topics are "
 "accepted in lightning talks."
 msgstr ""
+"Bunlar, birçok farklı konuda 30 dakikalık konuşmalardır. Çoğu konu, kısa "
+"sunumlar (lightning talks) kapsamında kabul edilir."
 
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal
@@ -2128,6 +2130,8 @@ msgid ""
 "Timely release of presentation material (slides),\n"
 "                            for publishing on our website."
 msgstr ""
+"Web sitemizde yayınlanmak üzere sunum materyallerinin (slaytların) zamanında"
+" paylaşılması"
 
 #. module: website_event_track
 #: model:ir.model.fields,field_description:website_event_track.field_event_track__name

@@ -23,6 +23,7 @@ export class FlectraLineChart extends FlectraChart {
         this.verticalAxisPosition = definition.verticalAxisPosition;
         this.stacked = definition.stacked;
         this.cumulative = definition.cumulative;
+        this.cumulatedStart = definition.cumulatedStart;
     }
 
     getDefinition() {
@@ -31,6 +32,7 @@ export class FlectraLineChart extends FlectraChart {
             verticalAxisPosition: this.verticalAxisPosition,
             stacked: this.stacked,
             cumulative: this.cumulative,
+            cumulatedStart: this.cumulatedStart,
         };
     }
 }

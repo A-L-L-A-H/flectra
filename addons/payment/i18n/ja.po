@@ -2118,7 +2118,7 @@ msgstr "Safariを開き、プリンタのIPアドレスに移動します。そ�
 #: code:addons/payment/models/payment_method.py:0
 #, python-format
 msgid "You cannot delete the default payment method."
-msgstr ""
+msgstr "デフォルトの支払方法は削除できません。"
 
 #. module: payment
 #. flectra-python

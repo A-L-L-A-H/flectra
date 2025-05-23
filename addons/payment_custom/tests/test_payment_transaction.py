@@ -1,4 +1,5 @@
 # Part of Flectra. See LICENSE file for full copyright and licensing details.
+import unittest
 
 from flectra import Command, fields
 from flectra.tests import tagged
@@ -12,6 +13,9 @@ class TestPaymentTransaction(PaymentCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+
+        if 'product.product' not in cls.env:
+            raise unittest.SkipTest("requires product")
 
         cls.provider = cls._prepare_provider(code='custom')
         cls.product = cls.env['product.product'].create({

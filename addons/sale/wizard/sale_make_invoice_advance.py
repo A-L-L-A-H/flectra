@@ -4,7 +4,7 @@
 from flectra import _, api, fields, models, SUPERUSER_ID
 from flectra.exceptions import UserError
 from flectra.fields import Command
-from flectra.tools import format_date, frozendict
+from flectra.tools import format_date, formatLang, frozendict
 
 
 class SaleAdvancePaymentInv(models.TransientModel):
@@ -421,7 +421,7 @@ class SaleAdvancePaymentInv(models.TransientModel):
         self.ensure_one()
         context = {'lang': order.partner_id.lang}
         if self.advance_payment_method == 'percentage':
-            name = _("Down payment of %s%%", self.amount)
+            name = _("Down payment of %s%%", formatLang(self.env(context=context), self.amount))
         else:
             name = _('Down Payment')
         del context
