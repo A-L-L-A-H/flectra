@@ -1126,7 +1126,7 @@ msgstr "Alle Benutzer"
 #: code:addons/web/static/src/views/fields/domain/domain_field.js:0
 #, python-format
 msgid "Allow expressions"
-msgstr ""
+msgstr "Ausdrücke erlauben"
 
 #. module: web
 #. flectra-javascript
@@ -3700,7 +3700,7 @@ msgstr ""
 #: code:addons/web/static/src/views/fields/domain/domain_field.js:0
 #, python-format
 msgid "If true, non-literals are accepted"
-msgstr ""
+msgstr "Wenn wahr, werden Nicht-Buchstabensymbole akzeptiert."
 
 #. module: web
 #. flectra-javascript
@@ -7241,13 +7241,15 @@ msgstr ""
 #, python-format
 msgid "The domain involves non-literals. Their evaluation might fail."
 msgstr ""
+"Die Domain enthält Nicht-Buchstabensymbole. Ihre Auswertung könnte "
+"fehlschlagen."
 
 #. module: web
 #. flectra-javascript
 #: code:addons/web/static/src/views/fields/domain/domain_field.js:0
 #, python-format
 msgid "The domain should not involve non-literals"
-msgstr ""
+msgstr "Die Domain sollte keine Nicht-Buchstabensymbole enthalten."
 
 #. module: web
 #. flectra-javascript

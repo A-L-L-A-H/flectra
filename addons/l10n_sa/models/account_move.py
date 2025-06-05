@@ -2,16 +2,19 @@
 # Part of Flectra. See LICENSE file for full copyright and licensing details.
 import base64
 
-from flectra import api, fields, models, _
-from flectra.exceptions import UserError
-from flectra.tools import float_repr
+from flectra import api, fields, models
+from flectra.tools import float_repr, format_datetime
 
 
 class AccountMove(models.Model):
     _inherit = 'account.move'
 
     l10n_sa_qr_code_str = fields.Char(string='Zatka QR Code', compute='_compute_qr_code_str')
-    l10n_sa_confirmation_datetime = fields.Datetime(string='Confirmation Date', readonly=True, copy=False)
+    l10n_sa_confirmation_datetime = fields.Datetime(string='Confirmation Date',
+                                                    readonly=True,
+                                                    copy=False,
+                                                    help="""Date when the invoice is confirmed and posted.
+                                                    In other words, it is the date on which the invoice is generated as final document (after securing all internal approvals).""")
 
     @api.depends('country_code', 'move_type')
     def _compute_show_delivery_date(self):
@@ -60,6 +63,10 @@ class AccountMove(models.Model):
                 if vals:
                     move.write(vals)
         return res
+
+    def get_l10n_sa_confirmation_datetime_sa_tz(self):
+        self.ensure_one()
+        return format_datetime(self.env, self.l10n_sa_confirmation_datetime, tz='Asia/Riyadh', dt_format='Y-MM-dd\nHH:mm:ss')
 
     def _l10n_sa_reset_confirmation_datetime(self):
         self.filtered(lambda m: m.country_code == 'SA').l10n_sa_confirmation_datetime = False

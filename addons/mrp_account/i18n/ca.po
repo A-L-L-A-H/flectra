@@ -16,7 +16,7 @@
 # Eugeni Chafer <eugeni@chafer.cat>, 2023
 # marcescu, 2023
 # Iván Infantes Castarnado, 2024
-# Xavier, 2025
+# Harcogourmet, 2025
 # Wil Flectra, 2025
 # 
 msgid ""
