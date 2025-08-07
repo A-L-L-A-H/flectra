@@ -2,9 +2,10 @@
 # Part of Flectra. See LICENSE file for full copyright and licensing details.
 
 from flectra.addons.mail.tests.mail_tracking_duration_mixin_case import MailTrackingDurationMixinCase
-from flectra.tests import Form
+from flectra.tests import Form, tagged
 
 
+@tagged('is_query_count')
 class TestProjectTaskMailTrackingDuration(MailTrackingDurationMixinCase):
 
     @classmethod

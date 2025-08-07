@@ -3,7 +3,7 @@
 # 	* mail_group
 # 
 # Translators:
-# Wil Flectra, 2024
+# Wil Flectra, 2023
 # Larissa Manderfeld, 2025
 # 
 msgid ""
@@ -538,7 +538,7 @@ msgstr ""
 #. module: mail_group
 #: model:ir.model.fields,help:mail_group.field_mail_group__alias_domain
 msgid "Email domain e.g. 'example.com' in 'flectra@example.com'"
-msgstr "E-Mail-Domain z. B. 'example.com' in 'flectra@example.com'"
+msgstr "E-Mail-Domain z. B. 'beispiel.com' in 'flectra@beispiel.com'"
 
 #. module: mail_group
 #: model_terms:ir.ui.view,arch_db:mail_group.mail_group_view_form
@@ -1392,7 +1392,7 @@ msgid ""
 "<jobs@example.flectrahq.com>"
 msgstr ""
 "Die Bezeichnung des E-Mail-Alias, z. B. „Jobs“, falls Sie E-Mails für "
-"<jobs@example.flectrahq.com> erhalten möchten"
+"<jobs@beispiel.flectrahq.com> erhalten möchten"
 
 #. module: mail_group
 #. flectra-python

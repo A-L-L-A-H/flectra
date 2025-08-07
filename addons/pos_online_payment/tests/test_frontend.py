@@ -14,7 +14,7 @@ from flectra.addons.point_of_sale.tests.common import archive_products
 import flectra.tests
 
 
-@flectra.tests.tagged('post_install', '-at_install')
+@flectra.tests.tagged('post_install', '-at_install', 'is_tour')
 class TestUi(AccountTestInvoicingCommon, OnlinePaymentCommon):
 
     @classmethod

@@ -21,6 +21,7 @@
 # Wil Flectra, 2024
 # Nadia Martynova, 2024
 # Ilya Rozhkov, 2024
+# Anastasiia Koroleva, 2025
 # 
 msgid ""
 msgstr ""
@@ -28,7 +29,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-09 20:37+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: Ilya Rozhkov, 2024\n"
+"Last-Translator: Anastasiia Koroleva, 2025\n"
 "Language-Team: Russian (https://app.transifex.com/flectra/teams/41243/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1994,7 +1995,7 @@ msgstr "Преобразует указанную строку в верхний
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid "Converts a string to a numeric value."
-msgstr ""
+msgstr "Преобразует строку текста в числовое значение."
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -6955,21 +6956,21 @@ msgstr "Основание (%s) должно быть от 2 до 36 включ�
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid "The base (%s) must be strictly positive."
-msgstr ""
+msgstr "Основание (%s) должно быть строго положительным числом."
 
 #. module: spreadsheet
 #. flectra-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid "The base must be different from 1."
-msgstr ""
+msgstr "Основание должно отличаться от 1."
 
 #. module: spreadsheet
 #. flectra-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid "The base of the logarithm."
-msgstr ""
+msgstr "Основание логарифма."
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -8205,7 +8206,7 @@ msgstr "Логарифм числа с основанием e (число Эйл
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid "The logarithm of a number, for a given base."
-msgstr ""
+msgstr "Логарифм числа по заданному основанию."
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -10147,7 +10148,7 @@ msgstr "Значение, для которого вычисляется лог�
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid "The value for which to calculate the logarithm."
-msgstr ""
+msgstr "Значение, для которого нужно вычислить логарифм."
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -12038,7 +12039,7 @@ msgstr "начальная_дата (%s) должна быть на или пе�
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid "the string to be converted"
-msgstr ""
+msgstr "строка для преобразования"
 
 #. module: spreadsheet
 #. flectra-javascript

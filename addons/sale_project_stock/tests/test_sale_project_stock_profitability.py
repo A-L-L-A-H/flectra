@@ -2,9 +2,12 @@
 
 from flectra import Command, fields
 from flectra.addons.sale_project.tests.test_project_profitability import TestProjectProfitabilityCommon
+from flectra.addons.stock_account.tests.test_anglo_saxon_valuation_reconciliation_common import ValuationReconciliationTestCommon
+from flectra.tests.common import tagged
 
 
-class TestSaleProjectStockProfitability(TestProjectProfitabilityCommon):
+@tagged("post_install", "-at_install")
+class TestSaleProjectStockProfitability(TestProjectProfitabilityCommon, ValuationReconciliationTestCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

@@ -8,6 +8,7 @@ from flectra import http, _
 from flectra.addons.http_routing.models.ir_http import slug
 from flectra.osv.expression import AND
 from flectra.http import request
+from flectra.tools import escape_psql
 from flectra.tools.misc import groupby
 
 
@@ -286,7 +287,7 @@ class WebsiteHrRecruitment(http.Controller):
     @http.route('/website_hr_recruitment/check_recent_application', type='json', auth="public", website=True)
     def check_recent_application(self, email, job_id):
         date_limit = datetime.now() - timedelta(days=90)
-        domain = [('email_from', '=ilike', email),
+        domain = [('email_from', '=ilike', escape_psql(email)),
                   ('create_date', '>=', date_limit),
                   ('job_id.website_id', 'in', [http.request.website.id, False])]
         recent_applications = http.request.env['hr.applicant'].sudo().search(domain)

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-09 20:36+0000\n"
+"POT-Creation-Date: 2025-06-13 00:52+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
 "Last-Translator: Malaz Abuidris <msea@flectrahq.com>, 2025\n"
 "Language-Team: Arabic (https://app.transifex.com/flectra/teams/41243/ar/)\n"
@@ -12172,6 +12172,13 @@ msgstr ""
 "على نظام شبكات توصيل المحتوى "
 
 #. module: website
+#. flectra-python
+#: code:addons/website/models/website_rewrite.py:0
+#, python-format
+msgid "URL must not start with '#'."
+msgstr "يجب ألا يبدأ عنوان URL بـ '#' "
+
+#. module: website
 #: model:ir.model.fields,field_description:website.field_website_rewrite__url_to
 msgid "URL to"
 msgstr "رابط URL إلى "
@@ -13721,6 +13728,14 @@ msgstr "و"
 #, python-format
 msgid "and copy paste the address of the font page here."
 msgstr "وقم بنسخ ولصق عنوان صفحة الخطوط هنا. "
+
+#. module: website
+#. flectra-python
+#: code:addons/website/models/website_rewrite.py:0
+#, python-format
+msgid "base URL of 'URL to' should not be same as 'URL from'."
+msgstr ""
+"يجب ألا يكون عنوان URL الأساسي لـ 'عنوان URL إلى' هو نفسه 'عنوان URL من'. "
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippets

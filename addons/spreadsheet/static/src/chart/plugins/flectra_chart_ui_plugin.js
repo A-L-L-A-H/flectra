@@ -203,6 +203,7 @@ export class FlectraChartUIPlugin extends UIPlugin {
         const definition = this.getters.getChart(chartId).getDefinitionForDataSource();
         const dataSourceId = this._getFlectraChartDataSourceId(chartId);
         this.dataSources.add(dataSourceId, ChartDataSource, definition);
+        this._addDomain(chartId);
     }
 
     /**

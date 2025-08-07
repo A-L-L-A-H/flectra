@@ -597,7 +597,7 @@ msgstr "Thẻ tiêu đề thành phần lớn"
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_background_options
 msgid "Blobs"
-msgstr "Đốm màu"
+msgstr "Hình tự do"
 
 #. module: web_editor
 #. flectra-javascript
@@ -3011,7 +3011,7 @@ msgstr "Xin lỗi! Chúng tôi không thể tạo ra phản hồi. Vui lòng th�
 #: code:addons/web_editor/controllers/main.py:0
 #, python-format
 msgid "Sorry, your prompt is too long. Try to say it in fewer words."
-msgstr "Rất tiếc, lời nhắc của bạn quá dài. Hãy cố gắng rút gọn lại nhé."
+msgstr "Rất tiếc, yêu cầu của bạn quá dài. Hãy cố gắng rút gọn lại nhé."
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options
@@ -3199,7 +3199,7 @@ msgstr ""
 #: code:addons/web_editor/static/src/xml/snippets.xml:0
 #, python-format
 msgid "Theme"
-msgstr "Chủ đề"
+msgstr "Giao diện"
 
 #. module: web_editor
 #. flectra-javascript

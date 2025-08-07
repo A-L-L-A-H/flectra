@@ -6,6 +6,7 @@
 # Matjaz Mozetic <m.mozetic@matmoz.si>, 2023
 # Tadej Lupšina <tadej@hbs.si>, 2023
 # Martin Trigaux, 2023
+# Jan Zorko, 2025
 # Aleš Pipan, 2025
 # 
 msgid ""
@@ -27,12 +28,12 @@ msgstr ""
 #: code:addons/sale_loyalty_delivery/models/loyalty_reward.py:0
 #, python-format
 msgid " (Max %s)"
-msgstr ""
+msgstr " (Maks. %s)"
 
 #. module: sale_loyalty_delivery
 #: model_terms:ir.ui.view,arch_db:sale_loyalty_delivery.loyalty_reward_view_kanban_inherit_loyalty_delivery
 msgid "( Max"
-msgstr ""
+msgstr "( Maks"
 
 #. module: sale_loyalty_delivery
 #. flectra-python
@@ -70,12 +71,12 @@ msgstr "Program zvestobe"
 #. module: sale_loyalty_delivery
 #: model:ir.model,name:sale_loyalty_delivery.model_loyalty_reward
 msgid "Loyalty Reward"
-msgstr ""
+msgstr "Nagrada za zvestobo"
 
 #. module: sale_loyalty_delivery
 #: model:ir.model.fields,field_description:sale_loyalty_delivery.field_loyalty_reward__reward_type
 msgid "Reward Type"
-msgstr ""
+msgstr "Vrsta nagrade"
 
 #. module: sale_loyalty_delivery
 #: model:ir.model,name:sale_loyalty_delivery.model_sale_order

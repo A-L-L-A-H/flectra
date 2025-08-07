@@ -9,7 +9,7 @@ from flectra.tests import tagged
 from flectra.tests.common import users
 
 
-@tagged('website_visitor')
+@tagged('website_visitor', 'is_query_count')
 class TestWebsiteVisitor(TestCrmCommon, WebsiteVisitorTests):
 
     def setUp(self):

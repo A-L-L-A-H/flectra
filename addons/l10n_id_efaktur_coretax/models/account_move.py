@@ -2,7 +2,6 @@
 
 from flectra import _, api, fields, models
 from flectra.exceptions import UserError, ValidationError, RedirectWarning
-from flectra.tools import cleanup_xml_node
 
 COUNTRY_CODE_MAP = {
     "BD": "BGD", "BE": "BEL", "BF": "BFA", "BG": "BGR", "BA": "BIH", "BB": "BRB", "WF": "WLF", "BL": "BLM", "BM": "BMU",

@@ -22,7 +22,7 @@ class Lang(models.Model):
     @api.model
     def _get_user_spreadsheet_locale(self):
         """Convert the flectra lang to a spreadsheet locale."""
-        lang = self._lang_get(self.env.user.lang)
+        lang = self._lang_get(self.env.user.lang or 'en_US')
         return lang._flectra_lang_to_spreadsheet_locale()
 
     def _flectra_lang_to_spreadsheet_locale(self):

@@ -7165,7 +7165,7 @@ msgstr "이 셀의 내용이 XLSX 파일(%s자 이상)에 비해 너무 깁니�
 #: code:addons/web/static/src/views/fields/domain/domain_field.js:0
 #, python-format
 msgid "The domain involves non-literals. Their evaluation might fail."
-msgstr ""
+msgstr "도메인에 비문자열이 포함되어 있습니다. 평가가 실패할 수 있습니다."
 
 #. module: web
 #. flectra-javascript
@@ -17319,7 +17319,7 @@ msgstr "고글"
 #: code:addons/web/static/src/core/emoji_picker/emoji_data.js:0
 #, python-format
 msgid "gold"
-msgstr "금메달"
+msgstr "골드"
 
 #. module: web
 #. flectra-javascript
@@ -24507,7 +24507,7 @@ msgstr "인내하는 얼굴"
 #: code:addons/web/static/src/core/emoji_picker/emoji_data.js:0
 #, python-format
 msgid "person"
-msgstr "사람"
+msgstr "개인"
 
 #. module: web
 #. flectra-javascript

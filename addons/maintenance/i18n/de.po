@@ -3,7 +3,7 @@
 # 	* maintenance
 # 
 # Translators:
-# Wil Flectra, 2024
+# Wil Flectra, 2023
 # Larissa Manderfeld, 2025
 # 
 msgid ""
@@ -515,7 +515,7 @@ msgstr "E-Mail-CC"
 #. module: maintenance
 #: model:ir.model.fields,help:maintenance.field_maintenance_equipment_category__alias_domain
 msgid "Email domain e.g. 'example.com' in 'flectra@example.com'"
-msgstr "E-Mail-Domain z. B. 'example.com' in 'flectra@example.com'"
+msgstr "E-Mail-Domain z. B. 'beispiel.com' in 'flectra@beispiel.com'"
 
 #. module: maintenance
 #: model:ir.model.fields,field_description:maintenance.field_maintenance_request__repeat_until
@@ -1516,7 +1516,7 @@ msgid ""
 "<jobs@example.flectrahq.com>"
 msgstr ""
 "Die Bezeichnung des E-Mail-Alias, z. B. „Jobs“, falls Sie E-Mails für "
-"<jobs@example.flectrahq.com> erhalten möchten"
+"<jobs@beispiel.flectrahq.com> erhalten möchten"
 
 #. module: maintenance
 #: model:res.groups,comment:maintenance.group_equipment_manager

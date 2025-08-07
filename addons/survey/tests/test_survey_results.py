@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 # Part of Flectra. See LICENSE file for full copyright and licensing details.
 
+from flectra.tests import tagged
+
 from flectra.addons.survey.controllers.main import Survey
 from flectra.addons.survey.tests import common
 from flectra.addons.website.tools import MockRequest
 
 
+@tagged("is_query_count")
 class TestSurveyResults(common.TestSurveyResultsCommon):
     """ Check the results and the performance of the different filters combinations.
     The filters can be combined but their query count doesn't add up if their

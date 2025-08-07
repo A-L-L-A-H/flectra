@@ -818,6 +818,22 @@ class TestUi(TestPointOfSaleHttpCommon):
         self.assertEqual(len(pos_session.statement_line_ids), 1)
         self.assertEqual(pos_session.statement_line_ids[0].amount, -10)
 
+    def test_pos_closing_cash_decimals(self):
+        """
+        Test that the closing cash difference is rounded according to the currency specification
+        and does not have excessive decimal places.
+        """
+        self.main_pos_config.open_ui()
+        current_session = self.main_pos_config.current_session_id
+        current_session.post_closing_cash_details(560.40)
+        current_session.close_session_from_ui()
+
+        self.main_pos_config.with_user(self.pos_user).open_ui()
+        self.start_tour("/pos/ui?config_id=%d" % self.main_pos_config.id, 'CashClosingDecimals', login="pos_user")
+
+        pos_session = self.main_pos_config.current_session_id
+        self.assertEqual(pos_session.message_ids[0].body.striptags(), 'Opening difference: $\xa0-\ufeff1.91')
+
     def test_cash_payments_should_reflect_on_next_opening(self):
         self.main_pos_config.with_user(self.pos_user).open_ui()
         self.start_tour("/pos/ui?config_id=%d" % self.main_pos_config.id, 'OrderPaidInCash', login="pos_user")
@@ -954,6 +970,18 @@ class TestUi(TestPointOfSaleHttpCommon):
 
         self.main_pos_config.with_user(self.pos_user).open_ui()
         self.start_tour("/pos/ui?config_id=%d" % self.main_pos_config.id, 'ShowTaxExcludedTour', login="pos_user")
+
+    def test_chrome_without_cash_move_permission(self):
+        self.env.user.write({'groups_id': [
+            Command.set(
+                [
+                    self.env.ref('base.group_user').id,
+                    self.env.ref('point_of_sale.group_pos_user').id,
+                ]
+            )
+        ]})
+        self.main_pos_config.open_ui()
+        self.start_tour("/pos/ui?config_id=%d" % self.main_pos_config.id, 'chrome_without_cash_move_permission', login="accountman")
 
     def test_09_pos_barcodes_scan_product_pacaging(self):
         product = self.env['product.product'].create({

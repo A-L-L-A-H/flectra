@@ -1522,9 +1522,8 @@ class PosSession(models.Model):
         message = ""
         if difference:
             message = f"{state} difference: " \
-                      f"{self.currency_id.symbol + ' ' if self.currency_id.position == 'before' else ''}" \
-                      f"{self.currency_id.round(difference)} " \
-                      f"{self.currency_id.symbol if self.currency_id.position == 'after' else ''}" + Markup('<br/>')
+                      f"{self.currency_id.format(difference) }" \
+                          + Markup('<br/>')
         if notes:
             message += escape(notes).replace('\n', Markup('<br/>'))
         if message:
@@ -1575,7 +1574,7 @@ class PosSession(models.Model):
         if not sessions:
             raise UserError(_("There is no cash payment method for this PoS Session"))
 
-        self.env['account.bank.statement.line'].sudo().create([
+        self.env['account.bank.statement.line'].create([
             {
                 'pos_session_id': session.id,
                 'journal_id': session.cash_journal_id.id,
@@ -1897,6 +1896,7 @@ class PosSession(models.Model):
         config = self.env['pos.config'].search_read(**params['search_params'])[0]
         config['use_proxy'] = config['is_posbox'] and (config['iface_electronic_scale'] or config['iface_print_via_proxy']
                                                        or config['iface_scan_via_proxy'] or config['iface_customer_facing_display_via_proxy'])
+        config['has_cash_move_permission'] = self.user_has_groups('account.group_account_invoice')
         return config
 
     def _loader_params_pos_bill(self):
