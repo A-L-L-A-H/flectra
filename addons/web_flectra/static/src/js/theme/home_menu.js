@@ -5,7 +5,6 @@ import { ErrorHandler, NotUpdatable } from "@web/core/utils/components";
 import { NavBar, MenuDropdown, MenuItem } from "@web/webclient/navbar/navbar";
 import { useService } from "@web/core/utils/hooks";
 import { isMobileOS } from "@web/core/browser/feature_detection";
-
 export default class HomeMenu extends Component{
 
     setup() {
@@ -29,9 +28,19 @@ export default class HomeMenu extends Component{
     }
 
     onKeyDown(){
-        if(document.activeElement !== this.searchBox.el && this.ui.activeElement === document){
-            this.focusOnSearch()
-        }
+       const themePanel = document.querySelector('.f-theme-customizer-panel');
+       const activeEl = document.activeElement;
+       const isThemeActive =
+            themePanel?.contains(activeEl) ||
+            ["INPUT", "TEXTAREA", "SELECT"].includes(activeEl?.tagName);
+
+       if (
+            !isThemeActive &&
+            activeEl !== this.searchBox.el &&
+            this.ui.activeElement === document
+       ) {
+            this.focusOnSearch();
+       }
     }
 
     focusOnSearch(){
