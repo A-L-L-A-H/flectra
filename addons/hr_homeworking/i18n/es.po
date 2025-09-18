@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-09 20:37+0000\n"
-"PO-Revision-Date: 2025-08-06 09:55+0000\n"
+"PO-Revision-Date: 2025-08-26 01:40+0000\n"
 "Last-Translator: \"Larissa Manderfeld (lman)\" <lman@flectrahq.com>\n"
 "Language-Team: Spanish <https://translate.flectrahq.com/projects/flectra-17/"
 "hr_homeworking/es/>\n"
@@ -137,7 +137,7 @@ msgstr "Cadena de día de la semana"
 #: model:ir.model.fields,field_description:hr_homeworking.field_homework_location_wizard__display_name
 #: model:ir.model.fields,field_description:hr_homeworking.field_hr_employee_location__display_name
 msgid "Display Name"
-msgstr "Nombre mostrado"
+msgstr "Nombre para mostrar"
 
 #. module: hr_homeworking
 #. flectra-javascript

@@ -619,6 +619,9 @@ export class Wysiwyg extends Component {
 
         if (options.snippets) {
             $(this.flectraEditor.document.body).addClass('editor_enable');
+            if (localization.direction === "rtl") {
+                this.flectraEditor.document.body.setAttribute("is-rtl-backend", "true");
+            }
             this.snippetsMenu = await this._createSnippetsMenuInstance(options);
             await this._insertSnippetMenu();
 

@@ -1,6 +1,10 @@
 # Part of Flectra. See LICENSE file for full copyright and licensing details.
 
+import unittest
+
 import flectra.tests
+
+from flectra.tests.common import new_test_user
 from flectra.tools import mute_logger
 
 
@@ -51,3 +55,19 @@ class TestRestrictedEditor(flectra.tests.HttpCase):
             ])]
         })
         self.start_tour(self.env['website'].get_client_action_url('/'), 'test_restricted_editor_test_admin', login='restricted')
+
+    # FIXME the logic of the commit that introduced the fix at 8c41c147a4c6a415e
+    # was reverted, so this test is disabled for now. Branding *on views* as
+    # a restricted editor is something we want in some custo (e.g. flectrahq.com).
+    # See commit messages for details.
+    @unittest.skip
+    @mute_logger('flectra.addons.http_routing.models.ir_http', 'flectra.http')
+    def test_03_restricted_editor_tester(self):
+        """
+        Tests that restricted users cannot edit ir.ui.view records despite being
+        on a page of a record (main_object) they can edit.
+        """
+        self.user_test = new_test_user(self.env, login='restricted', website_id=False)
+        self.user_test.groups_id |= self.env.ref('website.group_website_restricted_editor')
+        self.user_test.groups_id |= self.env.ref('test_website.group_test_website_tester')
+        self.start_tour(self.env['website'].get_client_action_url('/test_model/1'), 'test_restricted_editor_tester', login='restricted')

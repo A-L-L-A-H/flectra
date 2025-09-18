@@ -99,7 +99,7 @@ def _initialize_db(id, db_name, demo, lang, user_password, login='admin', countr
 
 
 def _check_faketime_mode(db_name):
-    if os.getenv('FLECTRA_FAKETIME_TEST_MODE') and db_name != 'postgres':
+    if os.getenv('FLECTRA_FAKETIME_TEST_MODE') and db_name in flectra.tools.config['db_name'].split(','):
         try:
             db = flectra.sql_db.db_connect(db_name)
             with db.cursor() as cursor:

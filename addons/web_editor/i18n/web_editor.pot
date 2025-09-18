@@ -3541,6 +3541,13 @@ msgstr ""
 
 #. module: web_editor
 #. flectra-javascript
+#: code:addons/web_editor/static/src/js/editor/snippets.options.js:0
+#, python-format
+msgid "WebP compression not supported on this browser"
+msgstr ""
+
+#. module: web_editor
+#. flectra-javascript
 #: code:addons/web_editor/static/src/js/editor/flectra-editor/src/FlectraEditor.js:0
 #: code:addons/web_editor/static/src/js/editor/flectra-editor/src/FlectraEditor.js:0
 #: code:addons/web_editor/static/src/js/editor/flectra-editor/src/FlectraEditor.js:0
