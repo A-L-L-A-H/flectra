@@ -1,6 +1,6 @@
 # Translation of Flectra Server.
 # This file contains the translation of the following modules:
-# 	* spreadsheet
+# * spreadsheet
 #
 # Translators:
 # Ivana Bartonkova, 2023
@@ -14,21 +14,23 @@
 # Tereza Mokrá, 2024
 # Wil Flectra, 2024
 # Marta Wacławek, 2025
-#
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-12 02:57+0000\n"
-"PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: Marta Wacławek, 2025\n"
-"Language-Team: Czech (https://app.transifex.com/flectra/teams/41243/cs/)\n"
+"POT-Creation-Date: 2025-12-29 18:38+0000\n"
+"PO-Revision-Date: 2026-01-17 08:19+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
+"Language-Team: Czech <https://translate.flectrahq.com/projects/flectra-17/"
+"spreadsheet/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n "
-"<= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : "
+"(n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+"X-Generator: Weblate 5.14.3\n"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -2205,7 +2207,7 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid "Data validation"
-msgstr ""
+msgstr "Ověřování dat"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -3158,7 +3160,25 @@ msgstr ""
 #. flectra-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
-msgid "Function [[FUNCTION_NAME]] expects number values for %s, but got a %s."
+msgid ""
+"Function [[FUNCTION_NAME]] expects number values for %s, but got a boolean."
+msgstr ""
+
+#. module: spreadsheet
+#. flectra-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+#, python-format
+msgid ""
+"Function [[FUNCTION_NAME]] expects number values for %s, but got a string."
+msgstr ""
+
+#. module: spreadsheet
+#. flectra-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+#, python-format
+msgid ""
+"Function [[FUNCTION_NAME]] expects number values for %s, but got an empty "
+"value."
 msgstr ""
 
 #. module: spreadsheet
@@ -5219,7 +5239,7 @@ msgstr "Produkt hodnot z rozsahu tabulky."
 #: code:addons/spreadsheet/static/src/pivot/pivot_time_adapters.js:0
 #, python-format
 msgid "Q%(quarter)s %(year)s"
-msgstr ""
+msgstr "Q%(quarter)s %(year)s"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -5744,7 +5764,7 @@ msgstr "Vybrat vše"
 #: code:addons/spreadsheet/static/src/global_filters/components/filter_value/filter_value.xml:0
 #, python-format
 msgid "Select period..."
-msgstr ""
+msgstr "Vybrat období..."
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -5794,7 +5814,7 @@ msgstr "Sdílet"
 #: code:addons/spreadsheet/static/src/components/share_button/share_button.xml:0
 #, python-format
 msgid "Share to web"
-msgstr ""
+msgstr "Sdílet na web"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -5973,7 +5993,7 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid "Split text into columns"
-msgstr ""
+msgstr "Split text into columns"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -7808,7 +7828,7 @@ msgstr "Maxpoint musí být číslo"
 
 #. module: spreadsheet
 #. flectra-javascript
-#: code:addons/spreadsheet/static/src/chart/flectra_menu/figure_component.js:0
+#: code:addons/spreadsheet/static/src/helpers/helpers.js:0
 #, python-format
 msgid ""
 "The menu linked to this chart doesn't have an corresponding action. Please "
@@ -10376,9 +10396,7 @@ msgstr ""
 #. flectra-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
-msgid ""
-"Value for parameter %d is missing, while the function [[FUNCTION_NAME]] "
-"expect a number or a range."
+msgid "Value for parameter %s is missing in [[FUNCTION_NAME]]."
 msgstr ""
 
 #. module: spreadsheet

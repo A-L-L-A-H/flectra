@@ -4,11 +4,13 @@
 from flectra import Command
 
 from flectra.tests import common, tagged, Form
+from flectra.addons.account.tests.common import AccountTestInvoicingCommon
 from flectra.tools import mute_logger
 from datetime import datetime
 
 
-class TestDropship(common.TransactionCase):
+@tagged('post_install', '-at_install')
+class TestDropship(AccountTestInvoicingCommon):
 
     @classmethod
     def setUpClass(cls):

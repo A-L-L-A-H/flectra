@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-16 13:49+0000\n"
+"POT-Creation-Date: 2025-12-29 18:37+0000\n"
 "PO-Revision-Date: 2022-09-22 05:45+0000\n"
 "Last-Translator: Baskhuu Lodoikhuu <baskhuujacara@gmail.com>, 2022\n"
 "Language-Team: Mongolian (https://app.transifex.com/flectra/teams/41243/mn/)\n"
@@ -46,7 +46,8 @@ msgstr "Хэрэглэгчдийг Google -р нэвтрэхийг зөвшөө�
 #. module: auth_oauth
 #: model_terms:ir.ui.view,arch_db:auth_oauth.res_config_settings_view_form
 msgid "Allow users to sign in with their Google account"
-msgstr "Хэрэглэгчид өөрсдийн Google account-аа ашиглан нэвтэрч орохыг зөвшөөрөх"
+msgstr ""
+"Хэрэглэгчид өөрсдийн Google account-аа ашиглан нэвтэрч орохыг зөвшөөрөх"
 
 #. module: auth_oauth
 #: model:ir.model.fields,field_description:auth_oauth.field_auth_oauth_provider__enabled
@@ -236,8 +237,14 @@ msgstr ""
 #. flectra-python
 #: code:addons/auth_oauth/controllers/main.py:0
 #, python-format
-msgid "You do not have access to this database or your invitation has expired. Please ask for an invitation and be sure to follow the link in your invitation email."
-msgstr "Танд энэ өгөгдлийн бааз руу хандах эрх алга эсвэл таны урилгын хугацаа дууссан байна. Урилгын хүсэлт илгээж улмаар ирсэн имэйл доторх холбоосыг ашиглан хандаарай."
+msgid ""
+"You do not have access to this database or your invitation has expired. "
+"Please ask for an invitation and be sure to follow the link in your "
+"invitation email."
+msgstr ""
+"Танд энэ өгөгдлийн бааз руу хандах эрх алга эсвэл таны урилгын хугацаа "
+"дууссан байна. Урилгын хүсэлт илгээж улмаар ирсэн имэйл доторх холбоосыг "
+"ашиглан хандаарай."
 
 #. module: auth_oauth
 #: model_terms:ir.ui.view,arch_db:auth_oauth.view_oauth_provider_form

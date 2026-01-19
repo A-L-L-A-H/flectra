@@ -15,7 +15,7 @@ from flectra.tools import file_open, mute_logger
 
 from flectra.addons.payment import utils as payment_utils
 from flectra.addons.payment_stripe import utils as stripe_utils
-from flectra.addons.payment_stripe.const import HANDLED_WEBHOOK_EVENTS
+from flectra.addons.payment_stripe.const import CURRENCY_DECIMALS, HANDLED_WEBHOOK_EVENTS
 
 _logger = logging.getLogger(__name__)
 
@@ -184,7 +184,9 @@ class StripeController(http.Controller):
         """
         amount_to_refund = refund_object['amount']
         converted_amount = payment_utils.to_major_currency_units(
-            amount_to_refund, source_tx_sudo.currency_id
+            amount_to_refund,
+            source_tx_sudo.currency_id,
+            arbitrary_decimal_number=CURRENCY_DECIMALS.get(source_tx_sudo.currency_id.name),
         )
         return source_tx_sudo._create_child_transaction(converted_amount, is_refund=True)
 

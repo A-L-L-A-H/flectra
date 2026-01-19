@@ -1,23 +1,23 @@
 # Translation of Flectra Server.
 # This file contains the translation of the following modules:
 # 	* pos_online_payment
-# 
+#
 # Translators:
 # Wil Flectra, 2023
 # Rasareeyar Lappiam, 2023
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-26 21:55+0000\n"
+"POT-Creation-Date: 2025-12-29 18:37+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
 "Last-Translator: Rasareeyar Lappiam, 2023\n"
 "Language-Team: Thai (https://app.transifex.com/flectra/teams/41243/th/)\n"
+"Language: th\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: th\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: pos_online_payment
@@ -27,8 +27,7 @@ msgstr "<strong>เกิดข้อผิดพลาด:</strong> สกุ�
 
 #. module: pos_online_payment
 #: model_terms:ir.ui.view,arch_db:pos_online_payment.pay_confirmation
-msgid ""
-"<strong>Error:</strong> There was a problem during the payment process."
+msgid "<strong>Error:</strong> There was a problem during the payment process."
 msgstr "<strong>เกิดข้อผิดพลาด:</strong> เกิดปัญหาระหว่างขั้นตอนการชำระเงิน"
 
 #. module: pos_online_payment
@@ -36,7 +35,8 @@ msgstr "<strong>เกิดข้อผิดพลาด:</strong> เกิ�
 msgid ""
 "<strong>No suitable payment method could be found.</strong>\n"
 "                            <br/>\n"
-"                            If you believe that it is an error, please contact the website administrator."
+"                            If you believe that it is an error, please "
+"contact the website administrator."
 msgstr ""
 "<strong>ไม่พบวิธีการชำระเงินที่เหมาะสม</strong>\n"
 "                            <br/>\n"
@@ -60,8 +60,7 @@ msgstr "ต้องระบุตัวเลือกการชำระเ
 #. flectra-python
 #: code:addons/pos_online_payment/controllers/payment_portal.py:0
 #, python-format
-msgid ""
-"A validation payment cannot be used for a Point of Sale online payment."
+msgid "A validation payment cannot be used for a Point of Sale online payment."
 msgstr "ไม่สามารถใช้การชำระเงินเพื่อยืนยันการชำระเงินออนไลน์การขายหน้าร้านได้"
 
 #. module: pos_online_payment
@@ -78,8 +77,8 @@ msgid ""
 "same currency as the Sales Journal, or the company currency if that is not "
 "set, of the POS config."
 msgstr ""
-"ผู้ให้บริการการชำระเงินทั้งหมดที่กำหนดค่าสำหรับวิธีการชำระเงินออนไลน์ต้องใช้สกุลเงินเดียวกันกับสมุดรายวันการขาย"
-" หรือสกุลเงินของบริษัท หากไม่ได้ตั้งค่าการกำหนดค่า POS ไว้"
+"ผู้ให้บริการการชำระเงินทั้งหมดที่กำหนดค่าสำหรับวิธีการชำระเงินออนไลน์ต้องใช้สกุลเงินเดียวกันกับสมุดรายวันการขาย "
+"หรือสกุลเงินของบริษัท หากไม่ได้ตั้งค่าการกำหนดค่า POS ไว้"
 
 #. module: pos_online_payment
 #: model:ir.model.fields,field_description:pos_online_payment.field_pos_payment_method__online_payment_provider_ids
@@ -114,7 +113,6 @@ msgstr "ยกเลิกการชำระเงิน"
 #. module: pos_online_payment
 #. flectra-python
 #: code:addons/pos_online_payment/models/pos_payment.py:0
-#: code:addons/pos_online_payment/models/pos_payment.py:0
 #, python-format
 msgid "Cannot create a POS online payment without an accounting payment."
 msgstr "ไม่สามารถสร้างการชำระเงินออนไลน์ POS โดยไม่มีการชำระเงินทางบัญชีได้"
@@ -143,8 +141,7 @@ msgstr "ไม่สามารถแก้ไขข้อมูลสำคั
 #, python-format
 msgid ""
 "Could not create an online payment method (company_id=%d, pos_config_id=%d)"
-msgstr ""
-"ไม่สามารถสร้างวิธีการชำระเงินออนไลน์ได้ (company_id=%d, pos_config_id=%d)"
+msgstr "ไม่สามารถสร้างวิธีการชำระเงินออนไลน์ได้ (company_id=%d, pos_config_id=%d)"
 
 #. module: pos_online_payment
 #: model:ir.model.fields,field_description:pos_online_payment.field_pos_payment_method__has_an_online_payment_provider
@@ -209,9 +206,6 @@ msgstr "การชำระเงินทางบัญชีออนไล
 
 #. module: pos_online_payment
 #. flectra-javascript
-#: code:addons/pos_online_payment/static/src/app/screens/payment_screen/payment_screen.js:0
-#: code:addons/pos_online_payment/static/src/app/screens/payment_screen/payment_screen.js:0
-#: code:addons/pos_online_payment/static/src/app/screens/payment_screen/payment_screen.js:0
 #: code:addons/pos_online_payment/static/src/app/screens/payment_screen/payment_screen.js:0
 #, python-format
 msgid "Online payment unavailable"
@@ -445,9 +439,7 @@ msgstr "ผู้ให้บริการชำระเงินไม่ถ
 #, python-format
 msgid ""
 "The payment should either be direct, with redirection, or made by a token."
-msgstr ""
-"การชำระเงินควรเป็นการชำระเงินโดยตรง หรือมีการเปลี่ยนเส้นทาง "
-"หรือชำระด้วยโทเค็น"
+msgstr "การชำระเงินควรเป็นการชำระเงินโดยตรง หรือมีการเปลี่ยนเส้นทาง หรือชำระด้วยโทเค็น"
 
 #. module: pos_online_payment
 #. flectra-python
@@ -509,9 +501,7 @@ msgstr "มีการชำระเงินออนไลน์ที่ข
 msgid ""
 "There is a problem with the server. The order cannot be saved and therefore "
 "the online payment is not possible."
-msgstr ""
-"เกิดปัญหากับเซิร์ฟเวอร์ ไม่สามารถบันทึกคำสั่งซื้อได้ "
-"ดังนั้นจึงไม่สามารถชำระเงินออนไลน์ได้"
+msgstr "เกิดปัญหากับเซิร์ฟเวอร์ ไม่สามารถบันทึกคำสั่งซื้อได้ ดังนั้นจึงไม่สามารถชำระเงินออนไลน์ได้"
 
 #. module: pos_online_payment
 #. flectra-javascript
@@ -520,9 +510,7 @@ msgstr ""
 msgid ""
 "There is a problem with the server. The order online payment status cannot "
 "be retrieved."
-msgstr ""
-"เกิดปัญหากับเซิร์ฟเวอร์ "
-"ไม่สามารถเรียกคืนสถานะการชำระเงินสำหรับการสั่งซื้อออนไลน์ได้"
+msgstr "เกิดปัญหากับเซิร์ฟเวอร์ ไม่สามารถเรียกคืนสถานะการชำระเงินสำหรับการสั่งซื้อออนไลน์ได้"
 
 #. module: pos_online_payment
 #. flectra-javascript
@@ -532,8 +520,7 @@ msgid ""
 "There is a problem with the server. The order online payment status cannot "
 "be retrieved. Are you sure there is no online payment for this order ?"
 msgstr ""
-"เกิดปัญหากับเซิร์ฟเวอร์ "
-"ไม่สามารถเรียกคืนสถานะการชำระเงินสำหรับการสั่งซื้อออนไลน์ได้ "
+"เกิดปัญหากับเซิร์ฟเวอร์ ไม่สามารถเรียกคืนสถานะการชำระเงินสำหรับการสั่งซื้อออนไลน์ได้ "
 "คุณแน่ใจหรือไม่ว่าไม่มีการชำระเงินออนไลน์สำหรับคำสั่งซื้อนี้"
 
 #. module: pos_online_payment
@@ -542,8 +529,7 @@ msgstr ""
 #, python-format
 msgid ""
 "There is no online payment method configured for this Point of Sale order."
-msgstr ""
-"ไม่มีการกำหนดค่าวิธีการชำระเงินออนไลน์สำหรับคำสั่งซื้อการขายหน้าร้านนี้"
+msgstr "ไม่มีการกำหนดค่าวิธีการชำระเงินออนไลน์สำหรับคำสั่งซื้อการขายหน้าร้านนี้"
 
 #. module: pos_online_payment
 #. flectra-python
@@ -571,8 +557,7 @@ msgid ""
 "published payment provider supporting the currency of that POS config."
 msgstr ""
 "หากต้องการใช้วิธีการชำระเงินออนไลน์ในการกำหนดค่า POS "
-"จะต้องมีผู้ให้บริการการชำระเงินที่เผยแพร่อย่างน้อยหนึ่งรายที่รองรับสกุลเงินของการกำหนดค่า"
-" POS นั้น"
+"จะต้องมีผู้ให้บริการการชำระเงินที่เผยแพร่อย่างน้อยหนึ่งรายที่รองรับสกุลเงินของการกำหนดค่า POS นั้น"
 
 #. module: pos_online_payment
 #. flectra-python
@@ -609,8 +594,7 @@ msgid ""
 "Use this payment method for online payments (payments made on a web page "
 "with online payment providers)"
 msgstr ""
-"ใช้วิธีการชำระเงินนี้สำหรับการชำระเงินออนไลน์ "
-"(ชำระเงินบนหน้าเว็บกับผู้ให้บริการชำระเงินออนไลน์)"
+"ใช้วิธีการชำระเงินนี้สำหรับการชำระเงินออนไลน์ (ชำระเงินบนหน้าเว็บกับผู้ให้บริการชำระเงินออนไลน์)"
 
 #. module: pos_online_payment
 #. flectra-javascript

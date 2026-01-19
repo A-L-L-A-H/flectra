@@ -1,23 +1,24 @@
 # Translation of Flectra Server.
 # This file contains the translation of the following modules:
 # 	* account_check_printing
-# 
+#
 # Translators:
 # Wil Flectra, 2023
 # Tony Ng, 2024
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-05 12:31+0000\n"
+"POT-Creation-Date: 2025-12-29 18:37+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
 "Last-Translator: Tony Ng, 2024\n"
-"Language-Team: Chinese (Taiwan) (https://app.transifex.com/flectra/teams/41243/zh_TW/)\n"
+"Language-Team: Chinese (Taiwan) (https://app.transifex.com/flectra/teams/41243/"
+"zh_TW/)\n"
+"Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: account_check_printing
@@ -166,7 +167,6 @@ msgstr "顯示名稱"
 #. module: account_check_printing
 #. flectra-python
 #: code:addons/account_check_printing/models/account_payment.py:0
-#: code:addons/account_check_printing/models/account_payment.py:0
 #, python-format
 msgid "Go to the configuration panel"
 msgstr "至配置面板"
@@ -181,8 +181,8 @@ msgstr "識別號"
 #: code:addons/account_check_printing/models/account_payment.py:0
 #, python-format
 msgid ""
-"In order to print multiple checks at once, they must belong to the same bank"
-" journal."
+"In order to print multiple checks at once, they must belong to the same bank "
+"journal."
 msgstr "為了一次列印多張支票，它們必須為相同的銀行帳戶."
 
 #. module: account_check_printing
@@ -215,18 +215,28 @@ msgstr "手動編號"
 #: model:ir.model.fields,help:account_check_printing.field_account_payment__payment_method_line_id
 msgid ""
 "Manual: Pay or Get paid by any method outside of Flectra.\n"
-"Payment Providers: Each payment provider has its own Payment Method. Request a transaction on/to a card thanks to a payment token saved by the partner when buying or subscribing online.\n"
+"Payment Providers: Each payment provider has its own Payment Method. Request "
+"a transaction on/to a card thanks to a payment token saved by the partner "
+"when buying or subscribing online.\n"
 "Check: Pay bills by check and print it from Flectra.\n"
-"Batch Deposit: Collect several customer checks at once generating and submitting a batch deposit to your bank. Module account_batch_payment is necessary.\n"
-"SEPA Credit Transfer: Pay in the SEPA zone by submitting a SEPA Credit Transfer file to your bank. Module account_sepa is necessary.\n"
-"SEPA Direct Debit: Get paid in the SEPA zone thanks to a mandate your partner will have granted to you. Module account_sepa is necessary.\n"
+"Batch Deposit: Collect several customer checks at once generating and "
+"submitting a batch deposit to your bank. Module account_batch_payment is "
+"necessary.\n"
+"SEPA Credit Transfer: Pay in the SEPA zone by submitting a SEPA Credit "
+"Transfer file to your bank. Module account_sepa is necessary.\n"
+"SEPA Direct Debit: Get paid in the SEPA zone thanks to a mandate your "
+"partner will have granted to you. Module account_sepa is necessary.\n"
 msgstr ""
 "手動: 通過 Flectra 之外的任何方式支付或收款.\n"
-"支付提供商: 每個支付提供商都有自己的支付方式. 借助合作夥伴在線購買或訂閱時保存的支付密鑰，請求在卡上/向卡進行交易.\n"
+"支付提供商: 每個支付提供商都有自己的支付方式. 借助合作夥伴在線購買或訂閱時保"
+"存的支付密鑰，請求在卡上/向卡進行交易.\n"
 "支票: 通過支票支付賬單並從 Flectra 列印.\n"
-"批量存款: 一次收集多張客戶支票，產生批量存款並將其提交給您的銀行. 模組 account_batch_payment 是必需的.\n"
-"SEPA Credit Transfer: 通過向您的銀行提交 SEPA Credit Transfer 文件在 SEPA 區進行支付. 模組 account_sepa 是必需的.\n"
-"SEPA 直接借記: 由於您的合作夥伴授予您的授權，在 SEPA 區獲得付款。 模組 account_sepa 是必需的.\n"
+"批量存款: 一次收集多張客戶支票，產生批量存款並將其提交給您的銀行. 模組 "
+"account_batch_payment 是必需的.\n"
+"SEPA Credit Transfer: 通過向您的銀行提交 SEPA Credit Transfer 文件在 SEPA 區"
+"進行支付. 模組 account_sepa 是必需的.\n"
+"SEPA 直接借記: 由於您的合作夥伴授予您的授權，在 SEPA 區獲得付款。 模組 "
+"account_sepa 是必需的.\n"
 
 #. module: account_check_printing
 #: model:ir.model.fields,field_description:account_check_printing.field_res_company__account_check_printing_multi_stub
@@ -282,8 +292,8 @@ msgstr "要列印為支票的付款必須選擇'支票'為付款方式並且尚�
 #. module: account_check_printing
 #: model_terms:ir.ui.view,arch_db:account_check_printing.print_pre_numbered_checks_view
 msgid ""
-"Please enter the number of the first pre-printed check that you are about to"
-" print on."
+"Please enter the number of the first pre-printed check that you are about to "
+"print on."
 msgstr "請輸入您將首次預先印製的支票的號碼."
 
 #. module: account_check_printing
@@ -300,7 +310,9 @@ msgid ""
 "Preferred payment method when paying this vendor. This is used to filter "
 "vendor bills by preferred payment method to register payments in mass. Use "
 "cases: create bank files for batch wires, check runs."
-msgstr "向該供應商付款時的預設付款方式.這用於通過預設付款方式過濾供應商賬單以批量登記付款.用例：為批量電匯建立銀行文件，檢查執行."
+msgstr ""
+"向該供應商付款時的預設付款方式.這用於通過預設付款方式過濾供應商賬單以批量登記"
+"付款.用例：為批量電匯建立銀行文件，檢查執行."
 
 #. module: account_check_printing
 #: model_terms:ir.ui.view,arch_db:account_check_printing.print_pre_numbered_checks_view
@@ -346,7 +358,8 @@ msgstr "右邊距"
 #: model:ir.model.fields,help:account_check_printing.field_res_company__account_check_printing_layout
 #: model:ir.model.fields,help:account_check_printing.field_res_config_settings__account_check_printing_layout
 msgid ""
-"Select the format corresponding to the check paper you will be printing your checks on.\n"
+"Select the format corresponding to the check paper you will be printing your "
+"checks on.\n"
 "In order to disable the printing feature, select 'None'."
 msgstr ""
 "選擇與要列印支票的支票紙對應的格式.\n"
@@ -402,7 +415,9 @@ msgid ""
 "The selected journal is configured to print check numbers. If your pre-"
 "printed check paper already has numbers or if the current numbering is "
 "wrong, you can change it in the journal configuration page."
-msgstr "所選的帳簿已設定成列印支票編號.如果您的預先列印支票紙張已有了編號或目前編號是錯誤的，您可在日記帳設定界面去更改設定."
+msgstr ""
+"所選的帳簿已設定成列印支票編號.如果您的預先列印支票紙張已有了編號或目前編號是"
+"錯誤的，您可在日記帳設定界面去更改設定."
 
 #. module: account_check_printing
 #: model:ir.model.fields,help:account_check_printing.field_res_company__account_check_printing_multi_stub
@@ -410,7 +425,8 @@ msgstr "所選的帳簿已設定成列印支票編號.如果您的預先列印�
 msgid ""
 "This option allows you to print check details (stub) on multiple pages if "
 "they don't fit on a single page."
-msgstr "此選項允許您在多個頁面上列印支票詳細資訊 (存根) (如果它們不適合單個頁面)."
+msgstr ""
+"此選項允許您在多個頁面上列印支票詳細資訊 (存根) (如果它們不適合單個頁面)."
 
 #. module: account_check_printing
 #: model:ir.model.fields,help:account_check_printing.field_res_company__account_check_printing_date_label
@@ -445,4 +461,5 @@ msgstr "作廢支票"
 msgid ""
 "You have to choose a check layout. For this, go in Invoicing/Accounting "
 "Settings, search for 'Checks layout' and set one."
-msgstr "您必須選擇一個支票格式. 進入應收付憑單/會計設定，搜索“支票格式”來進行設定."
+msgstr ""
+"您必須選擇一個支票格式. 進入應收付憑單/會計設定，搜索“支票格式”來進行設定."

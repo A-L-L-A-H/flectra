@@ -1,24 +1,27 @@
 # Translation of Flectra Server.
 # This file contains the translation of the following modules:
-# 	* spreadsheet
+# * spreadsheet
 #
 # Translators:
 # Wil Flectra, 2023
 # Abe Manyo, 2025
 #
+# Weblate <noreply-mt-weblate@weblate.org>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-12 02:57+0000\n"
-"PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: Abe Manyo, 2025\n"
-"Language-Team: Indonesian (https://app.transifex.com/flectra/teams/41243/id/)\n"
+"POT-Creation-Date: 2025-12-29 18:38+0000\n"
+"PO-Revision-Date: 2025-12-20 08:39+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
+"Language-Team: Indonesian <https://translate.flectrahq.com/projects/flectra-17/"
+"spreadsheet/id/>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.14.3\n"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -3192,10 +3195,32 @@ msgstr ""
 #. flectra-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
-msgid "Function [[FUNCTION_NAME]] expects number values for %s, but got a %s."
+msgid ""
+"Function [[FUNCTION_NAME]] expects number values for %s, but got a boolean."
 msgstr ""
-"Fungsi [[FUNCTION_NAME]] mengharapkan nilai nomor untuk %s, tapi mendapatkan "
-"%s."
+"Fungsi [[FUNCTION_NAME]] mengharapkan value angka untuk %s, tapi mendapatkan "
+"boolean."
+
+#. module: spreadsheet
+#. flectra-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+#, python-format
+msgid ""
+"Function [[FUNCTION_NAME]] expects number values for %s, but got a string."
+msgstr ""
+"Fungsi [[FUNCTION_NAME]] mengharapkan value angka untuk %s, tapi mendapatkan "
+"string."
+
+#. module: spreadsheet
+#. flectra-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+#, python-format
+msgid ""
+"Function [[FUNCTION_NAME]] expects number values for %s, but got an empty "
+"value."
+msgstr ""
+"Fungsi [[FUNCTION_NAME]] mengharapkan value angka untuk %s, tapi mendapatkan "
+"value kosong."
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -7369,6 +7394,8 @@ msgid ""
 "The first and second arguments of [[FUNCTION_NAME]] must be non-empty "
 "matrices."
 msgstr ""
+"Argument pertama dan kedua dari [[FUNCTION_NAME]] harus merupakan matrix non-"
+"empty."
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -7986,7 +8013,7 @@ msgstr "Maxpoint harus merupakan bilangan"
 
 #. module: spreadsheet
 #. flectra-javascript
-#: code:addons/spreadsheet/static/src/chart/flectra_menu/figure_component.js:0
+#: code:addons/spreadsheet/static/src/helpers/helpers.js:0
 #, python-format
 msgid ""
 "The menu linked to this chart doesn't have an corresponding action. Please "
@@ -10653,12 +10680,8 @@ msgstr "Perubahan value dari key value"
 #. flectra-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
-msgid ""
-"Value for parameter %d is missing, while the function [[FUNCTION_NAME]] "
-"expect a number or a range."
-msgstr ""
-"Jumlah untuk parameter %d hilang, sementara fungsi [[FUNCTION_NAME]] "
-"mengharapkan angka atau range."
+msgid "Value for parameter %s is missing in [[FUNCTION_NAME]]."
+msgstr "Value untuk parameter %s tidak ada di [[FUNCTION_NAME]]."
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -11305,6 +11328,8 @@ msgid ""
 "[[FUNCTION_NAME]] expects the provided values of %(argName)s to be a non-"
 "empty matrix."
 msgstr ""
+"[[FUNCTION_NAME]] mengharapkan value yang disediakan dari %(argName)s untuk "
+"merupakan matrix non-empty."
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -11504,6 +11529,21 @@ msgstr "besok"
 #, python-format
 msgid "yesterday"
 msgstr "kemarin"
+
+#, python-format
+#~ msgid ""
+#~ "Function [[FUNCTION_NAME]] expects number values for %s, but got a %s."
+#~ msgstr ""
+#~ "Fungsi [[FUNCTION_NAME]] mengharapkan nilai nomor untuk %s, tapi "
+#~ "mendapatkan %s."
+
+#, python-format
+#~ msgid ""
+#~ "Value for parameter %d is missing, while the function [[FUNCTION_NAME]] "
+#~ "expect a number or a range."
+#~ msgstr ""
+#~ "Jumlah untuk parameter %d hilang, sementara fungsi [[FUNCTION_NAME]] "
+#~ "mengharapkan angka atau range."
 
 #, python-format
 #~ msgid "Cannot multiply matrices : incompatible matrices size."

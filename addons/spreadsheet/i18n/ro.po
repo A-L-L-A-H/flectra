@@ -1,6 +1,6 @@
 # Translation of Flectra Server.
 # This file contains the translation of the following modules:
-# 	* spreadsheet
+# * spreadsheet
 #
 # Translators:
 # Claudia Baisan, 2024
@@ -12,21 +12,23 @@
 # Simonel Criste <info@erpsystems.solutions>, 2024
 # Alin Miclea, 2024
 # Larisa_nexterp, 2025
-#
+# Weblate <noreply-mt-weblate@weblate.org>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-12 02:57+0000\n"
-"PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: Larisa_nexterp, 2025\n"
-"Language-Team: Romanian (https://app.transifex.com/flectra/teams/41243/ro/)\n"
+"POT-Creation-Date: 2025-12-29 18:38+0000\n"
+"PO-Revision-Date: 2025-12-20 08:39+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
+"Language-Team: Romanian <https://translate.flectrahq.com/projects/flectra-17/"
+"spreadsheet/ro/>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
-"2:1));\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
+"X-Generator: Weblate 5.14.3\n"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -3220,10 +3222,32 @@ msgstr ""
 #. flectra-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
-msgid "Function [[FUNCTION_NAME]] expects number values for %s, but got a %s."
+msgid ""
+"Function [[FUNCTION_NAME]] expects number values for %s, but got a boolean."
 msgstr ""
-"Funcția [[FUNCTION_NAME]] se așteaptă la valori numerice pentru %s, dar a "
-"primit %s."
+"Funcția [[FUNCTION_NAME]] așteaptă valori numerice pentru %s, dar a primit o "
+"valoare booleană."
+
+#. module: spreadsheet
+#. flectra-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+#, python-format
+msgid ""
+"Function [[FUNCTION_NAME]] expects number values for %s, but got a string."
+msgstr ""
+"Funcția [[FUNCTION_NAME]] așteaptă valori numerice pentru %s, dar a primit "
+"un șir de caractere."
+
+#. module: spreadsheet
+#. flectra-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+#, python-format
+msgid ""
+"Function [[FUNCTION_NAME]] expects number values for %s, but got an empty "
+"value."
+msgstr ""
+"Funcția [[FUNCTION_NAME]] așteaptă valori numerice pentru %s, dar a primit o "
+"valoare goală."
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -8052,7 +8076,7 @@ msgstr "Maxpoint trebuie să fie un număr"
 
 #. module: spreadsheet
 #. flectra-javascript
-#: code:addons/spreadsheet/static/src/chart/flectra_menu/figure_component.js:0
+#: code:addons/spreadsheet/static/src/helpers/helpers.js:0
 #, python-format
 msgid ""
 "The menu linked to this chart doesn't have an corresponding action. Please "
@@ -10721,12 +10745,8 @@ msgstr "Modificarea valorii față de valoarea cheie"
 #. flectra-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
-msgid ""
-"Value for parameter %d is missing, while the function [[FUNCTION_NAME]] "
-"expect a number or a range."
+msgid "Value for parameter %s is missing in [[FUNCTION_NAME]]."
 msgstr ""
-"Valoarea pentru parametru %d lipsește, în timp ce funcția [[FUNCTION_NAME]] "
-"așteaptă un număr sau un interval."
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -11580,6 +11600,21 @@ msgstr "mâine"
 #, python-format
 msgid "yesterday"
 msgstr "ieri"
+
+#, python-format
+#~ msgid ""
+#~ "Function [[FUNCTION_NAME]] expects number values for %s, but got a %s."
+#~ msgstr ""
+#~ "Funcția [[FUNCTION_NAME]] se așteaptă la valori numerice pentru %s, dar a "
+#~ "primit %s."
+
+#, python-format
+#~ msgid ""
+#~ "Value for parameter %d is missing, while the function [[FUNCTION_NAME]] "
+#~ "expect a number or a range."
+#~ msgstr ""
+#~ "Valoarea pentru parametru %d lipsește, în timp ce funcția "
+#~ "[[FUNCTION_NAME]] așteaptă un număr sau un interval."
 
 #, python-format
 #~ msgid "Cannot multiply matrices : incompatible matrices size."

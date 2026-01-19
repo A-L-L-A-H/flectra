@@ -82,7 +82,7 @@ class ProductTemplate(models.Model):
 
     def _construct_tax_string(self, price):
         currency = self.currency_id
-        res = self.taxes_id.filtered(lambda t: t.company_id == self.env.company).compute_all(
+        res = self.taxes_id._filter_taxes_by_company(self.env.company).compute_all(
             price, product=self, partner=self.env['res.partner']
         )
         joined = []
@@ -151,7 +151,7 @@ class ProductTemplate(models.Model):
         # If no company was set for the product, the product will be available for all companies and therefore should
         # have the default taxes of the other companies as well. sudo() is used since we're going to need to fetch all
         # the other companies default taxes which the user may not have access to.
-        other_companies = self.env['res.company'].sudo().search([('id', 'not in', self.env.companies.ids)])
+        other_companies = self.env['res.company'].sudo().search(['!', ('id', 'child_of', self.env.companies.ids)])
         if other_companies and products:
             products_without_company = products.filtered(lambda p: not p.company_id).sudo()
             products_without_company._force_default_tax(other_companies)
@@ -301,14 +301,16 @@ class ProductProduct(models.Model):
             [*self.env['res.partner']._check_company_domain(company), ('company_id', '!=', False)],
             [('company_id', '=', False)],
         ):
-            products = self.env['product.product'].search(
-                expression.AND([
-                    expression.OR(domains),
-                    company_domain,
-                    extra_domain,
-                ]),
-            )
             for domain in domains:
-                if products_by_domain := products.filtered_domain(domain):
-                    return products_by_domain[0]
+                product = self.env['product.product'].search(
+                    expression.AND([
+                        domain,
+                        company_domain,
+                        extra_domain,
+                    ]),
+                    limit=1,
+                )
+                # We need a single product. Exit early if one is found (implements the priority logic).
+                if product:
+                    return product
         return self.env['product.product']

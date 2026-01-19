@@ -1,24 +1,24 @@
 # Translation of Flectra Server.
 # This file contains the translation of the following modules:
 # 	* mail_plugin
-# 
+#
 # Translators:
 # Ryoko Tsuda <ryoko@quartile.co>, 2023
 # Wil Flectra, 2024
 # Junko Augias, 2025
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-05 12:31+0000\n"
+"POT-Creation-Date: 2025-12-29 18:37+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
 "Last-Translator: Junko Augias, 2025\n"
 "Language-Team: Japanese (https://app.transifex.com/flectra/teams/41243/ja/)\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: mail_plugin
@@ -34,7 +34,9 @@ msgstr "%s従業員 "
 #, python-format
 msgid ""
 "Access Error: Only Internal Users can link their inboxes to this database."
-msgstr "アクセスエラー:  このデータベースに受信トレイをリンクできるのは内部ユーザのみです。"
+msgstr ""
+"アクセスエラー:  このデータベースに受信トレイをリンクできるのは内部ユーザのみ"
+"です。"
 
 #. module: mail_plugin
 #. flectra-javascript
@@ -77,7 +79,8 @@ msgstr "年間収益"
 msgid ""
 "Attachments could not be logged in Flectra because their total size exceeded "
 "the allowed maximum."
-msgstr "添付ファイルの合計サイズが許容上限を超えたため、Flectraに記録できませんでした。"
+msgstr ""
+"添付ファイルの合計サイズが許容上限を超えたため、Flectraに記録できませんでした。"
 
 #. module: mail_plugin
 #. flectra-python
@@ -199,7 +202,8 @@ msgstr "連絡先が見つかりました (%(count)s)"
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
 #, python-format
 msgid "Could not autocomplete the company. Internal error. Try again later..."
-msgstr "会社を自動入力できませんでした。内部エラーです。後で再試行して下さい..."
+msgstr ""
+"会社を自動入力できませんでした。内部エラーです。後で再試行して下さい..."
 
 #. module: mail_plugin
 #. flectra-javascript
@@ -506,7 +510,9 @@ msgstr "この連絡先にリンクしている企業は、エンリッチでき
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
 #, python-format
 msgid "No company linked to this contact could be enriched or found in Flectra"
-msgstr "この連絡先にリンクしている企業は、エンリッチできない、またはFlectraで見つかりませんでした"
+msgstr ""
+"この連絡先にリンクしている企業は、エンリッチできない、またはFlectraで見つかりま"
+"せんでした"
 
 #. module: mail_plugin
 #. flectra-javascript
@@ -583,7 +589,9 @@ msgstr "パートナーのIAPは1人につき1つのみ許可されます"
 msgid ""
 "Oops, looks like you have exhausted your free enrichment requests. Please "
 "log in to try again."
-msgstr "無料エンリッチメントリクエストを使い果たしたようです。ログインして再度お試し下さい。"
+msgstr ""
+"無料エンリッチメントリクエストを使い果たしたようです。ログインして再度お試し"
+"下さい。"
 
 #. module: mail_plugin
 #. flectra-javascript
@@ -748,7 +756,8 @@ msgstr "この連絡先はFlectraのデータベースに存在しません。"
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
 #, python-format
 msgid "This contact has no email address, no company could be enriched."
-msgstr "この連絡先にはEメールアドレスがなく、エンリッチできる会社はありません。"
+msgstr ""
+"この連絡先にはEメールアドレスがなく、エンリッチできる会社はありません。"
 
 #. module: mail_plugin
 #. flectra-python
@@ -757,11 +766,12 @@ msgstr "この連絡先にはEメールアドレスがなく、エンリッチ�
 msgid ""
 "This is your notification address. Search the Contact manually to link this "
 "email to a record."
-msgstr "これはあなたの通知アドレスです。このメールをレコードにリンクするには、手動で連絡先を検索します。"
+msgstr ""
+"これはあなたの通知アドレスです。このメールをレコードにリンクするには、手動で"
+"連絡先を検索します。"
 
 #. module: mail_plugin
 #. flectra-python
-#: code:addons/mail_plugin/controllers/mail_plugin.py:0
 #: code:addons/mail_plugin/controllers/mail_plugin.py:0
 #, python-format
 msgid "This partner does not exist"
@@ -774,7 +784,9 @@ msgstr "この取引先は存在しません"
 msgid ""
 "Warning: Attachments could not be logged in Flectra because their total size "
 "exceeded the allowed maximum."
-msgstr "警告: 添付ファイルの合計サイズが許容上限を超えたため、Flectraに記録できませんでした。"
+msgstr ""
+"警告: 添付ファイルの合計サイズが許容上限を超えたため、Flectraに記録できませんで"
+"した。"
 
 #. module: mail_plugin
 #. flectra-javascript
@@ -784,8 +796,8 @@ msgid ""
 "Warning: Could not fetch the attachments %(attachments)s as their sizes are "
 "bigger then the maximum size of %(size)sMB per each attachment."
 msgstr ""
-"警告: "
-"添付ファイル%(attachments)sのサイズが各添付ファイルの最大サイズ%(size)sMBを超えているため、添付ファイルを取得できませんでした。"
+"警告: 添付ファイル%(attachments)sのサイズが各添付ファイルの最大サイ"
+"ズ%(size)sMBを超えているため、添付ファイルを取得できませんでした。"
 
 #. module: mail_plugin
 #. flectra-javascript

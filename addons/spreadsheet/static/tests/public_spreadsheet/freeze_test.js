@@ -1,6 +1,6 @@
 /** @flectra-module */
 
-import { freezeFlectraData } from "../../src/helpers/model";
+import { freezeFlectraData, waitForDataLoaded } from "../../src/helpers/model";
 import { createSpreadsheetWithChart } from "../utils/chart";
 import {
     setCellContent,
@@ -185,6 +185,15 @@ QUnit.module("freezing spreadsheet", {}, function () {
         assert.strictEqual(data.globalFilters[0].value, "");
     });
 
+    QUnit.test("Empty FLECTRA.LIST result is frozen to an empty string", async function (assert) {
+        const { model } = await createSpreadsheetWithList();
+        setCellContent(model, "A1", '=FLECTRA.LIST(1, 9999,"probability")'); // has no record
+        await waitForDataLoaded(model);
+        assert.strictEqual(getEvaluatedCell(model, "A1").value, "");
+        const frozenData = await freezeFlectraData(model);
+        assert.strictEqual(frozenData.sheets[0].cells.A1.content, '=""');
+    })
+
     QUnit.test("flectra links are replaced with their label", async function (assert) {
         const view = {
             name: "an flectra view",
@@ -243,13 +252,22 @@ QUnit.module("freezing spreadsheet", {}, function () {
         const data = await freezeFlectraData(model);
         const cells = data.sheets[0].cells;
         assert.strictEqual(cells.A10.content, "(#1) Partner Pivot");
-        assert.strictEqual(cells.A11.content, "");
+        assert.strictEqual(cells.A11.content, '=""');
         assert.strictEqual(cells.A12.content, "Total");
         assert.strictEqual(cells.B10.content, "Total");
         assert.strictEqual(cells.B11.content, "Probability");
         assert.strictEqual(cells.B12.content, "131");
         assert.strictEqual(data.formats[cells.B12.format], "#,##0.00");
         assert.deepEqual(data.styles[cells.B12.style], { bold: true }, "style is preserved");
+    });
+
+    QUnit.test("empty values from spilled pivot table is exported as empty string", async function (assert) {
+        const { model } = await createSpreadsheetWithPivot();
+        setCellContent(model, "A10", "=FLECTRA.PIVOT.TABLE(1)");
+        assert.strictEqual(getEvaluatedCell(model, "B12").value, "");  // empty value
+        const data = await freezeFlectraData(model);
+        const cells = data.sheets[0].cells;
+        assert.strictEqual(cells.B12.content, '=""');
     });
 
     QUnit.test(

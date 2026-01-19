@@ -2,7 +2,7 @@ import json
 from contextlib import contextmanager
 from freezegun import freeze_time
 from requests import Session, PreparedRequest, Response
-from urllib.parse import unquote
+from urllib.parse import parse_qs, quote_plus
 from psycopg2 import IntegrityError
 
 from flectra.exceptions import ValidationError, UserError
@@ -51,22 +51,33 @@ class TestPeppolParticipant(TransactionCase):
             },
         }
 
-    @staticmethod
-    def _smp_xml(pid: str) -> bytes:
-        return f"""<?xml version='1.0' encoding='UTF-8'?><smp:ServiceGroup xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:id="http://busdox.org/transport/identifiers/1.0/" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:smp="http://busdox.org/serviceMetadata/publishing/1.0/"><id:ParticipantIdentifier scheme="iso6523-actorid-upis">{pid}</id:ParticipantIdentifier></smp:ServiceGroup>""".encode()
-
     @classmethod
     def _request_handler(cls, s: Session, r: PreparedRequest, /, **kw):
         response = Response()
         response.status_code = 200
 
         # mock SMP participant lookup: 200 if pid in SMP_OK_IDS, else 404
-        if 'iso6523-actorid-upis%3A%3A' in r.url:
-            pid = unquote(r.url).rpartition('::')[-1]  # e.g. "0208:0000000000"
-            if pid in SMP_OK_IDS:
-                response._content = cls._smp_xml(pid)
+        if r.path_url.startswith('/api/peppol/1/lookup'):
+            peppol_identifier = parse_qs(r.path_url.rsplit('?')[1])['peppol_identifier'][0]
+            if peppol_identifier in SMP_OK_IDS:
+                response.json = lambda: {
+                    "result": {
+                        "identifier": peppol_identifier,
+                        "smp_base_url": "http://example.com/smp",
+                        "ttl": 60,
+                        "service_group_url": "http://example.com/smp/iso6523-actorid-upis%3A%3A" + quote_plus(peppol_identifier),
+                        "services": []
+                    }
+                }
             else:
                 response.status_code = 404
+                response.json = lambda: {
+                    "error": {
+                        "code": "NOT_FOUND",
+                        "message": "no naptr record",
+                        "retryable": False,
+                    },
+                }
             return response
 
         url = r.path_url
@@ -124,14 +135,6 @@ class TestPeppolParticipant(TransactionCase):
             'account_peppol_endpoint': False,
         })
         with self.assertRaises(ValidationError), self.cr.savepoint():
-            settings.button_create_peppol_proxy_user()
-
-    def test_create_participant_already_exists(self):
-        # creating a participant that already exists on Peppol network should not be possible
-        vals = self._get_participant_vals()
-        vals['account_peppol_eas'] = '0208'
-        settings = self.env['res.config.settings'].create(vals)
-        with self.assertRaises(UserError), self.cr.savepoint():
             settings.button_create_peppol_proxy_user()
 
     def test_create_success_participant(self):

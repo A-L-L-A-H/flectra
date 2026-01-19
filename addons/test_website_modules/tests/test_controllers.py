@@ -3,13 +3,13 @@
 from base64 import b64encode
 
 from flectra import Command, tests
-from flectra.addons.base.tests.common import HttpCaseWithUserDemo
+from flectra.addons.base.tests.common import HttpCaseWithUserDemo, HttpCaseWithUserPortal
 from flectra.tools import mute_logger
 from flectra.tools.json import scriptsafe as json_safe
 
 
 @tests.tagged('-at_install', 'post_install')
-class TestWebEditorController(HttpCaseWithUserDemo):
+class TestWebEditorController(HttpCaseWithUserDemo, HttpCaseWithUserPortal):
 
     def test_modify_image(self):
         gif_base64 = b"R0lGODdhAQABAIAAAP///////ywAAAAAAQABAAACAkQBADs="
@@ -92,7 +92,7 @@ class TestWebEditorController(HttpCaseWithUserDemo):
             json = modify('portal', 'page-portalfail.gif', True)
         self.assertEqual('flectra.exceptions.AccessError', json['error']['data']['name'], "Expect access error")
 
-        event = self.env['event.event'].search([], limit=1)
+        event = self.env['event.event'].create({'name': 'Event'})
         attachment.res_model = 'event.event'
         attachment.res_id = event.id
 

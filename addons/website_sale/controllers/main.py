@@ -392,7 +392,8 @@ class WebsiteSale(payment_portal.PaymentPortal):
         if filter_by_price_enabled:
             # TODO Find an alternative way to obtain the domain through the search metadata.
             Product = request.env['product.template'].with_context(bin_size=True)
-            domain = self._get_shop_domain(search, category, attrib_values)
+            search_term = fuzzy_search_term if fuzzy_search_term else search
+            domain = self._get_shop_domain(search_term, category, attrib_values)
 
             # This is ~4 times more efficient than a search for the cheapest and most expensive products
             query = Product._where_calc(domain)
@@ -424,7 +425,12 @@ class WebsiteSale(payment_portal.PaymentPortal):
         if filter_by_tags_enabled and search_product:
             all_tags = ProductTag.search(
                 expression.AND([
-                    [('product_ids.is_published', '=', True), ('visible_on_ecommerce', '=', True)],
+                    [
+                        ('visible_on_ecommerce', '=', True),
+                        '|',
+                        ('product_template_ids.is_published', '=', True),
+                        ('product_product_ids.is_published', '=', True),
+                    ],
                     website_domain
                 ])
             )
@@ -1774,6 +1780,16 @@ class WebsiteSale(payment_portal.PaymentPortal):
 
         return values
 
+    @http.route(
+        _express_checkout_shipping_route + '/compute_taxes', type='json', auth='public',
+        website=True, sitemap=False,
+    )
+    def express_checkout_shipping_address_compute_taxes(self):
+        order_sudo = request.website.sale_get_order()
+        order_sudo._recompute_taxes()
+
+        return payment_utils.to_minor_currency_units(order_sudo.amount_total, order_sudo.currency_id)
+
     def _get_shop_payment_errors(self, order):
         """ Check that there is no error that should block the payment.
 
@@ -2109,7 +2125,12 @@ class CustomerPortal(sale_portal.CustomerPortal):
         :return: The payment-specific values.
         :rtype: dict
         """
-        website_id = website_id or order_sudo.website_id.id
+        if not website_id:
+            if order_sudo.website_id:
+                website_id = order_sudo.website_id.id
+            elif request.website:
+                website_id = request.website.id
+
         return super()._get_payment_values(order_sudo, website_id=website_id, **kwargs)
 
     def _sale_reorder_get_line_context(self):
@@ -2118,7 +2139,9 @@ class CustomerPortal(sale_portal.CustomerPortal):
     @http.route('/my/orders/reorder_modal_content', type='json', auth='public', website=True)
     def my_orders_reorder_modal_content(self, order_id, access_token):
         try:
-            sale_order = self._document_check_access('sale.order', order_id, access_token=access_token)
+            sale_order = self._document_check_access(
+                'sale.order', order_id, access_token=access_token,
+            ).with_user(request.env.user).sudo()
         except (AccessError, MissingError):
             return request.redirect('/my')
 

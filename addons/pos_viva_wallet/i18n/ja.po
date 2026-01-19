@@ -1,23 +1,23 @@
 # Translation of Flectra Server.
 # This file contains the translation of the following modules:
 # 	* pos_viva_wallet
-# 
+#
 # Translators:
 # Wil Flectra, 2024
 # Junko Augias, 2025
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-10 10:33+0000\n"
+"POT-Creation-Date: 2025-12-29 18:37+0000\n"
 "PO-Revision-Date: 2024-02-07 08:49+0000\n"
 "Last-Translator: Junko Augias, 2025\n"
 "Language-Team: Japanese (https://app.transifex.com/flectra/teams/41243/ja/)\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: pos_viva_wallet
@@ -49,7 +49,9 @@ msgstr "クライアントシークレット"
 msgid ""
 "Could not connect to the Flectra server, please check your internet connection "
 "and try again."
-msgstr "Flectraサーバに接続できませんでした。インターネット接続を確認して、もう一度お試し下さい。"
+msgstr ""
+"Flectraサーバに接続できませんでした。インターネット接続を確認して、もう一度お試"
+"し下さい。"
 
 #. module: pos_viva_wallet
 #. flectra-python
@@ -96,8 +98,7 @@ msgstr "'group_pos_user' のみがViva Walletからの支払状況を入手で�
 #. flectra-python
 #: code:addons/pos_viva_wallet/models/pos_payment_method.py:0
 #, python-format
-msgid ""
-"Only 'group_pos_user' are allowed to send a Viva Wallet payment request"
+msgid "Only 'group_pos_user' are allowed to send a Viva Wallet payment request"
 msgstr "'group_pos_user' のみがViva Walletの支払要求を送信できます。"
 
 #. module: pos_viva_wallet
@@ -128,17 +129,19 @@ msgstr "テストモード"
 #. module: pos_viva_wallet
 #. flectra-python
 #: code:addons/pos_viva_wallet/models/pos_payment_method.py:0
-#: code:addons/pos_viva_wallet/models/pos_payment_method.py:0
 #, python-format
 msgid "There are some issues between us and Viva Wallet, try again later. %s"
-msgstr "Viva Walletとの間で問題が発生しました。もう少し後になってからお試し下さい。%s"
+msgstr ""
+"Viva Walletとの間で問題が発生しました。もう少し後になってからお試し下さい。%s"
 
 #. module: pos_viva_wallet
 #. flectra-python
 #: code:addons/pos_viva_wallet/models/pos_payment_method.py:0
 #, python-format
 msgid "There are some issues between us and Viva Wallet, try again later.%s)"
-msgstr "Viva Walletとの間で問題が発生しました。もう少し後になってからお試し下さい: %s)"
+msgstr ""
+"Viva Walletとの間で問題が発生しました。もう少し後になってからお試し下さい: "
+"%s)"
 
 #. module: pos_viva_wallet
 #. flectra-python
@@ -147,28 +150,29 @@ msgstr "Viva Walletとの間で問題が発生しました。もう少し後に�
 msgid ""
 "Unable to retrieve Viva Wallet Bearer Token: Please verify that the Client "
 "ID and Client Secret are correct"
-msgstr "Viva Wallet ベアラートークンを取得できません: クライアントIDとクライアントシークレットが正しいことを確認して下さい。"
+msgstr ""
+"Viva Wallet ベアラートークンを取得できません: クライアントIDとクライアント"
+"シークレットが正しいことを確認して下さい。"
 
 #. module: pos_viva_wallet
 #: model:ir.model.fields,help:pos_viva_wallet.field_pos_payment_method__viva_wallet_api_key
 #: model:ir.model.fields,help:pos_viva_wallet.field_pos_payment_method__viva_wallet_merchant_id
 msgid ""
-"Used when connecting to Viva Wallet: "
-"https://developer.vivawallet.com/getting-started/find-your-account-"
-"credentials/merchant-id-and-api-key/"
+"Used when connecting to Viva Wallet: https://developer.vivawallet.com/"
+"getting-started/find-your-account-credentials/merchant-id-and-api-key/"
 msgstr ""
-"Viva Walletに接続時に使用: https://developer.vivawallet.com/getting-started/find-"
-"your-account-credentials/merchant-id-and-api-key/"
+"Viva Walletに接続時に使用: https://developer.vivawallet.com/getting-started/"
+"find-your-account-credentials/merchant-id-and-api-key/"
 
 #. module: pos_viva_wallet
 #: model:ir.model.fields,help:pos_viva_wallet.field_pos_payment_method__viva_wallet_client_id
 msgid ""
-"Used when connecting to Viva Wallet: "
-"https://developer.vivawallet.com/getting-started/find-your-account-"
-"credentials/pos-apis-credentials/#find-your-pos-apis-credentials"
+"Used when connecting to Viva Wallet: https://developer.vivawallet.com/"
+"getting-started/find-your-account-credentials/pos-apis-credentials/#find-"
+"your-pos-apis-credentials"
 msgstr ""
-"Viva Walletに接続時に使用: https://developer.vivawallet.com/getting-started/find-"
-"your-account-credentials/pos-apis-credentials/#find-your-pos-apis-"
+"Viva Walletに接続時に使用: https://developer.vivawallet.com/getting-started/"
+"find-your-account-credentials/pos-apis-credentials/#find-your-pos-apis-"
 "credentials"
 
 #. module: pos_viva_wallet

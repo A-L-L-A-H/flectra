@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-12 02:57+0000\n"
-"PO-Revision-Date: 2025-09-16 01:41+0000\n"
+"POT-Creation-Date: 2025-12-29 18:38+0000\n"
+"PO-Revision-Date: 2025-10-21 01:40+0000\n"
 "Last-Translator: \"Marianna Ciofani (cima)\" <cima@flectrahq.com>\n"
 "Language-Team: Italian <https://translate.flectrahq.com/projects/flectra-17/"
 "spreadsheet/it/>\n"
@@ -20,8 +20,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n != 0 && n % 1000000 == 0)"
-" ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n != 0 && n % 1000000 == "
+"0) ? 1 : 2);\n"
 "X-Generator: Weblate 5.12.2\n"
 
 #. module: spreadsheet
@@ -3234,10 +3234,32 @@ msgstr ""
 #. flectra-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
-msgid "Function [[FUNCTION_NAME]] expects number values for %s, but got a %s."
+msgid ""
+"Function [[FUNCTION_NAME]] expects number values for %s, but got a boolean."
 msgstr ""
-"La funzione [[FUNCTION_NAME]] prevede un valore numerico compreso pari a %s "
-"ma ha %s."
+"La funzione [[FUNCTION_NAME]] richiede valori numerici per %s, ma ha "
+"ricevuto un valore booleano."
+
+#. module: spreadsheet
+#. flectra-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+#, python-format
+msgid ""
+"Function [[FUNCTION_NAME]] expects number values for %s, but got a string."
+msgstr ""
+"La funzione [[FUNCTION_NAME]] richiede valori numerici per %s, ma ha "
+"ricevuto una stringa."
+
+#. module: spreadsheet
+#. flectra-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+#, python-format
+msgid ""
+"Function [[FUNCTION_NAME]] expects number values for %s, but got an empty "
+"value."
+msgstr ""
+"La funzione [[FUNCTION_NAME]] richiede valori numerici per %s, ma ha "
+"ricevuto un valore vuoto."
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -8070,7 +8092,7 @@ msgstr "Il punto massimo deve essere un numero"
 
 #. module: spreadsheet
 #. flectra-javascript
-#: code:addons/spreadsheet/static/src/chart/flectra_menu/figure_component.js:0
+#: code:addons/spreadsheet/static/src/helpers/helpers.js:0
 #, python-format
 msgid ""
 "The menu linked to this chart doesn't have an corresponding action. Please "
@@ -10745,12 +10767,8 @@ msgstr "Variazione valore rispetto al valore chiave"
 #. flectra-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
-msgid ""
-"Value for parameter %d is missing, while the function [[FUNCTION_NAME]] "
-"expect a number or a range."
-msgstr ""
-"Il valore per il parametro %d è mancante, mentre la funzione "
-"[[FUNCTION_NAME]] prevede un numero o un intervallo."
+msgid "Value for parameter %s is missing in [[FUNCTION_NAME]]."
+msgstr "In [[FUNCTION_NAME]] manca il valore del parametro %s."
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -11600,6 +11618,21 @@ msgstr "domani"
 #, python-format
 msgid "yesterday"
 msgstr "ieri"
+
+#, python-format
+#~ msgid ""
+#~ "Function [[FUNCTION_NAME]] expects number values for %s, but got a %s."
+#~ msgstr ""
+#~ "La funzione [[FUNCTION_NAME]] prevede un valore numerico compreso pari a "
+#~ "%s ma ha %s."
+
+#, python-format
+#~ msgid ""
+#~ "Value for parameter %d is missing, while the function [[FUNCTION_NAME]] "
+#~ "expect a number or a range."
+#~ msgstr ""
+#~ "Il valore per il parametro %d è mancante, mentre la funzione "
+#~ "[[FUNCTION_NAME]] prevede un numero o un intervallo."
 
 #, python-format
 #~ msgid "Cannot multiply matrices : incompatible matrices size."

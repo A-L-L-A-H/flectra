@@ -1,24 +1,25 @@
 # Translation of Flectra Server.
 # This file contains the translation of the following modules:
 # 	* pos_online_payment
-# 
+#
 # Translators:
 # Wil Flectra, 2023
 # Malaz Abuidris <msea@flectrahq.com>, 2023
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-26 21:55+0000\n"
+"POT-Creation-Date: 2025-12-29 18:37+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
 "Last-Translator: Malaz Abuidris <msea@flectrahq.com>, 2023\n"
 "Language-Team: Arabic (https://app.transifex.com/flectra/teams/41243/ar/)\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: ar\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 #. module: pos_online_payment
 #: model_terms:ir.ui.view,arch_db:pos_online_payment.pay
@@ -27,8 +28,7 @@ msgstr "<strong>خطأ:</strong> العملة غير موجودة أو غير ص
 
 #. module: pos_online_payment
 #: model_terms:ir.ui.view,arch_db:pos_online_payment.pay_confirmation
-msgid ""
-"<strong>Error:</strong> There was a problem during the payment process."
+msgid "<strong>Error:</strong> There was a problem during the payment process."
 msgstr "<strong>خطأ:</strong> كانت هناك مشكلة أثناء عملية الدفع. "
 
 #. module: pos_online_payment
@@ -36,11 +36,13 @@ msgstr "<strong>خطأ:</strong> كانت هناك مشكلة أثناء عمل�
 msgid ""
 "<strong>No suitable payment method could be found.</strong>\n"
 "                            <br/>\n"
-"                            If you believe that it is an error, please contact the website administrator."
+"                            If you believe that it is an error, please "
+"contact the website administrator."
 msgstr ""
 "<strong>لم يتم العثور على خيار دفع مناسب.</strong>\n"
 "                            <br/>\n"
-"                            إذا كنت تظن أنه هناك خطأ ما، يرجى التواصل مع مدير الموقع الإلكتروني. "
+"                            إذا كنت تظن أنه هناك خطأ ما، يرجى التواصل مع "
+"مدير الموقع الإلكتروني. "
 
 #. module: pos_online_payment
 #. flectra-python
@@ -61,8 +63,7 @@ msgstr "يجب أن يتم تحديد خيار دفع. "
 #. flectra-python
 #: code:addons/pos_online_payment/controllers/payment_portal.py:0
 #, python-format
-msgid ""
-"A validation payment cannot be used for a Point of Sale online payment."
+msgid "A validation payment cannot be used for a Point of Sale online payment."
 msgstr ""
 "لا يمكن استخدام عملية الدفع للتأكيد من أجل الدفع أونلاين في نقطة البيع. "
 
@@ -117,7 +118,6 @@ msgstr "إلغاء الدفع "
 #. module: pos_online_payment
 #. flectra-python
 #: code:addons/pos_online_payment/models/pos_payment.py:0
-#: code:addons/pos_online_payment/models/pos_payment.py:0
 #, python-format
 msgid "Cannot create a POS online payment without an accounting payment."
 msgstr "لا يمكن إنشاء نقطة بيع أونلاين دون دفع المحاسبة. "
@@ -130,8 +130,8 @@ msgid ""
 "Cannot create a POS payment with a not online payment method and an online "
 "accounting payment."
 msgstr ""
-"لا يمكن إنشاء دفع في نقطة البيع باستخدام دفع غير أونلاين مع طريقة دفع محاسبة"
-" أونلاين. "
+"لا يمكن إنشاء دفع في نقطة البيع باستخدام دفع غير أونلاين مع طريقة دفع محاسبة "
+"أونلاين. "
 
 #. module: pos_online_payment
 #. flectra-python
@@ -211,9 +211,6 @@ msgstr "مدفوعات المحاسبة عبر الإنترنت "
 
 #. module: pos_online_payment
 #. flectra-javascript
-#: code:addons/pos_online_payment/static/src/app/screens/payment_screen/payment_screen.js:0
-#: code:addons/pos_online_payment/static/src/app/screens/payment_screen/payment_screen.js:0
-#: code:addons/pos_online_payment/static/src/app/screens/payment_screen/payment_screen.js:0
 #: code:addons/pos_online_payment/static/src/app/screens/payment_screen/payment_screen.js:0
 #, python-format
 msgid "Online payment unavailable"
@@ -355,8 +352,7 @@ msgstr "خطأ في الخادم "
 #: code:addons/pos_online_payment/models/payment_transaction.py:0
 #, python-format
 msgid "The POS online payment (tx.id=%d) could not be saved correctly"
-msgstr ""
-"لم نتمكن من حفظ الدفع عبر الإنترنت في نقطة البيع (tx.id=%d) بشكل صحيح "
+msgstr "لم نتمكن من حفظ الدفع عبر الإنترنت في نقطة البيع (tx.id=%d) بشكل صحيح "
 
 #. module: pos_online_payment
 #. flectra-python

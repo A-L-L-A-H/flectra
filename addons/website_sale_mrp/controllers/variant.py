@@ -1,0 +1,16 @@
+# Part of Flectra. See LICENSE file for full copyright and licensing details.
+
+from flectra.http import request, route
+
+from flectra.addons.website_sale_stock.controllers.variant import WebsiteSaleStockVariantController
+
+
+class WebsiteSaleMrpVariantController(WebsiteSaleStockVariantController):
+
+    @route('/website_sale_mrp/get_unavailable_qty_from_kits', type='json', auth='public', website=True)
+    def get_unavailable_qty_from_kits(self, product_id=None, *args, **kwargs):
+        so = request.website.sale_get_order()
+        if not so:
+            return 0
+        product = request.env['product.product'].browse(product_id)
+        return so._get_unavailable_quantity_from_kits(product)

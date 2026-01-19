@@ -1,23 +1,23 @@
 # Translation of Flectra Server.
 # This file contains the translation of the following modules:
 # 	* mail_plugin
-# 
+#
 # Translators:
 # Wil Flectra, 2024
 # Rasareeyar Lappiam, 2024
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-05 12:31+0000\n"
+"POT-Creation-Date: 2025-12-29 18:37+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
 "Last-Translator: Rasareeyar Lappiam, 2024\n"
 "Language-Team: Thai (https://app.transifex.com/flectra/teams/41243/th/)\n"
+"Language: th\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: th\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: mail_plugin
@@ -78,9 +78,7 @@ msgstr "รายได้ประจำปี"
 msgid ""
 "Attachments could not be logged in Flectra because their total size exceeded "
 "the allowed maximum."
-msgstr ""
-"ไม่สามารถบันทึกสิ่งที่แนบมาใน Flectra "
-"ได้เนื่องจากขนาดรวมเกินขนาดสูงสุดที่อนุญาต"
+msgstr "ไม่สามารถบันทึกสิ่งที่แนบมาใน Flectra ได้เนื่องจากขนาดรวมเกินขนาดสูงสุดที่อนุญาต"
 
 #. module: mail_plugin
 #. flectra-python
@@ -202,9 +200,7 @@ msgstr "พบผู้ติดต่อ (%(count)s)"
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
 #, python-format
 msgid "Could not autocomplete the company. Internal error. Try again later..."
-msgstr ""
-"ไม่สามารถเติมข้อมูลบริษัทอัตโนมัติได้ เกิดข้อผิดพลาดภายใน "
-"ลองอีกครั้งในภายหลัง..."
+msgstr "ไม่สามารถเติมข้อมูลบริษัทอัตโนมัติได้ เกิดข้อผิดพลาดภายใน ลองอีกครั้งในภายหลัง..."
 
 #. module: mail_plugin
 #. flectra-javascript
@@ -511,8 +507,7 @@ msgstr "ไม่มีบริษัทใดที่เชื่อมโย
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
 #, python-format
 msgid "No company linked to this contact could be enriched or found in Flectra"
-msgstr ""
-"ไม่มีบริษัทใดที่เชื่อมโยงกับผู้ติดต่อรายนี้สามารถเติมเต็มหรือพบได้ใน Flectra"
+msgstr "ไม่มีบริษัทใดที่เชื่อมโยงกับผู้ติดต่อรายนี้สามารถเติมเต็มหรือพบได้ใน Flectra"
 
 #. module: mail_plugin
 #. flectra-javascript
@@ -589,9 +584,7 @@ msgstr "อนุญาตให้มี IAP พาร์ทเนอร์เ�
 msgid ""
 "Oops, looks like you have exhausted your free enrichment requests. Please "
 "log in to try again."
-msgstr ""
-"อ๊ะ ดูเหมือนว่าคุณได้ใช้ คำขอเติมเต็มข้อมูลฟรี ของคุณหมดแล้ว "
-"กรุณาเข้าสู่ระบบเพื่อลองอีกครั้ง"
+msgstr "อ๊ะ ดูเหมือนว่าคุณได้ใช้ คำขอเติมเต็มข้อมูลฟรี ของคุณหมดแล้ว กรุณาเข้าสู่ระบบเพื่อลองอีกครั้ง"
 
 #. module: mail_plugin
 #. flectra-javascript
@@ -765,13 +758,10 @@ msgstr "ผู้ติดต่อรายนี้ไม่มีที่อ
 msgid ""
 "This is your notification address. Search the Contact manually to link this "
 "email to a record."
-msgstr ""
-"นี่คือที่อยู่การแจ้งเตือนของคุณ "
-"ค้นหาผู้ติดต่อด้วยตนเองเพื่อเชื่อมโยงอีเมลนี้กับบันทึก"
+msgstr "นี่คือที่อยู่การแจ้งเตือนของคุณ ค้นหาผู้ติดต่อด้วยตนเองเพื่อเชื่อมโยงอีเมลนี้กับบันทึก"
 
 #. module: mail_plugin
 #. flectra-python
-#: code:addons/mail_plugin/controllers/mail_plugin.py:0
 #: code:addons/mail_plugin/controllers/mail_plugin.py:0
 #, python-format
 msgid "This partner does not exist"
@@ -784,9 +774,7 @@ msgstr "ไม่มีพาร์ทเนอร์รายนี้"
 msgid ""
 "Warning: Attachments could not be logged in Flectra because their total size "
 "exceeded the allowed maximum."
-msgstr ""
-"คำเตือน: ไม่สามารถบันทึกไฟล์แนบใน Flectra ได้ "
-"เนื่องจากขนาดรวมเกินขนาดสูงสุดที่อนุญาต"
+msgstr "คำเตือน: ไม่สามารถบันทึกไฟล์แนบใน Flectra ได้ เนื่องจากขนาดรวมเกินขนาดสูงสุดที่อนุญาต"
 
 #. module: mail_plugin
 #. flectra-javascript
@@ -796,8 +784,8 @@ msgid ""
 "Warning: Could not fetch the attachments %(attachments)s as their sizes are "
 "bigger then the maximum size of %(size)sMB per each attachment."
 msgstr ""
-"คำเตือน: ไม่สามารถดึงไฟล์แนบ %(attachments)s ได้ "
-"เนื่องจากมีขนาดใหญ่กว่าขนาดสูงสุด %(size)sMB ต่อไฟล์แนบแต่ละไฟล์"
+"คำเตือน: ไม่สามารถดึงไฟล์แนบ %(attachments)s ได้ เนื่องจากมีขนาดใหญ่กว่าขนาดสูงสุด "
+"%(size)sMB ต่อไฟล์แนบแต่ละไฟล์"
 
 #. module: mail_plugin
 #. flectra-javascript

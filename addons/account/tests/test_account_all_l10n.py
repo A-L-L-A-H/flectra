@@ -2,6 +2,7 @@
 import logging
 import time
 
+from flectra.modules.loading import force_demo
 from flectra.tests import standalone
 from flectra.addons.account.models.chart_template import AccountChartTemplate
 from unittest.mock import patch
@@ -24,7 +25,8 @@ def test_all_l10n(env):
 
 
     # Ensure the presence of demo data, to see if they can be correctly installed
-    assert env.ref('base.module_account').demo, "Need the demo to test with data"
+    if not env.ref('base.module_account').demo:
+        force_demo(env)
 
     # Install the requiriments
     _logger.info('Installing all l10n modules')

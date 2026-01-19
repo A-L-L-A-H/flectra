@@ -1,21 +1,21 @@
 # Translation of Flectra Server.
 # This file contains the translation of the following modules:
-# 	* spreadsheet
+# * spreadsheet
 #
 # Translators:
 # Martin Trigaux, 2023
 # Wil Flectra, 2023
 # Yaroslav Husyar, 2024
-# Alina Lisnenko <alina.lisnenko@erp.co.ua>, 2024
-#
+# Alina Lisnenko <alina.lisnenko@erp.co.ua>, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-12 02:57+0000\n"
-"PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: Alina Lisnenko <alina.lisnenko@erp.co.ua>, 2024\n"
-"Language-Team: Ukrainian (https://app.transifex.com/flectra/teams/41243/uk/)\n"
+"POT-Creation-Date: 2025-12-29 18:38+0000\n"
+"PO-Revision-Date: 2025-12-27 08:03+0000\n"
+"Last-Translator: Alina Lisnenko <alina.lisnenko@erp.co.ua>\n"
+"Language-Team: Ukrainian <https://translate.flectrahq.com/projects/flectra-17/"
+"spreadsheet/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,6 +24,7 @@ msgstr ""
 "11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % "
 "100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
 "(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
+"X-Generator: Weblate 5.14.3\n"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -3189,9 +3190,26 @@ msgstr ""
 #. flectra-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
-msgid "Function [[FUNCTION_NAME]] expects number values for %s, but got a %s."
+msgid ""
+"Function [[FUNCTION_NAME]] expects number values for %s, but got a boolean."
 msgstr ""
-"Функція [[FUNCTION_NAME]] очікує числових значень для %s, але отримує %s."
+
+#. module: spreadsheet
+#. flectra-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+#, python-format
+msgid ""
+"Function [[FUNCTION_NAME]] expects number values for %s, but got a string."
+msgstr ""
+
+#. module: spreadsheet
+#. flectra-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+#, python-format
+msgid ""
+"Function [[FUNCTION_NAME]] expects number values for %s, but got an empty "
+"value."
+msgstr ""
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -5316,7 +5334,7 @@ msgstr "Права доступу тільки для читання"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid "Redo"
-msgstr "Повенути дію"
+msgstr "Повернути дію"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -7958,7 +7976,7 @@ msgstr "Maxpoint має бути числом"
 
 #. module: spreadsheet
 #. flectra-javascript
-#: code:addons/spreadsheet/static/src/chart/flectra_menu/figure_component.js:0
+#: code:addons/spreadsheet/static/src/helpers/helpers.js:0
 #, python-format
 msgid ""
 "The menu linked to this chart doesn't have an corresponding action. Please "
@@ -10616,12 +10634,8 @@ msgstr "Зміна значення від ключового значення"
 #. flectra-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
-msgid ""
-"Value for parameter %d is missing, while the function [[FUNCTION_NAME]] "
-"expect a number or a range."
+msgid "Value for parameter %s is missing in [[FUNCTION_NAME]]."
 msgstr ""
-"Значення для параметра %d відсутнє, в той час. як функція [[FUNCTION_NAME]] "
-"очікує число або діапазон."
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -11461,6 +11475,20 @@ msgstr "завтра"
 #, python-format
 msgid "yesterday"
 msgstr "вчора"
+
+#, python-format
+#~ msgid ""
+#~ "Function [[FUNCTION_NAME]] expects number values for %s, but got a %s."
+#~ msgstr ""
+#~ "Функція [[FUNCTION_NAME]] очікує числових значень для %s, але отримує %s."
+
+#, python-format
+#~ msgid ""
+#~ "Value for parameter %d is missing, while the function [[FUNCTION_NAME]] "
+#~ "expect a number or a range."
+#~ msgstr ""
+#~ "Значення для параметра %d відсутнє, в той час. як функція "
+#~ "[[FUNCTION_NAME]] очікує число або діапазон."
 
 #, python-format
 #~ msgid "Cannot multiply matrices : incompatible matrices size."
