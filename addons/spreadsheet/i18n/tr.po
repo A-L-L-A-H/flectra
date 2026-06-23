@@ -25,13 +25,13 @@
 # Cengiz Cokay Global Nonwoven, 2024
 # Hakan Türkün, 2025
 # Deniz Guvener_Flectra <degu@flectrahq.com>, 2025
-# Weblate <noreply-mt-weblate@weblate.org>, 2025.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-29 18:38+0000\n"
-"PO-Revision-Date: 2025-12-20 08:39+0000\n"
+"POT-Creation-Date: 2026-04-24 17:38+0000\n"
+"PO-Revision-Date: 2026-01-24 17:01+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Turkish <https://translate.flectrahq.com/projects/flectra-17/"
 "spreadsheet/tr/>\n"
@@ -134,21 +134,13 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid ""
-"(1) Search starting at first item. \n"
-"      (-1) Search starting at last item. \n"
-"      (2) Perform a binary search that relies on lookup_array being sorted "
-"in ascending order. If not sorted, invalid results will be returned. \n"
-"      (-2) Perform a binary search that relies on lookup_array being sorted "
-"in descending order. If not sorted, invalid results will be returned.\n"
-"      "
+"(1) Search starting at first item.       (-1) Search starting at last "
+"item.       (2) Perform a binary search that relies on lookup_array being "
+"sorted in ascending order. If not sorted, invalid results will be "
+"returned.       (-2) Perform a binary search that relies on lookup_array "
+"being sorted in descending order. If not sorted, invalid results will be "
+"returned.      "
 msgstr ""
-"(1) İlk öğeden başlayarak ara. \n"
-"      (-1) Son öğeden başlayarak ara. \n"
-"      (2) arama_dizisi’nin artan düzende sıralı olmasına dayanan ikili arama "
-"yap. Sıralı değilse, geçersiz sonuçlar döndürülür. \n"
-"      (-2) arama_dizisi’nin azalan düzende sıralı olmasına dayanan ikili "
-"arama yap. Sıralı değilse, geçersiz sonuçlar döndürülür.\n"
-"      "
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -198,6 +190,13 @@ msgstr "2 sütun"
 #, python-format
 msgid "2 rows"
 msgstr "2 satır"
+
+#. module: spreadsheet
+#. flectra-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
+#, python-format
+msgid "A"
+msgstr ""
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -487,6 +486,13 @@ msgstr "Mutlak değer"
 #, python-format
 msgid "Absolute value of a number."
 msgstr "Bir sayının mutlak değeri."
+
+#. module: spreadsheet
+#. flectra-javascript
+#: code:addons/spreadsheet/static/src/actions/spreadsheet_download_action.js:0
+#, python-format
+msgid "Access Error"
+msgstr "Erişim Hatası"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -2650,10 +2656,7 @@ msgid "Does not contain"
 msgstr "İçermez"
 
 #. module: spreadsheet
-#. flectra-javascript
-#: code:addons/spreadsheet/static/src/public_readonly_app/public_readonly.js:0
 #: model_terms:ir.ui.view,arch_db:spreadsheet.public_spreadsheet_layout
-#, python-format
 msgid "Download"
 msgstr "İndir"
 
@@ -3184,26 +3187,6 @@ msgstr "Fonksiyon [[FONKSİYON_ADI]] herhangi bir sonuç bulamadı."
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid ""
-"Function [[FUNCTION_NAME]] expects criteria_range and criterion to be in "
-"pairs."
-msgstr ""
-"[[FUNCTION_NAME]] işlevi, ölçüt_aralığı ve ölçütün çiftler halinde olmasını "
-"bekliyor."
-
-#. module: spreadsheet
-#. flectra-javascript
-#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-#, python-format
-msgid ""
-"Function [[FUNCTION_NAME]] expects criteria_range to have the same dimension"
-msgstr ""
-"[[FUNCTION_NAME]] işlevi ölçüt_aralığının aynı boyuta sahip olmasını bekliyor"
-
-#. module: spreadsheet
-#. flectra-javascript
-#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-#, python-format
-msgid ""
 "Function [[FUNCTION_NAME]] expects number values for %s, but got a boolean."
 msgstr ""
 "Fonksiyon [[FUNCTION_NAME]], %s için sayı değerleri bekliyor, ancak boolean "
@@ -3614,12 +3597,8 @@ msgstr "[[FUNCTION_NAME]] değerlendirmesinde, '%s' içinde '%s' bulunamıyor."
 #, python-format
 msgid ""
 "In [[FUNCTION_NAME]], the number of columns of the first matrix (%s) must be "
-"equal to the \n"
-"        number of rows of the second matrix (%s)."
+"equal to the         number of rows of the second matrix (%s)."
 msgstr ""
-"[[FONKSİYON_ADI]] içinde ilk matrisin (%s) sütun sayısı, ikinci matrisin "
-"(%s) satır sayısına \n"
-"        eşit olmalıdır."
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -11008,14 +10987,9 @@ msgstr ""
 #, python-format
 msgid ""
 "Whether or not to remove empty text messages from the split results. The "
-"default behavior is to treat \n"
-"        consecutive delimiters as one (if TRUE). If FALSE, empty cells "
-"values are added between consecutive delimiters."
+"default behavior is to treat         consecutive delimiters as one (if "
+"TRUE). If FALSE, empty cells values are added between consecutive delimiters."
 msgstr ""
-"Bölme sonuçlarından boş metinlerin kaldırılıp kaldırılmayacağı. Varsayılan "
-"davranış, \n"
-"        ardışık ayırıcıların tek bir ayırıcı olarak kabul edilmesidir (DOĞRU "
-"ise). YANLIŞ ise, ardışık ayırıcıların arasına boş hücre değerleri eklenir."
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -11033,12 +11007,8 @@ msgstr ""
 #, python-format
 msgid ""
 "Whether the array should be scanned by column. True scans the array by "
-"column and false (default) \n"
-"      scans the array by row."
+"column and false (default)       scans the array by row."
 msgstr ""
-"Dizinin sütunlara göre taranıp taranmayacağı. Doğru, sütunlara göre tararken "
-"yanlış (varsayılan) \n"
-"      satırlara göre tarar."
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -11232,6 +11202,22 @@ msgstr "Mevcut bir filtrenin içindeki hücreler birleştirilemez."
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid "You cannot create overlapping filters."
+msgstr ""
+
+#. module: spreadsheet
+#. flectra-javascript
+#: code:addons/spreadsheet/static/src/actions/spreadsheet_download_action.js:0
+#, python-format
+msgid ""
+"You don't have the rights to export data. Please contact an Administrator."
+msgstr ""
+"Verileri dışa aktarma haklarınız yok. Lütfen bir Yönetici ile temas kurun."
+
+#. module: spreadsheet
+#. flectra-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
+#, python-format
+msgid "Z"
 msgstr ""
 
 #. module: spreadsheet
@@ -11474,7 +11460,83 @@ msgstr "yarın"
 
 #. module: spreadsheet
 #. flectra-javascript
+#: code:addons/spreadsheet/static/src/public_readonly_app/public_readonly.xml:0
+#, python-format
+msgid "x"
+msgstr ""
+
+#. module: spreadsheet
+#. flectra-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid "yesterday"
 msgstr "dün"
+
+#, python-format
+#~ msgid ""
+#~ "(1) Search starting at first item. \n"
+#~ "      (-1) Search starting at last item. \n"
+#~ "      (2) Perform a binary search that relies on lookup_array being "
+#~ "sorted in ascending order. If not sorted, invalid results will be "
+#~ "returned. \n"
+#~ "      (-2) Perform a binary search that relies on lookup_array being "
+#~ "sorted in descending order. If not sorted, invalid results will be "
+#~ "returned.\n"
+#~ "      "
+#~ msgstr ""
+#~ "(1) İlk öğeden başlayarak ara. \n"
+#~ "      (-1) Son öğeden başlayarak ara. \n"
+#~ "      (2) arama_dizisi’nin artan düzende sıralı olmasına dayanan ikili "
+#~ "arama yap. Sıralı değilse, geçersiz sonuçlar döndürülür. \n"
+#~ "      (-2) arama_dizisi’nin azalan düzende sıralı olmasına dayanan ikili "
+#~ "arama yap. Sıralı değilse, geçersiz sonuçlar döndürülür.\n"
+#~ "      "
+
+#, python-format
+#~ msgid ""
+#~ "Function [[FUNCTION_NAME]] expects criteria_range and criterion to be in "
+#~ "pairs."
+#~ msgstr ""
+#~ "[[FUNCTION_NAME]] işlevi, ölçüt_aralığı ve ölçütün çiftler halinde "
+#~ "olmasını bekliyor."
+
+#, python-format
+#~ msgid ""
+#~ "Function [[FUNCTION_NAME]] expects criteria_range to have the same "
+#~ "dimension"
+#~ msgstr ""
+#~ "[[FUNCTION_NAME]] işlevi ölçüt_aralığının aynı boyuta sahip olmasını "
+#~ "bekliyor"
+
+#, python-format
+#~ msgid ""
+#~ "In [[FUNCTION_NAME]], the number of columns of the first matrix (%s) must "
+#~ "be equal to the \n"
+#~ "        number of rows of the second matrix (%s)."
+#~ msgstr ""
+#~ "[[FONKSİYON_ADI]] içinde ilk matrisin (%s) sütun sayısı, ikinci matrisin "
+#~ "(%s) satır sayısına \n"
+#~ "        eşit olmalıdır."
+
+#, python-format
+#~ msgid ""
+#~ "Whether or not to remove empty text messages from the split results. The "
+#~ "default behavior is to treat \n"
+#~ "        consecutive delimiters as one (if TRUE). If FALSE, empty cells "
+#~ "values are added between consecutive delimiters."
+#~ msgstr ""
+#~ "Bölme sonuçlarından boş metinlerin kaldırılıp kaldırılmayacağı. "
+#~ "Varsayılan davranış, \n"
+#~ "        ardışık ayırıcıların tek bir ayırıcı olarak kabul edilmesidir "
+#~ "(DOĞRU ise). YANLIŞ ise, ardışık ayırıcıların arasına boş hücre değerleri "
+#~ "eklenir."
+
+#, python-format
+#~ msgid ""
+#~ "Whether the array should be scanned by column. True scans the array by "
+#~ "column and false (default) \n"
+#~ "      scans the array by row."
+#~ msgstr ""
+#~ "Dizinin sütunlara göre taranıp taranmayacağı. Doğru, sütunlara göre "
+#~ "tararken yanlış (varsayılan) \n"
+#~ "      satırlara göre tarar."

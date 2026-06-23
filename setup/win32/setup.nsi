@@ -8,6 +8,7 @@ Unicode True
 
 !include 'MUI2.nsh'
 !include 'FileFunc.nsh'
+!include 'WordFunc.nsh'
 !include 'LogicLib.nsh'
 !include 'Sections.nsh'
 !include 'x64.nsh'
@@ -85,6 +86,9 @@ Unicode True
 !define DEFAULT_POSTGRESQL_USERNAME 'openpg'
 !define DEFAULT_POSTGRESQL_PASSWORD 'openpgpwd'
 
+!define DEFAULT_FLECTRA_DB_USERNAME 'flectra'
+!define DEFAULT_FLECTRA_DB_PASSWORD 'flectrapwd'
+
 Name '${DISPLAY_NAME}'
 Caption "${PRODUCT_NAME} ${VERSION} Setup"
 OutFile "${TOOLSDIR}\server\flectra_setup_${VERSION}.exe"
@@ -112,6 +116,12 @@ Var HWNDPostgreSQLPort
 Var HWNDPostgreSQLUsername
 Var HWNDPostgreSQLPassword
 
+Var TextFlectraDBUsername
+Var TextFlectraDBPassword
+
+Var HWNDFlectraDBUsername
+Var HWNDFlectraDBPassword
+
 Var ProxyTokenDialog
 Var ProxyTokenLabel
 Var ProxyTokenText
@@ -136,6 +146,7 @@ Var ProxyTokenPwd
 !define MUI_PAGE_CUSTOMFUNCTION_LEAVE ComponentLeave
 !insertmacro MUI_PAGE_COMPONENTS
 Page Custom ShowPostgreSQL LeavePostgreSQL
+Page Custom ShowFlectraDB LeaveFlectraDB
 !define MUI_PAGE_CUSTOMFUNCTION_LEAVE dir_leave
 !insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_INSTFILES
@@ -173,6 +184,13 @@ LangString DESC_PostgreSQL_Hostname ${LANG_ENGLISH} "Hostname"
 LangString DESC_PostgreSQL_Port ${LANG_ENGLISH} "Port"
 LangString DESC_PostgreSQL_Username ${LANG_ENGLISH} "Username"
 LangString DESC_PostgreSQL_Password ${LANG_ENGLISH} "Password"
+LangString DESC_FlectraDBSection ${LANG_ENGLISH} "Flectra PostgreSQL User"
+LangString DESC_FlectraDBPage ${LANG_ENGLISH} "Configure the Flectra PostgreSQL user credentials"
+LangString DESC_FlectraDB_Username ${LANG_ENGLISH} "Flectra DB Username"
+LangString DESC_FlectraDB_Password ${LANG_ENGLISH} "Flectra DB Password"
+LangString WARNING_FlectraDBUsernameIsEmpty ${LANG_ENGLISH} "The Flectra database username cannot be empty"
+LangString WARNING_FlectraDBPasswordIsEmpty ${LANG_ENGLISH} "The Flectra database password cannot be empty"
+LangString WARNING_FlectraDBUsernameInvalid ${LANG_ENGLISH} "The Flectra database username must contain only letters, digits and underscores, and start with a letter or underscore"
 LangString Profile_AllInOne ${LANG_ENGLISH} "Flectra Server And PostgreSQL Server"
 LangString Profile_Server ${LANG_ENGLISH} "Flectra Server Only"
 LangString Profile_IOT ${LANG_ENGLISH} "Flectra IoT"
@@ -199,6 +217,13 @@ LangString DESC_PostgreSQL_Hostname ${LANG_FRENCH} "Hôte"
 LangString DESC_PostgreSQL_Port ${LANG_FRENCH} "Port"
 LangString DESC_PostgreSQL_Username ${LANG_FRENCH} "Utilisateur"
 LangString DESC_PostgreSQL_Password ${LANG_FRENCH} "Mot de passe"
+LangString DESC_FlectraDBSection ${LANG_FRENCH} "Utilisateur Flectra PostgreSQL"
+LangString DESC_FlectraDBPage ${LANG_FRENCH} "Configurez les identifiants de l'utilisateur Flectra pour PostgreSQL"
+LangString DESC_FlectraDB_Username ${LANG_FRENCH} "Utilisateur Flectra"
+LangString DESC_FlectraDB_Password ${LANG_FRENCH} "Mot de passe Flectra"
+LangString WARNING_FlectraDBUsernameIsEmpty ${LANG_FRENCH} "Le nom d'utilisateur Flectra ne peut pas être vide"
+LangString WARNING_FlectraDBPasswordIsEmpty ${LANG_FRENCH} "Le mot de passe Flectra ne peut pas être vide"
+LangString WARNING_FlectraDBUsernameInvalid ${LANG_FRENCH} "Le nom d'utilisateur Flectra ne peut contenir que des lettres, chiffres et underscores, et doit commencer par une lettre ou un underscore"
 LangString Profile_AllInOne ${LANG_FRENCH} "Serveur Flectra Et Serveur PostgreSQL"
 LangString Profile_Server ${LANG_FRENCH} "Seulement Le Serveur Flectra"
 LangString Profile_IOT ${LANG_FRENCH} "Flectra IoT"
@@ -240,8 +265,8 @@ Section $(TITLE_Flectra_Server) SectionFlectra_Server
 
     # If there is a previous install of the Flectra Server, keep the login/password from the config file
     WriteIniStr "$INSTDIR\server\flectra.conf" "options" "db_host" $TextPostgreSQLHostname
-    WriteIniStr "$INSTDIR\server\flectra.conf" "options" "db_user" $TextPostgreSQLUsername
-    WriteIniStr "$INSTDIR\server\flectra.conf" "options" "db_password" $TextPostgreSQLPassword
+    WriteIniStr "$INSTDIR\server\flectra.conf" "options" "db_user" $TextFlectraDBUsername
+    WriteIniStr "$INSTDIR\server\flectra.conf" "options" "db_password" $TextFlectraDBPassword
     WriteIniStr "$INSTDIR\server\flectra.conf" "options" "db_port" $TextPostgreSQLPort
     # Fix the addons path
     WriteIniStr "$INSTDIR\server\flectra.conf" "options" "addons_path" "$INSTDIR\server\flectra\addons"
@@ -274,7 +299,7 @@ Section $(TITLE_PostgreSQL) SectionPostgreSQL
     VAR /GLOBAL postgresql_exe_filename
     VAR /GLOBAL postgresql_url
 
-    StrCpy $postgresql_exe_filename "postgresql-12.4-1-windows-x64.exe"
+    StrCpy $postgresql_exe_filename "postgresql-16.14-1-windows-x64.exe"
 
     StrCpy $postgresql_url "https://get.enterprisedb.com/postgresql/$postgresql_exe_filename"
     nsExec::Exec 'net user openpgsvc /delete'
@@ -299,6 +324,19 @@ Section $(TITLE_PostgreSQL) SectionPostgreSQL
         --serviceaccount "openpgsvc" --servicepassword "0p3npgsvcPWD" \
         --superaccount "$TextPostgreSQLUsername" --superpassword "$TextPostgreSQLPassword" \
         --serverport $TextPostgreSQLPort'
+
+    DetailPrint "Creating Flectra database user with CREATEDB privilege"
+    ${WordReplace} $TextFlectraDBPassword "'" "''" "+" $R0
+    System::Call 'Kernel32::SetEnvironmentVariableW(w "PGPASSWORD", w "$TextPostgreSQLPassword")'
+    nsExec::ExecToStack `"$INSTDIR\PostgreSQL\bin\psql.exe" -w -U "$TextPostgreSQLUsername" -h "$TextPostgreSQLHostname" -p $TextPostgreSQLPort -d postgres -c "CREATE ROLE $TextFlectraDBUsername WITH CREATEDB NOSUPERUSER NOCREATEROLE LOGIN PASSWORD '$R0'"`
+    Pop $R1
+    Pop $R2
+    System::Call 'Kernel32::SetEnvironmentVariableW(w "PGPASSWORD", w "")'
+    ${If} $R1 != 0
+        DetailPrint "Failed to create Flectra database user (psql exit code $R1)"
+    ${Else}
+        DetailPrint "Flectra database user created successfully"
+    ${EndIf}
 SectionEnd
 
 Section $(TITLE_IOT) IOT
@@ -438,6 +476,9 @@ Function .onInit
     StrCpy $TextPostgreSQLUsername ${DEFAULT_POSTGRESQL_USERNAME}
     StrCpy $TextPostgreSQLPassword ${DEFAULT_POSTGRESQL_PASSWORD}
 
+    StrCpy $TextFlectraDBUsername ${DEFAULT_FLECTRA_DB_USERNAME}
+    StrCpy $TextFlectraDBPassword ${DEFAULT_FLECTRA_DB_PASSWORD}
+
     Push $R0
     ${GetOptions} $cmdLineParams '/allinone' $R0
     IfErrors +2 0
@@ -461,6 +502,21 @@ Function .onInit
     StrCpy $HasPostgreSQL 1
     !insertmacro UnselectSection ${SectionPostgreSQL}
     SectionSetFlags ${SectionPostgreSQL} ${SF_RO}
+
+    EnumRegKey $R5 HKLM "SOFTWARE\PostgreSQL\Installations" 0
+    ReadRegStr $R6 HKLM "SOFTWARE\PostgreSQL\Installations\$R5" "Base Directory"
+
+    System::Call 'Kernel32::SetEnvironmentVariableW(w "PGPASSWORD", w "${DEFAULT_FLECTRA_DB_PASSWORD}")'
+    nsExec::ExecToStack `"$R6\bin\psql.exe" -w -U "${DEFAULT_FLECTRA_DB_USERNAME}" -h "${DEFAULT_POSTGRESQL_HOSTNAME}" -p ${DEFAULT_POSTGRESQL_PORT} -d postgres -tAc "SELECT 1"`
+    Pop $R7
+    Pop $R8
+    System::Call 'Kernel32::SetEnvironmentVariableW(w "PGPASSWORD", w "")'
+
+    ${If} $R7 != 0
+        StrCpy $TextFlectraDBUsername "${DEFAULT_POSTGRESQL_USERNAME}"
+        StrCpy $TextFlectraDBPassword "${DEFAULT_POSTGRESQL_PASSWORD}"
+    ${EndIf}
+
 
     DoInstallPostgreSQL:
 FunctionEnd
@@ -540,6 +596,70 @@ Function LeavePostgreSQL
     StrLen $1 $TextPostgreSQLPassword
     ${If} $1 == 0
         MessageBox MB_ICONEXCLAMATION|MB_OK $(WARNING_PasswordIsEmpty)
+        Abort
+    ${EndIf}
+
+FunctionEnd
+
+Function ShowFlectraDB
+    GetCurInstType $R0
+    IntCmp $R0 1 bypassFlectraDBConfig
+    IntCmp $R0 2 bypassFlectraDBConfig
+
+    ${If} $HasPostgreSQL == 1
+        Goto bypassFlectraDBConfig
+    ${EndIf}
+
+    nsDialogs::Create /NOUNLOAD 1018
+    Pop $0
+
+    ${If} $0 == error
+        Abort
+    ${EndIf}
+
+    ${NSD_CreateLabel} 0 0 100% 10u $(DESC_FlectraDBPage)
+    Pop $0
+
+    ${NSD_CreateLabel} 0 45 90u 12u $(DESC_FlectraDB_Username)
+    Pop $0
+    ${NSD_CreateText} 130 45 130u 12u $TextFlectraDBUsername
+    Pop $HWNDFlectraDBUsername
+
+    ${NSD_CreateLabel} 0 75 90u 12u $(DESC_FlectraDB_Password)
+    Pop $0
+    ${NSD_CreateText} 130 75 130u 12u $TextFlectraDBPassword
+    Pop $HWNDFlectraDBPassword
+
+    nsDialogs::Show
+    bypassFlectraDBConfig:
+FunctionEnd
+
+Function LeaveFlectraDB
+    ${NSD_GetText} $HWNDFlectraDBUsername $TextFlectraDBUsername
+    ${NSD_GetText} $HWNDFlectraDBPassword $TextFlectraDBPassword
+
+    StrLen $1 $TextFlectraDBUsername
+    ${If} $1 == 0
+        MessageBox MB_ICONEXCLAMATION|MB_OK $(WARNING_FlectraDBUsernameIsEmpty)
+        Abort
+    ${EndIf}
+
+    ${StrFilter} $TextFlectraDBUsername "12" "_" "" $R0
+    ${If} $R0 != $TextFlectraDBUsername
+        MessageBox MB_ICONEXCLAMATION|MB_OK $(WARNING_FlectraDBUsernameInvalid)
+        Abort
+    ${EndIf}
+
+    StrCpy $R1 $TextFlectraDBUsername 1
+    ${StrFilter} $R1 "1" "" "" $R2
+    ${If} $R1 == $R2
+        MessageBox MB_ICONEXCLAMATION|MB_OK $(WARNING_FlectraDBUsernameInvalid)
+        Abort
+    ${EndIf}
+
+    StrLen $1 $TextFlectraDBPassword
+    ${If} $1 == 0
+        MessageBox MB_ICONEXCLAMATION|MB_OK $(WARNING_FlectraDBPasswordIsEmpty)
         Abort
     ${EndIf}
 FunctionEnd

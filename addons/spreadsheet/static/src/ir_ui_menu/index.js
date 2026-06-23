@@ -67,12 +67,6 @@ export const spreadsheetLinkMenuCellService = {
                     const menu = env.services.menu.getMenu(menuId);
                     env.services.action.doAction(menu.actionID);
                 },
-                // createCell: (id, content, properties, sheetId, getters) => {
-                //     const { url } = parseMarkdownLink(content);
-                //     const menuId = parseIrMenuIdLink(url);
-                //     const menuName = env.services.menu.getMenu(menuId).name;
-                //     return new FlectraMenuLinkCell(id, content, menuId, menuName, properties);
-                // },
             })
             .add("FlectraMenuXmlLink", {
                 sequence: 66,

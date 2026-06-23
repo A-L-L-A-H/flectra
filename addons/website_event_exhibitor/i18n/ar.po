@@ -1,26 +1,28 @@
 # Translation of Flectra Server.
 # This file contains the translation of the following modules:
-# 	* website_event_exhibitor
+# * website_event_exhibitor
 #
 # Translators:
 # Martin Trigaux, 2023
 # Wil Flectra, 2023
 # Malaz Abuidris <msea@flectrahq.com>, 2025
-#
+# Weblate <noreply-mt-weblate@weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-29 18:38+0000\n"
-"PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: Malaz Abuidris <msea@flectrahq.com>, 2025\n"
-"Language-Team: Arabic (https://app.transifex.com/flectra/teams/41243/ar/)\n"
+"POT-Creation-Date: 2026-01-29 18:37+0000\n"
+"PO-Revision-Date: 2026-03-07 08:23+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
+"Language-Team: Arabic <https://translate.flectrahq.com/projects/flectra-17/"
+"website_event_exhibitor/ar/>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 5.16.1\n"
 
 #. module: website_event_exhibitor
 #. flectra-javascript
@@ -113,6 +115,37 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_event_exhibitor.exhibitor_main
 msgid "About"
 msgstr "حول "
+
+#. module: website_event_exhibitor
+#: model_terms:event.sponsor,website_description:website_event_exhibitor.event_7_sponsor_1
+#: model_terms:event.sponsor,website_description:website_event_exhibitor.event_7_sponsor_3
+#: model_terms:event.sponsor,website_description:website_event_exhibitor.event_sponsor_0
+#: model_terms:event.sponsor,website_description:website_event_exhibitor.event_sponsor_3
+msgid ""
+"Acme Corporation designs, develops, integrates and supports HR and Supply\n"
+"                Chain processes in order to make our customers more "
+"productive,\n"
+"                responsive and profitable."
+msgstr ""
+"تقوم شركة Acme Corporation بتصميم وتطوير ودمج ودعم عمليات الموارد البشرية "
+"وإدارة سلاسل\n"
+"                التوريد لمساعدة عملائنا على تحقيق أكبر قدر ممكن من الإنتاجية\n"
+"                وسرعة الاستجابة والربحية."
+
+#. module: website_event_exhibitor
+#: model_terms:event.sponsor,website_description:website_event_exhibitor.event_7_sponsor_1
+#: model_terms:event.sponsor,website_description:website_event_exhibitor.event_7_sponsor_3
+#: model_terms:event.sponsor,website_description:website_event_exhibitor.event_sponsor_0
+#: model_terms:event.sponsor,website_description:website_event_exhibitor.event_sponsor_3
+msgid ""
+"Acme Corporation integrates ERP for Global Companies and supports PME\n"
+"                with Open Sources software to manage their businesses. Our\n"
+"                consultants are experts in the following areas:"
+msgstr ""
+"تقوم شركة Acme Corporation بدمج نظام تخطيط موارد المؤسسات (ERP) للشركات "
+"العالمية وتدعم الشركات الصغيرة والمتوسطة\n"
+"                ببرامج مفتوحة المصدر لإدارة أعمالها. يتمتع مستشارونا\n"
+"                بخبرة واسعة في المجالات التالية:"
 
 #. module: website_event_exhibitor
 #: model:ir.model.fields,field_description:website_event_exhibitor.field_event_sponsor__message_needaction
@@ -287,36 +320,6 @@ msgstr "أنشئ في"
 #: model_terms:event.sponsor,website_description:website_event_exhibitor.event_sponsor_3
 msgid "Customer Relationship Management"
 msgstr "إدارة علاقات العملاء"
-
-#. module: website_event_exhibitor
-#: model_terms:event.sponsor,website_description:website_event_exhibitor.event_7_sponsor_1
-#: model_terms:event.sponsor,website_description:website_event_exhibitor.event_7_sponsor_3
-#: model_terms:event.sponsor,website_description:website_event_exhibitor.event_sponsor_0
-#: model_terms:event.sponsor,website_description:website_event_exhibitor.event_sponsor_3
-msgid ""
-"Deco Addict designs, develops, integrates and supports HR and Supply\n"
-"                Chain processes in order to make our customers more "
-"productive,\n"
-"                responsive and profitable."
-msgstr ""
-"تقوم Deco Addict بتصميم وتطوير ودمج ودعم الموارد البشرية\n"
-"                وعمليات سلاسل التوريد في سبيل جعل العملاء أكثر إنتاجية\n"
-"                وأكثر استجابة وأكثر ربحية. "
-
-#. module: website_event_exhibitor
-#: model_terms:event.sponsor,website_description:website_event_exhibitor.event_7_sponsor_1
-#: model_terms:event.sponsor,website_description:website_event_exhibitor.event_7_sponsor_3
-#: model_terms:event.sponsor,website_description:website_event_exhibitor.event_sponsor_0
-#: model_terms:event.sponsor,website_description:website_event_exhibitor.event_sponsor_3
-msgid ""
-"Deco Addict integrates ERP for Global Companies and supports PME\n"
-"                with Open Sources software to manage their businesses. Our\n"
-"                consultants are experts in the following areas:"
-msgstr ""
-"تقوم Deco Addict بدمج نظام إدارة موارد المؤسسات للشركات العالمية وتدعم\n"
-"                الشركات الصغيرة والمتوسطة باستخدام برنامج مفتوح المصدر "
-"لإدارة\n"
-"                أعمالها. مستشارونا خبراء في المجالات التالية: "
 
 #. module: website_event_exhibitor
 #: model:ir.model.fields,field_description:website_event_exhibitor.field_event_sponsor__website_description
@@ -1176,3 +1179,24 @@ msgstr "يبدأ في "
 #, python-format
 msgid "starts on"
 msgstr "يبدأ في "
+
+#~ msgid ""
+#~ "Deco Addict designs, develops, integrates and supports HR and Supply\n"
+#~ "                Chain processes in order to make our customers more "
+#~ "productive,\n"
+#~ "                responsive and profitable."
+#~ msgstr ""
+#~ "تقوم Deco Addict بتصميم وتطوير ودمج ودعم الموارد البشرية\n"
+#~ "                وعمليات سلاسل التوريد في سبيل جعل العملاء أكثر إنتاجية\n"
+#~ "                وأكثر استجابة وأكثر ربحية. "
+
+#~ msgid ""
+#~ "Deco Addict integrates ERP for Global Companies and supports PME\n"
+#~ "                with Open Sources software to manage their businesses. "
+#~ "Our\n"
+#~ "                consultants are experts in the following areas:"
+#~ msgstr ""
+#~ "تقوم Deco Addict بدمج نظام إدارة موارد المؤسسات للشركات العالمية وتدعم\n"
+#~ "                الشركات الصغيرة والمتوسطة باستخدام برنامج مفتوح المصدر "
+#~ "لإدارة\n"
+#~ "                أعمالها. مستشارونا خبراء في المجالات التالية: "

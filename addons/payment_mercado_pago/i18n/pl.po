@@ -6,12 +6,13 @@
 # Wil Flectra, 2023
 #
 # "Marta (wacm)" <wacm@flectrahq.com>, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 17.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-12-29 18:38+0000\n"
-"PO-Revision-Date: 2026-01-17 08:18+0000\n"
+"PO-Revision-Date: 2026-02-24 14:03+0000\n"
 "Last-Translator: \"Marta (wacm)\" <wacm@flectrahq.com>\n"
 "Language-Team: Polish <https://translate.flectrahq.com/projects/flectra-17/"
 "payment_mercado_pago/pl/>\n"
@@ -37,34 +38,36 @@ msgid ""
 "Call your card issuer to activate your card or use another payment method. "
 "The phone number is on the back of your card."
 msgstr ""
+"Skontaktuj się z wystawcą karty, aby ją aktywować, lub skorzystaj z innej "
+"metody płatności. Numer telefonu znajduje się na odwrocie karty."
 
 #. module: payment_mercado_pago
 #. flectra-python
 #: code:addons/payment_mercado_pago/const.py:0
 #, python-format
 msgid "Check expiration date."
-msgstr ""
+msgstr "Sprawdź datę ważności."
 
 #. module: payment_mercado_pago
 #. flectra-python
 #: code:addons/payment_mercado_pago/const.py:0
 #, python-format
 msgid "Check the card number."
-msgstr ""
+msgstr "Sprawdź numer karty."
 
 #. module: payment_mercado_pago
 #. flectra-python
 #: code:addons/payment_mercado_pago/const.py:0
 #, python-format
 msgid "Check the card security code."
-msgstr ""
+msgstr "Sprawdź kod zabezpieczający karty."
 
 #. module: payment_mercado_pago
 #. flectra-python
 #: code:addons/payment_mercado_pago/const.py:0
 #, python-format
 msgid "Check the data."
-msgstr ""
+msgstr "Sprawdź dane."
 
 #. module: payment_mercado_pago
 #: model:ir.model.fields,field_description:payment_mercado_pago.field_payment_provider__code
@@ -86,7 +89,7 @@ msgstr "Mercado Pago"
 #. module: payment_mercado_pago
 #: model:ir.model.fields,field_description:payment_mercado_pago.field_payment_provider__mercado_pago_access_token
 msgid "Mercado Pago Access Token"
-msgstr ""
+msgstr "Token dostępu Mercado Pago"
 
 #. module: payment_mercado_pago
 #. flectra-python
@@ -111,34 +114,36 @@ msgstr "Transakcja płatnicza"
 #, python-format
 msgid "Payment was not processed, use another card or contact issuer."
 msgstr ""
+"Płatność nie została zrealizowana. Użyj innej karty lub skontaktuj się z "
+"wystawcą karty."
 
 #. module: payment_mercado_pago
 #. flectra-python
 #: code:addons/payment_mercado_pago/models/payment_transaction.py:0
 #, python-format
 msgid "Received data with invalid status: %s"
-msgstr ""
+msgstr "Otrzymano dane o nieprawidłowym statusie: %s"
 
 #. module: payment_mercado_pago
 #. flectra-python
 #: code:addons/payment_mercado_pago/models/payment_transaction.py:0
 #, python-format
 msgid "Received data with missing payment id."
-msgstr ""
+msgstr "Otrzymano dane z brakującym identyfikatorem płatności."
 
 #. module: payment_mercado_pago
 #. flectra-python
 #: code:addons/payment_mercado_pago/models/payment_transaction.py:0
 #, python-format
 msgid "Received data with missing reference."
-msgstr ""
+msgstr "Otrzymano dane bez referencji."
 
 #. module: payment_mercado_pago
 #. flectra-python
 #: code:addons/payment_mercado_pago/models/payment_transaction.py:0
 #, python-format
 msgid "Received data with missing status."
-msgstr ""
+msgstr "Otrzymano dane z brakującym statusem."
 
 #. module: payment_mercado_pago
 #. flectra-python
@@ -148,6 +153,8 @@ msgid ""
 "The communication with the API failed. Mercado Pago gave us the following "
 "information: '%s' (code %s)"
 msgstr ""
+"Komunikacja z API się nie powiodła. Mercado Pago zwrócił następujące "
+"informacje '%s' (kod błędu: %s)"
 
 #. module: payment_mercado_pago
 #. flectra-python
@@ -157,6 +164,8 @@ msgid ""
 "The communication with the API failed. The response is empty. Please verify "
 "your access token."
 msgstr ""
+"Komunikacja z API się nie powiodła. Odpowiedź jest pusta. Zweryfikuj swój "
+"token dostępu."
 
 #. module: payment_mercado_pago
 #: model:ir.model.fields,help:payment_mercado_pago.field_payment_provider__code
@@ -168,7 +177,7 @@ msgstr "Kod techniczny tego dostawcy usług płatniczych."
 #: code:addons/payment_mercado_pago/const.py:0
 #, python-format
 msgid "This payment method does not process payments in installments."
-msgstr ""
+msgstr "Ta metoda płatności nie obsługuje płatności ratalnych."
 
 #. module: payment_mercado_pago
 #. flectra-python
@@ -178,6 +187,9 @@ msgid ""
 "We are processing your payment. Don't worry, in less than 2 business days, "
 "we will notify you by e-mail if your payment has been credited."
 msgstr ""
+"Przetwarzamy Twoją płatność. Nie martw się, w ciągu mniej niż 2 dni "
+"roboczych poinformujemy Cię e-mailem, czy Twoja płatność została "
+"zaksięgowana."
 
 #. module: payment_mercado_pago
 #. flectra-python
@@ -188,6 +200,9 @@ msgid ""
 "will notify you by e-mail if your payment has been credited or if we need "
 "more information."
 msgstr ""
+"Przetwarzamy Twoją płatność. Nie martw się, w ciągu mniej niż 2 dni "
+"roboczych powiadomimy Cię e-mailem, czy Twoja płatność została zaksięgowana, "
+"czy też potrzebujemy dodatkowych informacji."
 
 #. module: payment_mercado_pago
 #. flectra-python
@@ -196,6 +211,7 @@ msgstr ""
 msgid ""
 "We were unable to process your payment, please check your card information."
 msgstr ""
+"Nie udało nam się przetworzyć Twojej płatności. Sprawdź dane swojej karty."
 
 #. module: payment_mercado_pago
 #. flectra-python
@@ -203,6 +219,7 @@ msgstr ""
 #, python-format
 msgid "We were unable to process your payment, please use another card."
 msgstr ""
+"Nie udało nam się przetworzyć Twojej płatności. Proszę użyć innej karty."
 
 #. module: payment_mercado_pago
 #. flectra-python
@@ -212,6 +229,8 @@ msgid ""
 "You have already made a payment for that value. If you need to pay again, "
 "use another card or another payment method."
 msgstr ""
+"Już dokonałeś płatności za tę kwotę. Jeśli musisz zapłacić ponownie, użyj "
+"innej karty lub innej metody płatności."
 
 #. module: payment_mercado_pago
 #. flectra-python
@@ -221,20 +240,22 @@ msgid ""
 "You have reached the limit of allowed attempts. Choose another card or other "
 "means of payment."
 msgstr ""
+"Osiągnąłeś limit dozwolonych prób. Wybierz inną kartę lub inny sposób "
+"płatności."
 
 #. module: payment_mercado_pago
 #. flectra-python
 #: code:addons/payment_mercado_pago/const.py:0
 #, python-format
 msgid "You must authorize the payment with this card."
-msgstr ""
+msgstr "Musisz autoryzować płatność tą kartą."
 
 #. module: payment_mercado_pago
 #. flectra-python
 #: code:addons/payment_mercado_pago/const.py:0
 #, python-format
 msgid "Your card has not enough funds."
-msgstr ""
+msgstr "Na Twojej karcie nie ma wystarczających środków."
 
 #. module: payment_mercado_pago
 #. flectra-python
@@ -244,3 +265,5 @@ msgid ""
 "Your payment has been credited. In your summary you will see the charge as a "
 "statement descriptor."
 msgstr ""
+"Twoja płatność została zaksięgowana. W podsumowaniu zobaczysz opłatę jako "
+"opis na wyciągu."

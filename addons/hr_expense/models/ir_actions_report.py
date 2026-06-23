@@ -1,7 +1,7 @@
 import io
-from flectra import models
+from flectra import models, _
 from flectra.tools import pdf
-from flectra.tools.pdf import FlectraPdfFileReader, FlectraPdfFileWriter
+from flectra.tools.pdf import FlectraPdfFileReader, FlectraPdfFileWriter, PdfReadError, DependencyError
 
 
 class IrActionsReport(models.Model):
@@ -35,7 +35,15 @@ class IrActionsReport(models.Model):
                         attachment_prep_stream = self._render_qweb_pdf_prepare_streams('hr_expense.report_expense_sheet_img', data, res_ids=res_ids)
                         attachment_stream = attachment_prep_stream[expense_sheet.id]['stream']
                     attachment_reader = FlectraPdfFileReader(attachment_stream, strict=False)
-                    output_pdf.appendPagesFromReader(attachment_reader)
+                    try:
+                        output_pdf.appendPagesFromReader(attachment_reader)
+                    except (PdfReadError, DependencyError) as e:
+                        expense_sheet._message_log(body=_(
+                            "The attachment (%s) has not been added to the report due to the following error: '%s'",
+                            attachment.name,
+                            e
+                        ))
+                        continue
                     stream_list.append(attachment_stream)
 
                 new_pdf_stream = io.BytesIO()

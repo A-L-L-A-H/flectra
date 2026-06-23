@@ -6,13 +6,14 @@
 # Wil Flectra, 2023
 #
 # "Marta (wacm)" <wacm@flectrahq.com>, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-12-29 18:38+0000\n"
-"PO-Revision-Date: 2026-01-17 08:18+0000\n"
-"Last-Translator: \"Marta (wacm)\" <wacm@flectrahq.com>\n"
+"PO-Revision-Date: 2026-03-24 16:14+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Polish <https://translate.flectrahq.com/projects/flectra-17/"
 "payment_mollie/pl/>\n"
 "Language: pl\n"
@@ -20,9 +21,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && "
-"(n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || "
-"(n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
-"X-Generator: Weblate 5.14.3\n"
+"(n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && "
+"n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"X-Generator: Weblate 5.16.2\n"
 
 #. module: payment_mollie
 #: model_terms:ir.ui.view,arch_db:payment_mollie.payment_provider_form
@@ -56,7 +57,7 @@ msgstr "Mollie"
 #. module: payment_mollie
 #: model:ir.model.fields,field_description:payment_mollie.field_payment_provider__mollie_api_key
 msgid "Mollie API Key"
-msgstr ""
+msgstr "Klucz API Mollie"
 
 #. module: payment_mollie
 #. flectra-python
@@ -80,12 +81,12 @@ msgstr "Transakcja płatnicza"
 #: code:addons/payment_mollie/models/payment_transaction.py:0
 #, python-format
 msgid "Received data with invalid payment status: %s"
-msgstr ""
+msgstr "Otrzymano dane z nieprawidłowym statusem płatnosci: %s"
 
 #. module: payment_mollie
 #: model:ir.model.fields,help:payment_mollie.field_payment_provider__mollie_api_key
 msgid "The Test or Live API Key depending on the configuration of the provider"
-msgstr ""
+msgstr "Testowy lub produkcyjny klucz API w zależności od konfiguracji dostawcy"
 
 #. module: payment_mollie
 #. flectra-python

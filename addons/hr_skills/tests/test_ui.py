@@ -1,9 +1,12 @@
 # Part of Flectra. See LICENSE file for full copyright and licensing details.
 
 import flectra.tests
+from flectra.tools import mute_logger
 
 @flectra.tests.tagged('-at_install', 'post_install')
 class SkillsTestUI(flectra.tests.HttpCase):
+
+    @mute_logger('flectra.http', 'flectra.sql_db')
     def test_ui(self):
         levels = self.env['hr.skill.level'].create([{
             'name': f'Level {x}',

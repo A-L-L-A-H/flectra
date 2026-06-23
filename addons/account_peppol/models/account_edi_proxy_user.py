@@ -2,6 +2,7 @@
 # Part of Flectra. See LICENSE file for full copyright and licensing details.
 
 import logging
+from lxml import etree
 
 from flectra import _, api, fields, models, tools
 from flectra.addons.account_edi_proxy_client.models.account_edi_proxy_user import AccountEdiProxyError
@@ -49,7 +50,7 @@ class AccountEdiProxyClientUser(models.Model):
         edi_users._peppol_get_new_documents()
 
     def _cron_peppol_get_message_status(self):
-        edi_users = self.search([('company_id.account_peppol_proxy_state', '=', 'active'), ('proxy_type', '=', 'peppol')])
+        edi_users = self.search([('company_id.account_peppol_proxy_state', 'in', ('active', 'sender')), ('proxy_type', '=', 'peppol')])
         edi_users._peppol_get_message_status()
 
     # -------------------------------------------------------------------------
@@ -93,29 +94,20 @@ class AccountEdiProxyClientUser(models.Model):
             return
 
         try:
-            with self.env.cr.savepoint():
-                # fetch state from IAP and update user if relevant
-                # _peppol_get_participant_status ignores errors, and here we want to know if it failed
-                # _make_request_peppol won't commit on no_such_user error because it only does so if account_peppol_migration_key is set
-                proxy_user = user._make_request(f"{user._get_server_url()}/api/peppol/1/participant_status")
+            # fetch state from IAP and update user if relevant
+            # _peppol_get_participant_status ignores errors, and here we want to know if it failed
+            # _make_request_peppol won't commit on no_such_user error
+            proxy_user = user._make_request(f"{user._get_server_url()}/api/peppol/1/participant_status")
 
-                state_map = {
-                    'active': 'active',
-                    'verified': 'pending',
-                    'rejected': 'rejected',
-                    'canceled': 'canceled',
-                    # IAP-side is still draft (needs phone confirmation)
-                    # set to not_verified to match normal registration flow
-                    'draft': 'not_verified'
-                }
+            state_map = {'active': 'active', 'sender': 'sender', 'verified': 'pending', 'rejected': 'rejected'}
 
-                if proxy_user.get('peppol_state') in state_map:
-                    user.company_id.account_peppol_proxy_state = state_map[proxy_user['peppol_state']]
-                    user.active = True
-                else:
-                    # NOTE: this shouldn't happen, but if it does, we will have refreshed the token
-                    # but as it's an unknown state, there is not much we can do with that information
-                    return
+            if proxy_user.get('peppol_state') in state_map:
+                user.company_id.account_peppol_proxy_state = state_map[proxy_user['peppol_state']]
+                user.active = True
+            else:
+                # NOTE: this shouldn't happen, but if it does, we will have refreshed the token
+                # but as it's an unknown state, there is not much we can do with that information
+                return
         except AccountEdiProxyError as e:
             _logger.info("Tried unsuccessfully to recover EDI proxy user id=%s (%s)", user.id, e)
         else:
@@ -161,15 +153,6 @@ class AccountEdiProxyClientUser(models.Model):
                 continue
 
             company = edi_user.company_id
-            journal = company.peppol_purchase_journal_id
-            # use the first purchase journal if the Peppol journal is not set up
-            # to create the move anyway
-            if not journal:
-                journal = self.env['account.journal'].search([
-                    *self.env['account.journal']._check_company_domain(company),
-                    ('type', '=', 'purchase')
-                ], limit=1)
-
             need_retrigger = need_retrigger or len(message_uuids) > job_count
             message_uuids = message_uuids[:job_count]
             proxy_acks = []
@@ -194,9 +177,33 @@ class AccountEdiProxyClientUser(models.Model):
 
                 try:
                     attachment = self.env['ir.attachment'].create(attachment_vals)
+                    xml_tree = etree.fromstring(attachment.raw)
+                    invoice_type_code = xml_tree.findtext('.//{*}InvoiceTypeCode')
+                    credit_note_type_code = xml_tree.findtext('.//{*}CreditNoteTypeCode')
+
+                    if invoice_type_code in ['389', '527'] or credit_note_type_code == '261':
+                        # 389/527: Self-billing invoice; 261: Self-billing credit note
+                        journal = self.env['account.journal'].search(
+                            [
+                                *self.env['account.journal']._check_company_domain(company),
+                                ('type', '=', 'sale'),
+                            ],
+                            limit=1,
+                        )
+                        move_type = 'out_invoice' if invoice_type_code else 'out_refund'
+                    else:
+                        # use the first purchase journal if the Peppol journal is not set up
+                        # to create the move anyway
+                        journal = company.peppol_purchase_journal_id or self.env['account.journal'].search([
+                            *self.env['account.journal']._check_company_domain(company),
+                            ('type', '=', 'purchase')
+                        ], limit=1)
+                        move_type = 'in_invoice'
+
                     move = journal\
+                        .with_company(company) \
                         .with_context(
-                            default_move_type='in_invoice',
+                            default_move_type=move_type,
                             default_peppol_move_state=content['state'],
                             default_peppol_message_uuid=uuid,
                             default_journal_id=journal.id,
@@ -218,6 +225,7 @@ class AccountEdiProxyClientUser(models.Model):
                         'res_id': move.id,
                     })
                     self.env['ir.attachment'].create(attachment_vals)
+                    _logger.exception('Error while processing the Peppol document with uuid %s', uuid)
                 if 'is_in_extractable_state' in move._fields:
                     move.is_in_extractable_state = False
 
@@ -302,15 +310,40 @@ class AccountEdiProxyClientUser(models.Model):
                 proxy_user = edi_user._make_request(
                     f"{edi_user._get_server_url()}/api/peppol/1/participant_status")
             except AccountEdiProxyError as e:
-                _logger.error('Error while updating Peppol participant status: %s', e)
+                if e.code == 'client_gone':
+                    # reset the connection if it was archived/deleted on IAP side
+                    edi_user.sudo().company_id._reset_peppol_configuration()
+                else:
+                    # don't auto-deregister users on any other errors to avoid settings client-side to states
+                    # that are not recoverable without user action if an error on IAP side ever occurs
+                    _logger.error('Error while updating Peppol participant status: %s', e)
                 continue
 
-            state_map = {
+            local_state = {
+                'draft': 'not_registered',
                 'active': 'active',
+                'sender': 'sender',
                 'verified': 'pending',
                 'rejected': 'rejected',
-                'canceled': 'canceled',
-            }
+            }.get(proxy_user.get('peppol_state'))
 
-            if proxy_user['peppol_state'] in state_map:
-                edi_user.company_id.account_peppol_proxy_state = state_map[proxy_user['peppol_state']]
+            if local_state == 'not_registered':
+                edi_user.sudo().company_id._reset_peppol_configuration()
+            elif local_state:
+                edi_user.company_id.account_peppol_proxy_state = local_state
+            else:
+                _logger.warning("Received unknown Peppol state '%s' for EDI proxy user id=%s", proxy_user.get('peppol_state'), edi_user.id)
+
+    def _get_company_details(self):
+        self.ensure_one()
+        return {
+            'peppol_company_name': self.company_id.display_name,
+            'peppol_company_vat': self.company_id.vat,
+            'peppol_company_street': self.company_id.street,
+            'peppol_company_city': self.company_id.city,
+            'peppol_company_zip': self.company_id.zip,
+            'peppol_country_code': self.company_id.country_id.code,
+            'peppol_phone_number': self.company_id.account_peppol_phone_number,
+            'peppol_contact_email': self.company_id.account_peppol_contact_email,
+            'peppol_migration_key': self.company_id.sudo().account_peppol_migration_key,
+        }
