@@ -21,7 +21,7 @@ class ResPartner(models.Model):
             res['arch'] = etree.tostring(doc, encoding="utf-8")
         return res
 
-    def _get_latest(self):
+    def _compute_latest_followup(self):
         company = self.env.user.company_id
         for partner in self:
             amls = partner.unreconciled_aml_ids
@@ -46,6 +46,26 @@ class ResPartner(models.Model):
                     latest_level_without_lit = aml_followup.id
             partner.latest_followup_date = latest_date
             partner.latest_followup_level_id = latest_level
+
+
+    def _compute_latest_followup_without_lit(self):
+        company = self.env.user.company_id
+        for partner in self:
+            latest_days_without_lit = False
+            latest_level_without_lit = False
+            for aml in partner.unreconciled_aml_ids:
+                aml_followup = aml.followup_line_id
+                if (
+                    aml.company_id == company
+                    and not aml.blocked
+                    and aml_followup
+                    and (
+                        not latest_days_without_lit
+                        or latest_days_without_lit < aml_followup.delay
+                    )
+                ):
+                    latest_days_without_lit = aml_followup.delay
+                    latest_level_without_lit = aml_followup.id
             partner.latest_followup_level_id_without_lit = latest_level_without_lit
 
     def do_partner_manual_action_dermanord(self, followup_line):
@@ -360,11 +380,11 @@ class ResPartner(models.Model):
         domain=[('full_reconcile_id', '=', False), ('account_id.account_type', '=', 'asset_receivable')]
     )
     latest_followup_date = fields.Date(
-        compute='_get_latest', string="Latest Follow-up Date", compute_sudo=True,
+        compute='_compute_latest_followup', string="Latest Follow-up Date", compute_sudo=True,
         help="Latest date that the follow-up level of the partner was changed"
     )
     latest_followup_level_id = fields.Many2one(
-        'followup.line', compute='_get_latest', compute_sudo=True,
+        'followup.line', compute='_compute_latest_followup', compute_sudo=True,
         string="Latest Follow-up Level", help="The maximum follow-up level"
     )
 
@@ -373,7 +393,7 @@ class ResPartner(models.Model):
         help="Gives the sequence order when displaying a list of follow-up lines.", default=0
     )
     latest_followup_level_id_without_lit = fields.Many2one(
-        'followup.line', compute='_get_latest', store=True, compute_sudo=True,
+        'followup.line', compute='_compute_latest_followup_without_lit', store=True, compute_sudo=True,
         string="Latest Follow-up Level without litigation",
         help="The maximum follow-up level without taking into "
              "account the account move lines with litigation")
