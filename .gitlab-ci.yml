@@ -8,6 +8,8 @@ variables:
 
 job_test_base:
   stage: test
+  tags:
+    - flectra
   script:
     - apt-get update
     - apt-get install -y git locales
@@ -18,6 +20,8 @@ job_test_base:
 
 job_test_all:
   stage: test
+  tags:
+    - flectra
   script:
     - apt-get update
     - apt-get install -y git locales
