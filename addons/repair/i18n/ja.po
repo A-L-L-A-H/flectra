@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-12-29 18:37+0000\n"
-"PO-Revision-Date: 2026-01-10 08:05+0000\n"
+"PO-Revision-Date: 2026-05-02 08:05+0000\n"
 "Last-Translator: \"Junko Augias (juau)\" <juau@flectrahq.com>\n"
 "Language-Team: Japanese <https://translate.flectrahq.com/projects/flectra-17/repair/"
 "ja/>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.14.3\n"
+"X-Generator: Weblate 5.17\n"
 
 #. module: repair
 #: model:ir.actions.report,print_report_name:repair.action_report_repair_order
@@ -841,7 +841,7 @@ msgstr "修理品は、すべてこのロットに属しています"
 #. module: repair
 #: model:ir.model.fields,field_description:repair.field_stock_warn_insufficient_qty_repair__quant_ids
 msgid "Quant"
-msgstr "Quant"
+msgstr "在庫数量"
 
 #. module: repair
 #: model:ir.model.fields,field_description:repair.field_stock_warn_insufficient_qty_repair__quantity
@@ -1286,7 +1286,7 @@ msgstr "処理タイプ"
 #. module: repair
 #: model:ir.model.fields,help:repair.field_repair_order__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr "記録上の例外活動の種類。"
+msgstr "レコード上の例外の活動タイプ。"
 
 #. module: repair
 #. flectra-python

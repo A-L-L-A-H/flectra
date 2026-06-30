@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-29 18:37+0000\n"
+"POT-Creation-Date: 2026-04-03 18:39+0000\n"
 "PO-Revision-Date: 2025-12-31 11:45+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Hindi <https://translate.flectrahq.com/projects/flectra-17/loyalty/hi/"
@@ -58,11 +58,6 @@ msgstr ""
 #, python-format
 msgid " (Max %s)"
 msgstr " (अधिकतम %s)"
-
-#. module: loyalty
-#: model_terms:ir.ui.view,arch_db:loyalty.loyalty_report
-msgid "$100"
-msgstr ""
 
 #. module: loyalty
 #. flectra-python
@@ -126,26 +121,11 @@ msgid "10% on your order"
 msgstr "आपके ऑर्डर पर 10%"
 
 #. module: loyalty
-#: model_terms:ir.ui.view,arch_db:loyalty.gift_card_report
-msgid "1000"
-msgstr ""
-
-#. module: loyalty
 #. flectra-python
 #: code:addons/loyalty/models/loyalty_program.py:0
 #, python-format
 msgid "2+1 Free"
 msgstr "2+1 मुफ़्त"
-
-#. module: loyalty
-#: model_terms:ir.ui.view,arch_db:loyalty.loyalty_report
-msgid "2023-08-20"
-msgstr ""
-
-#. module: loyalty
-#: model_terms:ir.ui.view,arch_db:loyalty.gift_card_report
-msgid "2023-12-31"
-msgstr ""
 
 #. module: loyalty
 #: model_terms:ir.ui.view,arch_db:loyalty.loyalty_reward_view_kanban
@@ -296,18 +276,18 @@ msgid ""
 "                                <span class=\"o_stat_text\" "
 "invisible=\"program_type != 'ewallet'\">eWallets</span>"
 msgstr ""
-"<span class=\"o_stat_text\" invisible="
-"\"program_type not in ('coupons', 'next_order_coupons')\">कूपन</span>\n"
-"                                <span class=\"o_stat_text\" invisible="
-"\"program_type != 'loyalty'\">लॉयल्टी कार्ड</span>\n"
-"                                <span class=\"o_stat_text\" invisible="
-"\"program_type not in ('promotion', 'buy_x_get_y')\">प्रोमो</span>\n"
-"                                <span class=\"o_stat_text\" invisible="
-"\"program_type != 'promo_code'\">डिस्काउंट</span>\n"
-"                                <span class=\"o_stat_text\" invisible="
-"\"program_type != 'gift_card'\">गिफ़्ट कार्ड</span>\n"
-"                                <span class=\"o_stat_text\" invisible="
-"\"program_type != 'ewallet'\">ई-वॉलेट</span>"
+"<span class=\"o_stat_text\" invisible=\"program_type not in ('coupons', "
+"'next_order_coupons')\">कूपन</span>\n"
+"                                <span class=\"o_stat_text\" "
+"invisible=\"program_type != 'loyalty'\">लॉयल्टी कार्ड</span>\n"
+"                                <span class=\"o_stat_text\" "
+"invisible=\"program_type not in ('promotion', 'buy_x_get_y')\">प्रोमो</span>\n"
+"                                <span class=\"o_stat_text\" "
+"invisible=\"program_type != 'promo_code'\">डिस्काउंट</span>\n"
+"                                <span class=\"o_stat_text\" "
+"invisible=\"program_type != 'gift_card'\">गिफ़्ट कार्ड</span>\n"
+"                                <span class=\"o_stat_text\" "
+"invisible=\"program_type != 'ewallet'\">ई-वॉलेट</span>"
 
 #. module: loyalty
 #: model_terms:ir.ui.view,arch_db:loyalty.loyalty_report
@@ -324,8 +304,8 @@ msgid ""
 "<span colspan=\"2\" invisible=\"program_type != 'coupons'\">Grant the amount "
 "of coupon points defined as the coupon value</span>"
 msgstr ""
-"<span colspan=\"2\" invisible=\"program_type != 'coupons'\">कूपन मूल्य के बराबर कू"
-"पन पॉइंट की राशि दें</span>"
+"<span colspan=\"2\" invisible=\"program_type != 'coupons'\">कूपन मूल्य के बराबर "
+"कूपन पॉइंट की राशि दें</span>"
 
 #. module: loyalty
 #: model_terms:ir.ui.view,arch_db:loyalty.loyalty_reward_view_form
@@ -767,14 +747,12 @@ msgstr "कूपन"
 #. module: loyalty
 #: model_terms:ir.actions.act_window,help:loyalty.loyalty_program_gift_ewallet_action
 msgid "Create a new one from scratch, or use one of the templates below."
-msgstr ""
-"शुरुआत से एक नया बनाएं, या नीचे दिए गए टेम्पलेट में से किसी एक का इस्तेमाल करें।"
+msgstr "शुरुआत से एक नया बनाएं, या नीचे दिए गए टेम्पलेट में से किसी एक का इस्तेमाल करें।"
 
 #. module: loyalty
 #: model_terms:ir.actions.act_window,help:loyalty.loyalty_program_discount_loyalty_action
 msgid "Create one from scratch, or use a templates below:"
-msgstr ""
-"शुरुआत से एक नया बनाएं, या नीचे दिए गए टेम्पलेट में से किसी एक का इस्तेमाल करें:"
+msgstr "शुरुआत से एक नया बनाएं, या नीचे दिए गए टेम्पलेट में से किसी एक का इस्तेमाल करें:"
 
 #. module: loyalty
 #. flectra-javascript
@@ -860,7 +838,8 @@ msgid ""
 "Define Discount codes on conditional rules then share it with your customers "
 "for rewards."
 msgstr ""
-"शर्त-आधारित नियमों पर डिस्काउंट कोड तय करें, फिर उन्हें इनाम के तौर पर अपने ग्राहकों के साथ साझा करें।"
+"शर्त-आधारित नियमों पर डिस्काउंट कोड तय करें, फिर उन्हें इनाम के तौर पर अपने ग्राहकों के "
+"साथ साझा करें।"
 
 #. module: loyalty
 #: model:ir.model.fields,field_description:loyalty.field_loyalty_reward__description
@@ -980,7 +959,8 @@ msgid ""
 "Drive repeat purchases by sending a unique, single-use coupon code for the "
 "next purchase when a customer buys something in your store."
 msgstr ""
-"खरीदारी करने पर, अगली बार के लिए एक खास डिस्काउंट कोड देकर ग्राहकों को दोबारा खरीदें के लिए प्रेरित करें।"
+"खरीदारी करने पर, अगली बार के लिए एक खास डिस्काउंट कोड देकर ग्राहकों को दोबारा खरीदें "
+"के लिए प्रेरित करें।"
 
 #. module: loyalty
 #: model_terms:ir.ui.view,arch_db:loyalty.loyalty_program_view_form
@@ -1111,8 +1091,9 @@ msgid ""
 "Point of Sale or regular orders to claim the Reward. You can define "
 "constraints on its usage through conditional rule."
 msgstr ""
-"कूपन कोड मैन्युअल रूप से जनरेट और शेयर करें. इनाम पाने के लिए इसे ई-कॉमर्स, पॉइंट ऑफ़ सेल या सामान्य ऑर्"
-"डर में इस्तेमाल किया जा सकता है. इसके इस्तेमाल पर शर्तें, शर्त-आधारित नियमों से तय की जा सकती हैं।"
+"कूपन कोड मैन्युअल रूप से जनरेट और शेयर करें. इनाम पाने के लिए इसे ई-कॉमर्स, पॉइंट ऑफ़ सेल या "
+"सामान्य ऑर्डर में इस्तेमाल किया जा सकता है. इसके इस्तेमाल पर शर्तें, शर्त-आधारित नियमों से "
+"तय की जा सकती हैं।"
 
 #. module: loyalty
 #: model:ir.model,name:loyalty.model_loyalty_generate_wizard
@@ -1193,11 +1174,11 @@ msgid ""
 "                                    Then, Gift Cards can be used to pay "
 "orders."
 msgstr ""
-"गिफ़्ट कार्ड, मैन्युअल रूप से बनाए जाते हैं या जब ग्राहक गिफ़्ट कार्ड प्रॉडक्ट ऑर्डर करता है, तो उसे अपने-आप "
-"ईमेल से भेजे जाते हैं.\n"
+"गिफ़्ट कार्ड, मैन्युअल रूप से बनाए जाते हैं या जब ग्राहक गिफ़्ट कार्ड प्रॉडक्ट ऑर्डर करता है, "
+"तो उसे अपने-आप ईमेल से भेजे जाते हैं.\n"
 "                                    <br/>\n"
-"                                    इसके बाद, गिफ़्ट कार्ड का इस्तेमाल ऑर्डर का पेमेंट करने के "
-"लिए किया जा सकता है।"
+"                                    इसके बाद, गिफ़्ट कार्ड का इस्तेमाल ऑर्डर का पेमेंट "
+"करने के लिए किया जा सकता है।"
 
 #. module: loyalty
 #: model:ir.actions.act_window,name:loyalty.loyalty_program_gift_ewallet_action
@@ -1216,7 +1197,8 @@ msgid ""
 "Grant 1 credit for each item bought then reward the customer with Y items in "
 "exchange of X credits."
 msgstr ""
-"खरीदे गए हर आइटम के लिए 1 क्रेडिट दें. फिर, ग्राहक को X क्रेडिट के बदले Y आइटम का इनाम दें।"
+"खरीदे गए हर आइटम के लिए 1 क्रेडिट दें. फिर, ग्राहक को X क्रेडिट के बदले Y आइटम का इनाम "
+"दें।"
 
 #. module: loyalty
 #: model:ir.model.fields,field_description:loyalty.field_loyalty_card__has_message
@@ -1408,7 +1390,8 @@ msgstr "अधिकतम इस्तेमाल"
 #: model:ir.model.constraint,message:loyalty.constraint_loyalty_program_check_max_usage
 msgid "Max usage must be strictly positive if a limit is used."
 msgstr ""
-"अगर कोई सीमा इस्तेमाल की जाती है, तो ज़्यादा से ज़्यादा उपयोग की संख्या ज़ीरो से ज़्यादा होनी चाहिए।"
+"अगर कोई सीमा इस्तेमाल की जाती है, तो ज़्यादा से ज़्यादा उपयोग की संख्या ज़ीरो से ज़्यादा "
+"होनी चाहिए।"
 
 #. module: loyalty
 #: model:ir.model.fields,field_description:loyalty.field_loyalty_card__message_has_error
@@ -1585,7 +1568,8 @@ msgid ""
 "Product used in the sales order to apply the discount. Each reward has its "
 "own product for reporting purpose"
 msgstr ""
-"छूट लागू करने के लिए सेल्स ऑर्डर में इस्तेमाल हुआ प्रॉडक्ट. रिपोर्टिंग के लिए, हर इनाम का अपना प्रॉडक्ट होता है"
+"छूट लागू करने के लिए सेल्स ऑर्डर में इस्तेमाल हुआ प्रॉडक्ट. रिपोर्टिंग के लिए, हर इनाम का "
+"अपना प्रॉडक्ट होता है"
 
 #. module: loyalty
 #: model:ir.model.fields,field_description:loyalty.field_loyalty_program__trigger_product_ids
@@ -1737,8 +1721,7 @@ msgstr "चुने गए ग्राहक"
 #: code:addons/loyalty/models/loyalty_program.py:0
 #, python-format
 msgid "Sell Gift Cards, that allows to purchase products"
-msgstr ""
-"गिफ़्ट कार्ड बेचें, जिनका इस्तेमाल प्रॉडक्ट खरीदने के लिए किया जा सकता है"
+msgstr "गिफ़्ट कार्ड बेचें, जिनका इस्तेमाल प्रॉडक्ट खरीदने के लिए किया जा सकता है"
 
 #. module: loyalty
 #: model_terms:ir.ui.view,arch_db:loyalty.loyalty_card_view_tree
@@ -1866,8 +1849,7 @@ msgstr "शुरू होने की तारीख इस प्रोग�
 #, python-format
 msgid ""
 "The validity period's start date must be anterior or equal to its end date."
-msgstr ""
-"शुरू होने की तारीख, खत्म होने की तारीख से पहले या उसके बराबर होनी चाहिए।"
+msgstr "शुरू होने की तारीख, खत्म होने की तारीख से पहले या उसके बराबर होनी चाहिए।"
 
 #. module: loyalty
 #: model_terms:ir.actions.act_window,help:loyalty.loyalty_card_action
@@ -1884,7 +1866,8 @@ msgstr "ये वे प्रॉडक्ट हैं जिन्हें �
 msgid ""
 "This is the max amount this reward may discount, leave to 0 for no limit."
 msgstr ""
-"यह वह अधिकतम राशि है जिस पर यह इनाम छूट दे सकता है. अगर कोई सीमा नहीं रखनी है, तो 0 छोड़ दें।"
+"यह वह अधिकतम राशि है जिस पर यह इनाम छूट दे सकता है. अगर कोई सीमा नहीं रखनी है, तो "
+"0 छोड़ दें।"
 
 #. module: loyalty
 #. flectra-python
@@ -1894,7 +1877,8 @@ msgid ""
 "This pricelist may not be archived. It is being used for active promotion "
 "programs: %s"
 msgstr ""
-"इस प्राइसलिस्ट को अभी नहीं हटाया जा सकता, क्योंकि यह सक्रिय प्रमोशन प्रोग्राम में इस्तेमाल हो रही है: %s"
+"इस प्राइसलिस्ट को अभी नहीं हटाया जा सकता, क्योंकि यह सक्रिय प्रमोशन प्रोग्राम में "
+"इस्तेमाल हो रही है: %s"
 
 #. module: loyalty
 #. flectra-python
@@ -1975,8 +1959,8 @@ msgid ""
 "When customers make an order, they accumulate points they can exchange for "
 "rewards on the current order or on a future one."
 msgstr ""
-"जब ग्राहक कोई ऑर्डर करते हैं, तो वे पॉइंट जमा करते हैं, जिन्हें वे वर्तमान ऑर्डर पर या भविष्य के ऑर्डर "
-"पर इनाम के लिए एक्सचेंज कर सकते हैं।"
+"जब ग्राहक कोई ऑर्डर करते हैं, तो वे पॉइंट जमा करते हैं, जिन्हें वे वर्तमान ऑर्डर पर या भविष्य "
+"के ऑर्डर पर इनाम के लिए एक्सचेंज कर सकते हैं।"
 
 #. module: loyalty
 #: model_terms:ir.ui.view,arch_db:loyalty.loyalty_program_view_form
@@ -1984,7 +1968,8 @@ msgid ""
 "When generating coupon, you can define a specific points value that can be "
 "exchanged for rewards."
 msgstr ""
-"कूपन बनाते समय, आप यह बता सकते हैं कि यह कितने पॉइंट्स के बराबर होगा, जिसे इनामों के लिए बदला जा सके।"
+"कूपन बनाते समय, आप यह बता सकते हैं कि यह कितने पॉइंट्स के बराबर होगा, जिसे इनामों के लिए "
+"बदला जा सके।"
 
 #. module: loyalty
 #: model:ir.model.fields,help:loyalty.field_loyalty_rule__reward_point_split
@@ -2026,8 +2011,8 @@ msgid ""
 "You cannot delete %(name)s as it is used in 'Coupons & Loyalty'. Please "
 "archive it instead."
 msgstr ""
-"आप %(name)s को नहीं हटा सकते क्योंकि यह कूपन और लॉयल्टी प्रोग्राम में इस्तेमाल हो रहा है. इसके बजाय, इसे "
-"संग्रहीत कर दें।"
+"आप %(name)s को नहीं हटा सकते क्योंकि यह कूपन और लॉयल्टी प्रोग्राम में इस्तेमाल हो रहा है. "
+"इसके बजाय, इसे संग्रहीत कर दें।"
 
 #. module: loyalty
 #: model:mail.template,subject:loyalty.mail_template_gift_card
@@ -2089,10 +2074,11 @@ msgid ""
 "                                    Then, eWallets are proposed during the "
 "checkout, to pay orders."
 msgstr ""
-"ई-वॉलेट ग्राहक द्वारा ई-वॉलेट उत्पाद खरीदने पर खुद बन जाता है या उसे मैन्युअल रूप से बनाया जाता है.\n"
+"ई-वॉलेट ग्राहक द्वारा ई-वॉलेट उत्पाद खरीदने पर खुद बन जाता है या उसे मैन्युअल रूप से बनाया "
+"जाता है.\n"
 "                                    <br/>\n"
-"                                    फिर, ऑर्डर का भुगतान करते समय चेकआउट पर ई-वॉलेट से "
-"भुगतान का विकल्प दिया जाता है।"
+"                                    फिर, ऑर्डर का भुगतान करते समय चेकआउट पर ई-"
+"वॉलेट से भुगतान का विकल्प दिया जाता है।"
 
 #. module: loyalty
 #: model_terms:ir.ui.view,arch_db:loyalty.loyalty_rule_view_kanban

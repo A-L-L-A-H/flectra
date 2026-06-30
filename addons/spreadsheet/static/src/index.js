@@ -27,6 +27,7 @@ import {
     FlectraChartCorePlugin,
     FlectraChartUIPlugin,
 } from "@spreadsheet/chart/index"; // Flectrachart depends on filter for its getters
+import { LoggingUIPlugin } from "@spreadsheet/logging/logging_ui_plugin";
 
 corePluginRegistry.add("FlectraGlobalFiltersCorePlugin", GlobalFiltersCorePlugin);
 corePluginRegistry.add("FlectraPivotCorePlugin", PivotCorePlugin);
@@ -38,3 +39,4 @@ coreViewsPluginRegistry.add("FlectraGlobalFiltersUIPlugin", GlobalFiltersUIPlugi
 coreViewsPluginRegistry.add("FlectraPivotUIPlugin", PivotUIPlugin);
 coreViewsPluginRegistry.add("FlectraListUIPlugin", ListUIPlugin);
 coreViewsPluginRegistry.add("flectraChartUIPlugin", FlectraChartUIPlugin);
+coreViewsPluginRegistry.add("FlectraLoggingUIPlugin", LoggingUIPlugin);

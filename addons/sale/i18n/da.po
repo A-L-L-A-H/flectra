@@ -13,13 +13,13 @@
 # Wil Flectra, 2025
 # Kira Petersen, 2025
 # "Kira Petersen François (peti)" <peti@flectrahq.com>, 2025.
-# Weblate <noreply-mt-weblate@weblate.org>, 2025.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-29 18:38+0000\n"
-"PO-Revision-Date: 2025-11-20 16:12+0000\n"
+"POT-Creation-Date: 2026-04-03 18:40+0000\n"
+"PO-Revision-Date: 2026-02-24 14:04+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Danish <https://translate.flectrahq.com/projects/flectra-17/sale/da/"
 ">\n"
@@ -28,7 +28,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 5.14.3\n"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_payment_provider_onboarding_wizard___data_fetched
@@ -114,21 +114,6 @@ msgid ""
 msgstr ""
 "(object.state in ('draft', 'sent') and 'Tilbud - %s' % (object.name)) or "
 "'Ordre - %s' % (object.name)"
-
-#. module: sale
-#: model_terms:ir.ui.view,arch_db:sale.report_saleorder_document
-msgid "2023-12-31"
-msgstr "2023-12-31"
-
-#. module: sale
-#: model_terms:ir.ui.view,arch_db:sale.report_saleorder_document
-msgid "27.00"
-msgstr "27.00"
-
-#. module: sale
-#: model_terms:ir.ui.view,arch_db:sale.report_saleorder_document
-msgid "31.05"
-msgstr "31.05"
 
 #. module: sale
 #. flectra-javascript
@@ -5278,6 +5263,14 @@ msgstr "De angivne parametre er ugyldige."
 
 #. module: sale
 #. flectra-python
+#: code:addons/sale/controllers/portal.py:0
+#: code:addons/sale/wizard/payment_link_wizard.py:0
+#, python-format
+msgid "The sale order has expired."
+msgstr "Salgsordren er udløbet."
+
+#. module: sale
+#. flectra-python
 #: code:addons/sale/wizard/sale_make_invoice_advance.py:0
 #, python-format
 msgid "The value of the down payment amount must be positive."
@@ -6001,3 +5994,12 @@ msgid ""
 msgstr ""
 "{{ object.company_id.name }} {{ object.type_name }} Annulleret (Ref "
 "{{ object.name or 'n/a' }})"
+
+#~ msgid "2023-12-31"
+#~ msgstr "2023-12-31"
+
+#~ msgid "27.00"
+#~ msgstr "27.00"
+
+#~ msgid "31.05"
+#~ msgstr "31.05"

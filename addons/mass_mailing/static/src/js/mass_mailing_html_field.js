@@ -254,7 +254,7 @@ export class MassMailingHtmlField extends HtmlField {
             this.wysiwyg.flectraEditor.observerActive();
 
             if ($codeview.hasClass('d-none')) {
-                this.wysiwyg.setValue(this._getCodeViewValue($codeview[0]));
+                this.wysiwyg.setValue(this._getCodeViewValue($codeview[0]), false);
                 this.wysiwyg.flectraEditor.sanitize();
                 this.wysiwyg.flectraEditor.historyStep(true);
             } else {

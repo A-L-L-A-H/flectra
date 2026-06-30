@@ -7,13 +7,13 @@
 # Larissa Manderfeld, 2024
 # Wil Flectra, 2025
 # "Larissa Manderfeld (lman)" <lman@flectrahq.com>, 2025.
-# "Noemi Pla Garcia (nopl)" <nopl@flectrahq.com>, 2025.
+# "Noemi Pla Garcia (nopl)" <nopl@flectrahq.com>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-29 18:37+0000\n"
-"PO-Revision-Date: 2025-12-06 08:03+0000\n"
+"POT-Creation-Date: 2026-05-15 17:36+0000\n"
+"PO-Revision-Date: 2026-01-29 08:39+0000\n"
 "Last-Translator: \"Noemi Pla Garcia (nopl)\" <nopl@flectrahq.com>\n"
 "Language-Team: Spanish <https://translate.flectrahq.com/projects/flectra-17/"
 "auth_signup/es/>\n"
@@ -24,11 +24,6 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n != 0 && n % 1000000 == "
 "0) ? 1 : 2);\n"
 "X-Generator: Weblate 5.14.3\n"
-
-#. module: auth_signup
-#: model_terms:ir.ui.view,arch_db:auth_signup.reset_password_email
-msgid "+1 650-123-4567"
-msgstr "+1 650-123-4567"
 
 #. module: auth_signup
 #: model_terms:ir.ui.view,arch_db:auth_signup.reset_password_email
@@ -63,11 +58,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:auth_signup.reset_password_email
 msgid "--<br/>Mitchell Admin"
 msgstr "--<br/>Mitchell Admin"
-
-#. module: auth_signup
-#: model_terms:ir.ui.view,arch_db:auth_signup.alert_login_new_device
-msgid "111.222.333.444"
-msgstr "111.222.333.444"
 
 #. module: auth_signup
 #: model_terms:ir.ui.view,arch_db:auth_signup.reset_password_email
@@ -827,8 +817,8 @@ msgid ""
 "Could not contact the mail server, please check your outgoing email server "
 "configuration"
 msgstr ""
-"No se pudo contactar con el servidor de correo. Revise la configuración de "
-"su servidor de correo de salida."
+"No fue posible contactar con el servidor de correo. Revise la configuración "
+"del servidor de correo saliente"
 
 #. module: auth_signup
 #. flectra-python
@@ -1284,6 +1274,12 @@ msgid ""
 msgstr ""
 "{{ object.create_uid.name }} de {{ object.company_id.name }} le invita a "
 "conectarse con Flectra"
+
+#~ msgid "+1 650-123-4567"
+#~ msgstr "+1 650-123-4567"
+
+#~ msgid "111.222.333.444"
+#~ msgstr "111.222.333.444"
 
 #~ msgid ""
 #~ "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"padding-"

@@ -3,13 +3,13 @@
 # * hr_holidays
 #
 # Translators:
-# Weblate <noreply-mt-weblate@weblate.org>, 2025.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Flectra 9.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-12-29 18:36+0000\n"
-"PO-Revision-Date: 2025-11-20 14:40+0000\n"
+"PO-Revision-Date: 2026-02-21 08:04+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Hindi <https://translate.flectrahq.com/projects/flectra-17/"
 "hr_holidays/hi/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 5.14.3\n"
 
 #. module: hr_holidays
 #. flectra-python
@@ -884,7 +884,7 @@ msgstr "ऐक्टिविटी टाइप"
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_form
 msgid "Add a description..."
-msgstr ""
+msgstr "कोई विवरण जोड़ें..।"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_allocation_view_form
@@ -1364,7 +1364,7 @@ msgstr "अनुमति दे सकता है"
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__can_cancel
 msgid "Can Cancel"
-msgstr ""
+msgstr "रद्द कर सकता है"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_accrual_level__can_modify_value_type
@@ -2885,7 +2885,7 @@ msgstr "कुछ नहीं. जमा छुट्टी को 0 कर द
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_type__employee_requests__no
 msgid "Not Allowed"
-msgstr ""
+msgstr "अनुमति नहीं है"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_type__responsible_ids

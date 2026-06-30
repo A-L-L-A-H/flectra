@@ -6,14 +6,15 @@
 # Marta Wacławek, 2025
 # Wil Flectra, 2025
 #
-# Weblate <noreply-mt-weblate@weblate.org>, 2025.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
+# "Marta (wacm)" <wacm@flectrahq.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-29 18:38+0000\n"
-"PO-Revision-Date: 2025-11-20 14:43+0000\n"
-"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
+"POT-Creation-Date: 2026-02-20 18:37+0000\n"
+"PO-Revision-Date: 2026-02-24 14:04+0000\n"
+"Last-Translator: \"Marta (wacm)\" <wacm@flectrahq.com>\n"
 "Language-Team: Polish <https://translate.flectrahq.com/projects/flectra-17/"
 "sale_project/pl/>\n"
 "Language: pl\n"
@@ -21,9 +22,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && "
-"(n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && "
-"n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
-"X-Generator: Weblate 5.12.2\n"
+"(n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || "
+"(n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"X-Generator: Weblate 5.14.3\n"
 
 #. module: sale_project
 #. flectra-python
@@ -60,13 +61,6 @@ msgstr ""
 #, python-format
 msgid "%(name)s's Sales Orders"
 msgstr "Zamówienia sprzedaży %(name)s"
-
-#. module: sale_project
-#: model_terms:ir.ui.view,arch_db:sale_project.product_template_form_view_invoice_policy_inherit_sale_project
-msgid ""
-"<span class=\"fa fa-lg fa-building-o fa-fw\" title=\"Values set here are "
-"company-specific.\" groups=\"base.group_multi_company\"/>"
-msgstr ""
 
 #. module: sale_project
 #: model_terms:ir.ui.view,arch_db:sale_project.view_edit_project_inherit_form
@@ -151,7 +145,7 @@ msgstr "Anulowano"
 #. module: sale_project
 #: model:ir.model,name:sale_project.model_res_config_settings
 msgid "Config Settings"
-msgstr "Ustawienia konfiguracji"
+msgstr "Konfiguracja ustawień"
 
 #. module: sale_project
 #. flectra-python
@@ -931,6 +925,11 @@ msgid "Unit of Measure"
 msgstr "Jednostka miary"
 
 #. module: sale_project
+#: model_terms:ir.ui.view,arch_db:sale_project.product_template_form_view_invoice_policy_inherit_sale_project
+msgid "Values set here are company-specific."
+msgstr "Ustawione tu wartości są specyficzne dla danej firmy."
+
+#. module: sale_project
 #: model:ir.model.fields,field_description:sale_project.field_project_project__vendor_bill_count
 msgid "Vendor Bill Count"
 msgstr "Liczba rachunków dostawcy"
@@ -957,3 +956,10 @@ msgid ""
 msgstr ""
 "Nie można powiązać pozycji zamówienia %(order_id)s - %(product_id)s z tym "
 "zadaniem, ponieważ jest to refakturowany wydatek."
+
+#~ msgid ""
+#~ "<span class=\"fa fa-lg fa-building-o fa-fw\" title=\"Values set here are "
+#~ "company-specific.\" groups=\"base.group_multi_company\"/>"
+#~ msgstr ""
+#~ "<span class=\"fa fa-lg fa-building-o fa-fw\" title=\"Wartości ustawione "
+#~ "tutaj są specyficzne dla firmy.\" groups=\"base.group_multi_company\"/>"

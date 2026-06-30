@@ -2,13 +2,13 @@
 # This file contains the translation of the following modules:
 # * sale_project
 #
-# Weblate <noreply-mt-weblate@weblate.org>, 2025.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-29 18:38+0000\n"
-"PO-Revision-Date: 2025-12-31 11:45+0000\n"
+"POT-Creation-Date: 2026-02-20 18:37+0000\n"
+"PO-Revision-Date: 2026-05-18 07:36+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Hindi <https://translate.flectrahq.com/projects/flectra-17/"
 "sale_project/hi/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.14.3\n"
+"X-Generator: Weblate 5.17\n"
 
 #. module: sale_project
 #. flectra-python
@@ -46,13 +46,6 @@ msgstr ""
 #: code:addons/sale_project/models/project.py:0
 #, python-format
 msgid "%(name)s's Sales Orders"
-msgstr ""
-
-#. module: sale_project
-#: model_terms:ir.ui.view,arch_db:sale_project.product_template_form_view_invoice_policy_inherit_sale_project
-msgid ""
-"<span class=\"fa fa-lg fa-building-o fa-fw\" title=\"Values set here are "
-"company-specific.\" groups=\"base.group_multi_company\"/>"
 msgstr ""
 
 #. module: sale_project
@@ -99,6 +92,11 @@ msgid ""
 "this sale line\n"
 "  - Stock Moves: the quantity comes from confirmed pickings\n"
 msgstr ""
+"प्रॉडक्ट कॉन्फ़िगरेशन के अनुसार, डिलीवर की गई मात्रा को ऑटोमैटिक तरीके से कैलकुलेट करें:\n"
+"  - मैन्युअल: मात्रा को लाइन पर मैन्युअल रूप से सेट करें\n"
+"  - एनालिटिक फ्रॉम एक्सपेंसेस: जितने खर्चे दर्ज किए गए हैं, उनकी कुल संख्या ही डिलीवरी मात्रा होगी\n"
+"  - टाइमशीट: मात्रा इस सेल लाइन से जुड़े टास्क पर दर्ज किए गए घंटों का योग है\n"
+"  - स्टॉक मूव्स: मात्रा पुष्टि की गई पिकिंग से आती है\n"
 
 #. module: sale_project
 #. flectra-python
@@ -156,7 +154,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:sale_project.field_product_product__service_tracking
 #: model:ir.model.fields,field_description:sale_project.field_product_template__service_tracking
 msgid "Create on Order"
-msgstr ""
+msgstr "ऑर्डर पर बनाएं"
 
 #. module: sale_project
 #: model:ir.model.fields,field_description:sale_project.field_project_milestone__project_partner_id
@@ -176,7 +174,7 @@ msgstr "कस्टमर इनवॉइस"
 #: code:addons/sale_project/static/src/components/project_right_side_panel/project_right_side_panel.xml:0
 #, python-format
 msgid "Delivered"
-msgstr ""
+msgstr "डिलीवर किया गया"
 
 #. module: sale_project
 #: model:ir.model.fields,field_description:sale_project.field_project_task__display_sale_order_button
@@ -205,7 +203,7 @@ msgstr "हो गया"
 #: code:addons/sale_project/models/project.py:0
 #, python-format
 msgid "Down Payments"
-msgstr ""
+msgstr "डाउन पेमेंट"
 
 #. module: sale_project
 #: model:ir.model.fields,field_description:sale_project.field_sale_order_line__project_id
@@ -386,7 +384,7 @@ msgstr "जर्नल आइटम"
 #: code:addons/sale_project/static/src/components/project_right_side_panel/project_right_side_panel.xml:0
 #, python-format
 msgid "Load more"
-msgstr ""
+msgstr "ज़्यादा लोड करें"
 
 #. module: sale_project
 #: model:ir.model.fields,help:sale_project.field_product_product__service_type
@@ -399,6 +397,11 @@ msgid ""
 "Create a task and track hours: Create a task on the sales order validation "
 "and track the work hours."
 msgstr ""
+"ऑर्डर पर मात्रा मैनुअल रूप से सेट करें: बिना एनालिटिक अकाउंट बनाए, दर्ज की गई मात्रा के "
+"आधार पर इनवॉइस बनाएं.\n"
+"कॉन्ट्रैक्ट पर टाइमशीट: संबंधित टाइमशीट पर ट्रैक किए गए घंटों के आधार पर इनवॉइस बनाएं.\n"
+"टास्क बनाएं और घंटे ट्रैक करें: सेल्स ऑर्डर की पुष्टि होने पर टास्क बनाएं और काम के घंटों को "
+"ट्रैक करें।"
 
 #. module: sale_project
 #. flectra-python
@@ -453,7 +456,7 @@ msgstr ""
 #. module: sale_project
 #: model:ir.model.fields.selection,name:sale_project.selection__product_template__service_tracking__no
 msgid "Nothing"
-msgstr ""
+msgstr "कुछ नहीं"
 
 #. module: sale_project
 #: model:ir.model.fields,field_description:sale_project.field_sale_order__project_count
@@ -526,7 +529,7 @@ msgstr ""
 #. module: sale_project
 #: model:ir.model,name:sale_project.model_project_milestone
 msgid "Project Milestone"
-msgstr ""
+msgstr "प्रोजेक्ट माइलस्टोन"
 
 #. module: sale_project
 #: model:ir.model.fields.selection,name:sale_project.selection__product_template__service_type__milestones
@@ -649,6 +652,12 @@ msgid ""
 "also change or remove the sales order item of each timesheet entry "
 "individually."
 msgstr ""
+"सेल्स ऑर्डर आइटम जिसमें इस टास्क पर बिताया गया समय जोड़ा जाएगा, ताकि आपके ग्राहक को "
+"इनवॉइस भेजा जा सके.\n"
+"डिफ़ॉल्ट रूप से प्रोजेक्ट पर सेट किया गया सेल्स ऑर्डर आइटम चुना जाएगा. उसकी अनुपस्थिति में, "
+"अंतिम प्रीपेड सेल्स ऑर्डर आइटम जिसमें समय बचा है, उपयोग किया जाएगा.\n"
+"इस टास्क को नॉन-बिलेबल बनाने के लिए सेल्स ऑर्डर आइटम को हटा दें. आप हर टाइमशीट एंट्री के "
+"सेल्स ऑर्डर आइटम को व्यक्तिगत रूप से बदल या हटा भी सकते हैं।"
 
 #. module: sale_project
 #. flectra-javascript
@@ -680,8 +689,9 @@ msgid ""
 "It can be modified on each task and timesheet entry individually if "
 "necessary."
 msgstr ""
-"सेल्स ऑर्डर आइटम जिसे इस प्रोजेक्ट के टास्क और टाइमशीट पर डिफ़ॉल्ट रूप से चुना जाएगा, सिवाय इसके कि टाइमशी"
-"ट पर सेट कर्मचारी स्पष्ट रूप से प्रोजेक्ट पर किसी अन्य सेल्स ऑर्डर आइटम से जुड़ा हो. \n"
+"सेल्स ऑर्डर आइटम जिसे इस प्रोजेक्ट के टास्क और टाइमशीट पर डिफ़ॉल्ट रूप से चुना जाएगा, "
+"सिवाय इसके कि टाइमशीट पर सेट कर्मचारी स्पष्ट रूप से प्रोजेक्ट पर किसी अन्य सेल्स ऑर्डर "
+"आइटम से जुड़ा हो. \n"
 "ज़रूरत पड़ने पर इसे हर टास्क और टाइमशीट एंट्री पर अलग-अलग बदला जा सकता है।"
 
 #. module: sale_project
@@ -832,7 +842,7 @@ msgstr "टू डू"
 #. module: sale_project
 #: model:ir.model.fields,field_description:sale_project.field_project_task__task_to_invoice
 msgid "To invoice"
-msgstr ""
+msgstr "इनवॉइस के लिए"
 
 #. module: sale_project
 #: model:ir.model.fields,field_description:sale_project.field_product_product__service_type
@@ -851,6 +861,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:sale_project.field_project_milestone__product_uom
 msgid "Unit of Measure"
 msgstr "माप की इकाई"
+
+#. module: sale_project
+#: model_terms:ir.ui.view,arch_db:sale_project.product_template_form_view_invoice_policy_inherit_sale_project
+msgid "Values set here are company-specific."
+msgstr ""
 
 #. module: sale_project
 #: model:ir.model.fields,field_description:sale_project.field_project_project__vendor_bill_count

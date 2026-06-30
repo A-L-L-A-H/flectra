@@ -2,13 +2,13 @@
 # This file contains the translation of the following modules:
 # * website_hr_recruitment
 #
-# Weblate <noreply-mt-weblate@weblate.org>, 2025.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-29 18:37+0000\n"
-"PO-Revision-Date: 2025-11-22 21:22+0000\n"
+"POT-Creation-Date: 2026-04-03 18:38+0000\n"
+"PO-Revision-Date: 2026-05-23 08:30+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Hindi <https://translate.flectrahq.com/projects/flectra-17/"
 "website_hr_recruitment/hi/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 5.17\n"
 
 #. module: website_hr_recruitment
 #. flectra-python
@@ -45,11 +45,6 @@ msgstr ""
 #. module: website_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:website_hr_recruitment.index
 msgid "'. Showing results for '"
-msgstr ""
-
-#. module: website_hr_recruitment
-#: model_terms:ir.ui.view,arch_db:website_hr_recruitment.job_right_side_bar
-msgid "+1 (650) 555-0187"
 msgstr ""
 
 #. module: website_hr_recruitment
@@ -397,7 +392,7 @@ msgstr "ऑनलाइन कॉन्टेंट लिखने का अ�
 #. module: website_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:website_hr_recruitment.job_right_side_bar
 msgid "Facebook"
-msgstr ""
+msgstr "Facebook"
 
 #. module: website_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:website_hr_recruitment.job_right_side_bar
@@ -515,7 +510,7 @@ msgstr "सेल्स की पूरी प्रक्रिया को �
 #. module: website_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:website_hr_recruitment.job_right_side_bar
 msgid "LinkedIn"
-msgstr ""
+msgstr "LinkedIn"
 
 #. module: website_hr_recruitment
 #. flectra-javascript
@@ -913,7 +908,7 @@ msgstr ""
 #. module: website_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:website_hr_recruitment.apply
 msgid "breadcrumb"
-msgstr ""
+msgstr "ब्रेडक्रम्ब"
 
 #. module: website_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:website_hr_recruitment.apply

@@ -11,10 +11,12 @@ import math
 import psycopg2
 import re
 from textwrap import shorten
+from urllib.parse import urlencode
 
 from flectra import api, fields, models, _, Command, SUPERUSER_ID, modules, tools
 from flectra.addons.account.tools import format_structured_reference_iso
 from flectra.exceptions import UserError, ValidationError, AccessError, RedirectWarning
+from flectra.tools.mimetypes import guess_mimetype
 from flectra.tools.misc import clean_context
 from flectra.tools import (
     date_utils,
@@ -894,7 +896,7 @@ class AccountMove(models.Model):
         for move in self:
             # This will get the bank account from the partner in an order with the trusted first
             bank_ids = move.bank_partner_id.bank_ids.filtered(
-                lambda bank: not bank.company_id or bank.company_id == move.company_id
+                lambda bank: (not bank.company_id or bank.company_id == move.company_id)
             ).sorted(lambda bank: not bank.allow_out_payment)
             move.partner_bank_id = bank_ids[:1]
 
@@ -2027,7 +2029,7 @@ class AccountMove(models.Model):
         return self.currency_id == currency \
             and self.move_type in ('out_invoice', 'out_receipt', 'in_invoice', 'in_receipt') \
             and self.invoice_payment_term_id.early_discount \
-            and (not reference_date or reference_date <= self.invoice_payment_term_id._get_last_discount_date(self.invoice_date)) \
+            and (not reference_date or reference_date <= self.invoice_payment_term_id._get_last_discount_date(self.invoice_date or fields.Date.context_today(self))) \
             and self.payment_state == 'not_paid'
 
     # -------------------------------------------------------------------------
@@ -3263,6 +3265,7 @@ class AccountMove(models.Model):
                             invoices |= invoice
                             current_invoice = self.env['account.move']
                             add_file_data_results(file_data, invoice)
+                            self._post_process_link_to_purchase_order(invoice)
 
                 except RedirectWarning:
                     raise
@@ -3281,6 +3284,11 @@ class AccountMove(models.Model):
             close_file(file_data)
 
         return attachments_by_invoice
+
+    @api.model
+    def _post_process_link_to_purchase_order(self, invoice):
+        # To be implemented in modules needing to process the invoice after it was linked (or not) to a PO
+        pass
 
     # -------------------------------------------------------------------------
     # BUSINESS METHODS
@@ -3928,6 +3936,22 @@ class AccountMove(models.Model):
                     "The recipient bank account linked to this invoice is archived.\n"
                     "So you cannot confirm the invoice."
                 ))
+            if invoice.partner_bank_id and invoice.is_inbound() and not invoice.partner_bank_id.allow_out_payment:
+                if self.env.user.id == SUPERUSER_ID or self.user_has_groups('base.group_public') or self.user_has_groups('base.group_portal'):
+                    # Do not block in case of automated flows, simply remove the information
+                    invoice.partner_bank_id = False
+                elif invoice.partner_bank_id._user_can_trust():
+                    raise RedirectWarning(
+                        _(
+                            "The company bank account (%(account_number)s) linked to this invoice is not trusted. "
+                            "Go to the Bank Settings, double-check that it is yours or correct the number, and click on Send Money to trust it.",
+                            account_number=invoice.partner_bank_id.display_name,
+                        ),
+                        invoice.partner_bank_id._get_records_action(),
+                        _("Bank settings")
+                    )
+                else:
+                    raise UserError(_("The bank account of your company is not trusted. Please ask an admin or someone with approval rights to check it."))
             if float_compare(invoice.amount_total, 0.0, precision_rounding=invoice.currency_id.rounding) < 0:
                 raise UserError(_(
                     "You cannot validate an invoice with a negative total amount. "
@@ -4145,8 +4169,8 @@ class AccountMove(models.Model):
         return action
 
     def action_switch_move_type(self):
-        if any(move.posted_before for move in self):
-            raise ValidationError(_("You cannot switch the type of a document which has been posted once."))
+        if any((move.posted_before and move.name) for move in self):
+            raise ValidationError(_("You cannot switch the type of a document with an existing sequence number."))
         if any(move.move_type == "entry" for move in self):
             raise ValidationError(_("This action isn't available for this document."))
 
@@ -4181,10 +4205,14 @@ class AccountMove(models.Model):
         action['res_id'] = self.copy().id
         return action
 
+    def _is_exportable_as_self_invoice(self):
+        # To override in account_peppol_selfbilling
+        return False
+
     def action_send_and_print(self):
         template = self.env.ref(self._get_mail_template(), raise_if_not_found=False)
 
-        if any(not x.is_sale_document(include_receipts=True) for x in self):
+        if any(not x.is_sale_document(include_receipts=True) and not x._is_exportable_as_self_invoice() for x in self):
             raise UserError(_("You can only send sales documents"))
 
         return {
@@ -4742,6 +4770,13 @@ class AccountMove(models.Model):
         pdf_name = self._get_invoice_report_filename() if len(self) == 1 else "Invoices.pdf"
         return pdf_content, pdf_name
 
+    # this override is to make sure that the main attachment is not an xml
+    def _message_set_main_attachment_id(self, attachment_ids):
+        attachments = self.env['ir.attachment'].browse(attachment_ids).filtered(
+            lambda att: not (att.mimetype == 'text/plain' and guess_mimetype(att.raw or b'').endswith('/xml'))
+        )
+        super()._message_set_main_attachment_id(attachments.ids)
+
     def _get_invoice_report_filename(self, extension='pdf'):
         """ Get the filename of the generated invoice report with extension file. """
         self.ensure_one()
@@ -5058,6 +5093,29 @@ class AccountMove(models.Model):
     # -------------------------------------------------------------------------
     # HOOKS
     # -------------------------------------------------------------------------
+
+    def _get_moves_zip_export_docs(self):
+        docs = set()
+        for move in self.filtered(lambda m: m.state == 'posted' and m.is_sale_document()):
+            try:
+                legal_docs = move._get_invoice_legal_documents()
+                docs.update(legal_docs.ids)
+            except Exception:  # noqa: BLE001
+                pass  # no legal docs for this move
+
+        filename = _('documents')
+        return docs, filename
+
+    def action_export_zip(self):
+        attachment_ids, filename = self._get_moves_zip_export_docs()
+        if not attachment_ids:
+            raise UserError(_('Nothing to export.'))
+
+        return {
+            'type': 'ir.actions.act_url',
+            'url': f"/account/export_zip_documents?{urlencode({'ids': list(attachment_ids), 'filename': f'{filename}.zip'}, doseq=True)}",
+            'close': True,
+        }
 
     def _action_invoice_ready_to_be_sent(self):
         """ Hook allowing custom code when an invoice becomes ready to be sent by mail to the customer.

@@ -8,13 +8,14 @@
 #
 # Łukasz Grzenkowicz <lukasz.grzenkowicz@4biznes.eu>, 2025.
 # Weblate <noreply-mt-weblate@weblate.org>, 2026.
+# "Marta (wacm)" <wacm@flectrahq.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-15 18:37+0000\n"
-"PO-Revision-Date: 2026-01-17 17:00+0000\n"
-"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
+"POT-Creation-Date: 2026-04-24 17:37+0000\n"
+"PO-Revision-Date: 2026-06-03 18:17+0000\n"
+"Last-Translator: \"Marta (wacm)\" <wacm@flectrahq.com>\n"
 "Language-Team: Polish <https://translate.flectrahq.com/projects/flectra-17/"
 "account_peppol/pl/>\n"
 "Language: pl\n"
@@ -22,9 +23,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && "
-"(n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || "
-"(n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
-"X-Generator: Weblate 5.14.3\n"
+"(n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && "
+"n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"X-Generator: Weblate 5.17\n"
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.mail_notification_layout_with_responsible_signature_and_peppol
@@ -99,10 +100,10 @@ msgstr ""
 #, python-format
 msgid ""
 "A participant with these details has already been registered on the network. "
-"If you have previously registered to a Peppol service, please deregister."
+"If you continue, Flectra will register this company as sender only."
 msgstr ""
-"Uczestnik z tymi danymi został już zarejestrowany w sieci. Jeśli wcześniej "
-"zarejestrowałeś się w usłudze Peppol."
+"Uczestnik o tych danych został już zarejestrowany w sieci. Jeśli zdecydujesz "
+"się kontynuować, Flectra zarejestruje tę firmę wyłącznie jako nadawcę."
 
 #. module: account_peppol
 #. flectra-python
@@ -110,6 +111,17 @@ msgstr ""
 #, python-format
 msgid "A purchase journal must be used to receive Peppol documents."
 msgstr "Aby otrzymać dokumenty Peppol, należy użyć dziennika zakupu."
+
+#. module: account_peppol
+#. flectra-python
+#: code:addons/account_peppol/models/res_config_settings.py:0
+#, python-format
+msgid ""
+"A receiver connection is already registered for this participant. Please "
+"deregister that receiver connection first."
+msgstr ""
+"Połączenie odbierające jest już zarejestrowane dla tego uczestnika. Najpierw "
+"wyrejestruj to połączenie odbierające."
 
 #. module: account_peppol
 #: model:ir.model,name:account_peppol.model_account_edi_proxy_client_user
@@ -124,7 +136,7 @@ msgstr "Przeniesienie konta Wyślij"
 #. module: account_peppol
 #: model:ir.model.fields,field_description:account_peppol.field_res_config_settings__account_peppol_edi_mode
 msgid "Account Peppol Edi Mode"
-msgstr ""
+msgstr "Tryb EDI konta Peppol"
 
 #. module: account_peppol
 #: model:ir.model.fields,field_description:account_peppol.field_account_move_send__account_peppol_edi_mode_info
@@ -134,7 +146,7 @@ msgstr "Informacje o trybie konta Peppol Edi"
 #. module: account_peppol
 #: model:ir.model.fields,field_description:account_peppol.field_res_config_settings__account_peppol_mode_constraint
 msgid "Account Peppol Mode Constraint"
-msgstr ""
+msgstr "Tryb ograniczenia konta Peppol"
 
 #. module: account_peppol
 #: model:ir.model.fields,field_description:account_peppol.field_account_journal__is_peppol_journal
@@ -145,6 +157,14 @@ msgstr "Konto użyte w Peppol"
 #: model:ir.model.fields.selection,name:account_peppol.selection__res_company__account_peppol_proxy_state__active
 msgid "Active"
 msgstr "Aktywne"
+
+#. module: account_peppol
+#. flectra-javascript
+#: code:addons/account_peppol/static/src/components/res_config_settings_buttons/res_config_settings_buttons.js:0
+#: code:addons/account_peppol/static/src/components/res_config_settings_buttons/res_config_settings_buttons.xml:0
+#, python-format
+msgid "Allow reception"
+msgstr "Pozwalaj na odbiór"
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.res_config_settings_view_form
@@ -160,6 +180,11 @@ msgstr ""
 "przez Flectra."
 
 #. module: account_peppol
+#: model:ir.model.fields.selection,name:account_peppol.selection__res_company__account_peppol_proxy_state__sender
+msgid "Can send but not receive"
+msgstr "Może wysyłać, ale nie otrzymywać"
+
+#. module: account_peppol
 #. flectra-python
 #: code:addons/account_peppol/models/res_config_settings.py:0
 #, python-format
@@ -171,18 +196,11 @@ msgstr ""
 "wyrejestruj się."
 
 #. module: account_peppol
-#. flectra-python
-#: code:addons/account_peppol/models/res_config_settings.py:0
+#. flectra-javascript
+#: code:addons/account_peppol/static/src/components/res_config_settings_buttons/res_config_settings_buttons.js:0
 #, python-format
-msgid "Can't cancel registration with this status: %s"
-msgstr "Nie można anulować rejestracji z tym statusem: %s"
-
-#. module: account_peppol
-#. flectra-python
-#: code:addons/account_peppol/models/res_config_settings.py:0
-#, python-format
-msgid "Can't deregister with this status: %s"
-msgstr "Nie można się wyrejestrować z tym statusem: %s"
+msgid "Cancel"
+msgstr "Anuluj"
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.account_peppol_view_move_form
@@ -241,7 +259,7 @@ msgstr "Firmy"
 #. module: account_peppol
 #: model:ir.model,name:account_peppol.model_res_config_settings
 msgid "Config Settings"
-msgstr "Ustawienia konfiguracji"
+msgstr "Konfiguracja ustawień"
 
 #. module: account_peppol
 #. flectra-javascript
@@ -291,6 +309,11 @@ msgstr "Demo"
 #, python-format
 msgid "Deregister from Peppol"
 msgstr "Wyrejestruj się z Peppol"
+
+#. module: account_peppol
+#: model_terms:ir.ui.view,arch_db:account_peppol.res_config_settings_view_form
+msgid "Disable the reception."
+msgstr "Wyłącz odbiór."
 
 #. module: account_peppol
 #: model:ir.model.fields.selection,name:account_peppol.selection__account_move__peppol_move_state__done
@@ -411,9 +434,23 @@ msgid "Not verified"
 msgstr "Nie zweryfikowano"
 
 #. module: account_peppol
+#. flectra-javascript
+#: code:addons/account_peppol/static/src/components/res_config_settings_buttons/res_config_settings_buttons.js:0
+#, python-format
+msgid "OK"
+msgstr "OK"
+
+#. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.mail_notification_layout_with_responsible_signature_and_peppol
 msgid "Flectra"
 msgstr "Flectra"
+
+#. module: account_peppol
+#. flectra-python
+#: code:addons/account_peppol/models/res_config_settings.py:0
+#, python-format
+msgid "Only sender-only connections can be reactivated for reception."
+msgstr "Tylko połączenia z wysyłką można ponownie aktywować do odbioru."
 
 #. module: account_peppol
 #: model:ir.model.fields.selection,name:account_peppol.selection__account_edi_proxy_client_user__proxy_type__peppol
@@ -513,7 +550,7 @@ msgstr "Punkt końcowy Peppol"
 #: model:ir.model.fields,field_description:account_peppol.field_account_move__peppol_is_demo_uuid
 #: model:ir.model.fields,field_description:account_peppol.field_account_payment__peppol_is_demo_uuid
 msgid "Peppol Is Demo Uuid"
-msgstr ""
+msgstr "Demo uuid Peppol"
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.account_peppol_view_account_invoice_filter
@@ -604,12 +641,10 @@ msgstr ""
 #, python-format
 msgid ""
 "Please enter the mobile number in the correct international format.\n"
-"For example: +32123456789, where +32 is the country code.\n"
-"Currently, only European countries are supported."
+"For example: +32123456789, where +32 is the country code."
 msgstr ""
 "Wprowadź numer telefonu komórkowego w prawidłowym formacie międzynarodowym.\n"
-"Na przykład: +32123456789, gdzie +32 to kod kraju.\n"
-"Obecnie obsługiwane są tylko kraje europejskie."
+"Na przykład: +32123456789, gdzie +32 to kod kraju."
 
 #. module: account_peppol
 #. flectra-python
@@ -671,6 +706,15 @@ msgid "Rejected"
 msgstr "Odrzucone"
 
 #. module: account_peppol
+#: model_terms:ir.ui.view,arch_db:account_peppol.res_config_settings_view_form
+msgid ""
+"Route your vendor bills elsewhere while maintaining the ability to send "
+"customer invoices."
+msgstr ""
+"Przekieruj swoje faktury od dostawcy w inne miejsce, przy jednoczesnym "
+"utrzymaniu zdolności do wysyłania faktur klientom."
+
+#. module: account_peppol
 #: model:ir.model.fields,field_description:account_peppol.field_account_edi_proxy_client_user__peppol_verification_code
 #: model:ir.model.fields,field_description:account_peppol.field_res_config_settings__account_peppol_verification_code
 msgid "SMS verification code"
@@ -719,7 +763,7 @@ msgstr ""
 #: code:addons/account_peppol/static/src/components/res_config_settings_buttons/res_config_settings_buttons.js:0
 #, python-format
 msgid "Switch to Live"
-msgstr ""
+msgstr "Przełącz na wersję live"
 
 #. module: account_peppol
 #. flectra-python
@@ -737,6 +781,9 @@ msgid ""
 "                                        By clicking the button below I "
 "accept that Flectra may process my e-invoices."
 msgstr ""
+"Tryb testowy pozwala na rejestrację użytkownika w testowej sieci Peppol.\n"
+"                                        Poprzez kliknięcie przycisku poniżej "
+"akceptuję, że Flectra może przetwarzać moje e-faktury."
 
 #. module: account_peppol
 #. flectra-python
@@ -786,6 +833,17 @@ msgid ""
 msgstr ""
 "Faktura została wysłana do punktu dostępowego Peppol. Wraz z plikiem XML "
 "przesłano następujące załączniki:"
+
+#. module: account_peppol
+#. flectra-python
+#: code:addons/account_peppol/wizard/account_move_send.py:0
+#, python-format
+msgid ""
+"The partner has indicated it does not accept this document type, so you "
+"cannot send this invoice via Peppol."
+msgstr ""
+"Partner wskazał, że nie akceptuje tego typu dokumentów, więc nie możesz "
+"wysłać tej faktury przez Peppol."
 
 #. module: account_peppol
 #. flectra-python
@@ -860,6 +918,7 @@ msgid ""
 "This peppol identification is already used by %(parent_name)s. Please use "
 "something else."
 msgstr ""
+"Ten identyfikator Peppol jest już używany przez %(parent_name)s. Użyj innego."
 
 #. module: account_peppol
 #. flectra-python
@@ -925,26 +984,26 @@ msgstr ""
 #: code:addons/account_peppol/static/src/components/res_config_settings_buttons/res_config_settings_buttons.js:0
 #, python-format
 msgid "Validate registration"
-msgstr ""
+msgstr "Potwierdź rejestrację"
 
 #. module: account_peppol
 #. flectra-javascript
 #: code:addons/account_peppol/static/src/components/res_config_settings_buttons/res_config_settings_buttons.js:0
 #, python-format
 msgid "Validate registration (Demo)"
-msgstr ""
+msgstr "Potwierdź rejestrację (Demo)"
 
 #. module: account_peppol
 #. flectra-javascript
 #: code:addons/account_peppol/static/src/components/res_config_settings_buttons/res_config_settings_buttons.js:0
 #, python-format
 msgid "Validate registration (Test)"
-msgstr ""
+msgstr "Potwierdź rejestrację (Test)"
 
 #. module: account_peppol
 #: model:ir.model.fields.selection,name:account_peppol.selection__res_company__account_peppol_proxy_state__sent_verification
 msgid "Verification code sent"
-msgstr ""
+msgstr "Wysłano kod weryfikacyjny"
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.res_partner_form_account_peppol
@@ -961,7 +1020,7 @@ msgstr "Zweryfikuj Peppol"
 #: code:addons/account_peppol/static/src/components/res_config_settings_buttons/res_config_settings_buttons.xml:0
 #, python-format
 msgid "Verify mobile number"
-msgstr ""
+msgstr "Zweryfikuj mój numer komórkowy"
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.res_partner_form_account_peppol
@@ -977,7 +1036,21 @@ msgstr "Ostrzeżenie"
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.res_config_settings_view_form
 msgid "We sent a verification code to"
+msgstr "Wysłaliśmy kod weryfikacyjny do"
+
+#. module: account_peppol
+#. flectra-python
+#: code:addons/account_peppol/models/account_journal.py:0
+#, python-format
+msgid ""
+"You can't change the type of a journal used for Peppol invoice reception toa "
+"type different than 'Purchase'.\n"
+"Please change the journal used for Peppol reception before changing the type "
+"of this journal."
 msgstr ""
+"Nie można zmienić typu dziennika używanego do odbioru faktur Peppol na inny "
+"typ niż \"Zakup\".\n"
+"Zmień dziennik używany do odbioru Peppol przed zmianą typu tego dziennika."
 
 #. module: account_peppol
 #. flectra-javascript
@@ -1001,7 +1074,7 @@ msgstr "Na ten numer telefonu otrzymasz kod weryfikacyjny"
 #: code:addons/account_peppol/models/res_config_settings.py:0
 #, python-format
 msgid "Your Peppol activation code in Flectra is"
-msgstr ""
+msgstr "Twój kod aktywacji peppol w Flectra to"
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.res_config_settings_view_form
@@ -1037,6 +1110,23 @@ msgstr "aby wysyłać faktury, ale ta"
 #: model_terms:ir.ui.view,arch_db:account_peppol.mail_notification_layout_with_responsible_signature_and_peppol
 msgid "uses"
 msgstr "używa"
+
+#, python-format
+#~ msgid ""
+#~ "A participant with these details has already been registered on the "
+#~ "network. If you have previously registered to a Peppol service, please "
+#~ "deregister."
+#~ msgstr ""
+#~ "Uczestnik z tymi danymi został już zarejestrowany w sieci. Jeśli "
+#~ "wcześniej zarejestrowałeś się w usłudze Peppol."
+
+#, python-format
+#~ msgid "Can't cancel registration with this status: %s"
+#~ msgstr "Nie można anulować rejestracji z tym statusem: %s"
+
+#, python-format
+#~ msgid "Can't deregister with this status: %s"
+#~ msgstr "Nie można się wyrejestrować z tym statusem: %s"
 
 #~ msgid "Cannot receive this format"
 #~ msgstr "Nie może otrzymać tego formatu"

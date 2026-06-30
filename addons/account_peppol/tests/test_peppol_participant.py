@@ -2,12 +2,16 @@ import json
 from contextlib import contextmanager
 from freezegun import freeze_time
 from requests import Session, PreparedRequest, Response
+from unittest.mock import patch
 from urllib.parse import parse_qs, quote_plus
 from psycopg2 import IntegrityError
 
 from flectra.exceptions import ValidationError, UserError
+from flectra.tests import Form
 from flectra.tests.common import tagged, TransactionCase
 from flectra.tools import mute_logger
+
+from flectra.addons.account_edi_proxy_client.models.account_edi_proxy_user import AccountEdiProxyError
 
 ID_CLIENT = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
 FAKE_UUID = 'yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy'
@@ -35,6 +39,7 @@ class TestPeppolParticipant(TransactionCase):
                 }
             },
             '/api/peppol/1/activate_participant': {'result': {}},
+            '/api/peppol/1/register_sender': {'result': {}},
             '/iap/account_edi/2/create_user': {
                 'result': {
                     'id_client': cls.env.context.get('mock_id_client', ID_CLIENT),
@@ -49,6 +54,7 @@ class TestPeppolParticipant(TransactionCase):
                     'migration_key': 'test_key',
                 }
             },
+            '/api/peppol/1/get_all_documents': {'result': {'messages': []}},
         }
 
     @classmethod
@@ -125,8 +131,10 @@ class TestPeppolParticipant(TransactionCase):
     def _set_context(self, other_context):
         previous_context = self.env.context
         self.env.context = dict(previous_context, **other_context)
-        yield self
-        self.env.context = previous_context
+        try:
+            yield self
+        finally:
+            self.env.context = previous_context
 
     def test_create_participant_missing_data(self):
         # creating a participant without eas/endpoint/document should not be possible
@@ -294,7 +302,6 @@ class TestPeppolParticipant(TransactionCase):
         self.assertFalse(edi_user_1.active)
 
     def test_restore_user_in_draft_state(self):
-        """Test recovery when IAP-side is in KYC state (should set to not_verified and not keep in `not_registered`)"""
         settings = self.env['res.config.settings'].create(self._get_participant_vals())
         settings.button_create_peppol_proxy_user()
         edi_user = self.env.company.account_edi_proxy_client_ids
@@ -303,14 +310,15 @@ class TestPeppolParticipant(TransactionCase):
         edi_user.active = False
         edi_user.company_id.account_peppol_proxy_state = 'not_registered'
 
-        # mock IAP returning draft state (thus still in KYC)
-        with self._set_context({'peppol_state': 'draft'}):
-            result = self.env['account_edi_proxy_client.user']._try_recover_peppol_proxy_users(edi_user.company_id)
+        # mock IAP returning draft state
+        with self._set_context({'peppol_state': 'active'}):
+            user_vals = {**self._get_participant_vals(), 'account_peppol_endpoint': '0000000000'}
+            # user tries to re-register with same endpoint -> recovery kicks in
+            self.env['res.config.settings'].create(user_vals).button_create_peppol_proxy_user()
 
-        # should recover user and set state to not_verified
-        self.assertEqual(result, edi_user)
+        # should recover user and set state to active
         self.assertTrue(edi_user.active)
-        self.assertEqual(edi_user.company_id.account_peppol_proxy_state, 'not_verified')
+        self.assertEqual(edi_user.company_id.account_peppol_proxy_state, 'active')
 
     def test_cron_recovery_multi_company(self):
         """Test cron recovery works correctly across multi companies"""
@@ -568,3 +576,107 @@ class TestPeppolParticipant(TransactionCase):
             # handle malformed response gracefully
             self.assertIsNone(result)
             self.assertFalse(edi_user.active)
+
+    def test_deregister_with_client_gone_error(self):
+        """Test deregistration succeeds even when proxy returns client_gone error"""
+        settings = self.env['res.config.settings'].create(self._get_participant_vals())
+        settings.button_create_peppol_proxy_user()
+        self.env['account_edi_proxy_client.user']._cron_peppol_get_participant_status()
+        self.assertEqual(self.env.company.account_peppol_proxy_state, 'active')
+
+        original_make_request = self.env['account_edi_proxy_client.user']._make_request
+
+        def mock_make_request(self, url, params=None):
+            if 'cancel_peppol_registration' in url:
+                raise AccountEdiProxyError('client_gone', 'Client no longer exists on proxy')
+            return original_make_request(url, params)
+
+        with patch.object(self.registry['account_edi_proxy_client.user'], '_make_request', mock_make_request):
+            settings.button_deregister_peppol_participant()
+
+        # Should successfully deregister despite client_gone error
+        self.assertEqual(self.env.company.account_peppol_proxy_state, 'not_registered')
+
+    def test_do_not_reset_peppol_endpoint(self):
+        be_country = self.env.ref('base.be')
+        self.env.company.write({
+            'country_id': be_country.id,
+            'vat': 'BE0477472701',
+        })
+        settings = self.env['res.config.settings'].create({
+            'account_peppol_eas': '0088',
+            'account_peppol_endpoint': '88888888888',
+            'account_peppol_phone_number': '+32483123456',
+            'account_peppol_contact_email': 'yourcompany@test.example.com',
+        })
+        settings.button_create_peppol_proxy_user()
+        self.env['account_edi_proxy_client.user']._cron_peppol_get_participant_status()
+        self.env.company.vat = 'BE0475646428'
+        self.assertRecordValues(self.env.company.partner_id, [{
+            'peppol_eas': '0088',
+            'peppol_endpoint': '88888888888',
+        }])
+
+        with Form(self.env.company.partner_id) as partner:
+            # Test with NewID record
+            partner.vat = 'BE0477472701'
+        self.assertRecordValues(self.env.company.partner_id, [{
+            'peppol_eas': '0088',
+            'peppol_endpoint': '88888888888',
+        }])
+
+        company_partner = self.env.company.partner_id
+
+        other_company = self.env['res.company'].create({'name': 'new company 3', 'country_id': be_country.id})
+        self.env = self.env(context=dict(allowed_company_ids=other_company.ids))
+        # Do not raise even if no access to a registered company
+
+        company_partner.vat = 'BE0477472701'
+        self.assertRecordValues(company_partner, [{
+            'peppol_eas': '0088',
+            'peppol_endpoint': '88888888888',
+        }])
+
+        self.env.company.vat = 'BE0475646428'
+        self.assertRecordValues(self.env.company.partner_id, [{
+            'peppol_eas': '0208',
+            'peppol_endpoint': '0475646428',
+        }])
+
+    def test_create_child_company_sender_only(self):
+        """Test that when a child company attempts to register on Peppol using the exact same endpoint as its already active parent company"""
+        vals = self._get_participant_vals()
+        parent_company = self.env['res.company'].create({
+            'name': 'Parent Company',
+            'peppol_eas': vals['account_peppol_eas'],
+            'peppol_endpoint': vals['account_peppol_endpoint'],
+        })
+
+        child_company = self.env['res.company'].create({
+            'name': 'Child Company Connection',
+            'parent_id': parent_company.id,
+            'peppol_eas': vals['account_peppol_eas'],
+            'peppol_endpoint': vals['account_peppol_endpoint'],
+        })
+
+        self.env['account_edi_proxy_client.user'].sudo().create({
+            'id_client': 'parent_client',
+            'company_id': parent_company.id,
+            'proxy_type': 'peppol',
+            'edi_mode': 'test',
+            'edi_identification': f"{vals['account_peppol_eas']}:{vals['account_peppol_endpoint']}",
+            'refresh_token': FAKE_UUID,
+            'private_key': '1234',
+        })
+
+        settings = self.env['res.config.settings'].with_company(child_company).create(vals)
+        settings.button_create_peppol_proxy_user()
+
+        self.assertEqual(child_company.account_peppol_proxy_state, 'sender')
+        self.assertTrue(settings.peppol_use_parent_company)
+
+        child_user = self.env['account_edi_proxy_client.user'].search([
+            ('company_id', '=', child_company.id),
+            ('proxy_type', '=', 'peppol'),
+        ])
+        self.assertEqual(child_user.edi_identification, f"{vals['account_peppol_eas']}:{vals['account_peppol_endpoint']}")

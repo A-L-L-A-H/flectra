@@ -7,13 +7,15 @@
 # Pedro M. Baeza <pedro.baeza@tecnativa.com>, 2023
 # Larissa Manderfeld, 2024
 # "Larissa Manderfeld (lman)" <lman@flectrahq.com>, 2025.
+# Weblate <noreply-mt-weblate@weblate.org>, 2026.
+# "Noemi Pla Garcia (nopl)" <nopl@flectrahq.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-29 18:37+0000\n"
-"PO-Revision-Date: 2025-09-06 01:40+0000\n"
-"Last-Translator: \"Larissa Manderfeld (lman)\" <lman@flectrahq.com>\n"
+"POT-Creation-Date: 2026-01-29 18:36+0000\n"
+"PO-Revision-Date: 2026-05-27 09:49+0000\n"
+"Last-Translator: \"Noemi Pla Garcia (nopl)\" <nopl@flectrahq.com>\n"
 "Language-Team: Spanish <https://translate.flectrahq.com/projects/flectra-17/"
 "crm_iap_mine/es/>\n"
 "Language: es\n"
@@ -22,7 +24,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n != 0 && n % 1000000 == "
 "0) ? 1 : 2);\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 5.17\n"
 
 #. module: crm_iap_mine
 #. flectra-python
@@ -57,6 +59,42 @@ msgstr ""
 "    <p>Saludos cordiales,</p>\n"
 "    <p>FlectraHQ, Inc.</p>\n"
 "</div>"
+
+#. module: crm_iap_mine
+#: model_terms:ir.ui.view,arch_db:crm_iap_mine.enrich_company
+msgid ""
+"<i class=\"fa fa-fw me-2 fa-address-book text-primary\"/>\n"
+"                    <b>Address</b>"
+msgstr ""
+"<i class=\"fa fa-fw me-2 fa-address-book text-primary\"/>\n"
+"                    <b>Dirección</b>"
+
+#. module: crm_iap_mine
+#: model_terms:ir.ui.view,arch_db:crm_iap_mine.enrich_company
+msgid ""
+"<i class=\"fa fa-fw me-2 fa-cube text-primary\"/>\n"
+"                    <b>Industries</b>"
+msgstr ""
+"<i class=\"fa fa-fw me-2 fa-cube text-primary\"/>\n"
+"                    <b>Sectores</b>"
+
+#. module: crm_iap_mine
+#: model_terms:ir.ui.view,arch_db:crm_iap_mine.enrich_company
+msgid ""
+"<i class=\"fa fa-fw me-2 fa-globe text-primary\"/>\n"
+"                    <b>Website</b>"
+msgstr ""
+"<i class=\"fa fa-fw me-2 fa-globe text-primary\"/>\n"
+"                    <b>Sitio web</b>"
+
+#. module: crm_iap_mine
+#: model_terms:ir.ui.view,arch_db:crm_iap_mine.enrich_company
+msgid ""
+"<i class=\"fa fa-fw me-2 fa-solid fa-id-card text-primary\"/>\n"
+"                    <b>Tax ID</b>"
+msgstr ""
+"<i class=\"fa fa-fw me-2 fa-solid fa-id-card text-primary\"/>\n"
+"                    <b>Núm. de identificación fiscal</b>"
 
 #. module: crm_iap_mine
 #: model_terms:ir.ui.view,arch_db:crm_iap_mine.crm_iap_lead_mining_request_view_form
@@ -338,7 +376,7 @@ msgstr "Generar leads"
 #: code:addons/crm_iap_mine/models/crm_iap_lead_mining_request.py:0
 #, python-format
 msgid "Generate new leads based on their country, industry, size, etc."
-msgstr "Generar nuevas leads en función de su país, industrias, tamaño, etc."
+msgstr "Generar nuevos leads en función de su país, sector, tamaño, etc."
 
 #. module: crm_iap_mine
 #: model:ir.model.fields,field_description:crm_iap_mine.field_crm_iap_lead_mining_request__lead_ids
@@ -408,7 +446,7 @@ msgstr "Sector"
 #. module: crm_iap_mine
 #: model:ir.model.constraint,message:crm_iap_mine.constraint_crm_iap_lead_industry_name_uniq
 msgid "Industry name already exists!"
-msgstr "¡El nombre de la industria ya existe!"
+msgstr "¡El nombre del sector ya existe!"
 
 #. module: crm_iap_mine
 #: model:crm.iap.lead.role,name:crm_iap_mine.crm_iap_mine_role_11
@@ -796,7 +834,7 @@ msgstr ""
 #: code:addons/crm_iap_mine/static/src/js/tours/crm_iap_lead.js:0
 #, python-format
 msgid "Which Industry do you want to target?"
-msgstr "¿En qué tipo de industria se quiere enfocar?"
+msgstr "¿Qué sector de actividad le interesa?"
 
 #. module: crm_iap_mine
 #: model_terms:ir.ui.view,arch_db:crm_iap_mine.crm_iap_lead_mining_request_view_form
@@ -834,3 +872,17 @@ msgstr "gerente"
 #: model_terms:ir.ui.view,arch_db:crm_iap_mine.crm_iap_lead_mining_request_view_form
 msgid "to"
 msgstr "a"
+
+#~ msgid ""
+#~ "<i class=\"fa fa-fw me-2 fa-building text-primary\"/>\n"
+#~ "                    <b>Company type</b>"
+#~ msgstr ""
+#~ "<i class=\"fa fa-fw me-2 fa-building text-primary\"/>\n"
+#~ "                    <b>Tipo de empresa</b>"
+
+#~ msgid ""
+#~ "<i class=\"fa fa-fw me-2 fa-phone text-primary\"/>\n"
+#~ "                    <b>Phone</b>"
+#~ msgstr ""
+#~ "<i class=\"fa fa-fw me-2 fa-phone text-primary\"/>\n"
+#~ "                    <b>Teléfono</b>"

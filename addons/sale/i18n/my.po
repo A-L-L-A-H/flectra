@@ -3,22 +3,22 @@
 # * sale
 #
 # Oakarmin Iron <oakarminiron@gmail.com>, 2025.
-# Weblate <noreply-mt-weblate@weblate.org>, 2025.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-29 18:38+0000\n"
-"PO-Revision-Date: 2025-11-20 16:32+0000\n"
+"POT-Creation-Date: 2026-04-03 18:40+0000\n"
+"PO-Revision-Date: 2026-04-04 19:14+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Burmese <https://translate.flectrahq.com/projects/flectra-17/sale/my/"
-">\n"
+"Language-Team: Burmese <https://translate.flectrahq.com/projects/flectra-17/sale/my/>"
+"\n"
 "Language: my\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 5.16.2\n"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_payment_provider_onboarding_wizard___data_fetched
@@ -99,21 +99,6 @@ msgid ""
 "(object.state in ('draft', 'sent') and 'Quotation - %s' % (object.name)) or "
 "'Order - %s' % (object.name)"
 msgstr ""
-
-#. module: sale
-#: model_terms:ir.ui.view,arch_db:sale.report_saleorder_document
-msgid "2023-12-31"
-msgstr ""
-
-#. module: sale
-#: model_terms:ir.ui.view,arch_db:sale.report_saleorder_document
-msgid "27.00"
-msgstr "၂၇.၀၀"
-
-#. module: sale
-#: model_terms:ir.ui.view,arch_db:sale.report_saleorder_document
-msgid "31.05"
-msgstr "၃၁.၀၅"
 
 #. module: sale
 #. flectra-javascript
@@ -887,7 +872,7 @@ msgstr ""
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__activity_ids
 msgid "Activities"
-msgstr ""
+msgstr "လှုပ်ရှားမှုများ"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__activity_exception_decoration
@@ -1922,7 +1907,7 @@ msgstr "စာရွက်စာတမ်း(များ)"
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_account_analytic_applicability__business_domain
 msgid "Domain"
-msgstr ""
+msgstr "ဒိုမိန်း"
 
 #. module: sale
 #. flectra-python
@@ -2464,7 +2449,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:sale.res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:sale.view_order_form
 msgid "Invoicing"
-msgstr ""
+msgstr "ပြေစာထုတ်ခြင်း"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_content
@@ -2745,7 +2730,7 @@ msgstr "မက်ဆေ့ဂျ်များ"
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_payment_provider_onboarding_wizard__manual_name
 msgid "Method"
-msgstr ""
+msgstr "နည်းလမ်း"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order_line__qty_delivered_method
@@ -2770,7 +2755,7 @@ msgstr ""
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.view_sales_order_filter
 msgid "My Orders"
-msgstr ""
+msgstr "ကျွန်ပ်၏ အော်ဒါများ"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_view_search_inherit_quotation
@@ -3047,7 +3032,7 @@ msgstr ""
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_advance_payment_inv__count
 msgid "Order Count"
-msgstr ""
+msgstr "အော်ဒါ အရေအတွက်"
 
 #. module: sale
 #. flectra-python
@@ -3761,7 +3746,7 @@ msgstr ""
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_content
 msgid "Sale Information"
-msgstr ""
+msgstr "အရောင်း အချက်အလက်"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_advance_payment_inv__sale_order_ids
@@ -3778,7 +3763,7 @@ msgstr "အရောင်း အော်ဒါ"
 #: model:ir.model.fields,field_description:sale.field_res_partner__sale_order_count
 #: model:ir.model.fields,field_description:sale.field_res_users__sale_order_count
 msgid "Sale Order Count"
-msgstr ""
+msgstr "အရောင်း အော်ဒါ အရေအတွက်"
 
 #. module: sale
 #: model:ir.actions.act_window,name:sale.mail_activity_plan_action_sale_order
@@ -3813,7 +3798,7 @@ msgstr ""
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.res_config_settings_view_form
 msgid "Sale Warnings"
-msgstr ""
+msgstr "အရောင်း သတိပေးချက်များ"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_res_company__sale_onboarding_payment_method
@@ -3854,7 +3839,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:sale.view_order_product_search
 #, python-format
 msgid "Sales Analysis"
-msgstr ""
+msgstr "အရောင်း ဆန်းစစ်ချက်"
 
 #. module: sale
 #: model:ir.actions.act_window,name:sale.action_order_report_salesperson
@@ -4487,7 +4472,7 @@ msgstr ""
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__note
 msgid "Terms and conditions"
-msgstr ""
+msgstr "သဘောတူညီမှူနှင့် အခြေအနေများ"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.view_order_form
@@ -4676,6 +4661,14 @@ msgstr ""
 #: code:addons/sale/controllers/portal.py:0
 #, python-format
 msgid "The provided parameters are invalid."
+msgstr ""
+
+#. module: sale
+#. flectra-python
+#: code:addons/sale/controllers/portal.py:0
+#: code:addons/sale/wizard/payment_link_wizard.py:0
+#, python-format
+msgid "The sale order has expired."
 msgstr ""
 
 #. module: sale
@@ -4890,7 +4883,7 @@ msgstr ""
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__transaction_ids
 msgid "Transactions"
-msgstr ""
+msgstr "ထရန်ဇက်ရှင်းများ"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__type_name
@@ -5337,3 +5330,9 @@ msgid ""
 "{{ object.company_id.name }} {{ object.type_name }} Cancelled (Ref "
 "{{ object.name or 'n/a' }})"
 msgstr ""
+
+#~ msgid "27.00"
+#~ msgstr "၂၇.၀၀"
+
+#~ msgid "31.05"
+#~ msgstr "၃၁.၀၅"

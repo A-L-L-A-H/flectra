@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-12-29 18:36+0000\n"
-"PO-Revision-Date: 2026-01-10 08:04+0000\n"
+"PO-Revision-Date: 2026-05-02 08:08+0000\n"
 "Last-Translator: \"Junko Augias (juau)\" <juau@flectrahq.com>\n"
 "Language-Team: Japanese <https://translate.flectrahq.com/projects/flectra-17/"
 "hr_recruitment/ja/>\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.14.3\n"
+"X-Generator: Weblate 5.17\n"
 
 #. module: hr_recruitment
 #. flectra-python
@@ -182,7 +182,7 @@ msgstr "<span invisible=\"not salary_proposed_extra\"> + </span>"
 #. module: hr_recruitment
 #: model_terms:ir.ui.view,arch_db:hr_recruitment.view_hr_recruitment_stage_kanban
 msgid "<span>Folded in Recruitment Pipe: </span>"
-msgstr "<span>採用パイプに折畳み済: </span>"
+msgstr "<span>採用パイプラインで折りたたむ: </span>"
 
 #. module: hr_recruitment
 #: model_terms:ir.ui.view,arch_db:hr_recruitment.view_hr_job_kanban
@@ -1128,7 +1128,7 @@ msgstr "作成者"
 #. module: hr_recruitment
 #: model:ir.model.fields,field_description:hr_recruitment.field_hr_applicant__availability
 msgid "Availability"
-msgstr "利用可能"
+msgstr "就業可能日"
 
 #. module: hr_recruitment
 #: model:hr.recruitment.degree,name:hr_recruitment.degree_bachelor
@@ -1162,7 +1162,7 @@ msgstr "ブラックリストされた電話は固定電話"
 #: model_terms:ir.ui.view,arch_db:hr_recruitment.hr_applicant_view_search_bis
 #, python-format
 msgid "Blocked"
-msgstr "不許可"
+msgstr "ブロック中"
 
 #. module: hr_recruitment
 #: model:ir.model.fields,field_description:hr_recruitment.field_applicant_send_mail__body_has_template_value
@@ -1636,7 +1636,7 @@ msgstr "従業員"
 #. module: hr_recruitment
 #: model:ir.model.fields,field_description:hr_recruitment.field_hr_applicant__emp_is_active
 msgid "Employee Active"
-msgstr "アクティブな従業員"
+msgstr "有効な従業員"
 
 #. module: hr_recruitment
 #: model:ir.model.fields,field_description:hr_recruitment.field_hr_applicant__employee_name
@@ -1730,7 +1730,7 @@ msgstr "一次面接"
 #. module: hr_recruitment
 #: model:ir.model.fields,field_description:hr_recruitment.field_hr_recruitment_stage__fold
 msgid "Folded in Kanban"
-msgstr "かんばんで折り込む"
+msgstr "かんばんで折りたたむ"
 
 #. module: hr_recruitment
 #: model:ir.model.fields,field_description:hr_recruitment.field_hr_applicant__message_follower_ids
@@ -1908,9 +1908,8 @@ msgstr ""
 msgid ""
 "If the active field is set to False, it will allow you to hide the resource "
 "record without removing it."
-msgstr ""
-"アクティブ項目をFalse にセットすると、リソースレコードは削除することなく非表"
-"示にできます。"
+msgstr "有効項目をFalse にセットすると、リソースレコードは削除することなく非表示にで"
+"きます。"
 
 #. module: hr_recruitment
 #: model:ir.model.fields,help:hr_recruitment.field_hr_applicant__active
@@ -3254,8 +3253,8 @@ msgid ""
 "This stage is folded in the kanban view when there are no records in that "
 "stage to display."
 msgstr ""
-"このステージは、そのステージにレコードが表示されていないときに、かんばんの"
-"ビューで折り込まれます。"
+"このステージは、そのステージにレコードが表示されていないときに、かんばん"
+"ビューで折りたたまれます。"
 
 #. module: hr_recruitment
 #: model:digest.tip,name:hr_recruitment.digest_tip_hr_recruitment_0
@@ -3300,7 +3299,7 @@ msgstr ""
 #. module: hr_recruitment
 #: model:ir.model.fields,help:hr_recruitment.field_hr_applicant__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr "記録上の例外活動の種類。"
+msgstr "レコード上の例外の活動タイプ。"
 
 #. module: hr_recruitment
 #: model:ir.model,name:hr_recruitment.model_utm_campaign
@@ -3320,7 +3319,7 @@ msgstr "UTMs"
 #. module: hr_recruitment
 #: model_terms:ir.ui.view,arch_db:hr_recruitment.view_hr_job_kanban
 msgid "Unarchive"
-msgstr "アーカイブ取消"
+msgstr "アーカイブ解除"
 
 #. module: hr_recruitment
 #: model_terms:ir.ui.view,arch_db:hr_recruitment.hr_applicant_view_search

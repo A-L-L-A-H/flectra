@@ -8,9 +8,11 @@ from freezegun import freeze_time
 from flectra import fields
 
 from flectra.tests.common import HttpCase
+from flectra.tools import mute_logger
 
 from flectra.addons.microsoft_calendar.models.microsoft_sync import MicrosoftSync
 from flectra.addons.microsoft_calendar.utils.event_id_storage import combine_ids
+
 
 def mock_get_token(user):
     return f"TOKEN_FOR_USER_{user.id}"
@@ -39,6 +41,10 @@ class TestCommon(HttpCase):
     @patch_api
     def setUp(self):
         super(TestCommon, self).setUp()
+        m = mute_logger('flectra.addons.auth_signup.models.res_users')
+        mute_logger.__enter__(m)  # noqa: PLC2801
+        self.addCleanup(mute_logger.__exit__, m, None, None, None)
+
         self.env.user.unpause_microsoft_synchronization()
 
         # prepare users

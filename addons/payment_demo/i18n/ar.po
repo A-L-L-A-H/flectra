@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-29 18:38+0000\n"
+"POT-Creation-Date: 2026-04-03 18:40+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
 "Last-Translator: Malaz Abuidris <msea@flectrahq.com>, 2024\n"
 "Language-Team: Arabic (https://app.transifex.com/flectra/teams/41243/ar/)\n"
@@ -247,6 +247,13 @@ msgstr "المدفوعات التي تتم من خلال هذه الطريقة �
 #: model:ir.model.fields.selection,name:payment_demo.selection__payment_token__demo_simulated_state__pending
 msgid "Pending"
 msgstr "قيد الانتظار "
+
+#. module: payment_demo
+#. flectra-python
+#: code:addons/payment_demo/controllers/portal.py:0
+#, python-format
+msgid "Provider %s is not properly configured."
+msgstr ""
 
 #. module: payment_demo
 #: model_terms:ir.ui.view,arch_db:payment_demo.payment_transaction_form

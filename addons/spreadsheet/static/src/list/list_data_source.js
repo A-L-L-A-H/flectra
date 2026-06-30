@@ -254,4 +254,16 @@ export class ListDataSource extends FlectraViewsDataSource {
             });
         });
     }
+
+    get source() {
+        this._assertMetadataIsLoaded();
+        const data = this._metaData;
+        return {
+            resModel: data.resModel,
+            type: "list",
+            fields: data.columns,
+            groupby: undefined,
+            domain: this._searchParams.domain,
+        };
+    }
 }

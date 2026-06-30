@@ -3,13 +3,13 @@
 # * spreadsheet
 #
 # Flectra Translation Bot <c3p@flectrahq.com>, 2025.
-# Weblate <noreply-mt-weblate@weblate.org>, 2025.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Flectra Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-29 18:38+0000\n"
-"PO-Revision-Date: 2025-11-23 06:16+0000\n"
+"POT-Creation-Date: 2026-04-24 17:38+0000\n"
+"PO-Revision-Date: 2026-04-25 17:00+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Bosnian <https://translate.flectrahq.com/projects/flectra-17/"
 "spreadsheet/bs/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 5.17\n"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -109,13 +109,12 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid ""
-"(1) Search starting at first item. \n"
-"      (-1) Search starting at last item. \n"
-"      (2) Perform a binary search that relies on lookup_array being sorted "
-"in ascending order. If not sorted, invalid results will be returned. \n"
-"      (-2) Perform a binary search that relies on lookup_array being sorted "
-"in descending order. If not sorted, invalid results will be returned.\n"
-"      "
+"(1) Search starting at first item.       (-1) Search starting at last "
+"item.       (2) Perform a binary search that relies on lookup_array being "
+"sorted in ascending order. If not sorted, invalid results will be "
+"returned.       (-2) Perform a binary search that relies on lookup_array "
+"being sorted in descending order. If not sorted, invalid results will be "
+"returned.      "
 msgstr ""
 
 #. module: spreadsheet
@@ -166,6 +165,13 @@ msgstr ""
 #, python-format
 msgid "2 rows"
 msgstr ""
+
+#. module: spreadsheet
+#. flectra-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
+#, python-format
+msgid "A"
+msgstr "A"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -432,6 +438,13 @@ msgstr ""
 
 #. module: spreadsheet
 #. flectra-javascript
+#: code:addons/spreadsheet/static/src/actions/spreadsheet_download_action.js:0
+#, python-format
+msgid "Access Error"
+msgstr "Greška pristupa"
+
+#. module: spreadsheet
+#. flectra-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid ""
@@ -669,7 +682,7 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid "Alignment"
-msgstr ""
+msgstr "Poravnanje"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -1041,7 +1054,7 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "Arrow"
-msgstr ""
+msgstr "Arrow"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -1112,7 +1125,7 @@ msgstr "Pozadinska boja"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "Background color"
-msgstr ""
+msgstr "Boja pozadine"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -1170,7 +1183,7 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "Bold"
-msgstr ""
+msgstr "Podebljano"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -1381,7 +1394,7 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid "Center"
-msgstr ""
+msgstr "Centar"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -1409,14 +1422,14 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid "Checkbox"
-msgstr ""
+msgstr "Potvrdni okvir"
 
 #. module: spreadsheet
 #. flectra-javascript
 #: code:addons/spreadsheet/static/src/global_filters/components/filter_text_value/filter_text_value.xml:0
 #, python-format
 msgid "Choose a value..."
-msgstr ""
+msgstr "Odaberite vrijednost..."
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -1823,7 +1836,7 @@ msgstr "Kopirano"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid "Copy"
-msgstr ""
+msgstr "Kopiraj"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -2538,10 +2551,7 @@ msgid "Does not contain"
 msgstr ""
 
 #. module: spreadsheet
-#. flectra-javascript
-#: code:addons/spreadsheet/static/src/public_readonly_app/public_readonly.js:0
 #: model_terms:ir.ui.view,arch_db:spreadsheet.public_spreadsheet_layout
-#, python-format
 msgid "Download"
 msgstr "Preuzimanje"
 
@@ -2855,7 +2865,7 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "Font Size"
-msgstr ""
+msgstr "Veličina fonta"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -3044,23 +3054,6 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid "Function [[FUNCTION_NAME]] didn't find any result."
-msgstr ""
-
-#. module: spreadsheet
-#. flectra-javascript
-#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-#, python-format
-msgid ""
-"Function [[FUNCTION_NAME]] expects criteria_range and criterion to be in "
-"pairs."
-msgstr ""
-
-#. module: spreadsheet
-#. flectra-javascript
-#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-#, python-format
-msgid ""
-"Function [[FUNCTION_NAME]] expects criteria_range to have the same dimension"
 msgstr ""
 
 #. module: spreadsheet
@@ -3463,8 +3456,7 @@ msgstr ""
 #, python-format
 msgid ""
 "In [[FUNCTION_NAME]], the number of columns of the first matrix (%s) must be "
-"equal to the \n"
-"        number of rows of the second matrix (%s)."
+"equal to the         number of rows of the second matrix (%s)."
 msgstr ""
 
 #. module: spreadsheet
@@ -3522,7 +3514,7 @@ msgstr "Informacija"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid "Insert"
-msgstr ""
+msgstr "Insert"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -3669,7 +3661,7 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid "Invalid"
-msgstr ""
+msgstr "Neispravno"
 
 #. module: spreadsheet
 #. flectra-python
@@ -3852,7 +3844,7 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid "Is between"
-msgstr ""
+msgstr "Je između"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -3887,7 +3879,7 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid "Is greater than or equal to"
-msgstr ""
+msgstr "Je veće ili jednako"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -4008,14 +4000,14 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/helpers/constants.js:0
 #, python-format
 msgid "Last 30 Days"
-msgstr ""
+msgstr "Posljednjih 30 dana"
 
 #. module: spreadsheet
 #. flectra-javascript
 #: code:addons/spreadsheet/static/src/helpers/constants.js:0
 #, python-format
 msgid "Last 365 Days"
-msgstr ""
+msgstr "Posljednjih 365 dana"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -4292,7 +4284,7 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid "Max"
-msgstr ""
+msgstr "Maks."
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -4394,7 +4386,7 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid "Min"
-msgstr ""
+msgstr "Min"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -4675,7 +4667,7 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "No results"
-msgstr ""
+msgstr "Nema rezultata"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -5088,7 +5080,7 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "Previous"
-msgstr ""
+msgstr "Prethodni"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -5250,14 +5242,14 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid "Rename"
-msgstr ""
+msgstr "Preimenuj"
 
 #. module: spreadsheet
 #. flectra-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "Replace"
-msgstr ""
+msgstr "Zamijeni"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -5645,7 +5637,7 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "Select all"
-msgstr ""
+msgstr "Označi sve"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -5667,7 +5659,7 @@ msgstr "Tačka-zarez"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "Separator"
-msgstr ""
+msgstr "Separator"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -6038,7 +6030,7 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid "Sum"
-msgstr ""
+msgstr "Zbroj"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -6119,7 +6111,7 @@ msgstr "Tekst"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "Text Color"
-msgstr ""
+msgstr "Boja teksta"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -9988,7 +9980,7 @@ msgstr ""
 #. module: spreadsheet
 #: model:ir.model.fields,field_description:spreadsheet.field_spreadsheet_mixin__thumbnail
 msgid "Thumbnail"
-msgstr ""
+msgstr "Thumbnail"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -10017,7 +10009,7 @@ msgstr "Naslov"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "Top"
-msgstr ""
+msgstr "Vrh"
 
 #. module: spreadsheet
 #. flectra-javascript
@@ -10626,9 +10618,8 @@ msgstr ""
 #, python-format
 msgid ""
 "Whether or not to remove empty text messages from the split results. The "
-"default behavior is to treat \n"
-"        consecutive delimiters as one (if TRUE). If FALSE, empty cells "
-"values are added between consecutive delimiters."
+"default behavior is to treat         consecutive delimiters as one (if "
+"TRUE). If FALSE, empty cells values are added between consecutive delimiters."
 msgstr ""
 
 #. module: spreadsheet
@@ -10645,8 +10636,7 @@ msgstr ""
 #, python-format
 msgid ""
 "Whether the array should be scanned by column. True scans the array by "
-"column and false (default) \n"
-"      scans the array by row."
+"column and false (default)       scans the array by row."
 msgstr ""
 
 #. module: spreadsheet
@@ -10831,6 +10821,21 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid "You cannot create overlapping filters."
+msgstr ""
+
+#. module: spreadsheet
+#. flectra-javascript
+#: code:addons/spreadsheet/static/src/actions/spreadsheet_download_action.js:0
+#, python-format
+msgid ""
+"You don't have the rights to export data. Please contact an Administrator."
+msgstr "Nemate prava na izvoz podataka. Molimo kontaktirajte administratora."
+
+#. module: spreadsheet
+#. flectra-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
+#, python-format
+msgid "Z"
 msgstr ""
 
 #. module: spreadsheet
@@ -11066,6 +11071,13 @@ msgstr ""
 #, python-format
 msgid "tomorrow"
 msgstr ""
+
+#. module: spreadsheet
+#. flectra-javascript
+#: code:addons/spreadsheet/static/src/public_readonly_app/public_readonly.xml:0
+#, python-format
+msgid "x"
+msgstr "x"
 
 #. module: spreadsheet
 #. flectra-javascript
