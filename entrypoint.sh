@@ -141,8 +141,16 @@ LIST_DB="${LIST_DB:-True}"
 
 INIT_DB="${INIT_DB:-false}"
 
-if [[ "${INIT_DB,,}" == "true" && -z "${DB_NAME:-}" ]]; then
-    DB_NAME="${POSTGRES_DB:-flectra}"
+if [[ "${INIT_DB,,}" == "true" ]]; then
+
+    if [[ -z "${DB_NAME:-}" ]]; then
+        DB_NAME="${POSTGRES_DB:-flectra}"
+    fi
+
+    # Only initialize a database that does not already exist.
+    # Never touch an existing database (e.g. one already created
+    # through the database manager).
+
 fi
 
 
