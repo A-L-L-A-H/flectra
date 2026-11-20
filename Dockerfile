@@ -1,12 +1,20 @@
-FROM python:3.11-slim
 
-# Flectra (Odoo fork) server image.
-# Matches the officially supported distro set in requirements.txt (Debian 11 / Ubuntu 22.04).
+FROM python:3.11-slim-bookworm
 
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+# --------------------------------------------------
+# Python environment
+# --------------------------------------------------
 
-# System deps: build tools + runtime libs required by python packages and wkhtmltopdf.
-RUN apt-get update && apt-get install -y --no-install-recommends \
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+# --------------------------------------------------
+# System dependencies
+# --------------------------------------------------
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        bash \
         ca-certificates \
         curl \
         dirmngr \
@@ -30,50 +38,97 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         gcc \
         node-less \
         npm \
-        python3-pip \
         python3-num2words \
         python3-pdfminer \
         python3-renderpm \
         python3-requests \
         postgresql-client \
         wget \
-    && curl -o wkhtmltox.deb -sSL \
+    && curl -fsSLo /tmp/wkhtmltox.deb \
         https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.bookworm_amd64.deb \
-    && apt-get install -y --no-install-recommends ./wkhtmltox.deb \
-    && rm -rf /var/lib/apt/lists/* wkhtmltox.deb
+    && apt-get install -y --no-install-recommends /tmp/wkhtmltox.deb \
+    && rm -rf /var/lib/apt/lists/* /tmp/wkhtmltox.deb
 
-# Add Flectra user
-RUN useradd --create-home --home-dir /opt/flectra --shell /bin/bash flectra
+# --------------------------------------------------
+# Create Flectra user
+# --------------------------------------------------
+
+RUN useradd \
+    --create-home \
+    --home-dir /opt/flectra \
+    --shell /bin/bash \
+    flectra
 
 WORKDIR /opt/flectra
 
+# --------------------------------------------------
+# Copy Flectra source
+# --------------------------------------------------
+
 COPY --chown=flectra:flectra . /opt/flectra
 
-# Install flectra (this pulls requirements.txt via setup.py)
-RUN pip3 install --upgrade pip \
-    && pip3 install --no-cache-dir -r requirements.txt \
-    && pip3 install --no-cache-dir .
+# --------------------------------------------------
+# Install Python dependencies
+# --------------------------------------------------
 
-# Copy entrypoint and default config
-COPY --chown=flectra:flectra ./debian/flectra.conf /etc/flectra/flectra.conf
-COPY --chown=flectra:flectra ./setup/flectra /usr/local/bin/flectra
-COPY --chown=flectra:flectra ./entrypoint.sh /entrypoint.sh
+RUN python -m pip install --no-cache-dir --upgrade pip \
+    && python -m pip install --no-cache-dir -r requirements.txt \
+    && python -m pip install --no-cache-dir .
 
-# Mount /var/lib/flectra to allow restoring filestore and sessions
-RUN mkdir -p /var/lib/flectra \
-    && chown -R flectra:flectra /var/lib/flectra /etc/flectra \
-    && chmod +x /entrypoint.sh /usr/local/bin/flectra
+# --------------------------------------------------
+# Flectra configuration
+# --------------------------------------------------
 
-# Expose flectra services
+COPY --chown=flectra:flectra \
+    ./debian/flectra.conf \
+    /etc/flectra/flectra.conf
+
+# --------------------------------------------------
+# Flectra executable
+# --------------------------------------------------
+
+COPY --chown=flectra:flectra \
+    ./setup/flectra \
+    /usr/local/bin/flectra
+
+# --------------------------------------------------
+# Entrypoint
+# --------------------------------------------------
+
+COPY --chown=flectra:flectra \
+    ./entrypoint.sh \
+    /entrypoint.sh
+
+# --------------------------------------------------
+# Runtime directories and permissions
+# --------------------------------------------------
+
+RUN sed -i 's/\r$//' /entrypoint.sh \
+    && mkdir -p /var/lib/flectra /etc/flectra \
+    && chown -R flectra:flectra \
+        /var/lib/flectra \
+        /etc/flectra \
+    && chmod 0755 \
+        /entrypoint.sh \
+        /usr/local/bin/flectra
+
+# --------------------------------------------------
+# Network ports
+# --------------------------------------------------
+
 EXPOSE 8069 8072
 
-ENV HOST=db \
-    PORT=5432 \
-    USER=flectra \
-    PASSWORD=flectra \
-    DB=postgres
+# --------------------------------------------------
+# Runtime user
+# --------------------------------------------------
 
 USER flectra
 
-ENTRYPOINT ["/entrypoint.sh"]
+# --------------------------------------------------
+# Entrypoint and default command
+# --------------------------------------------------
+
+# IMPORTANT: Explicitly execute using Bash.
+ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
+
 CMD ["flectra"]

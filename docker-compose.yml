@@ -1,42 +1,117 @@
-version: '3.8'
+
+name: flectra
 
 services:
+  # -----------------------------------------------
+  # PostgreSQL Database
+  # -----------------------------------------------
   db:
     image: postgres:15
+    container_name: flectra-db
+
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-flectra}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-flectra}
-      POSTGRES_DB: ${POSTGRES_DB:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      POSTGRES_DB: ${POSTGRES_DB:-flectra}
+
     volumes:
       - flectra-db-data:/var/lib/postgresql/data
+
     restart: unless-stopped
+
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-flectra}"]
+      test:
+        - CMD-SHELL
+        - 'pg_isready -h 127.0.0.1 -p 5432 -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"'
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 10
+      start_period: 10s
 
+    networks:
+      - flectra-network
+
+  # -----------------------------------------------
+  # Flectra Application
+  # -----------------------------------------------
   flectra:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: flectra-app
+
     depends_on:
       db:
         condition: service_healthy
+
     ports:
-      - "${FLECTRA_PORT:-8069}:8069"
-      - "${FLECTRA_LONGPOLL_PORT:-8072}:8072"
+      # HTTP
+      - "${FLECTRA_BIND_IP:-127.0.0.1}:${FLECTRA_PORT:-8069}:8069"
+
+      # WebSocket / Gevent
+      - "${FLECTRA_BIND_IP:-127.0.0.1}:${FLECTRA_GEVENT_PORT:-8072}:8072"
+
     environment:
-      HOST: db
-      USER: ${POSTGRES_USER:-flectra}
-      PASSWORD: ${POSTGRES_PASSWORD:-flectra}
-      DB: ${POSTGRES_DB:-postgres}
-      # master admin password for managing databases
-      ADMIN_PASSWD: ${ADMIN_PASSWD:-admin}
+      # -------------------------------------------
+      # PostgreSQL connection
+      # -------------------------------------------
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_USER: ${POSTGRES_USER:-flectra}
+      DB_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      DB_NAME: ${POSTGRES_DB:-flectra}
+
+      # -------------------------------------------
+      # Flectra server
+      # -------------------------------------------
+      HTTP_PORT: "8069"
+      GEVENT_PORT: "8072"
+
+      # -------------------------------------------
+      # Master administration password
+      # -------------------------------------------
+      ADMIN_PASSWD: ${ADMIN_PASSWD:?Set ADMIN_PASSWD in .env}
+
+      # -------------------------------------------
+      # Optional productivity applications
+      # -------------------------------------------
+      DEFAULT_PRODUCTIVITY_APPS: ${DEFAULT_PRODUCTIVITY_APPS:-false}
+
     volumes:
+      # Persistent Flectra data and filestore
       - flectra-data:/var/lib/flectra
+
+      # Custom addons
       - ./addons:/opt/flectra/addons:ro
-      - ./flectra/addons:/opt/flectra/flectra/addons:ro
+
+    # Explicitly put Flectra data inside persistent volume.
+    # Compatible with the revised entrypoint.
+    command:
+      - --data-dir=/var/lib/flectra
+
+    init: true
+
     restart: unless-stopped
 
+    stop_grace_period: 60s
+
+    networks:
+      - flectra-network
+
+# -----------------------------------------------
+# Persistent volumes
+# -----------------------------------------------
 volumes:
   flectra-db-data:
+    driver: local
+
   flectra-data:
+    driver: local
+
+# -----------------------------------------------
+# Internal network
+# -----------------------------------------------
+networks:
+  flectra-network:
+    driver: bridge
