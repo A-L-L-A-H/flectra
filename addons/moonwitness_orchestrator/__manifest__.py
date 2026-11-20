@@ -17,6 +17,7 @@
     'assets': {
         'web.assets_backend': [
             'moonwitness_orchestrator/static/src/whatsapp_dashboard.js',
+            'moonwitness_orchestrator/static/src/**/*.xml',
         ],
     },
     'application': False,
