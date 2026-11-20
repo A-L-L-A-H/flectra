@@ -4,7 +4,7 @@ import logging
 import urllib.request
 import urllib.error
 
-from odoo import api, fields, models
+from flectra import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
