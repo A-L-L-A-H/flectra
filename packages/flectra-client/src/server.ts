@@ -123,9 +123,22 @@ export class FlectraClient {
     return this.callKw<T>(model, "get_views", [], { context, views, options });
   }
 
-  async loadMenus<T = Record<string, unknown>>(context: Record<string, unknown> = {}): Promise<T> {
-    const { result } = await this.post<T>("/web/webclient/load_menus", { context });
-    return result;
+  async loadMenus<T = Record<string, unknown>>(): Promise<T> {
+    const headers: Record<string, string> = { Accept: "application/json" };
+    if (this.sessionId) headers.Cookie = `session_id=${this.sessionId}`;
+
+    const response = await this.fetcher(new URL("web/webclient/load_menus/nextjs", this.baseUrl), {
+      method: "GET",
+      headers,
+      cache: "no-store",
+    });
+
+    if (!response.ok) throw new Error(`Flectra menu request failed with HTTP ${response.status}.`);
+    try {
+      return (await response.json()) as T;
+    } catch {
+      throw new Error("Flectra returned an invalid menu response.");
+    }
   }
 
   async loadAction<T = unknown>(
