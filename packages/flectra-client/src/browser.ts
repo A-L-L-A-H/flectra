@@ -1,3 +1,13 @@
+export class FlectraBrowserError extends Error {
+  readonly status: number;
+
+  constructor(message: string, status: number) {
+    super(message);
+    this.name = "FlectraBrowserError";
+    this.status = status;
+  }
+}
+
 export class FlectraBrowserClient {
   private async post<T>(route: string, body: unknown): Promise<T> {
     const response = await fetch(route, {
@@ -12,11 +22,17 @@ export class FlectraBrowserClient {
     try {
       payload = (await response.json()) as { result?: T; error?: string };
     } catch {
-      throw new Error(`The workspace API returned a non-JSON response (HTTP ${response.status}).`);
+      throw new FlectraBrowserError(
+        `The workspace API returned a non-JSON response (HTTP ${response.status}).`,
+        response.status,
+      );
     }
 
     if (!response.ok) {
-      throw new Error(payload.error || `The workspace request failed (HTTP ${response.status}).`);
+      throw new FlectraBrowserError(
+        payload.error || `The workspace request failed (HTTP ${response.status}).`,
+        response.status,
+      );
     }
     return payload.result as T;
   }
