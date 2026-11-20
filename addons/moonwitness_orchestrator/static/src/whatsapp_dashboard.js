@@ -27,9 +27,13 @@ export class WhatsAppDashboard extends Component {
         try {
             const status = await this.rpc("/moonwitness_orchestrator/wa_status", {});
             this.state.status = status.status;
-            if (withQr && status.pairing_required) {
-                const qr = await this.rpc("/moonwitness_orchestrator/wa_qr", {});
-                this.state.qr = qr.qr || null;
+            if (status.pairing_required) {
+                if (withQr || !this.state.qr) {
+                    const qr = await this.rpc("/moonwitness_orchestrator/wa_qr", {});
+                    this.state.qr = qr.qr || null;
+                }
+            } else {
+                this.state.qr = null;
             }
             this.state.error = "";
         } catch (err) {

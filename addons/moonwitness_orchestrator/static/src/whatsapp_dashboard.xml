@@ -10,16 +10,16 @@
             <div class="text-center" t-if="state.qr">
                 <p>Scan dengan WhatsApp &gt; Perangkat Tertaut:</p>
                 <img t-att-src="state.qr" style="max-width:320px"/>
-                <p class="text-muted">Refresh halaman bila QR kedaluwarsa.</p>
+                <p class="text-muted">QR kedaluwarsa ~60 detik; halaman otomatis memuat ulang QR saat pairing masih dibutuhkan.</p>
             </div>
             <div t-if="state.status === 'connected'">
                 <div class="form-group">
-                    <label>Nomor Tujuan</label>
-                    <input type="text" class="form-control" t-model="state.to" placeholder="62812xxxxxxx"/>
+                    <label for="wa_to">Nomor Tujuan</label>
+                    <input id="wa_to" type="text" class="form-control" t-model="state.to" placeholder="62812xxxxxxx"/>
                 </div>
                 <div class="form-group">
-                    <label>Pesan</label>
-                    <textarea class="form-control" rows="3" t-model="state.message"/>
+                    <label for="wa_message">Pesan</label>
+                    <textarea id="wa_message" class="form-control" rows="3" t-model="state.message"/>
                 </div>
                 <button class="btn btn-primary" t-att-disabled="state.sending" t-on-click="send">Kirim</button>
                 <button class="btn btn-secondary" t-on-click="logout">Logout</button>
