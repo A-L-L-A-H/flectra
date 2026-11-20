@@ -8,7 +8,7 @@ class ResConfigSettings(models.TransientModel):
     moonwitness_agent_url = fields.Char(
         string='Docker Agent URL',
         config_parameter='moonwitness_arsy.agent_url',
-        default='http://flectra-docker-agent:8080',
+        default='http://arsy-agent:8080',
     )
     moonwitness_agent_token = fields.Char(
         string='Docker Agent Token',

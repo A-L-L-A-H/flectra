@@ -5,8 +5,9 @@ from flectra import fields, models
 class MoonwitnessBase(models.AbstractModel):
     """Base abstract model shared across moonwitness addons.
 
-    Provides common fields and audit behavior reused by moonwitness_arsy
-    and future moonwitness modules.
+    Provides common fields reused by moonwitness_arsy and future
+    moonwitness modules. Nothing concrete yet beyond this contract;
+    concrete addons inherit and extend as needed.
     """
 
     _name = 'moonwitness.base'
@@ -14,4 +15,3 @@ class MoonwitnessBase(models.AbstractModel):
 
     name = fields.Char(string='Name', required=True)
     active = fields.Boolean(string='Active', default=True)
-    create_uid_label = fields.Char(string='Created By', readonly=True)
