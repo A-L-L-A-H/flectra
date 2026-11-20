@@ -9,7 +9,10 @@ export const runtime = "nodejs";
 
 export async function POST(request: NextRequest) {
   if (!sameOrigin(request)) {
-    return NextResponse.json({ error: "Cross-origin request rejected." }, { status: 403 });
+    return NextResponse.json(
+      { error: "Cross-origin request rejected." },
+      { status: 403, headers: { "Cache-Control": "no-store, private" } },
+    );
   }
 
   const sessionId = request.cookies.get(FLECTRA_SESSION_COOKIE)?.value;
@@ -29,5 +32,6 @@ export async function POST(request: NextRequest) {
     path: "/",
     maxAge: 0,
   });
+  response.headers.set("Cache-Control", "no-store, private");
   return response;
 }
