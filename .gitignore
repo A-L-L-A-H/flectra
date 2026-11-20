@@ -6,18 +6,29 @@ _build/
 !.gitignore
 !.mailmap
 !.gitlab-ci.yml
+!.env.example
+
+# Local environment files and secrets
+.env
+.env.*
+
 # compiled python files
 *.py[co]
 __pycache__/
+
 # setup.py egg_info
 *.egg-info
+
 # emacs backup files
 *~
+
 # hg stuff
 *.orig
 status
+
 # flectra filestore
 flectra/filestore
+
 # maintenance migration scripts
 flectra/addons/base/maintenance
 
@@ -25,10 +36,10 @@ flectra/addons/base/maintenance
 install/win32/*.bat
 install/win32/meta.py
 
-# needed only when building for win32
-setup/win32/static/less/
-setup/win32/static/wkhtmltopdf/
-setup/win32/static/postgresql*.exe
+# needed only for win32 builds
+install/win32/static/less/
+install/win32/static/wkhtmltopdf/
+install/win32/static/postgresql*.exe
 
 # various virtualenv
 /bin/
@@ -39,5 +50,16 @@ setup/win32/static/postgresql*.exe
 /man/
 /share/
 /src/
-
 .venv/
+
+# Node.js / pnpm workspace
+node_modules/
+**/node_modules/
+.pnpm-store/
+.next/
+**/.next/
+.turbo/
+**/.turbo/
+out/
+**/out/
+*.tsbuildinfo
