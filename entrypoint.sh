@@ -128,7 +128,7 @@ GEVENT_PORT="${GEVENT_PORT:-${FLECTRA_GEVENT_PORT:-${LONGPOLL_PORT:-8072}}}"
 
 # Production defaults.
 
-LIST_DB="${LIST_DB:-False}"
+LIST_DB="${LIST_DB:-True}"
 
 
 # ------------------------------------------------------------
