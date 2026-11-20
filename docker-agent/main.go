@@ -258,8 +258,7 @@ func restoreHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if !body.Force {
-		existing, err := dbExec(fmt.Sprintf("SELECT 1 FROM pg_database WHERE datname = '%s'", dbName))
-		if err != nil || strings.TrimSpace(existing) == "" {
+		if existing, err := dbExec(fmt.Sprintf("SELECT 1 FROM pg_database WHERE datname = '%s'", dbName)); err != nil || strings.TrimSpace(existing) == "" {
 			http.Error(w, "database does not exist; use force", http.StatusConflict)
 			return
 		}
