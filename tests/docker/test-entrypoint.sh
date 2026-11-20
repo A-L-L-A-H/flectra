@@ -121,7 +121,8 @@ if grep -Fxq -- '-i' "$normal_args"; then
     echo "FAIL: initialized database must not reinstall base." >&2
     exit 1
 fi
-grep -Fxq -- '--config='$(dirname "$normal_args")'/flectra.conf' "$normal_args"
+expected_config_arg="--config=$(dirname "$normal_args")/flectra.conf"
+grep -Fxq -- "$expected_config_arg" "$normal_args"
 echo "PASS: initialized database starts without reinstalling base."
 
 echo "Testing incomplete database initialization ..."
