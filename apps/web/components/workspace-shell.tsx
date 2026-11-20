@@ -6,7 +6,6 @@ export type WorkspaceNavigationItem = {
   id: string;
   label: string;
   href: string;
-  sequence: number;
 };
 
 type WorkspaceShellProps = {
