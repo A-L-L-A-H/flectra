@@ -340,15 +340,15 @@ PSQL=(
 echo "Checking database: $DB_NAME"
 
 if ! DB_EXISTS="$(
+    DB_NAME_LIT="${DB_NAME//\'/\'\'}"
     PGPASSWORD="$DB_PASSWORD" \
     "${PSQL[@]}" \
         -d "$DB_MAINTENANCE_DB" \
         -qAt \
-        -v "target_db=$DB_NAME" \
         -c "SELECT EXISTS (
             SELECT 1
             FROM pg_database
-            WHERE datname = :'target_db'
+            WHERE datname = '${DB_NAME_LIT}'
         );"
 )"; then
 
