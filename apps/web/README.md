@@ -19,7 +19,7 @@ The Next.js app is a separate experience layer. The existing Python Flectra serv
 
 ## Initial read-only list renderer
 
-The first renderer loads the current user's native Flectra list view through `get_views`, derives its columns from the returned XML architecture and field metadata, then reads rows through `search_read`. It supports basic scalar values, static invisible columns, optional columns marked `optional="hide"`, refresh, and pagination.
+The first renderer loads the current user's native Flectra list view through `get_views`, derives its columns from the returned XML architecture and field metadata, then reads rows through `search_read`. It supports basic scalar values, static invisible columns, fail-closed hiding for columns with unevaluated dynamic invisible modifiers, optional columns marked `optional="hide"`, refresh, and pagination.
 
 Flectra remains the only authorization source:
 
