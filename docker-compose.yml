@@ -16,7 +16,7 @@ services:
 
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./backups:/backups
+      - arsy-backups:/backups
 
     depends_on:
       - flectra
@@ -140,6 +140,9 @@ volumes:
     driver: local
 
   flectra-data:
+    driver: local
+
+  arsy-backups:
     driver: local
 
 # -----------------------------------------------
