@@ -23,10 +23,17 @@ export async function getAuthenticatedFlectraClient() {
 }
 
 export function sameOrigin(request: Request): boolean {
+  const expectedOrigin = new URL(request.url).origin;
   const origin = request.headers.get("origin");
-  if (!origin) return true;
+
+  // Browser POST requests send Origin. If a proxy strips it, accept a
+  // same-origin Referer as a fallback; never treat a missing header as trusted.
+  const referer = request.headers.get("referer");
+  const candidate = origin || referer;
+  if (!candidate) return false;
+
   try {
-    return new URL(origin).origin === new URL(request.url).origin;
+    return new URL(candidate).origin === expectedOrigin;
   } catch {
     return false;
   }
