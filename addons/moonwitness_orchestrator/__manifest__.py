@@ -11,7 +11,6 @@
     'data': [
         'security/orchestrator_security.xml',
         'data/ir_config_parameters.xml',
-        'views/whatsapp_dashboard_views.xml',
         'views/whatsapp_menus.xml',
     ],
     'assets': {
