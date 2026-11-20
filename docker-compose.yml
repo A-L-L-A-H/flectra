@@ -82,6 +82,11 @@ services:
       # -------------------------------------------
       LIST_DB: "True"
 
+      # -------------------------------------------
+      # First-boot database initialization
+      # -------------------------------------------
+      INIT_DB: ${INIT_DB:-false}
+
     volumes:
       # Persistent Flectra data and filestore
       - flectra-data:/var/lib/flectra

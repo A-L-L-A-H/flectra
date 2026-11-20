@@ -134,6 +134,17 @@ GEVENT_PORT="${GEVENT_PORT:-${FLECTRA_GEVENT_PORT:-${LONGPOLL_PORT:-8072}}}"
 
 LIST_DB="${LIST_DB:-True}"
 
+# First-boot database initialization.
+# INIT_DB=true: create and initialize DB_NAME (default flectra) with
+# the base module on first boot, even when the database does not
+# exist yet. When false, start with the database manager instead.
+
+INIT_DB="${INIT_DB:-false}"
+
+if [[ "${INIT_DB,,}" == "true" && -z "${DB_NAME:-}" ]]; then
+    DB_NAME="${POSTGRES_DB:-flectra}"
+fi
+
 
 # ------------------------------------------------------------
 # 3. Validate configuration
