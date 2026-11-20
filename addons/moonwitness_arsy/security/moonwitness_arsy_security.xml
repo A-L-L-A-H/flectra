@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_moonwitness_arsy" model="res.groups">
+        <field name="name">Docker Manager</field>
+        <field name="category_id" ref="base.module_category_administration"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_system'))]"/>
+        <field name="comment">Members can control the Docker Compose stack via the host agent.</field>
+    </record>
+</odoo>

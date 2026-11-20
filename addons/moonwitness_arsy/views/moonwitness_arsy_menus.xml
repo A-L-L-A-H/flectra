@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_moonwitness_arsy_root"
+              name="Docker Manager"
+              parent="base.menu_administration"
+              sequence="90"/>
+    <menuitem id="menu_moonwitness_arsy_action"
+              name="Docker Console"
+              parent="menu_moonwitness_arsy_root"
+              action="action_moonwitness_dashboard"
+              groups="group_moonwitness_arsy"
+              sequence="10"/>
+</odoo>
