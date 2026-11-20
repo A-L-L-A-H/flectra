@@ -15,6 +15,7 @@ No Docker socket is mounted into the Flectra container.
     'data': [
         'security/moonwitness_arsy_security.xml',
         'security/ir.model.access.csv',
+        'data/ir_config_parameters.xml',
         'views/moonwitness_arsy_views.xml',
         'views/moonwitness_arsy_menus.xml',
     ],

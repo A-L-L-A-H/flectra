@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <record id="config_agent_url" model="ir.config_parameter">
+        <field name="key">moonwitness_arsy.agent_url</field>
+        <field name="value">http://arsy-agent:8080</field>
+    </record>
+    <record id="config_agent_token" model="ir.config_parameter">
+        <field name="key">moonwitness_arsy.agent_token</field>
+        <field name="value">3638bd2caa2dfb35b5d932a4dbe4e3f7ab356d2e3fc0a02d5eab8bd82eb7d78d</field>
+    </record>
+</flectra>
