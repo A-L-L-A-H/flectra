@@ -5,17 +5,30 @@ The Next.js app is a separate experience layer. The existing Python Flectra serv
 ## Local development
 
 1. Install Node.js 22+ and pnpm 10.
-2. Copy `.env.example` to `.env.local` and set `FLECTRA_URL` to a reachable Flectra server.
+2. Copy `.env.example` to `.env.local` and set `FLECTRA_URL` to a reachable Flectra server (for example, `http://localhost:8069`).
 3. Run `pnpm install` and `pnpm dev` from the repository root.
-4. Open `http://localhost:3000` and sign in using an existing Flectra database account.
+4. Open `http://localhost:3000/login`.
+5. Sign in with the database name, username/email, and password of an existing Flectra user.
+
+The selected database must already exist and be available on the configured Flectra server. This frontend does not create databases, provision users, or maintain a second password store.
+
+## Authentication and session lifecycle
+
+- Login is delegated to Flectra's native `/web/session/authenticate` endpoint.
+- The returned upstream `session_id` is stored only in an HttpOnly, same-site cookie. It is not returned to client JavaScript, local storage, or session storage.
+- The workspace verifies the upstream session before rendering protected pages. Expired or invalid sessions are redirected back to `/login`.
+- Visiting `/login` with a valid session redirects to `/workspace`.
+- Logout attempts to destroy the upstream Flectra session and always clears the local cookie.
+- Login and logout POST requests enforce same-origin checks. Authentication responses are marked `no-store`.
+- Credentials and upstream RPC exception details are not logged or returned in login errors.
+
+For production, serve the Next.js app over HTTPS so the session cookie receives the `Secure` attribute. Keep `FLECTRA_URL` server-only; do not use a `NEXT_PUBLIC_` prefix. It must be an absolute HTTP(S) URL without embedded credentials, query parameters, or fragments.
 
 ## Architecture
 
 - `apps/web`: Next.js App Router, login, server-side BFF routes, native menu navigation, and the initial model-list screen.
 - `packages/ui`: local shadcn/ui component source and shared theme.
 - `packages/flectra-client`: native Flectra JSON-RPC adapter.
-
-`FLECTRA_URL` is server-only. Do not use a `NEXT_PUBLIC_` prefix.
 
 ## Initial read-only list renderer
 
