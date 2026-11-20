@@ -325,6 +325,28 @@ echo "Flectra configuration generated."
 
 
 # ------------------------------------------------------------
+# 7.1 No default database: start with the database manager
+# ------------------------------------------------------------
+# When DB_NAME is unset, Flectra must boot without a default
+# database so the database manager (list_db = True) is usable.
+# All database existence / schema checks below are skipped.
+
+if [[ -z "${DB_NAME:-}" ]]; then
+
+    echo
+    echo "============================================================"
+    echo " NO DEFAULT DATABASE - DATABASE MANAGER ENABLED"
+    echo "============================================================"
+    echo
+
+    exec "$FLECTRA_BIN" \
+        --config="$CONF" \
+        "$@"
+
+fi
+
+
+# ------------------------------------------------------------
 # 7. Prepare PostgreSQL connection
 # ------------------------------------------------------------
 
@@ -472,21 +494,6 @@ if [[ "$DB_INITIALIZED" != "true" ]]; then
         --config="$CONF" \
         -d "$DB_NAME" \
         -i base \
-        "$@"
-
-fi
-
-
-if [[ -z "${DB_NAME:-}" ]]; then
-
-    echo
-    echo "============================================================"
-    echo " NO DEFAULT DATABASE - STARTING WITH DATABASE MANAGER"
-    echo "============================================================"
-    echo
-
-    exec "$FLECTRA_BIN" \
-        --config="$CONF" \
         "$@"
 
 fi
