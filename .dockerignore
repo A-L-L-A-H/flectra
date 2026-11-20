@@ -1,0 +1,35 @@
+# Git metadata and CI-only files
+.git
+.git/**
+.github
+.gitlab-ci.yml
+
+# Local environments and secrets
+.env
+.env.*
+!.env.example
+.venv
+**/.venv
+
+# Python build/runtime artifacts
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+flectra/filestore/
+
+# Node / Next.js workspace artifacts (if present)
+node_modules/
+**/node_modules/
+.next/
+**/.next/
+.turbo/
+**/.turbo/
+.pnpm-store/
