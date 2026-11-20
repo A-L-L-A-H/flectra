@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <template id="whatsapp_dashboard_template" name="WhatsApp Dashboard">
+        <t t-name="moonwitness_orchestrator.WhatsAppDashboard">
+            <div class="o_moonwitness_wa p-4">
+                <h4>WhatsApp</h4>
+                <div class="alert alert-info" t-if="state.status">
+                    Status: <strong t-esc="state.status"/>
+                </div>
+                <div class="alert alert-danger" t-if="state.error" t-esc="state.error"/>
+                <div class="text-center" t-if="state.qr">
+                    <p>Scan dengan WhatsApp &gt; Perangkat Tertaut:</p>
+                    <img t-att-src="state.qr" style="max-width:320px"/>
+                    <p class="text-muted">QR diperbarui tiap kali halaman dibuka; refresh bila kedaluwarsa.</p>
+                </div>
+                <div t-if="state.status === 'connected'">
+                    <div class="form-group">
+                        <label>Nomor Tujuan</label>
+                        <input type="text" class="form-control" t-model="state.to" placeholder="62812xxxxxxx"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Pesan</label>
+                        <textarea class="form-control" rows="3" t-model="state.message"/>
+                    </div>
+                    <button class="btn btn-primary" t-att-disabled="state.sending" t-on-click="send">Kirim</button>
+                    <button class="btn btn-secondary" t-on-click="logout">Logout</button>
+                </div>
+            </div>
+        </t>
+    </template>
+</flectra>
