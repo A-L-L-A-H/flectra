@@ -27,6 +27,26 @@ services:
       - flectra-network
 
   # -----------------------------------------------
+  # Node services orchestrator (Fastify + plugins)
+  # -----------------------------------------------
+  orchestrator:
+    build: ./services/orchestrator
+    container_name: flectra-orchestrator
+
+    environment:
+      ORCHESTRATOR_TOKEN: ${ORCHESTRATOR_TOKEN:?Set ORCHESTRATOR_TOKEN in .env}
+      WA_SESSION_DIR: /data/wa-session
+      PORT: "8090"
+
+    volumes:
+      - orchestrator-data:/data
+
+    restart: unless-stopped
+
+    networks:
+      - flectra-network
+
+  # -----------------------------------------------
   # PostgreSQL Database
   # -----------------------------------------------
   db:
@@ -143,6 +163,9 @@ volumes:
     driver: local
 
   arsy-backups:
+    driver: local
+
+  orchestrator-data:
     driver: local
 
 # -----------------------------------------------
