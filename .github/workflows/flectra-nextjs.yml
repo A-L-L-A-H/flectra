@@ -1,0 +1,51 @@
+name: Flectra Next.js
+
+on:
+  pull_request:
+    paths:
+      - "apps/web/**"
+      - "packages/**"
+      - "package.json"
+      - "pnpm-workspace.yaml"
+      - "pnpm-lock.yaml"
+      - ".npmrc"
+      - ".github/workflows/flectra-nextjs.yml"
+  push:
+    branches: [main]
+    paths:
+      - "apps/web/**"
+      - "packages/**"
+      - "package.json"
+      - "pnpm-workspace.yaml"
+      - "pnpm-lock.yaml"
+      - ".npmrc"
+      - ".github/workflows/flectra-nextjs.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: flectra-nextjs-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.9.2
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+      - name: Lint
+        run: pnpm lint
+      - name: Typecheck
+        run: pnpm typecheck
+      - name: Build
+        run: pnpm build
