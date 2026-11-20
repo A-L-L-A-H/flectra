@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { ArrowUpRight, Database, ShieldCheck, Users } from "lucide-react";
+import { Database, ShieldCheck, ListTree } from "lucide-react";
 import { Badge } from "@workspace/ui/components/badge";
 import {
   Card,
@@ -49,12 +48,12 @@ export default function WorkspacePage() {
         </Card>
         <Card>
           <CardHeader className="flex-row items-center justify-between space-y-0">
-            <CardDescription>First model</CardDescription>
-            <Users className="size-4 text-muted-foreground" />
+            <CardDescription>Navigation</CardDescription>
+            <ListTree className="size-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <p className="text-xl font-semibold">res.partner</p>
-            <p className="mt-1 text-xs text-muted-foreground">Native view metadata</p>
+            <p className="text-xl font-semibold">Native menus</p>
+            <p className="mt-1 text-xs text-muted-foreground">Filtered by Flectra user access</p>
           </CardContent>
         </Card>
       </div>
@@ -68,12 +67,10 @@ export default function WorkspacePage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <Link
-            href="/workspace/models/res.partner"
-            className="inline-flex items-center gap-2 text-sm font-medium text-orange-700 hover:text-orange-800"
-          >
-            Open Contacts <ArrowUpRight className="size-4" />
-          </Link>
+          <p className="text-sm text-muted-foreground">
+            Choose an application from the left navigation. Available entries are supplied by
+            Flectra's native menu loader; each selected window action opens the read-only model renderer.
+          </p>
         </CardContent>
       </Card>
     </div>
