@@ -3,42 +3,59 @@ import { WorkspaceShell, type WorkspaceNavigationItem } from "@/components/works
 import { getAuthenticatedFlectraClient } from "@/lib/flectra-server";
 
 type NativeMenu = {
-  id?: number;
+  id?: number | string;
   name?: string;
   actionID?: number | false;
   actionModel?: string | false;
+  children?: Array<number | string>;
 };
 
 function getNavigationItems(payload: unknown): WorkspaceNavigationItem[] {
   if (!payload || typeof payload !== "object" || Array.isArray(payload)) return [];
 
-  const values = Object.values(payload as Record<string, unknown>);
-  const items = values
-    .filter((value): value is NativeMenu => typeof value === "object" && value !== null && !Array.isArray(value))
-    .filter((menu) =>
-      typeof menu.name === "string" &&
-      menu.actionModel === "ir.actions.act_window" &&
-      typeof menu.actionID === "number" &&
-      menu.actionID > 0
-    )
-    .map((menu) => {
-      const action = String(menu.actionID);
-      return {
-        id: String(menu.id ?? action),
-        label: menu.name as string,
-        href: `/workspace/actions/${encodeURIComponent(action)}`,
-        sequence: typeof menu.sequence === "number" ? menu.sequence : 0,
-      };
-    });
+  const menuMap = payload as Record<string, NativeMenu>;
+  const ordered: NativeMenu[] = [];
+  const visited = new Set<string>();
 
-  const unique = new Map<string, WorkspaceNavigationItem>();
-  for (const item of items) {
-    if (!unique.has(item.href)) unique.set(item.href, item);
+  const visit = (id: number | string) => {
+    const key = String(id);
+    if (visited.has(key)) return;
+    visited.add(key);
+
+    const menu = menuMap[key];
+    if (!menu) return;
+    ordered.push(menu);
+    for (const childId of menu.children ?? []) visit(childId);
+  };
+
+  const root = menuMap.root;
+  if (root?.children) {
+    for (const childId of root.children) visit(childId);
+  } else {
+    ordered.push(...Object.values(menuMap));
   }
 
-  return [...unique.values()]
-    .sort((a, b) => a.sequence - b.sequence || a.label.localeCompare(b.label))
-    .slice(0, 60);
+  const unique = new Map<string, WorkspaceNavigationItem>();
+  for (const menu of ordered) {
+    if (
+      typeof menu.name !== "string" ||
+      menu.actionModel !== "ir.actions.act_window" ||
+      typeof menu.actionID !== "number" ||
+      menu.actionID <= 0
+    ) continue;
+
+    const action = String(menu.actionID);
+    const href = `/workspace/actions/${encodeURIComponent(action)}`;
+    if (!unique.has(href)) {
+      unique.set(href, {
+        id: String(menu.id ?? action),
+        label: menu.name,
+        href,
+      });
+    }
+  }
+
+  return [...unique.values()].slice(0, 60);
 }
 
 export default async function WorkspaceLayout({
@@ -54,7 +71,7 @@ export default async function WorkspaceLayout({
     // Flectra's native menu loader applies the current user's menu groups and
     // access configuration. Do not reconstruct a second permission system.
     try {
-      const menus = await client.loadMenus<Record<string, unknown>>();
+      const menus = await client.loadMenus<Record<string, NativeMenu>>();
       navigation = getNavigationItems(menus);
     } catch {
       // Keep the workspace usable if a Flectra version does not expose this
