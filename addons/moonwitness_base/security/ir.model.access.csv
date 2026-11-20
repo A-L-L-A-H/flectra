@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_moonwitness_base_user,moonwitness.base,model_moonwitness_base,group_moonwitness_base_user,1,0,0,0
+access_moonwitness_base_admin,moonwitness.base,model_moonwitness_base,group_moonwitness_base_admin,1,1,1,1

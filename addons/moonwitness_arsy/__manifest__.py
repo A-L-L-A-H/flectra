@@ -11,7 +11,7 @@ No Docker socket is mounted into the Flectra container.
     'category': 'Administration',
     'author': 'Moonwitness',
     'license': 'LGPL-3',
-    'depends': ['base', 'base_setup'],
+    'depends': ['base', 'base_setup', 'moonwitness_base'],
     'data': [
         'security/moonwitness_arsy_security.xml',
         'security/ir.model.access.csv',
