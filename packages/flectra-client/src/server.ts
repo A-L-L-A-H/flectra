@@ -123,6 +123,11 @@ export class FlectraClient {
     return this.callKw<T>(model, "get_views", [], { context, views, options });
   }
 
+  async loadMenus<T = Record<string, unknown>>(context: Record<string, unknown> = {}): Promise<T> {
+    const { result } = await this.post<T>("/web/webclient/load_menus", { context });
+    return result;
+  }
+
   async loadAction<T = unknown>(
     actionId: number | string,
     additionalContext: Record<string, unknown> = {},
