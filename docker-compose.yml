@@ -3,6 +3,30 @@ name: flectra
 
 services:
   # -----------------------------------------------
+  # Go host agent (owns docker.sock; internal only)
+  # -----------------------------------------------
+  arsy-agent:
+    build: ./docker-agent
+    container_name: flectra-arsy-agent
+
+    environment:
+      PANEL_TOKEN: ${PANEL_TOKEN:?Set PANEL_TOKEN in .env}
+      POSTGRES_USER: ${POSTGRES_USER:-flectra}
+      BACKUP_DIR: /backups
+
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./backups:/backups
+
+    depends_on:
+      - flectra
+
+    restart: unless-stopped
+
+    networks:
+      - flectra-network
+
+  # -----------------------------------------------
   # PostgreSQL Database
   # -----------------------------------------------
   db:
