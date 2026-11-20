@@ -107,7 +107,11 @@ DB_USER="${DB_USER:-${POSTGRES_USER:-${USER:-flectra}}}"
 
 DB_PASSWORD="${DB_PASSWORD:-${POSTGRES_PASSWORD:-${PASSWORD:-}}}"
 
-DB_NAME="${DB_NAME:-${DB:-${POSTGRES_DB:-flectra}}}"
+DB_NAME="${DB_NAME:-${DB:-${POSTGRES_DB:-}}}"
+
+# Optional: set DB_NAME (or POSTGRES_DB) to pin a default database.
+# When unset, Flectra starts with no default database and the
+# database manager handles database selection/creation.
 
 DB_MAINTENANCE_DB="${DB_MAINTENANCE_DB:-postgres}"
 
@@ -128,7 +132,18 @@ GEVENT_PORT="${GEVENT_PORT:-${FLECTRA_GEVENT_PORT:-${LONGPOLL_PORT:-8072}}}"
 
 # Production defaults.
 
-LIST_DB="${LIST_DB:-False}"
+LIST_DB="${LIST_DB:-True}"
+
+# First-boot database initialization.
+# INIT_DB=true: create and initialize DB_NAME (default flectra) with
+# the base module on first boot, even when the database does not
+# exist yet. When false, start with the database manager instead.
+
+INIT_DB="${INIT_DB:-false}"
+
+if [[ "${INIT_DB,,}" == "true" && -z "${DB_NAME:-}" ]]; then
+    DB_NAME="${POSTGRES_DB:-flectra}"
+fi
 
 
 # ------------------------------------------------------------
@@ -291,7 +306,9 @@ trap cleanup EXIT
     printf 'db_port = %s\n' "$DB_PORT"
     printf 'db_user = %s\n' "$DB_USER"
     printf 'db_password = %s\n' "$DB_PASSWORD"
-    printf 'db_name = %s\n' "$DB_NAME"
+    if [[ -n "${DB_NAME:-}" ]]; then
+        printf 'db_name = %s\n' "$DB_NAME"
+    fi
 
     # HTTP / Gevent.
     printf 'http_port = %s\n' "$HTTP_PORT"
@@ -319,6 +336,28 @@ echo "Flectra configuration generated."
 
 
 # ------------------------------------------------------------
+# 7.1 No default database: start with the database manager
+# ------------------------------------------------------------
+# When DB_NAME is unset, Flectra must boot without a default
+# database so the database manager (list_db = True) is usable.
+# All database existence / schema checks below are skipped.
+
+if [[ -z "${DB_NAME:-}" ]]; then
+
+    echo
+    echo "============================================================"
+    echo " NO DEFAULT DATABASE - DATABASE MANAGER ENABLED"
+    echo "============================================================"
+    echo
+
+    exec "$FLECTRA_BIN" \
+        --config="$CONF" \
+        "$@"
+
+fi
+
+
+# ------------------------------------------------------------
 # 7. Prepare PostgreSQL connection
 # ------------------------------------------------------------
 
@@ -340,15 +379,15 @@ PSQL=(
 echo "Checking database: $DB_NAME"
 
 if ! DB_EXISTS="$(
+    DB_NAME_LIT="${DB_NAME//\'/\'\'}"
     PGPASSWORD="$DB_PASSWORD" \
     "${PSQL[@]}" \
         -d "$DB_MAINTENANCE_DB" \
         -qAt \
-        -v "target_db=$DB_NAME" \
         -c "SELECT EXISTS (
             SELECT 1
             FROM pg_database
-            WHERE datname = :'target_db'
+            WHERE datname = '${DB_NAME_LIT}'
         );"
 )"; then
 

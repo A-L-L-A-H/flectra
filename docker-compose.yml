@@ -60,7 +60,6 @@ services:
       DB_PORT: "5432"
       DB_USER: ${POSTGRES_USER:-flectra}
       DB_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
-      DB_NAME: ${POSTGRES_DB:-flectra}
 
       # -------------------------------------------
       # Flectra server
@@ -77,6 +76,16 @@ services:
       # Optional productivity applications
       # -------------------------------------------
       DEFAULT_PRODUCTIVITY_APPS: ${DEFAULT_PRODUCTIVITY_APPS:-false}
+
+      # -------------------------------------------
+      # Database manager
+      # -------------------------------------------
+      LIST_DB: "True"
+
+      # -------------------------------------------
+      # First-boot database initialization
+      # -------------------------------------------
+      INIT_DB: ${INIT_DB:-false}
 
     volumes:
       # Persistent Flectra data and filestore
