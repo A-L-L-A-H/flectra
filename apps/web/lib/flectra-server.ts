@@ -8,7 +8,27 @@ export const FLECTRA_SESSION_COOKIE = "flectra_session";
 export function getFlectraBaseUrl(): string {
   const value = process.env.FLECTRA_URL?.trim();
   if (!value) throw new Error("FLECTRA_URL is not configured.");
-  return value.endsWith("/") ? value : `${value}/`;
+
+  let url: URL;
+  try {
+    url = new URL(value);
+  } catch {
+    throw new Error("FLECTRA_URL must be an absolute HTTP(S) URL.");
+  }
+
+  if (
+    (url.protocol !== "http:" && url.protocol !== "https:") ||
+    !url.hostname ||
+    url.username ||
+    url.password ||
+    url.search ||
+    url.hash
+  ) {
+    throw new Error("FLECTRA_URL must be an absolute HTTP(S) URL without credentials, query, or fragment.");
+  }
+
+  url.pathname = url.pathname.endsWith("/") ? url.pathname : `${url.pathname}/`;
+  return url.toString();
 }
 
 export function createFlectraServerClient(sessionId?: string): FlectraClient {
