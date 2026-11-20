@@ -16,7 +16,7 @@ export default async function WorkspaceActionPage({ params }: ActionPageProps) {
 
   try {
     const { client } = await getAuthenticatedFlectraClient();
-    const definition = await client.loadAction<FlectraWindowAction>(decodeURIComponent(action));
+    const definition = await client.loadAction<FlectraWindowAction>(action);
 
     // The first renderer intentionally supports read-only window actions only.
     // Flectra still validates the action and model access on every RPC request.
