@@ -13,18 +13,19 @@ type FlectraWindowAction = {
 
 export default async function WorkspaceActionPage({ params }: ActionPageProps) {
   const { action } = await params;
+  let definition: FlectraWindowAction;
 
   try {
     const { client } = await getAuthenticatedFlectraClient();
-    const definition = await client.loadAction<FlectraWindowAction>(action);
-
-    // The first renderer intentionally supports read-only window actions only.
-    // Flectra still validates the action and model access on every RPC request.
-    if (definition.type && definition.type !== "ir.actions.act_window") notFound();
-    if (!definition.res_model || !/^[A-Za-z_][A-Za-z0-9_.]*$/.test(definition.res_model)) notFound();
-
-    return <ModelListView model={definition.res_model} />;
+    definition = await client.loadAction<FlectraWindowAction>(action);
   } catch {
     notFound();
   }
+
+  // The first renderer intentionally supports read-only window actions only.
+  // Flectra still validates the action and model access on every RPC request.
+  if (definition.type && definition.type !== "ir.actions.act_window") notFound();
+  if (!definition.res_model || !/^[A-Za-z_][A-Za-z0-9_.]*$/.test(definition.res_model)) notFound();
+
+  return <ModelListView model={definition.res_model} />;
 }
