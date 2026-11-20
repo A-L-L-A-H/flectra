@@ -14,3 +14,12 @@ class ResConfigSettings(models.TransientModel):
         string='Docker Agent Token',
         config_parameter='moonwitness_arsy.agent_token',
     )
+    moonwitness_orchestrator_url = fields.Char(
+        string='Orchestrator URL',
+        config_parameter='moonwitness_arsy.orchestrator_url',
+        default='http://orchestrator:8090',
+    )
+    moonwitness_orchestrator_token = fields.Char(
+        string='Orchestrator Token',
+        config_parameter='moonwitness_arsy.orchestrator_token',
+    )
