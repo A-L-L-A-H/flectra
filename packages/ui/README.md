@@ -9,7 +9,8 @@ Components follow the shadcn/ui new-york conventions and use Radix UI primitives
 Run the CLI from the Next.js app workspace so it can resolve the monorepo aliases:
 
 ```bash
-pnpm --filter @flectra/web exec shadcn add dialog
+cd apps/web
+pnpm dlx shadcn@latest add dialog
 ```
 
 The CLI configuration is in `apps/web/components.json` and `packages/ui/components.json`. Review generated imports and dependencies before committing new components.
