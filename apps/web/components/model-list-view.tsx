@@ -35,8 +35,15 @@ type LoadState = "loading" | "ready" | "error";
 
 const PAGE_SIZE = 40;
 
-function isStaticTrue(value: string | null): boolean {
-  return value?.trim().toLowerCase() === "1" || value?.trim().toLowerCase() === "true";
+function isHiddenModifier(value: string | null): boolean {
+  const expression = value?.trim().toLowerCase();
+  if (!expression || expression === "0" || expression === "false") return false;
+
+  // The initial renderer deliberately does not evaluate Python/QWeb modifier
+  // expressions in the browser. Fail closed: if a column has any non-trivial
+  // invisible expression, keep it hidden until a native modifier evaluator
+  // is implemented. Flectra still enforces field-level access on every read.
+  return true;
 }
 
 /**
@@ -63,7 +70,7 @@ function parseListFields(arch: string, metadata: Record<string, FieldMetadata>):
 
     const name = node.getAttribute("name");
     if (!name || seen.has(name) || !metadata[name]) continue;
-    if (isStaticTrue(node.getAttribute("invisible")) || isStaticTrue(node.getAttribute("column_invisible"))) {
+    if (isHiddenModifier(node.getAttribute("invisible")) || isHiddenModifier(node.getAttribute("column_invisible"))) {
       continue;
     }
     if (node.getAttribute("optional") === "hide") continue;
