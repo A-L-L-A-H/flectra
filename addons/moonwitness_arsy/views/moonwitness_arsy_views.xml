@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
+<flectra>
     <record id="view_moonwitness_action_form" model="ir.ui.view">
         <field name="name">moonwitness.arsy.action.form</field>
         <field name="model">moonwitness_arsy.action</field>
@@ -32,4 +32,4 @@
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
-</odoo>
+</flectra>
