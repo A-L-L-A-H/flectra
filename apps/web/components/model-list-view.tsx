@@ -12,7 +12,7 @@ import {
   CardTitle,
 } from "@workspace/ui/components/card";
 import { Skeleton } from "@workspace/ui/components/skeleton";
-import { FlectraBrowserClient } from "@workspace/flectra-client/browser";
+import { FlectraBrowserClient, FlectraBrowserError } from "@workspace/flectra-client/browser";
 
 type FieldMetadata = {
   string?: string;
@@ -147,6 +147,11 @@ export function ModelListView({ model }: { model: string }) {
       setOffset(safeOffset);
       setState("ready");
     } catch (cause) {
+      if (cause instanceof FlectraBrowserError && cause.status === 401) {
+        // An expired upstream session must return to the Flectra login flow.
+        window.location.replace("/login");
+        return;
+      }
       setError(cause instanceof Error ? cause.message : "Unable to load this model.");
       setState("error");
     }
