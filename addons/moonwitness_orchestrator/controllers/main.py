@@ -6,7 +6,7 @@ from flectra.http import request
 class MoonwitnessOrchestratorController(http.Controller):
 
     def _guard(self):
-        if not request.env.user.has_group('moonwitness_arsy.group_moonwitness_arsy'):
+        if not request.env.user.has_group('moonwitness_orchestrator.group_moonwitness_orchestrator'):
             raise http.AccessError('Orchestrator: admin only')
 
     @http.route('/moonwitness_orchestrator/wa_status', type='json', auth='user')

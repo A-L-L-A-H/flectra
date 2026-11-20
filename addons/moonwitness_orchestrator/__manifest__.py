@@ -7,8 +7,9 @@
     'category': 'Administration',
     'author': 'Moonwitness',
     'license': 'LGPL-3',
-    'depends': ['base', 'moonwitness_base', 'moonwitness_arsy'],
+    'depends': ['base', 'moonwitness_base'],
     'data': [
+        'security/orchestrator_security.xml',
         'data/ir_config_parameters.xml',
         'views/whatsapp_dashboard_views.xml',
         'views/whatsapp_menus.xml',

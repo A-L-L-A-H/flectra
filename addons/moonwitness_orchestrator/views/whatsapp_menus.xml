@@ -5,9 +5,14 @@
         <field name="tag">moonwitness_orchestrator.whatsapp</field>
     </record>
 
+    <menuitem id="menu_moonwitness_orchestrator_root"
+              name="Moonwitness Orchestrator"
+              sequence="45"
+              groups="group_moonwitness_orchestrator"/>
+
     <menuitem id="menu_moonwitness_whatsapp"
               name="WhatsApp"
-              parent="moonwitness_arsy.menu_moonwitness_arsy_root"
+              parent="menu_moonwitness_orchestrator_root"
               action="action_moonwitness_whatsapp"
               sequence="10"/>
 </flectra>
