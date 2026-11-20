@@ -17,12 +17,12 @@ function getNavigationItems(payload: unknown): WorkspaceNavigationItem[] {
     .filter((value): value is NativeMenu => typeof value === "object" && value !== null && !Array.isArray(value))
     .filter((menu) =>
       typeof menu.name === "string" &&
-      typeof menu.actionModel === "string" &&
+      menu.actionModel === "ir.actions.act_window" &&
       typeof menu.actionID === "number" &&
       menu.actionID > 0
     )
     .map((menu) => {
-      const action = `${menu.actionModel},${menu.actionID}`;
+      const action = String(menu.actionID);
       return {
         id: String(menu.id ?? action),
         label: menu.name as string,
