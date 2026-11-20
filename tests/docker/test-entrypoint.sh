@@ -104,7 +104,7 @@ run_entrypoint() {
         TEST_TABLE_EXISTS="$table_exists" \
         TEST_BASE_INSTALLED="$base_installed" \
         TEST_FLECTRA_ARGS_FILE="$case_dir/args.txt" \
-        bash "$ENTRYPOINT" "$@"
+        bash "$ENTRYPOINT" "$@" >/dev/null
 
     printf '%s\n' "$case_dir/args.txt"
 }
