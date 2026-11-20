@@ -17,8 +17,17 @@ The Next.js app is a separate experience layer. The existing Python Flectra serv
 
 `FLECTRA_URL` is server-only. Do not use a `NEXT_PUBLIC_` prefix.
 
-## Initial scope
+## Initial read-only list renderer
 
-The first vertical slice implements Flectra session authentication, logout, session verification, action loading, view metadata loading, generic ORM RPC, and a read-only list renderer based on returned XML architecture and field metadata.
+The first renderer loads the current user's native Flectra list view through `get_views`, derives its columns from the returned XML architecture and field metadata, then reads rows through `search_read`. It supports basic scalar values, static invisible columns, optional columns marked `optional="hide"`, refresh, and pagination.
 
-Form editing, onchange workflows, relational widgets, full domain evaluation, kanban/calendar/graph/pivot rendering, attachment upload, long-polling, and advanced action navigation are not implemented yet.
+Flectra remains the only authorization source:
+
+- `get_views` and the resulting `fields_get` metadata run in the authenticated user's Flectra environment. Flectra filters the view and field metadata according to that user's access.
+- `search_read` and `search_count` run with the same upstream session. Flectra applies model read access, field access, and record rules.
+- The Next.js RPC bridge explicitly allows only `search_read` and `search_count`. Write methods such as `create`, `write`, and `unlink` are rejected at the BFF boundary as well as remaining subject to Flectra's own security.
+- The upstream `session_id` remains in an HttpOnly cookie and is never exposed to browser JavaScript.
+
+Do not add a second permission matrix or infer permissions from hidden buttons. The list is read-only by design.
+
+Form editing, onchange workflows, relational widgets, dynamic modifier evaluation, full domain evaluation, search panels, kanban/calendar/graph/pivot rendering, attachment upload, long-polling, and advanced action navigation are not implemented in this initial renderer.

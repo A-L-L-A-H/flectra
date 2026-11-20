@@ -4,6 +4,7 @@ export class FlectraBrowserClient {
       method: "POST",
       credentials: "same-origin",
       headers: { "Content-Type": "application/json" },
+      cache: "no-store",
       body: JSON.stringify(body),
     });
 
@@ -18,15 +19,6 @@ export class FlectraBrowserClient {
       throw new Error(payload.error || `The workspace request failed (HTTP ${response.status}).`);
     }
     return payload.result as T;
-  }
-
-  callKw<T = unknown>(
-    model: string,
-    method: string,
-    args: unknown[] = [],
-    kwargs: Record<string, unknown> = {},
-  ): Promise<T> {
-    return this.post<T>("/api/flectra/rpc", { model, method, args, kwargs });
   }
 
   getViews<T = unknown>(
@@ -51,6 +43,24 @@ export class FlectraBrowserClient {
     fields: string[] = [],
     kwargs: Record<string, unknown> = {},
   ): Promise<T[]> {
-    return this.callKw<T[]>(model, "search_read", [domain], { ...kwargs, fields });
+    return this.post<T[]>("/api/flectra/rpc", {
+      model,
+      method: "search_read",
+      args: [domain],
+      kwargs: { ...kwargs, fields },
+    });
+  }
+
+  searchCount(
+    model: string,
+    domain: unknown[] = [],
+    context: Record<string, unknown> = {},
+  ): Promise<number> {
+    return this.post<number>("/api/flectra/rpc", {
+      model,
+      method: "search_count",
+      args: [domain],
+      kwargs: { context },
+    });
   }
 }
