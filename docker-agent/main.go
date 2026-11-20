@@ -263,7 +263,7 @@ func restoreHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
-	_ = dbExec(fmt.Sprintf("DROP DATABASE IF EXISTS %s", dbName))
+	_, _ = dbExec(fmt.Sprintf("DROP DATABASE IF EXISTS %s", dbName))
 	if out, err := dbExec(fmt.Sprintf("CREATE DATABASE %s", dbName)); err != nil {
 		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": string(out)})
 		return
