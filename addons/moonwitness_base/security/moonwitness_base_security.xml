@@ -2,11 +2,11 @@
 <flectra>
     <record id="group_moonwitness_base_user" model="res.groups">
         <field name="name">Moonwitness Base User</field>
-        <field name="category_id" ref="base.module_category_management_administration"/>
+        <field name="category_id" ref="base.module_category_administration"/>
     </record>
     <record id="group_moonwitness_base_admin" model="res.groups">
         <field name="name">Moonwitness Base Administrator</field>
-        <field name="category_id" ref="base.module_category_management_administration"/>
+        <field name="category_id" ref="base.module_category_administration"/>
         <field name="implied_ids" eval="[(4, ref('group_moonwitness_base_user'))]"/>
     </record>
 </flectra>
