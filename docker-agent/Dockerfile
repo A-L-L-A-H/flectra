@@ -5,7 +5,7 @@ COPY main.go ./
 RUN CGO_ENABLED=0 go build -o /arsy-agent .
 
 FROM alpine:3.20
-RUN apk add --no-cache docker-cli postgresql15-client
+RUN apk add --no-cache docker-cli docker-compose postgresql15-client
 COPY --from=build /arsy-agent /usr/local/bin/arsy-agent
 ENV BACKUP_DIR=/backups
 EXPOSE 8080
