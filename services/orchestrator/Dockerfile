@@ -1,13 +1,24 @@
+FROM node:20-alpine AS build
+
+WORKDIR /app
+
+COPY package.json package-lock.json* ./
+RUN npm install
+
+COPY tsconfig.json ./
+COPY src ./src
+RUN npm run build
+
 FROM node:20-alpine
 
 WORKDIR /app
 
-COPY package.json ./
+COPY package.json package-lock.json* ./
 RUN npm install --omit=dev
 
-COPY src ./src
+COPY --from=build /app/dist ./dist
 
 ENV NODE_ENV=production
 EXPOSE 8090
 
-CMD ["node", "src/server.js"]
+CMD ["node", "dist/server.js"]
