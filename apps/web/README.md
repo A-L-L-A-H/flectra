@@ -34,7 +34,7 @@ For production, serve the Next.js app over HTTPS so the session cookie receives 
 
 ## Initial read-only list renderer
 
-The workspace loads navigation through Flectra's native `/web/webclient/load_menus` route. Menu entries therefore come from the current user's Flectra session rather than a hardcoded frontend menu. Selecting a supported window action resolves it through `/web/action/load`, then opens its model in the read-only list renderer. The renderer loads the native list view through `get_views`, derives columns from the returned XML architecture and field metadata, then reads rows through `search_read`. It supports basic scalar values, fail-closed hiding for columns with unevaluated dynamic invisible modifiers, optional columns marked `optional="hide"`, refresh, and pagination.
+The workspace loads navigation through Flectra's native `/web/webclient/load_menus` route. Menu entries therefore come from the current user's Flectra session rather than a hardcoded frontend menu. Selecting a supported window action resolves its numeric ID through `/web/action/load`, then opens its model in the read-only list renderer. Structured array domains and object contexts returned by the action are forwarded to `get_views`, `search_count`, and `search_read`; Python-expression strings are not evaluated by the Next.js runtime. The renderer loads the native list view through `get_views`, derives columns from the returned XML architecture and field metadata, then reads rows through `search_read`. It supports basic scalar values, fail-closed hiding for columns with unevaluated dynamic invisible modifiers, optional columns marked `optional="hide"`, refresh, and pagination.
 
 Flectra remains the only authorization source:
 
