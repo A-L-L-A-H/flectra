@@ -6,8 +6,9 @@
     </record>
 
     <menuitem id="menu_moonwitness_orchestrator_root"
-              name="Moonwitness Orchestrator"
-              sequence="45"
+              name="Services Orchestrator"
+              parent="moonwitness_base.menu_moonwitness_root"
+              sequence="20"
               groups="group_moonwitness_orchestrator"/>
 
     <menuitem id="menu_moonwitness_whatsapp"

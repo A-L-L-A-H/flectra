@@ -2,8 +2,8 @@
 <flectra>
     <menuitem id="menu_moonwitness_arsy_root"
               name="Docker Manager"
-              parent="base.menu_administration"
-              sequence="90"/>
+              parent="moonwitness_base.menu_moonwitness_root"
+              sequence="10"/>
     <menuitem id="menu_moonwitness_arsy_action"
               name="Docker Console"
               parent="menu_moonwitness_arsy_root"

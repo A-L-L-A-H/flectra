@@ -10,8 +10,9 @@
     'depends': ['base'],
     'data': [
         'security/moonwitness_base_security.xml',
+        'views/moonwitness_base_menus.xml',
     ],
-    'application': False,
+    'application': True,
     'auto_install': False,
     'installable': True,
 }
