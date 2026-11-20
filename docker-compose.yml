@@ -1,24 +1,15 @@
-
 name: flectra
 
 services:
-  # -----------------------------------------------
-  # PostgreSQL Database
-  # -----------------------------------------------
   db:
     image: postgres:15
-    container_name: flectra-db
-
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-flectra}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
       POSTGRES_DB: ${POSTGRES_DB:-flectra}
-
     volumes:
       - flectra-db-data:/var/lib/postgresql/data
-
     restart: unless-stopped
-
     healthcheck:
       test:
         - CMD-SHELL
@@ -27,91 +18,68 @@ services:
       timeout: 5s
       retries: 10
       start_period: 10s
-
     networks:
       - flectra-network
 
-  # -----------------------------------------------
-  # Flectra Application
-  # -----------------------------------------------
   flectra:
     build:
       context: .
       dockerfile: Dockerfile
-
-    container_name: flectra-app
-
     depends_on:
       db:
         condition: service_healthy
-
     ports:
-      # HTTP
       - "${FLECTRA_BIND_IP:-127.0.0.1}:${FLECTRA_PORT:-8069}:8069"
-
-      # WebSocket / Gevent
       - "${FLECTRA_BIND_IP:-127.0.0.1}:${FLECTRA_GEVENT_PORT:-8072}:8072"
-
     environment:
-      # -------------------------------------------
-      # PostgreSQL connection
-      # -------------------------------------------
+      # Database connection
       DB_HOST: db
       DB_PORT: "5432"
       DB_USER: ${POSTGRES_USER:-flectra}
       DB_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
       DB_NAME: ${POSTGRES_DB:-flectra}
 
-      # -------------------------------------------
-      # Flectra server
-      # -------------------------------------------
+      # Flectra runtime
+      DATA_DIR: /var/lib/flectra
+      CORE_ADDONS: /opt/flectra/flectra/addons
+      STANDARD_ADDONS: /opt/flectra/addons
+      CUSTOM_ADDONS_DIR: /opt/flectra/custom-addons
       HTTP_PORT: "8069"
       GEVENT_PORT: "8072"
 
-      # -------------------------------------------
-      # Master administration password
-      # -------------------------------------------
+      # Security and optional features
       ADMIN_PASSWD: ${ADMIN_PASSWD:?Set ADMIN_PASSWD in .env}
-
-      # -------------------------------------------
-      # Optional productivity applications
-      # -------------------------------------------
+      LIST_DB: ${LIST_DB:-false}
       DEFAULT_PRODUCTIVITY_APPS: ${DEFAULT_PRODUCTIVITY_APPS:-false}
+      PROXY_MODE: ${PROXY_MODE:-false}
 
     volumes:
-      # Persistent Flectra data and filestore
       - flectra-data:/var/lib/flectra
-
-      # Custom addons
-      - ./addons:/opt/flectra/addons:ro
-
-    # Explicitly put Flectra data inside persistent volume.
-    # Compatible with the revised entrypoint.
-    command:
-      - --data-dir=/var/lib/flectra
+      # Keep customer modules separate from the Flectra core addons.
+      - ./custom-addons:/opt/flectra/custom-addons:ro
 
     init: true
-
     restart: unless-stopped
-
     stop_grace_period: 60s
+
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - 'curl --fail --silent --show-error --max-time 5 http://127.0.0.1:8069/web/login -o /dev/null'
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 180s
 
     networks:
       - flectra-network
 
-# -----------------------------------------------
-# Persistent volumes
-# -----------------------------------------------
 volumes:
   flectra-db-data:
     driver: local
-
   flectra-data:
     driver: local
 
-# -----------------------------------------------
-# Internal network
-# -----------------------------------------------
 networks:
   flectra-network:
     driver: bridge
