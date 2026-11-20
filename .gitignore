@@ -41,3 +41,15 @@ setup/win32/static/postgresql*.exe
 /src/
 
 .venv/
+
+# Node.js / pnpm monorepo
+node_modules/
+**/node_modules/
+.pnpm-store/
+.next/
+**/.next/
+.turbo/
+**/.turbo/
+out/
+**/out/
+*.tsbuildinfo

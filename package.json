@@ -1,0 +1,13 @@
+{
+  "name": "flectra-workspace",
+  "private": true,
+  "packageManager": "pnpm@10.9.2",
+  "engines": { "node": ">=22.0.0" },
+  "scripts": {
+    "dev": "pnpm --filter @flectra/web dev",
+    "build": "pnpm --filter @flectra/web build",
+    "start": "pnpm --filter @flectra/web start",
+    "lint": "pnpm --filter @flectra/web lint",
+    "typecheck": "pnpm --filter @flectra/web typecheck"
+  }
+}
