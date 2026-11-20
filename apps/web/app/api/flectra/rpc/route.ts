@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { FlectraRpcError } from "@workspace/flectra-client";
 import { getAuthenticatedFlectraClient, sameOrigin } from "@/lib/flectra-server";
+import { privateNoStoreHeaders, readJsonObject } from "@/lib/http";
 
 export const runtime = "nodejs";
 
@@ -16,9 +17,27 @@ function isObject(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
+function isBoundedDomain(value: unknown, depth = 0, budget = { nodes: 0 }): value is unknown[] {
+  if (!Array.isArray(value) || depth > 12) return false;
+  budget.nodes += 1;
+  if (budget.nodes > 500) return false;
+
+  for (const part of value) {
+    budget.nodes += 1;
+    if (budget.nodes > 500) return false;
+
+    if (Array.isArray(part)) {
+      if (!isBoundedDomain(part, depth + 1, budget)) return false;
+      continue;
+    }
+    if (part === null || ["string", "number", "boolean"].includes(typeof part)) continue;
+    return false;
+  }
+  return true;
+}
+
 function errorStatus(error: unknown): number {
   if (!(error instanceof FlectraRpcError)) return 400;
-
   const exceptionName = error.exceptionName ?? "";
   if (/SessionExpired|SessionInvalid/i.test(exceptionName)) return 401;
   if (/AccessError/i.test(exceptionName)) return 403;
@@ -26,95 +45,125 @@ function errorStatus(error: unknown): number {
   return 400;
 }
 
+function safeErrorMessage(error: unknown): string {
+  const status = errorStatus(error);
+  if (status === 401) return "Flectra session is no longer valid. Sign in again.";
+  if (status === 403) return "Flectra denied access to this data.";
+  return "Flectra could not complete this read request.";
+}
+
 export async function POST(request: NextRequest) {
   if (!sameOrigin(request)) {
-    return NextResponse.json({ error: "Cross-origin request rejected." }, { status: 403 });
+    return NextResponse.json({ error: "Cross-origin request rejected." }, {
+      status: 403,
+      headers: privateNoStoreHeaders(),
+    });
   }
 
-  let body: { model?: unknown; method?: unknown; args?: unknown; kwargs?: unknown };
-  try {
-    body = await request.json();
-  } catch {
-    return NextResponse.json({ error: "Invalid JSON request body." }, { status: 400 });
+  const parsed = await readJsonObject(request, 64 * 1024);
+  if (!parsed.ok) {
+    return NextResponse.json({ error: parsed.error }, {
+      status: parsed.status,
+      headers: privateNoStoreHeaders(),
+    });
   }
 
-  if (!isIdentifier(body.model)) {
-    return NextResponse.json({ error: "A valid model is required." }, { status: 400 });
-  }
+  const { model, method, args } = parsed.value;
+  const kwargs = parsed.value.kwargs === undefined ? {} : parsed.value.kwargs;
 
-  if (typeof body.method !== "string" || !READ_ONLY_METHODS.has(body.method)) {
-    return NextResponse.json(
-      { error: "This endpoint only permits the search_read and search_count methods." },
-      { status: 403 },
-    );
+  if (!isIdentifier(model)) {
+    return NextResponse.json({ error: "A valid model is required." }, {
+      status: 400,
+      headers: privateNoStoreHeaders(),
+    });
   }
-
-  if (!Array.isArray(body.args) || body.args.length !== 1 || !Array.isArray(body.args[0])) {
-    return NextResponse.json({ error: "A single domain array is required in args." }, { status: 400 });
+  if (typeof method !== "string" || !READ_ONLY_METHODS.has(method)) {
+    return NextResponse.json({ error: "Only search_read and search_count are permitted." }, {
+      status: 403,
+      headers: privateNoStoreHeaders(),
+    });
   }
-
-  const kwargs = body.kwargs === undefined ? {} : body.kwargs;
+  if (!Array.isArray(args) || args.length !== 1 || !isBoundedDomain(args[0])) {
+    return NextResponse.json({ error: "A bounded domain array is required." }, {
+      status: 400,
+      headers: privateNoStoreHeaders(),
+    });
+  }
   if (!isObject(kwargs)) {
-    return NextResponse.json({ error: "kwargs must be an object." }, { status: 400 });
+    return NextResponse.json({ error: "kwargs must be an object." }, {
+      status: 400,
+      headers: privateNoStoreHeaders(),
+    });
   }
 
   const unsupportedKeys = Object.keys(kwargs).filter((key) => !READ_ONLY_KWARGS.has(key));
   if (unsupportedKeys.length > 0) {
-    return NextResponse.json({ error: "Unsupported read options were supplied." }, { status: 400 });
+    return NextResponse.json({ error: "Unsupported read options were supplied." }, {
+      status: 400,
+      headers: privateNoStoreHeaders(),
+    });
   }
-
   if (kwargs.context !== undefined && !isObject(kwargs.context)) {
-    return NextResponse.json({ error: "context must be an object." }, { status: 400 });
+    return NextResponse.json({ error: "context must be an object." }, {
+      status: 400,
+      headers: privateNoStoreHeaders(),
+    });
+  }
+  if (isObject(kwargs.context) && Object.keys(kwargs.context).length > 64) {
+    return NextResponse.json({ error: "context contains too many entries." }, {
+      status: 400,
+      headers: privateNoStoreHeaders(),
+    });
   }
 
-  if (body.method === "search_read") {
+  if (method === "search_read") {
     if (
       !Array.isArray(kwargs.fields) ||
       kwargs.fields.length === 0 ||
       kwargs.fields.length > 100 ||
       !kwargs.fields.every(isIdentifier)
     ) {
-      return NextResponse.json({ error: "search_read requires 1 to 100 valid field names." }, { status: 400 });
+      return NextResponse.json({ error: "search_read requires 1 to 100 valid field names." }, {
+        status: 400,
+        headers: privateNoStoreHeaders(),
+      });
     }
-
-    if (!Number.isInteger(kwargs.limit) || (kwargs.limit as number) < 1 || (kwargs.limit as number) > 100) {
-      return NextResponse.json({ error: "search_read limit must be between 1 and 100." }, { status: 400 });
+    if (!Number.isSafeInteger(kwargs.limit) || (kwargs.limit as number) < 1 || (kwargs.limit as number) > 100) {
+      return NextResponse.json({ error: "search_read limit must be between 1 and 100." }, {
+        status: 400,
+        headers: privateNoStoreHeaders(),
+      });
     }
-
     if (
       kwargs.offset !== undefined &&
       (!Number.isSafeInteger(kwargs.offset) || (kwargs.offset as number) < 0 || (kwargs.offset as number) > 10_000_000)
     ) {
-      return NextResponse.json({ error: "search_read offset must be a non-negative integer." }, { status: 400 });
+      return NextResponse.json({ error: "search_read offset must be a non-negative integer." }, {
+        status: 400,
+        headers: privateNoStoreHeaders(),
+      });
     }
-
     if (kwargs.order !== undefined && (typeof kwargs.order !== "string" || kwargs.order.length > 256)) {
-      return NextResponse.json({ error: "search_read order must be a short string." }, { status: 400 });
+      return NextResponse.json({ error: "search_read order must be a short string." }, {
+        status: 400,
+        headers: privateNoStoreHeaders(),
+      });
     }
   } else if (Object.keys(kwargs).some((key) => key !== "context")) {
-    return NextResponse.json({ error: "search_count only accepts context." }, { status: 400 });
+    return NextResponse.json({ error: "search_count only accepts context." }, {
+      status: 400,
+      headers: privateNoStoreHeaders(),
+    });
   }
 
   try {
     const { client } = await getAuthenticatedFlectraClient();
-    const result = await client.callKw(
-      body.model,
-      body.method,
-      body.args as unknown[],
-      kwargs,
-    );
-
-    return NextResponse.json(
-      { result },
-      { headers: { "Cache-Control": "private, no-store" } },
-    );
+    const result = await client.callKw(model, method, args, kwargs);
+    return NextResponse.json({ result }, { headers: privateNoStoreHeaders() });
   } catch (error) {
-    return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Flectra read request failed." },
-      {
-        status: errorStatus(error),
-        headers: { "Cache-Control": "private, no-store" },
-      },
-    );
+    return NextResponse.json({ error: safeErrorMessage(error) }, {
+      status: errorStatus(error),
+      headers: privateNoStoreHeaders(),
+    });
   }
 }
