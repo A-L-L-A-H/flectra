@@ -21,6 +21,8 @@ The selected database must already exist and be available on the configured Flec
 - Logout attempts to destroy the upstream Flectra session and always clears the local cookie.
 - Login and logout POST requests enforce same-origin checks. Authentication responses are marked `no-store`.
 - Credentials and upstream RPC exception details are not logged or returned in login errors.
+- Workspace API requests require same-origin POSTs, JSON object bodies, and bounded payload sizes. Action, view, and read endpoints return private no-store responses; upstream exception/debug details are replaced with safe client messages.
+- Read RPC is allowlisted to `search_read` and `search_count`, with bounded domain depth/size, page size, field count, offset, sort length, and context entry count. Expired sessions return to `/login`.
 
 For production, serve the Next.js app over HTTPS so the session cookie receives the `Secure` attribute. Keep `FLECTRA_URL` server-only; do not use a `NEXT_PUBLIC_` prefix. It must be an absolute HTTP(S) URL without embedded credentials, query parameters, or fragments.
 
