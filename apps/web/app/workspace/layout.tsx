@@ -5,8 +5,8 @@ import { getAuthenticatedFlectraClient } from "@/lib/flectra-server";
 type NativeMenu = {
   id?: number;
   name?: string;
-  action?: string | number | false;
-  sequence?: number;
+  actionID?: number | false;
+  actionModel?: string | false;
 };
 
 function getNavigationItems(payload: unknown): WorkspaceNavigationItem[] {
@@ -15,13 +15,21 @@ function getNavigationItems(payload: unknown): WorkspaceNavigationItem[] {
   const values = Object.values(payload as Record<string, unknown>);
   const items = values
     .filter((value): value is NativeMenu => typeof value === "object" && value !== null && !Array.isArray(value))
-    .filter((menu) => typeof menu.name === "string" && (typeof menu.action === "string" || typeof menu.action === "number"))
-    .map((menu) => ({
-      id: String(menu.id ?? menu.action),
-      label: menu.name as string,
-      href: `/workspace/actions/${encodeURIComponent(String(menu.action))}`,
-      sequence: typeof menu.sequence === "number" ? menu.sequence : 0,
-    }));
+    .filter((menu) =>
+      typeof menu.name === "string" &&
+      typeof menu.actionModel === "string" &&
+      typeof menu.actionID === "number" &&
+      menu.actionID > 0
+    )
+    .map((menu) => {
+      const action = `${menu.actionModel},${menu.actionID}`;
+      return {
+        id: String(menu.id ?? action),
+        label: menu.name as string,
+        href: `/workspace/actions/${encodeURIComponent(action)}`,
+        sequence: typeof menu.sequence === "number" ? menu.sequence : 0,
+      };
+    });
 
   const unique = new Map<string, WorkspaceNavigationItem>();
   for (const item of items) {
