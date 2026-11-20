@@ -78,6 +78,11 @@ services:
       # -------------------------------------------
       DEFAULT_PRODUCTIVITY_APPS: ${DEFAULT_PRODUCTIVITY_APPS:-false}
 
+      # -------------------------------------------
+      # Database manager
+      # -------------------------------------------
+      LIST_DB: "True"
+
     volumes:
       # Persistent Flectra data and filestore
       - flectra-data:/var/lib/flectra
