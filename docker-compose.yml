@@ -60,7 +60,6 @@ services:
       DB_PORT: "5432"
       DB_USER: ${POSTGRES_USER:-flectra}
       DB_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
-      DB_NAME: ${POSTGRES_DB:-flectra}
 
       # -------------------------------------------
       # Flectra server

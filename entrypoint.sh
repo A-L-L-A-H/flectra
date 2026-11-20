@@ -107,7 +107,11 @@ DB_USER="${DB_USER:-${POSTGRES_USER:-${USER:-flectra}}}"
 
 DB_PASSWORD="${DB_PASSWORD:-${POSTGRES_PASSWORD:-${PASSWORD:-}}}"
 
-DB_NAME="${DB_NAME:-${DB:-${POSTGRES_DB:-flectra}}}"
+DB_NAME="${DB_NAME:-${DB:-${POSTGRES_DB:-}}}"
+
+# Optional: set DB_NAME (or POSTGRES_DB) to pin a default database.
+# When unset, Flectra starts with no default database and the
+# database manager handles database selection/creation.
 
 DB_MAINTENANCE_DB="${DB_MAINTENANCE_DB:-postgres}"
 
@@ -291,7 +295,9 @@ trap cleanup EXIT
     printf 'db_port = %s\n' "$DB_PORT"
     printf 'db_user = %s\n' "$DB_USER"
     printf 'db_password = %s\n' "$DB_PASSWORD"
-    printf 'db_name = %s\n' "$DB_NAME"
+    if [[ -n "${DB_NAME:-}" ]]; then
+        printf 'db_name = %s\n' "$DB_NAME"
+    fi
 
     # HTTP / Gevent.
     printf 'http_port = %s\n' "$HTTP_PORT"
@@ -466,6 +472,21 @@ if [[ "$DB_INITIALIZED" != "true" ]]; then
         --config="$CONF" \
         -d "$DB_NAME" \
         -i base \
+        "$@"
+
+fi
+
+
+if [[ -z "${DB_NAME:-}" ]]; then
+
+    echo
+    echo "============================================================"
+    echo " NO DEFAULT DATABASE - STARTING WITH DATABASE MANAGER"
+    echo "============================================================"
+    echo
+
+    exec "$FLECTRA_BIN" \
+        --config="$CONF" \
         "$@"
 
 fi
