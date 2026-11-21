@@ -13,5 +13,5 @@ class MoonwitnessBase(models.AbstractModel):
     _name = 'moonwitness.base'
     _description = 'Moonwitness Base'
 
-    name = fields.Char(string='Name', required=True)
+    name = fields.Char(string='Name')
     active = fields.Boolean(string='Active', default=True)

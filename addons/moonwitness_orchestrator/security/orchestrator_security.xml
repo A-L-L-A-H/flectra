@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <flectra>
     <record id="group_moonwitness_orchestrator" model="res.groups">
-        <field name="name">Moonwitness Orchestrator Admin</field>
+        <field name="name">MoonWitness Orchestrator Admin</field>
         <field name="category_id" ref="base.module_category_administration"/>
     </record>
 </flectra>

@@ -4,7 +4,8 @@ import { registry } from "@web/core/registry";
 import { useService } from "@web/core/utils/hooks";
 import { Component, useState, onWillStart, onWillUnmount } from "@flectra/owl";
 
-const POLL_MS = 3000;
+const PAIRING_POLL_MS = 3000;
+const CONNECTED_POLL_MS = 10000;
 
 export class WhatsAppDashboard extends Component {
     setup() {
@@ -15,22 +16,29 @@ export class WhatsAppDashboard extends Component {
             qr: null,
             error: "",
             sending: false,
+            logging_out: false,
             to: "",
             message: "",
         });
-        onWillStart(() => this.refresh(true));
-        this.timer = setInterval(() => this.refresh(false), POLL_MS);
-        onWillUnmount(() => clearInterval(this.timer));
+        this.unmounted = false;
+        onWillStart(() => this.refresh());
+        onWillUnmount(() => {
+            this.unmounted = true;
+            clearTimeout(this.timer);
+        });
     }
 
-    async refresh(withQr) {
+    async refresh() {
+        if (this.refreshing) return;
+        this.refreshing = true;
         try {
             const status = await this.rpc("/moonwitness_orchestrator/wa_status", {});
             this.state.status = status.status;
-            if (status.pairing_required) {
-                if (withQr || !this.state.qr) {
-                    const qr = await this.rpc("/moonwitness_orchestrator/wa_qr", {});
-                    this.state.qr = qr.qr || null;
+            if (status.pairing_required && status.qr_available) {
+                const qr = await this.rpc("/moonwitness_orchestrator/wa_qr", {});
+                const nextQr = qr.qr || null;
+                if (this.state.qr !== nextQr) {
+                    this.state.qr = nextQr;
                 }
             } else {
                 this.state.qr = null;
@@ -38,6 +46,15 @@ export class WhatsAppDashboard extends Component {
             this.state.error = "";
         } catch (err) {
             this.state.error = String(err.message || err);
+        } finally {
+            this.refreshing = false;
+            if (!this.state.logging_out && !this.unmounted) {
+                const connected = this.state.status === "connected";
+                this.timer = setTimeout(
+                    () => this.refresh(),
+                    connected ? CONNECTED_POLL_MS : PAIRING_POLL_MS,
+                );
+            }
         }
     }
 
@@ -59,9 +76,18 @@ export class WhatsAppDashboard extends Component {
     }
 
     async logout() {
-        await this.rpc("/moonwitness_orchestrator/wa_logout", {});
-        this.state.qr = null;
-        this.refresh(true);
+        if (this.state.logging_out) return;
+        this.state.logging_out = true;
+        clearTimeout(this.timer);
+        try {
+            await this.rpc("/moonwitness_orchestrator/wa_logout", {});
+            this.state.qr = null;
+        } catch (err) {
+            this.notification.add(String(err.message || err), { type: "danger" });
+        } finally {
+            this.state.logging_out = false;
+            this.refresh();
+        }
     }
 }
 

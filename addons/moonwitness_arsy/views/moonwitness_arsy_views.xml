@@ -4,7 +4,7 @@
         <field name="name">moonwitness.arsy.action.form</field>
         <field name="model">moonwitness_arsy.action</field>
         <field name="arch" type="xml">
-            <form string="Docker Manager">
+            <form string="MoonWitness ARSY">
                 <group>
                     <field name="action_type"/>
                     <field name="command" invisible="action_type != 'action'"/>
@@ -27,7 +27,7 @@
     </record>
 
     <record id="action_moonwitness_dashboard" model="ir.actions.act_window">
-        <field name="name">Docker Manager</field>
+        <field name="name">MoonWitness ARSY</field>
         <field name="res_model">moonwitness_arsy.action</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>

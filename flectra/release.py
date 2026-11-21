@@ -16,12 +16,11 @@ version_info = (3, 0, 0, FINAL, 0, '')
 version = '.'.join(str(s) for s in version_info[:2]) + RELEASE_LEVELS_DISPLAY[version_info[3]] + str(version_info[4] or '') + version_info[5]
 series = serie = major_version = '.'.join(str(s) for s in version_info[:2])
 
-product_name = 'Flectra'
-description = 'Flectra Server'
-long_desc = '''Flectra is a complete ERP and CRM. The main features are accounting (analytic
-and financial), stock management, sales and purchases management, tasks
-automation, marketing campaigns, help desk, POS, etc. Technical features include
-a distributed server, an object database, a dynamic GUI,
+product_name = 'MoonWitness'
+description = 'MoonWitness Server (powered by Flectra 3.0)'
+long_desc = '''MoonWitness is an operational platform powered by the Flectra 3.0 Python ERP
+and ORM engine. It combines first-party MoonWitness addons, host management,
+and service orchestration with Flectra's modular web client, PostgreSQL ORM,
 customizable reports, and XML-RPC interfaces.
 '''
 classifiers = """Development Status :: 5 - Production/Stable
@@ -29,7 +28,7 @@ License :: OSI Approved :: GNU Lesser General Public License v3
 
 Programming Language :: Python
 """
-url = 'https://www.flectrahq.com'
+url = 'https://github.com/A-L-L-A-H/flectra'
 author = 'FlectraHQ, OpenERP S.A.'
 author_email = 'info@flectrahq.com'
 license = 'LGPL-3'

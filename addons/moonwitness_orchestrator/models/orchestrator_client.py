@@ -1,21 +1,38 @@
 # -*- coding: utf-8 -*-
 import json
 import logging
-import urllib.request
 import urllib.error
+import urllib.request
+from urllib.parse import urlparse
 
-from flectra import api, fields, models
+from flectra import _, models
 
 _logger = logging.getLogger(__name__)
 
 ORCHESTRATOR_TIMEOUT = 30
+ORCHESTRATOR_URL_PARAM = 'moonwitness_orchestrator.url'
+ORCHESTRATOR_TOKEN_PARAM = 'moonwitness_orchestrator.token'
+LEGACY_ORCHESTRATOR_URL_PARAM = 'moonwitness_arsy.orchestrator_url'
+LEGACY_ORCHESTRATOR_TOKEN_PARAM = 'moonwitness_arsy.orchestrator_token'
+
+
+def validate_orchestrator_url(base_url):
+    candidate = (base_url or '').strip()
+    parsed = urlparse(candidate)
+    if parsed.scheme not in ('http', 'https') or not parsed.netloc:
+        raise OrchestratorError(
+            _('Orchestrator URL harus berupa URL HTTP/HTTPS absolut yang valid.')
+        )
+    return candidate
 
 
 class MoonwitnessOrchestratorClient(models.AbstractModel):
     """HTTP client for the Fastify services orchestrator.
 
     Orchestrator URL and token live in ir.config_parameter:
-    moonwitness_arsy.orchestrator_url / moonwitness_arsy.orchestrator_token.
+    moonwitness_orchestrator.url / moonwitness_orchestrator.token
+    (with compatibility fallback to moonwitness_arsy.orchestrator_url /
+    moonwitness_arsy.orchestrator_token).
     """
 
     _name = 'moonwitness.orchestrator'
@@ -23,15 +40,23 @@ class MoonwitnessOrchestratorClient(models.AbstractModel):
 
     def _get_settings(self):
         icp = self.env['ir.config_parameter'].sudo()
-        return (
-            icp.get_param('moonwitness_arsy.orchestrator_url', ''),
-            icp.get_param('moonwitness_arsy.orchestrator_token', ''),
-        )
+        base_url = (
+            icp.get_param(ORCHESTRATOR_URL_PARAM, '')
+            or icp.get_param(LEGACY_ORCHESTRATOR_URL_PARAM, '')
+            or ''
+        ).strip()
+        token = (
+            icp.get_param(ORCHESTRATOR_TOKEN_PARAM, '')
+            or icp.get_param(LEGACY_ORCHESTRATOR_TOKEN_PARAM, '')
+            or ''
+        ).strip()
+        return base_url, token
 
     def _request(self, method, path, payload=None):
         base_url, token = self._get_settings()
         if not base_url or not token:
             raise OrchestratorError('Orchestrator URL / token belum dikonfigurasi di Settings.')
+        base_url = validate_orchestrator_url(base_url)
         url = base_url.rstrip('/') + path
         body = json.dumps(payload).encode('utf-8') if payload is not None else None
         req = urllib.request.Request(url, data=body, method=method)

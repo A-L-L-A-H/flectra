@@ -6,7 +6,7 @@
     </record>
 
     <menuitem id="menu_moonwitness_orchestrator_root"
-              name="Services Orchestrator"
+              name="MoonWitness Orchestrator"
               parent="moonwitness_base.menu_moonwitness_root"
               sequence="20"
               groups="group_moonwitness_orchestrator"/>

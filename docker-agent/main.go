@@ -8,12 +8,16 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
+	"path/filepath"
+	"regexp"
 	"sort"
+	"strconv"
 	"strings"
 	"time"
 )
 
 const composeProject = "flectra"
+const maxOutputBytes = 64 << 10
 
 var backupDir string
 
@@ -42,7 +46,14 @@ func compose(args ...string) ([]byte, error) {
 	full := append([]string{"compose", "-p", composeProject}, args...)
 	cmd := exec.Command("docker", full...)
 	out, err := cmd.CombinedOutput()
-	return out, err
+	return truncateOutput(out), err
+}
+
+func truncateOutput(out []byte) []byte {
+	if len(out) > maxOutputBytes {
+		return out[:maxOutputBytes]
+	}
+	return out
 }
 
 func writeJSON(w http.ResponseWriter, status int, v any) {
@@ -74,7 +85,7 @@ func actionHandler(w http.ResponseWriter, r *http.Request) {
 	var body struct {
 		Command string `json:"command"`
 	}
-	if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
+	if err := json.NewDecoder(http.MaxBytesReader(w, r.Body, 1<<20)).Decode(&body); err != nil {
 		http.Error(w, "bad body", http.StatusBadRequest)
 		return
 	}
@@ -99,13 +110,18 @@ func actionHandler(w http.ResponseWriter, r *http.Request) {
 
 func logsHandler(w http.ResponseWriter, r *http.Request) {
 	service := strings.TrimPrefix(r.URL.Path, "/logs/")
-	if service == "" {
+	if !regexp.MustCompile(`^[A-Za-z0-9_-]+$`).MatchString(service) {
 		http.Error(w, "service required", http.StatusBadRequest)
 		return
 	}
 	tail := r.URL.Query().Get("tail")
 	if tail == "" {
 		tail = "200"
+	}
+	tailValue, tailErr := strconv.Atoi(tail)
+	if tailErr != nil || tailValue < 1 || tailValue > 5000 {
+		http.Error(w, "invalid tail", http.StatusBadRequest)
+		return
 	}
 	out, err := compose("logs", "--tail", tail, service)
 	if err != nil {
@@ -115,6 +131,10 @@ func logsHandler(w http.ResponseWriter, r *http.Request) {
 	lines := strings.Split(strings.TrimSpace(string(out)), "\n")
 	level := r.URL.Query().Get("level")
 	if level != "" {
+		if !regexp.MustCompile(`^(INFO|WARNING|ERROR|CRITICAL)$`).MatchString(level) {
+			http.Error(w, "invalid level", http.StatusBadRequest)
+			return
+		}
 		var filtered []string
 		for _, l := range lines {
 			if strings.Contains(l, " - "+level+" ") || strings.Contains(l, level+":") {
@@ -156,7 +176,7 @@ func createDropHandler(w http.ResponseWriter, r *http.Request, drop bool) {
 	var body struct {
 		Name string `json:"name"`
 	}
-	if err := json.NewDecoder(r.Body).Decode(&body); err != nil || body.Name == "" {
+	if err := json.NewDecoder(http.MaxBytesReader(w, r.Body, 1<<20)).Decode(&body); err != nil || body.Name == "" {
 		http.Error(w, "name required", http.StatusBadRequest)
 		return
 	}
@@ -168,7 +188,7 @@ func createDropHandler(w http.ResponseWriter, r *http.Request, drop bool) {
 	if drop {
 		verb = "DROP DATABASE IF EXISTS"
 	}
-	out, err := dbExec(verb + " " + body.Name)
+	out, err := dbExec(verb + ` "` + body.Name + `"`)
 	writeJSON(w, map[bool]int{true: http.StatusInternalServerError, false: http.StatusOK}[err != nil],
 		map[string]string{"output": string(out)})
 }
@@ -190,7 +210,7 @@ func backupHandler(w http.ResponseWriter, r *http.Request) {
 	var body struct {
 		Database string `json:"database"`
 	}
-	if err := json.NewDecoder(r.Body).Decode(&body); err != nil || !regexpSafe(body.Database) {
+	if err := json.NewDecoder(http.MaxBytesReader(w, r.Body, 1<<20)).Decode(&body); err != nil || !regexpSafe(body.Database) {
 		http.Error(w, "database required", http.StatusBadRequest)
 		return
 	}
@@ -224,7 +244,11 @@ func backupsHandler(w http.ResponseWriter, r *http.Request) {
 		if e.IsDir() || !strings.HasSuffix(e.Name(), ".dump") {
 			continue
 		}
-		info, _ := e.Info()
+		info, err := e.Info()
+		if err != nil {
+			log.Printf("skipping backup %s: %v", e.Name(), err)
+			continue
+		}
 		files = append(files, map[string]any{"name": e.Name(), "bytes": info.Size(), "modified": info.ModTime().UTC()})
 	}
 	sort.Slice(files, func(i, j int) bool { return files[i]["name"].(string) > files[j]["name"].(string) })
@@ -236,15 +260,21 @@ func restoreHandler(w http.ResponseWriter, r *http.Request) {
 		Filename string `json:"filename"`
 		Force    bool   `json:"force"`
 	}
-	if err := json.NewDecoder(r.Body).Decode(&body); err != nil || !regexpSafe(strings.TrimSuffix(body.Filename, ".dump")) {
-		http.Error(w, "filename required", http.StatusBadRequest)
-		return
-	}
-	if strings.Contains(body.Filename, "..") || strings.ContainsAny(body.Filename, "/\\") {
+	if err := json.NewDecoder(http.MaxBytesReader(w, r.Body, 1<<20)).Decode(&body); err != nil || !regexp.MustCompile(`^[A-Za-z0-9_-]+\.dump$`).MatchString(body.Filename) {
 		http.Error(w, "invalid filename", http.StatusBadRequest)
 		return
 	}
-	src := backupDir + "/" + body.Filename
+	src := filepath.Join(backupDir, body.Filename)
+	if clean, err := filepath.Abs(filepath.Clean(src)); err != nil {
+		http.Error(w, "invalid filename", http.StatusBadRequest)
+		return
+	} else {
+		root, _ := filepath.Abs(backupDir)
+		if !strings.HasPrefix(clean, root+string(filepath.Separator)) {
+			http.Error(w, "invalid filename", http.StatusBadRequest)
+			return
+		}
+	}
 	if _, err := os.Stat(src); err != nil {
 		http.Error(w, "backup not found", http.StatusNotFound)
 		return
@@ -258,13 +288,13 @@ func restoreHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if !body.Force {
-		if existing, err := dbExec(fmt.Sprintf("SELECT 1 FROM pg_database WHERE datname = '%s'", dbName)); err != nil || strings.TrimSpace(existing) == "" {
+		if existing, err := dbExec(fmt.Sprintf(`SELECT 1 FROM pg_database WHERE datname = '%s'`, dbName)); err != nil || strings.TrimSpace(existing) == "" {
 			http.Error(w, "database does not exist; use force", http.StatusConflict)
 			return
 		}
 	}
-	_, _ = dbExec(fmt.Sprintf("DROP DATABASE IF EXISTS %s", dbName))
-	if out, err := dbExec(fmt.Sprintf("CREATE DATABASE %s", dbName)); err != nil {
+	_, _ = dbExec(fmt.Sprintf(`DROP DATABASE IF EXISTS "%s"`, dbName))
+	if out, err := dbExec(fmt.Sprintf(`CREATE DATABASE "%s"`, dbName)); err != nil {
 		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": string(out)})
 		return
 	}
@@ -287,15 +317,27 @@ func restoreHandler(w http.ResponseWriter, r *http.Request) {
 
 func retentionHandler(w http.ResponseWriter, r *http.Request) {
 	days := 7
-	entries, _ := os.ReadDir(backupDir)
+	entries, err := os.ReadDir(backupDir)
+	if err != nil {
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
+		return
+	}
 	cutoff := time.Now().AddDate(0, 0, -days)
 	removed := 0
 	for _, e := range entries {
 		if e.IsDir() || !strings.HasSuffix(e.Name(), ".dump") {
 			continue
 		}
-		if info, err := e.Info(); err == nil && info.ModTime().Before(cutoff) {
-			os.Remove(backupDir + "/" + e.Name())
+		info, err := e.Info()
+		if err != nil {
+			log.Printf("skipping backup %s: %v", e.Name(), err)
+			continue
+		}
+		if info.ModTime().Before(cutoff) {
+			if err := os.Remove(filepath.Join(backupDir, e.Name())); err != nil {
+				log.Printf("failed removing backup %s: %v", e.Name(), err)
+				continue
+			}
 			removed++
 		}
 	}
@@ -324,5 +366,13 @@ func main() {
 
 	addr := ":8080"
 	log.Printf("arsy-agent listening on %s", addr)
-	log.Fatal(http.ListenAndServe(addr, mux))
+	server := &http.Server{
+		Addr:              addr,
+		Handler:           mux,
+		ReadHeaderTimeout: 10 * time.Second,
+		ReadTimeout:       30 * time.Second,
+		WriteTimeout:      120 * time.Second,
+		IdleTimeout:       60 * time.Second,
+	}
+	log.Fatal(server.ListenAndServe())
 }

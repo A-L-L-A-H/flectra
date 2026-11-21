@@ -5,6 +5,7 @@ import urllib.request
 import urllib.error
 
 from flectra import api, fields, models
+from flectra.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
@@ -28,7 +29,7 @@ class DockerAgentClient(models.AbstractModel):
     def _request(self, method, path, payload=None):
         agent_url, token = self._get_settings()
         if not agent_url or not token:
-            raise UserErrorAgent('Agent URL / token belum dikonfigurasi di Settings.')
+            raise UserError('Agent URL / token belum dikonfigurasi di Settings.')
         url = agent_url.rstrip('/') + path
         body = json.dumps(payload).encode('utf-8') if payload is not None else None
         req = urllib.request.Request(url, data=body, method=method)
@@ -40,9 +41,9 @@ class DockerAgentClient(models.AbstractModel):
                 return json.loads(resp.read().decode('utf-8'))
         except urllib.error.HTTPError as err:
             detail = err.read().decode('utf-8', errors='replace')
-            raise UserErrorAgent('Agent error %s: %s' % (err.code, detail))
+            raise UserError('Agent error %s: %s' % (err.code, detail))
         except (urllib.error.URLError, OSError) as err:
-            raise UserErrorAgent('Agent tidak terjangkau: %s' % err)
+            raise UserError('Agent tidak terjangkau: %s' % err)
 
     def status(self):
         return self._request('GET', '/status')
@@ -86,8 +87,7 @@ class DockerAgentClient(models.AbstractModel):
             'dbname': self._cr.dbname,
             'level': 'INFO',
             'message': '%s: %s by uid %s' % (action, target, self.env.uid),
+            'path': 'moonwitness_arsy.agent',
+            'func': '_log_audit',
+            'line': '0',
         })
-
-
-class UserErrorAgent(Exception):
-    """Raised for agent connectivity/configuration errors."""

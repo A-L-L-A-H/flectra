@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Moonwitness Base',
-    'summary': 'Base infrastructure shared by moonwitness addons',
-    'description': "Shared abstract models, security groups, and access rules used by moonwitness_arsy and other moonwitness modules.",
+    'name': 'MoonWitness Base',
+    'summary': 'Base infrastructure shared by MoonWitness addons',
+    'description': "Shared abstract models, security groups, and access rules used by moonwitness_arsy and other MoonWitness modules.",
     'version': '3.0.1.0.0',
     'category': 'Administration',
-    'author': 'Moonwitness',
+    'author': 'MoonWitness',
     'license': 'LGPL-3',
     'depends': ['base'],
     'data': [

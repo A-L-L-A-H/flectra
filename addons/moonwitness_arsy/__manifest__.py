@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Moonwitness Arsy',
+    'name': 'MoonWitness ARSY',
     'summary': 'Docker Manager panel inside Flectra: status, actions, logs, databases, backups',
     'description': """
 Manage the Docker Compose stack (flectra app, db, backups) from the Flectra UI.
@@ -9,7 +9,7 @@ No Docker socket is mounted into the Flectra container.
     """,
     'version': '3.0.1.0.0',
     'category': 'Administration',
-    'author': 'Moonwitness',
+    'author': 'MoonWitness',
     'license': 'LGPL-3',
     'depends': ['base', 'base_setup', 'moonwitness_base'],
     'data': [
