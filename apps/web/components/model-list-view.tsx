@@ -14,7 +14,7 @@ import {
   CardTitle,
 } from "@moonwitness/ui/components/card";
 import { Skeleton } from "@moonwitness/ui/components/skeleton";
-import { FlectraBrowserClient, FlectraBrowserError } from "@moonwitness/engine-client/browser";
+import { EngineBrowserClient, EngineBrowserError } from "@moonwitness/engine-client/browser";
 
 type FieldMetadata = {
   string?: string;
@@ -98,7 +98,7 @@ export function ModelListView({
   context?: Record<string, unknown>;
 }) {
   const router = useRouter();
-  const client = useMemo(() => new FlectraBrowserClient(), []);
+  const client = useMemo(() => new EngineBrowserClient(), []);
   const [state, setState] = useState<LoadState>("loading");
   const [fields, setFields] = useState<ListField[]>([]);
   const [records, setRecords] = useState<RecordValue[]>([]);
@@ -140,7 +140,7 @@ export function ModelListView({
       setOffset(safeOffset);
       setState("ready");
     } catch (cause) {
-      if (cause instanceof FlectraBrowserError && cause.status === 401) {
+      if (cause instanceof EngineBrowserError && cause.status === 401) {
         window.location.replace("/login");
         return;
       }
@@ -163,7 +163,7 @@ export function ModelListView({
       })
       .catch((cause: unknown) => {
         if (cancelled) return;
-        if (cause instanceof FlectraBrowserError && cause.status === 401) {
+        if (cause instanceof EngineBrowserError && cause.status === 401) {
           window.location.replace("/login");
           return;
         }
