@@ -1,0 +1,64 @@
+name: MoonWitness Web Experience
+
+on:
+  pull_request:
+    paths:
+      - "apps/web/**"
+      - "packages/**"
+      - "addons/web/views/**"
+      - "addons/web/controllers/webmanifest.py"
+      - "addons/web/static/src/public/**"
+      - "addons/moonwitness_base/views/**"
+      - "addons/moonwitness_arsy/views/**"
+      - "addons/moonwitness_orchestrator/views/**"
+      - "docs/brand/**"
+      - "README.md"
+      - "scripts/check-moonwitness-brand.mjs"
+      - ".github/workflows/moonwitness-web.yml"
+  push:
+    branches: [main, dev]
+    paths:
+      - "apps/web/**"
+      - "packages/**"
+      - "addons/web/views/**"
+      - "addons/web/controllers/webmanifest.py"
+      - "addons/web/static/src/public/**"
+      - "addons/moonwitness_base/views/**"
+      - "addons/moonwitness_arsy/views/**"
+      - "addons/moonwitness_orchestrator/views/**"
+      - "docs/brand/**"
+      - "README.md"
+      - "scripts/check-moonwitness-brand.mjs"
+      - ".github/workflows/moonwitness-web.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: moonwitness-web-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: brand audit and web checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Run public-surface brand audit
+        run: node scripts/check-moonwitness-brand.mjs
+      - name: Enable pnpm
+        run: npm install -g pnpm@10.9.0
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Lint
+        run: pnpm lint
+      - name: Typecheck
+        run: pnpm typecheck
+      - name: Test
+        run: pnpm test
+      - name: Build
+        run: pnpm build
