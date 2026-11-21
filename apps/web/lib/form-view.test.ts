@@ -4,7 +4,7 @@ import {
   formatFieldValue,
   isStaticVisible,
   parseFormView,
-  type FlectraFieldMetadata,
+  type EngineFieldMetadata,
 } from "./form-view.ts";
 
 describe("parseFormView", () => {
@@ -41,7 +41,7 @@ describe("parseFormView", () => {
       </form>
     `;
 
-    const metadata: Record<string, FlectraFieldMetadata> = {
+    const metadata: Record<string, EngineFieldMetadata> = {
       state: {
         string: "Status",
         type: "selection",
