@@ -1,15 +1,15 @@
 {
-  "name": "flectra-workspace",
+  "name": "moonwitness-workspace",
   "private": true,
   "packageManager": "pnpm@10.9.0",
   "engines": { "node": ">=22.0.0" },
   "scripts": {
-    "dev": "pnpm --filter @flectra/web dev",
-    "build": "pnpm --filter @flectra/web build",
-    "start": "pnpm --filter @flectra/web start",
-    "lint": "pnpm --filter @flectra/web lint",
-    "typecheck": "pnpm --filter @flectra/web typecheck",
-    "test": "pnpm --filter @flectra/web test"
+    "dev": "pnpm --filter @moonwitness/web dev",
+    "build": "pnpm --filter @moonwitness/web build",
+    "start": "pnpm --filter @moonwitness/web start",
+    "lint": "pnpm --filter @moonwitness/web lint",
+    "typecheck": "pnpm --filter @moonwitness/web typecheck",
+    "test": "pnpm --filter @moonwitness/web test"
   }
 }
 
