@@ -4,17 +4,17 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { AlertCircle, ArrowUpRight, ChevronLeft, ChevronRight, LoaderCircle, RefreshCw, Rows3 } from "lucide-react";
-import { Badge } from "@workspace/ui/components/badge";
-import { Button } from "@workspace/ui/components/button";
+import { Badge } from "@moonwitness/ui/components/badge";
+import { Button } from "@moonwitness/ui/components/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@workspace/ui/components/card";
-import { Skeleton } from "@workspace/ui/components/skeleton";
-import { FlectraBrowserClient, FlectraBrowserError } from "@workspace/flectra-client/browser";
+} from "@moonwitness/ui/components/card";
+import { Skeleton } from "@moonwitness/ui/components/skeleton";
+import { FlectraBrowserClient, FlectraBrowserError } from "@moonwitness/engine-client/browser";
 
 type FieldMetadata = {
   string?: string;
