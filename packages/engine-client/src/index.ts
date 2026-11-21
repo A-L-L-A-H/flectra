@@ -1,9 +1,9 @@
-export { FlectraBrowserClient } from "./browser";
-export { FlectraRpcError } from "./errors";
+export { EngineBrowserClient } from "./browser";
+export { EngineRpcError } from "./errors";
 export type {
-  FlectraCallKw,
-  FlectraRpcErrorPayload,
-  FlectraSessionInfo,
-  FlectraViewDefinition,
-  FlectraViewsResult,
+  EngineCallKw,
+  EngineRpcErrorPayload,
+  EngineSessionInfo,
+  EngineViewDefinition,
+  EngineViewsResult,
 } from "./types";
