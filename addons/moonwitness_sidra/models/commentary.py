@@ -6,6 +6,7 @@ class SidraCommentary(models.Model):
     """Rantai tafsir, syarah, dan eksegesis bertingkat (Hermeneutic Stratigraphy)."""
     _name = 'moonwitness.sidra.commentary'
     _description = 'Sidra Exegetical Commentary'
+    _rec_name = 'urn'
     _inherit = ['moonwitness.sidra.base', 'moonwitness.sidra.provenance.mixin', 'moonwitness.sidra.epistemic.mixin']
     _order = 'passage_id, layer, id'
 

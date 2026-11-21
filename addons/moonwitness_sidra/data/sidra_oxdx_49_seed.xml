@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <!-- EXTERNAL CLASSIFICATION SCHEMES (Layer -2) -->
+    <record id="meta_scheme_oxdx" model="moonwitness.sidra.meta.scheme">
+        <field name="urn">mw:scheme:oxdx:1.0</field>
+        <field name="code">OX-DX</field>
+        <field name="name">OX-DX Universal Ontology (7 Zones x 7 Levels = 49 Levels)</field>
+        <field name="namespace_uri">https://github.com/bjo163/universal-ontology-engine</field>
+        <field name="version">1.0.0</field>
+        <field name="description">Canonical 49-level resolution spine from Universe to Bit.</field>
+    </record>
+    <record id="meta_scheme_bfo" model="moonwitness.sidra.meta.scheme">
+        <field name="urn">mw:scheme:bfo:2020</field>
+        <field name="code">BFO</field>
+        <field name="name">Basic Formal Ontology (ISO/IEC 21838-2)</field>
+        <field name="namespace_uri">http://purl.obolibrary.org/obo/bfo.owl</field>
+        <field name="version">2020</field>
+        <field name="description">Upper-level ontology distinguishing Continuant and Occurrent entities.</field>
+    </record>
+    <record id="meta_scheme_dolce" model="moonwitness.sidra.meta.scheme">
+        <field name="urn">mw:scheme:dolce:1.0</field>
+        <field name="code">DOLCE</field>
+        <field name="name">Descriptive Ontology for Linguistic and Cognitive Engineering</field>
+        <field name="namespace_uri">http://www.loa.istc.cnr.it/dolce</field>
+        <field name="version">1.0</field>
+        <field name="description">Cognitive-linguistic foundational ontology (Endurant, Perdurant, Quality).</field>
+    </record>
+    <record id="meta_scheme_lrmoo" model="moonwitness.sidra.meta.scheme">
+        <field name="urn">mw:scheme:lrmoo:1.0</field>
+        <field name="code">LRMoo</field>
+        <field name="name">IFLA LRMoo / FRBR Bibliographic Ontology</field>
+        <field name="namespace_uri">http://iflastandards.info/ns/lrm/lrmoo/</field>
+        <field name="version">1.0</field>
+        <field name="description">Work -> Expression -> Manifestation/Edition -> Passage model for sacred texts.</field>
+    </record>
+    <record id="meta_scheme_ontolex" model="moonwitness.sidra.meta.scheme">
+        <field name="urn">mw:scheme:ontolex-lemon:1.0</field>
+        <field name="code">OntoLex</field>
+        <field name="name">W3C OntoLex-Lemon Lexicon Model</field>
+        <field name="namespace_uri">http://www.w3.org/ns/lemon/ontolex#</field>
+        <field name="version">1.0</field>
+        <field name="description">W3C standard for linguistic linked data, roots, lemmas, and lexical senses.</field>
+    </record>
+    <record id="meta_scheme_cts" model="moonwitness.sidra.meta.scheme">
+        <field name="urn">mw:scheme:cts-urn:1.1</field>
+        <field name="code">CTS-URN</field>
+        <field name="name">Canonical Text Services / Distributed Text Services (CTS/DTS)</field>
+        <field name="namespace_uri">https://distributed-text-services.github.io/specifications/</field>
+        <field name="version">1.1</field>
+        <field name="description">Stable canonical passage addressing across multilingual text editions.</field>
+    </record>
+    <record id="meta_scheme_thompson" model="moonwitness.sidra.meta.scheme">
+        <field name="urn">mw:scheme:thompson:1958</field>
+        <field name="code">THOMPSON</field>
+        <field name="name">Stith Thompson Motif-Index of Folk-Literature</field>
+        <field name="namespace_uri">https://en.wikipedia.org/wiki/Motif-Index_of_Folk-Literature</field>
+        <field name="version">1958</field>
+        <field name="description">Cross-cultural thematic narrative motif taxonomy (A-Z).</field>
+    </record>
+    <record id="meta_scheme_golem" model="moonwitness.sidra.meta.scheme">
+        <field name="urn">mw:scheme:golem:1.0</field>
+        <field name="code">GOLEM</field>
+        <field name="name">GOLEM Ontology for Narrative and Character Modeling</field>
+        <field name="namespace_uri">https://www.mdpi.com/2076-0787/14/10/193</field>
+        <field name="version">1.0</field>
+        <field name="description">Computational narratology ontology for characters, events, and roles.</field>
+    </record>
+    <record id="meta_scheme_ud" model="moonwitness.sidra.meta.scheme">
+        <field name="urn">mw:scheme:ud:2.0</field>
+        <field name="code">UD-v2</field>
+        <field name="name">Universal Dependencies v2 POS &amp; Morphology</field>
+        <field name="namespace_uri">https://universaldependencies.org/</field>
+        <field name="version">2.0</field>
+        <field name="description">Cross-linguistic grammatical part-of-speech and morphological feature inventory.</field>
+    </record>
+
+    <!-- ALL 49 CANONICAL LEVELS OF OX-DX (7 ZONES x 7 LEVELS) -->
+    <!-- Zone 1: EXISTENCE (01-07) -->
+    <record id="meta_oxdx_z1_universe" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:01:universe</field><field name="code">UNIVERSE</field><field name="name">01 UNIVERSE</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">1</field><field name="oxdx_level">1</field><field name="description">Total managed boundary for the ontology instance.</field></record>
+    <record id="meta_oxdx_02" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:02:creation</field><field name="code">CREATION</field><field name="name">02 CREATION</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">1</field><field name="oxdx_level">2</field><field name="description">Origin, generation, or establishment boundary of a modeled thing.</field></record>
+    <record id="meta_oxdx_03" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:03:order</field><field name="code">ORDER</field><field name="name">03 ORDER</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">1</field><field name="oxdx_level">3</field><field name="description">Governing arrangement, rule, or organizing structure.</field></record>
+    <record id="meta_oxdx_04" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:04:reality</field><field name="code">REALITY</field><field name="name">04 REALITY</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">1</field><field name="oxdx_level">4</field><field name="description">The modeled state or world being represented.</field></record>
+    <record id="meta_oxdx_05" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:05:realm</field><field name="code">REALM</field><field name="name">05 REALM</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">1</field><field name="oxdx_level">5</field><field name="description">A bounded class or sphere within the modeled reality.</field></record>
+    <record id="meta_oxdx_06" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:06:world</field><field name="code">WORLD</field><field name="name">06 WORLD</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">1</field><field name="oxdx_level">6</field><field name="description">A coherent environment or operationally meaningful whole.</field></record>
+    <record id="meta_oxdx_07" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:07:domain</field><field name="code">DOMAIN</field><field name="name">07 DOMAIN</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">1</field><field name="oxdx_level">7</field><field name="description">A bounded subject, concern, or semantic area.</field></record>
+
+    <!-- Zone 2: CONTEXT (08-14) -->
+    <record id="meta_oxdx_z2_ecosystem" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:08:ecosystem</field><field name="code">ECOSYSTEM</field><field name="name">08 ECOSYSTEM</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">2</field><field name="oxdx_level">8</field><field name="description">Coherent collection of related systems, traditions, or resources.</field></record>
+    <record id="meta_oxdx_09" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:09:organization</field><field name="code">ORGANIZATION</field><field name="name">09 ORGANIZATION</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">2</field><field name="oxdx_level">9</field><field name="description">Ownership or institutional governance boundary.</field></record>
+    <record id="meta_oxdx_10" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:10:community</field><field name="code">COMMUNITY</field><field name="name">10 COMMUNITY</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">2</field><field name="oxdx_level">10</field><field name="description">Group of participating people, lineages, or stakeholders.</field></record>
+    <record id="meta_oxdx_11" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:11:region</field><field name="code">REGION</field><field name="name">11 REGION</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">2</field><field name="oxdx_level">11</field><field name="description">Bounded scope by historical place, geography, or locality.</field></record>
+    <record id="meta_oxdx_12" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:12:environment</field><field name="code">ENVIRONMENT</field><field name="name">12 ENVIRONMENT</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">2</field><field name="oxdx_level">12</field><field name="description">Historical era, epoch, or execution context.</field></record>
+    <record id="meta_oxdx_13" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:13:network</field><field name="code">NETWORK</field><field name="name">13 NETWORK</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">2</field><field name="oxdx_level">13</field><field name="description">Connected topology of lineages, transmission chains, and resources.</field></record>
+    <record id="meta_oxdx_14" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:14:context</field><field name="code">CONTEXT</field><field name="name">14 CONTEXT</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">2</field><field name="oxdx_level">14</field><field name="description">Immediate contextual boundary required to interpret a claim or passage.</field></record>
+
+    <!-- Zone 3: INTENT (15-21) -->
+    <record id="meta_oxdx_z3_purpose" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:15:purpose</field><field name="code">PURPOSE</field><field name="name">15 PURPOSE</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">3</field><field name="oxdx_level">15</field><field name="description">Fundamental reason for existence or teleological canon intent.</field></record>
+    <record id="meta_oxdx_16" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:16:mission</field><field name="code">MISSION</field><field name="name">16 MISSION</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">3</field><field name="oxdx_level">16</field><field name="description">Intended directed outcome, duty, or spiritual practice.</field></record>
+    <record id="meta_oxdx_17" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:17:objective</field><field name="code">OBJECTIVE</field><field name="name">17 OBJECTIVE</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">3</field><field name="oxdx_level">17</field><field name="description">Concrete target or claim that can be evaluated.</field></record>
+    <record id="meta_oxdx_18" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:18:program</field><field name="code">PROGRAM</field><field name="name">18 PROGRAM</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">3</field><field name="oxdx_level">18</field><field name="description">Coordinated body of related objectives, rites, or canonical sets.</field></record>
+    <record id="meta_oxdx_19" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:19:project</field><field name="code">PROJECT</field><field name="name">19 PROJECT</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">3</field><field name="oxdx_level">19</field><field name="description">Bounded scholarly or engineering research initiative.</field></record>
+    <record id="meta_oxdx_20" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:20:product</field><field name="code">PRODUCT</field><field name="name">20 PRODUCT</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">3</field><field name="oxdx_level">20</field><field name="description">Delivered knowledge capability or verified user-facing synthesis.</field></record>
+    <record id="meta_oxdx_21" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:21:system</field><field name="code">SYSTEM</field><field name="name">21 SYSTEM</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">3</field><field name="oxdx_level">21</field><field name="description">Coordinated set of capabilities operating as a whole.</field></record>
+
+    <!-- Zone 4: STRUCTURE (22-28) -->
+    <record id="meta_oxdx_22" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:22:repository</field><field name="code">REPOSITORY</field><field name="name">22 REPOSITORY</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">4</field><field name="oxdx_level">22</field><field name="description">Version-controlled corpus artifact boundary.</field></record>
+    <record id="meta_oxdx_z4_source" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:23:source</field><field name="code">SOURCE</field><field name="name">23 SOURCE</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">4</field><field name="oxdx_level">23</field><field name="description">Canonical source-material work from which editions derive.</field></record>
+    <record id="meta_oxdx_24" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:24:unit</field><field name="code">UNIT</field><field name="name">24 UNIT</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">4</field><field name="oxdx_level">24</field><field name="description">Native textual container such as surah, book, sutta, or nikaya.</field></record>
+    <record id="meta_oxdx_25" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:25:module</field><field name="code">MODULE</field><field name="name">25 MODULE</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">4</field><field name="oxdx_level">25</field><field name="description">Cohesive structural grouping inside a work or edition.</field></record>
+    <record id="meta_oxdx_26" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:26:subsystem</field><field name="code">SUBSYSTEM</field><field name="name">26 SUBSYSTEM</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">4</field><field name="oxdx_level">26</field><field name="description">Coordinated manifestation/edition with distinct publication identity.</field></record>
+    <record id="meta_oxdx_27" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:27:component</field><field name="code">COMPONENT</field><field name="name">27 COMPONENT</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">4</field><field name="oxdx_level">27</field><field name="description">Language-specific expression or translation component.</field></record>
+    <record id="meta_oxdx_28" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:28:element</field><field name="code">ELEMENT</field><field name="name">28 ELEMENT</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">4</field><field name="oxdx_level">28</field><field name="description">Addressable verse, ayah, hadith, or transmission link.</field></record>
+
+    <!-- Zone 5: SEMANTIC (29-35) -->
+    <record id="meta_oxdx_29" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:29:symbol</field><field name="code">SYMBOL</field><field name="name">29 SYMBOL</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">5</field><field name="oxdx_level">29</field><field name="description">Named semantic reference, root, or sacred signifier.</field></record>
+    <record id="meta_oxdx_z5_entity" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:30:entity</field><field name="code">ENTITY</field><field name="name">30 ENTITY</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">5</field><field name="oxdx_level">30</field><field name="description">Distinct person, being, concept, or place represented in the model.</field></record>
+    <record id="meta_oxdx_31" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:31:property</field><field name="code">PROPERTY</field><field name="name">31 PROPERTY</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">5</field><field name="oxdx_level">31</field><field name="description">Attribute, morphological feature, or divine quality.</field></record>
+    <record id="meta_oxdx_32" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:32:relation</field><field name="code">RELATION</field><field name="name">32 RELATION</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">5</field><field name="oxdx_level">32</field><field name="description">Typed semantic connection between identifiable resources.</field></record>
+    <record id="meta_oxdx_33" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:33:operation</field><field name="code">OPERATION</field><field name="name">33 OPERATION</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">5</field><field name="oxdx_level">33</field><field name="description">Epistemic assessment, AQEL verification, or semantic transformation.</field></record>
+    <record id="meta_oxdx_34" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:34:function</field><field name="code">FUNCTION</field><field name="name">34 FUNCTION</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">5</field><field name="oxdx_level">34</field><field name="description">Discourse role, participant mapping, or reproducible inference rule.</field></record>
+    <record id="meta_oxdx_35" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:35:behavior</field><field name="code">BEHAVIOR</field><field name="name">35 BEHAVIOR</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">5</field><field name="oxdx_level">35</field><field name="description">Observable witness pattern, phenomenological effect, or speech act.</field></record>
+
+    <!-- Zone 6: DYNAMIC (36-42) -->
+    <record id="meta_oxdx_36" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:36:state</field><field name="code">STATE</field><field name="name">36 STATE</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">6</field><field name="oxdx_level">36</field><field name="description">Epistemic or review state of a claim at a point in time.</field></record>
+    <record id="meta_oxdx_z6_event" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:37:event</field><field name="code">EVENT</field><field name="name">37 EVENT</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">6</field><field name="oxdx_level">37</field><field name="description">Historical, prophetic, or narrative occurrence recorded in text.</field></record>
+    <record id="meta_oxdx_38" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:38:process</field><field name="code">PROCESS</field><field name="name">38 PROCESS</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">6</field><field name="oxdx_level">38</field><field name="description">Ongoing transmission, tafsir stratification, or ingestion lifecycle.</field></record>
+    <record id="meta_oxdx_39" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:39:flow</field><field name="code">FLOW</field><field name="name">39 FLOW</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">6</field><field name="oxdx_level">39</field><field name="description">Ordered narrative arc or isnad chain flow.</field></record>
+    <record id="meta_oxdx_40" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:40:transition</field><field name="code">TRANSITION</field><field name="name">40 TRANSITION</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">6</field><field name="oxdx_level">40</field><field name="description">Cross-lingual translation unit or state transition.</field></record>
+    <record id="meta_oxdx_41" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:41:action</field><field name="code">ACTION</field><field name="name">41 ACTION</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">6</field><field name="oxdx_level">41</field><field name="description">Character participation event or comparative alignment invocation.</field></record>
+    <record id="meta_oxdx_42" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:42:execution</field><field name="code">EXECUTION</field><field name="name">42 EXECUTION</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">6</field><field name="oxdx_level">42</field><field name="description">Concrete GraphRAG retrieval execution and audit log.</field></record>
+
+    <!-- Zone 7: REPRESENTATION (43-49) -->
+    <record id="meta_oxdx_43" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:43:instruction</field><field name="code">INSTRUCTION</field><field name="name">43 INSTRUCTION</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">7</field><field name="oxdx_level">43</field><field name="description">Normative rule, qa'idah, or validation directive.</field></record>
+    <record id="meta_oxdx_44" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:44:expression</field><field name="code">EXPRESSION</field><field name="name">44 EXPRESSION</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">7</field><field name="oxdx_level">44</field><field name="description">Syntactic or script-specific linguistic expression.</field></record>
+    <record id="meta_oxdx_45" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:45:value</field><field name="code">VALUE</field><field name="name">45 VALUE</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">7</field><field name="oxdx_level">45</field><field name="description">Concrete literal value, score, or dense embedding vector.</field></record>
+    <record id="meta_oxdx_46" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:46:data</field><field name="code">DATA</field><field name="name">46 DATA</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">7</field><field name="oxdx_level">46</field><field name="description">Encoded UTF-8 verbatim text content and JSONL partitions.</field></record>
+    <record id="meta_oxdx_z7_token" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:47:token</field><field name="code">TOKEN</field><field name="name">47 TOKEN</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">7</field><field name="oxdx_level">47</field><field name="description">Lexical word token or tsvector search lexeme.</field></record>
+    <record id="meta_oxdx_48" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:48:character</field><field name="code">CHARACTER</field><field name="name">48 CHARACTER</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">7</field><field name="oxdx_level">48</field><field name="description">Unicode code point, diacritic mark, or character span offset.</field></record>
+    <record id="meta_oxdx_49" model="moonwitness.sidra.meta.category"><field name="urn">mw:meta:oxdx:49:bit</field><field name="code">BIT</field><field name="name">49 BIT</field><field name="upper_framework">oxdx</field><field name="oxdx_zone">7</field><field name="oxdx_level">49</field><field name="description">Binary integrity digest (SHA-256 / Blake3) verifying exact provenance.</field></record>
+</flectra>

@@ -25,17 +25,17 @@ class TestSidraPhase2(TransactionCase):
     def test_lineage_mptt_hierarchy(self):
         """MPTT Lineage computes parent_path and supports child_of ancestor queries."""
         Lineage = self.env['moonwitness.sidra.lineage']
-        sunni = Lineage.create({
-            'urn': 'mw:lineage:islam:sunni',
-            'code': 'sunni',
+        sunni = Lineage.resolve_urn('mw:lineage:islam:sunni') or Lineage.create({
+            'urn': 'mw:lineage:test:sunni',
+            'code': 'sunni_test',
             'name': 'Sunni Islam',
             'tradition_id': self.islam.id,
             'provenance_id': self.prov.id,
         })
         shafii = Lineage.create({
-            'urn': 'mw:lineage:islam:sunni:shafii',
-            'code': 'shafii',
-            'name': 'Shafi\'i Madhhab',
+            'urn': 'mw:lineage:test:sunni:shafii:sub',
+            'code': 'shafii_sub_test',
+            'name': 'Shafi\'i Sub-Lineage Test',
             'tradition_id': self.islam.id,
             'parent_id': sunni.id,
             'provenance_id': self.prov.id,

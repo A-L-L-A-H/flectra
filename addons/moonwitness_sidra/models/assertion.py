@@ -6,6 +6,7 @@ class SidraPredicate(models.Model):
     """Controlled vocabulary of semantic predicates connecting entities and assertions."""
     _name = 'moonwitness.sidra.predicate'
     _description = 'Sidra Semantic Predicate'
+    _rec_name = 'label'
     _inherit = ['moonwitness.sidra.base']
 
     label = fields.Char(string='Predicate Label', required=True, help='e.g. mentions, has-role, part-of')

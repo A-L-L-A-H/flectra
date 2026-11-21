@@ -36,6 +36,7 @@ class SidraTransmissionIsnad(models.Model):
     """Jaringan rantai sanad hadits dan ketersambungan transmisi lisan ke tulisan."""
     _name = 'moonwitness.sidra.transmission.isnad'
     _description = 'Sidra Transmission Chain (Isnad Graph)'
+    _rec_name = 'urn'
     _inherit = [
         'moonwitness.sidra.base',
         'moonwitness.sidra.provenance.mixin',

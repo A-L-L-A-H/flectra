@@ -19,7 +19,7 @@ TRADITION_HINTS = {
     'oshb': 'judaism', 'hebrew': 'judaism', 'mishnah': 'judaism',
     'dhammapada': 'buddhism', 'suttacentral': 'buddhism',
     'bhagavad': 'hinduism', 'upanishads': 'hinduism', 'yoga': 'hinduism', 'sanskrit': 'hinduism',
-    'tao': 'taoism', 'zhuangzi': 'taoism', 'analects': 'confucianism',
+    'tao': 'daoism', 'zhuangzi': 'daoism', 'analects': 'confucianism',
     'shinto': 'shinto', 'sikhism': 'sikhism', 'jainism': 'jainism',
     'gathas': 'zoroastrianism', 'bahai': 'bahai', 'egypt': 'ancient-egyptian',
 }
@@ -114,10 +114,19 @@ class SidraImporterService(models.AbstractModel):
                     errors.append({'dataset': ds, 'error': str(exc)})
                     _logger.error("[BUNDLED ERR] %s: %s", ds, exc)
 
+        # Enrich Layer 3-7 canonical links & materialize Layer 8 Knowledge Graph + Embeddings
+        if only is None:
+            builder = self.env['moonwitness.sidra.graph.builder.service']
+            builder.enrich_canonical_layers()
+            kg_stats = builder.build_knowledge_graph()
+        else:
+            kg_stats = {}
+
         return {
             'datasets_loaded': loaded,
             'records_total': total_records,
             'errors': errors,
+            'kg_stats': kg_stats,
         }
 
     @api.model
@@ -242,6 +251,14 @@ class SidraImporterService(models.AbstractModel):
         Content = self.env['moonwitness.sidra.content']
         Alignment = self.env['moonwitness.sidra.alignment']
         Assertion = self.env['moonwitness.sidra.assertion']
+        Evidence = self.env['moonwitness.sidra.evidence']
+        SourceBinding = self.env['moonwitness.sidra.source.binding']
+        Commentary = self.env['moonwitness.sidra.commentary']
+        Character = self.env['moonwitness.sidra.character']
+        Gazetteer = self.env['moonwitness.sidra.gazetteer']
+        Institution = self.env['moonwitness.sidra.institution']
+        Epoch = self.env['moonwitness.sidra.epoch']
+        Lineage = self.env['moonwitness.sidra.lineage']
         Lexicon = self.env['moonwitness.sidra.lexicon']
         Word = self.env['moonwitness.sidra.word']
         Divinity = self.env['moonwitness.sidra.divinity']
@@ -255,7 +272,13 @@ class SidraImporterService(models.AbstractModel):
         content_cache = self._load_urn_map('moonwitness_sidra_content')
         alignment_cache = self._load_urn_map('moonwitness_sidra_alignment')
         assertion_cache = self._load_urn_map('moonwitness_sidra_assertion')
+        evidence_cache = self._load_urn_map('moonwitness_sidra_evidence')
+        binding_cache = self._load_urn_map('moonwitness_sidra_source_binding')
+        commentary_cache = self._load_urn_map('moonwitness_sidra_commentary')
         word_cache = self._load_urn_map('moonwitness_sidra_word')
+
+        self.env.cr.execute("SELECT urn, passage_id FROM moonwitness_sidra_content WHERE urn IS NOT NULL")
+        content_to_passage = dict(self.env.cr.fetchall())
 
         self.env.cr.execute("SELECT language, id FROM moonwitness_sidra_expression")
         expr_by_lang = dict(self.env.cr.fetchall())
@@ -304,6 +327,8 @@ class SidraImporterService(models.AbstractModel):
         content_batch = []
         alignment_batch = []
         word_batch = []
+        binding_batch = []
+        evidence_batch = []
         count = 0
         seq_fallback = 0
         default_lexicon_id = False
@@ -483,6 +508,24 @@ class SidraImporterService(models.AbstractModel):
                             content_cache[urn] = -1
                             if len(content_batch) >= batch_size:
                                 self._flush_batch(Content, content_batch, content_cache)
+                # Mirror Quran Tafsir commentary content directly into Layer 6 Commentary
+                t_target = textual.get('target', '')
+                if t_target.startswith('mw:passage:islam:tafsir:'):
+                    q_ref = t_target.replace('mw:passage:islam:tafsir:', 'mw:passage:quran:')
+                    q_pass_id = passage_cache.get(q_ref)
+                    comm_urn = f"mw:commentary:{urn}"
+                    if q_pass_id and q_pass_id > 0 and comm_urn not in commentary_cache:
+                        c_rec = Commentary.create({
+                            'urn': comm_urn,
+                            'passage_id': q_pass_id,
+                            'author': 'Classical Quran Commentary (Mukhtasar at-Tafsir)',
+                            'commentary_type': 'tafsir_matsur',
+                            'layer': 1,
+                            'text': textual.get('text', ''),
+                            'source_ref': t_target,
+                            'provenance_id': default_provenance.id,
+                        })
+                        commentary_cache[comm_urn] = c_rec.id
                 count += 1
 
             elif kind == 'textual.alignment':
@@ -528,6 +571,69 @@ class SidraImporterService(models.AbstractModel):
                         'provenance_id': default_provenance.id
                     })
                     assertion_cache[urn] = a.id
+                a_id = assertion_cache.get(urn)
+                if a_id and a_id > 0:
+                    for idx_ev, ev_ref in enumerate(record.get('evidence') or []):
+                        p_id = passage_cache.get(ev_ref) or content_to_passage.get(ev_ref)
+                        if p_id and p_id > 0:
+                            ev_urn = f"mw:evidence:link:{a_id}:{idx_ev}"
+                            if ev_urn not in evidence_cache:
+                                evidence_batch.append({
+                                    'urn': ev_urn,
+                                    'assertion_id': a_id,
+                                    'passage_id': p_id,
+                                    'relation': 'supports',
+                                    'excerpt': str(ev_ref),
+                                    'provenance_id': default_provenance.id,
+                                })
+                                evidence_cache[ev_urn] = -1
+                                if len(evidence_batch) >= batch_size:
+                                    self._flush_batch(Evidence, evidence_batch, evidence_cache)
+                count += 1
+
+            elif rtype == 'evidence':
+                b_urn = f"mw:binding:{urn}"
+                if b_urn not in binding_cache:
+                    sel = record.get('selector') or {}
+                    binding_batch.append({
+                        'urn': b_urn,
+                        'source_urn': str(record.get('target') or urn),
+                        'selector_json': json.dumps(sel, ensure_ascii=False) if sel else '',
+                        'provenance_id': default_provenance.id,
+                    })
+                    binding_cache[b_urn] = -1
+                    if len(binding_batch) >= batch_size:
+                        self._flush_batch(SourceBinding, binding_batch, binding_cache)
+                count += 1
+
+            elif rtype == 'entity':
+                label_name = self._extract_label_title(record, urn)
+                if kind == 'person' and not Character.resolve_urn(urn):
+                    Character.create({
+                        'urn': urn, 'name': label_name, 'tradition_id': default_tradition.id,
+                        'character_type': 'human', 'ontological_status': 'endurant',
+                        'provenance_id': default_provenance.id,
+                    })
+                elif kind == 'place' and not Gazetteer.resolve_urn(urn):
+                    Gazetteer.create({
+                        'urn': urn, 'name': label_name, 'description': record.get('description') or '',
+                        'provenance_id': default_provenance.id,
+                    })
+                elif kind == 'institution' and not Institution.resolve_urn(urn):
+                    Institution.create({
+                        'urn': urn, 'name': label_name, 'tradition_id': default_tradition.id,
+                        'institution_type': 'university', 'provenance_id': default_provenance.id,
+                    })
+                elif kind == 'event' and not Epoch.resolve_urn(urn):
+                    Epoch.create({
+                        'urn': urn, 'name': label_name, 'tradition_id': default_tradition.id,
+                        'description': record.get('description') or '', 'provenance_id': default_provenance.id,
+                    })
+                elif kind in ('religious_movement', 'tradition.classification') and not Lineage.resolve_urn(urn):
+                    Lineage.create({
+                        'urn': urn, 'code': urn.split(':')[-1][:40], 'name': label_name,
+                        'tradition_id': default_tradition.id, 'provenance_id': default_provenance.id,
+                    })
                 count += 1
 
             elif kind == 'lexicon.term':
@@ -576,5 +682,7 @@ class SidraImporterService(models.AbstractModel):
         self._flush_batch(Content, content_batch, content_cache)
         self._flush_batch(Alignment, alignment_batch, alignment_cache)
         self._flush_batch(Word, word_batch, word_cache)
+        self._flush_batch(SourceBinding, binding_batch, binding_cache)
+        self._flush_batch(Evidence, evidence_batch, evidence_cache)
 
         return count

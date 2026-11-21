@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <!-- ASSESSORS (Layer -1) -->
+    <record id="assessor_canonical_tradition" model="moonwitness.sidra.assessor">
+        <field name="urn">mw:assessor:canonical-tradition-consensus</field>
+        <field name="name">Canonical Tradition Consensus</field>
+        <field name="assessor_type">community</field>
+        <field name="credentials">Historical community consensus recognizing primary scriptural canons.</field>
+    </record>
+    <record id="assessor_p1006_validator" model="moonwitness.sidra.assessor">
+        <field name="urn">mw:assessor:rgbl-p1006-validator</field>
+        <field name="name">RGBL P1-006 Deterministic Invariant Engine</field>
+        <field name="assessor_type">rule</field>
+        <field name="credentials">Automated semantic invariant &amp; SHA-256 checksum verification engine.</field>
+    </record>
+    <record id="assessor_muhaddith" model="moonwitness.sidra.assessor">
+        <field name="urn">mw:assessor:classical-jarh-wa-tadil</field>
+        <field name="name">Classical Muhaddithun (Jarh wa Ta'dil)</field>
+        <field name="assessor_type">human</field>
+        <field name="credentials">Classical Hadith narrator authentication methodology (Bukhari, Muslim, Ibn Hajar).</field>
+    </record>
+    <record id="assessor_research_board" model="moonwitness.sidra.assessor">
+        <field name="urn">mw:assessor:moonwitness-research-board</field>
+        <field name="name">MoonWitness Comparative Research Board</field>
+        <field name="assessor_type">human</field>
+        <field name="credentials">Cross-tradition comparative philology and provenance curation standard.</field>
+    </record>
+
+    <!-- SCOPED EPISTEMIC STATUSES (Layer -1) -->
+    <record id="epistemic_attested_islam" model="moonwitness.sidra.epistemic.status">
+        <field name="urn">mw:epistemic:attested:islam</field>
+        <field name="status">attested</field>
+        <field name="tradition_id" ref="tradition_islam"/>
+        <field name="lineage_scope">Mainstream Islamic Consensus (Mutawatir / Sahih)</field>
+        <field name="assessor_id" ref="assessor_canonical_tradition"/>
+        <field name="confidence">1.0</field>
+        <field name="method">canonical-attestation</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="epistemic_attested_christianity" model="moonwitness.sidra.epistemic.status">
+        <field name="urn">mw:epistemic:attested:christianity</field>
+        <field name="status">attested</field>
+        <field name="tradition_id" ref="tradition_christianity"/>
+        <field name="lineage_scope">Ecumenical Biblical Canon</field>
+        <field name="assessor_id" ref="assessor_canonical_tradition"/>
+        <field name="confidence">1.0</field>
+        <field name="method">canonical-attestation</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="epistemic_attested_judaism" model="moonwitness.sidra.epistemic.status">
+        <field name="urn">mw:epistemic:attested:judaism</field>
+        <field name="status">attested</field>
+        <field name="tradition_id" ref="tradition_judaism"/>
+        <field name="lineage_scope">Masoretic Tanakh &amp; Rabbinic Canon</field>
+        <field name="assessor_id" ref="assessor_canonical_tradition"/>
+        <field name="confidence">1.0</field>
+        <field name="method">canonical-attestation</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="epistemic_attested_buddhism" model="moonwitness.sidra.epistemic.status">
+        <field name="urn">mw:epistemic:attested:buddhism</field>
+        <field name="status">attested</field>
+        <field name="tradition_id" ref="tradition_buddhism"/>
+        <field name="lineage_scope">Pali Tipitaka &amp; Early Buddhist Texts</field>
+        <field name="assessor_id" ref="assessor_canonical_tradition"/>
+        <field name="confidence">1.0</field>
+        <field name="method">canonical-attestation</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="epistemic_attested_hinduism" model="moonwitness.sidra.epistemic.status">
+        <field name="urn">mw:epistemic:attested:hinduism</field>
+        <field name="status">attested</field>
+        <field name="tradition_id" ref="tradition_hinduism"/>
+        <field name="lineage_scope">Shruti (Vedas/Upanishads) &amp; Smriti (Bhagavad Gita)</field>
+        <field name="assessor_id" ref="assessor_canonical_tradition"/>
+        <field name="confidence">1.0</field>
+        <field name="method">canonical-attestation</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="epistemic_scholarly_inferred" model="moonwitness.sidra.epistemic.status">
+        <field name="urn">mw:epistemic:inferred:comparative</field>
+        <field name="status">inferred</field>
+        <field name="lineage_scope">Cross-Tradition Comparative Philology</field>
+        <field name="assessor_id" ref="assessor_research_board"/>
+        <field name="confidence">0.85</field>
+        <field name="method">comparative-semantic-analysis</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+</flectra>

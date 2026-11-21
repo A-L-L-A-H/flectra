@@ -15,14 +15,37 @@ class TestSidraPhase3And4(TransactionCase):
         self.islam = self.env['moonwitness.sidra.tradition'].search([('code', '=', 'islam')], limit=1)
 
     def test_ontology_divinity_gazetteer_seed(self):
-        """OX-DX 7 zones, Divinity Kataphatic/Apophatic entities, and Pleiades Gazetteer must be seeded."""
-        self.assertGreaterEqual(self.env['moonwitness.sidra.meta.category'].search_count([]), 7)
+        """All 49 OX-DX levels, 9 meta-schemes, assessors, epistemic statuses, Divinity Kataphatic/Apophatic entities, Cosmology, Lineages, Canons, and Gazetteer must be seeded."""
+        self.assertEqual(self.env['moonwitness.sidra.meta.category'].search_count([('upper_framework', '=', 'oxdx')]), 49)
+        self.assertGreaterEqual(self.env['moonwitness.sidra.meta.scheme'].search_count([]), 9)
+        self.assertGreaterEqual(self.env['moonwitness.sidra.assessor'].search_count([]), 4)
+        self.assertGreaterEqual(self.env['moonwitness.sidra.epistemic.status'].search_count([]), 6)
         allah = self.env['moonwitness.sidra.divinity'].resolve_urn('mw:divinity:islam:allah')
         self.assertTrue(allah)
         self.assertIn('Tanzih', allah.apophatic_attributes)
+        self.assertGreaterEqual(len(allah.primitive_ids), 7)
+        self.assertGreaterEqual(self.env['moonwitness.sidra.consciousness.mode'].search_count([]), 5)
+        self.assertGreaterEqual(self.env['moonwitness.sidra.manifestation'].search_count([]), 4)
+        self.assertGreaterEqual(self.env['moonwitness.sidra.universe'].search_count([]), 3)
+        self.assertGreaterEqual(self.env['moonwitness.sidra.realm'].search_count([]), 7)
+        self.assertGreaterEqual(self.env['moonwitness.sidra.lineage'].search_count([]), 13)
+        self.assertGreaterEqual(self.env['moonwitness.sidra.canon'].search_count([]), 6)
+        self.assertGreaterEqual(self.env['moonwitness.sidra.practice'].search_count([]), 7)
         jerusalem = self.env['moonwitness.sidra.gazetteer'].resolve_urn('mw:place:jerusalem')
         self.assertTrue(jerusalem)
         self.assertAlmostEqual(jerusalem.latitude, 31.778019, places=3)
+
+    def test_graph_builder_enrichment_and_kg(self):
+        """Verifies graph_builder_service runs cleanly and populates KG nodes, edges, and deterministic trigram embeddings."""
+        builder = self.env['moonwitness.sidra.graph.builder.service']
+        vec = builder._compute_trigram_vector('Bismillahirrahmanirrahim', dims=64)
+        self.assertEqual(len(vec), 64)
+        self.assertAlmostEqual(sum(v * v for v in vec), 1.0, places=3)
+        res = builder.enrich_canonical_layers()
+        self.assertTrue(res.get('ok'))
+        stats = builder.build_knowledge_graph(max_alignment_edges=50, max_embeddings=10)
+        self.assertGreater(stats['nodes'], 0)
+        self.assertGreater(stats['edges'], 0)
 
     def test_linguistics_wsi_narrative(self):
         """Tests OntoLex-Lemon Lexicon/Word, WSI Frame/Participant/WitnessPattern, and GOLEM Character/Story."""

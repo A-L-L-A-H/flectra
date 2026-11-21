@@ -6,6 +6,7 @@ class SidraAlignment(models.Model):
     """Penyelarasan ayat paralel lintas tradisi (Cross-Tradition Scriptural Alignment)."""
     _name = 'moonwitness.sidra.alignment'
     _description = 'Sidra Cross-Tradition Passage Alignment'
+    _rec_name = 'urn'
     _inherit = [
         'moonwitness.sidra.base',
         'moonwitness.sidra.provenance.mixin',

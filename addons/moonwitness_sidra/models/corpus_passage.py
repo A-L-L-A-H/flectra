@@ -6,6 +6,7 @@ class SidraCorpusPassage(models.Model):
     """LRMoo Passage: Discrete canonical addressable unit of sacred text (Ayah, Verse, Sutta, Hadith)."""
     _name = 'moonwitness.sidra.passage'
     _description = 'Sidra Corpus Passage (LRMoo Passage)'
+    _rec_name = 'urn'
     _inherit = [
         'moonwitness.sidra.base',
         'moonwitness.sidra.provenance.mixin',

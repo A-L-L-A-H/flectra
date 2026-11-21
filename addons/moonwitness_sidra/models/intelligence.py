@@ -10,6 +10,7 @@ class SidraKGNode(models.Model):
     """Layer 8: Unified Knowledge Graph Node spanning all Sidra layers."""
     _name = 'moonwitness.sidra.kg.node'
     _description = 'Sidra Knowledge Graph Node'
+    _rec_name = 'label'
     _inherit = ['moonwitness.sidra.base', 'moonwitness.sidra.provenance.mixin']
 
     entity_urn = fields.Char(string='Target Entity URN', required=True, index=True)
@@ -64,6 +65,7 @@ class SidraQueryLog(models.Model):
     """Layer 8: Immutable GraphRAG Query Audit & Hallucination Detector Log."""
     _name = 'moonwitness.sidra.query.log'
     _description = 'Sidra GraphRAG Query & Hallucination Audit Log'
+    _rec_name = 'query_text'
     _order = 'create_date desc, id desc'
 
     session_id = fields.Char(string='Session / WhatsApp Thread ID', index=True)

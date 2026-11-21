@@ -6,6 +6,7 @@ class SidraProvenance(models.Model):
     """Cryptographic provenance record documenting original source, checksum, and licensing."""
     _name = 'moonwitness.sidra.provenance'
     _description = 'Sidra Provenance Record'
+    _rec_name = 'urn'
     _inherit = ['moonwitness.sidra.base']
 
     source_url = fields.Char(string='Canonical Source URL', required=True)

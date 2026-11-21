@@ -26,6 +26,7 @@ class SidraWord(models.Model):
     """Token/lemma-level lexical unit with Semitic root / Sanskrit dhatu and UD v2 POS."""
     _name = 'moonwitness.sidra.word'
     _description = 'Sidra Lexical Word / Token'
+    _rec_name = 'form'
     _inherit = ['moonwitness.sidra.base', 'moonwitness.sidra.provenance.mixin', 'moonwitness.sidra.epistemic.mixin']
     _order = 'passage_id, token_index, id'
 

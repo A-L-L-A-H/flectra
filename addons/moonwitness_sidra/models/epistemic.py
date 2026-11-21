@@ -6,6 +6,7 @@ class SidraEpistemicStatus(models.Model):
     """Scoped epistemic attestation and truth classification per tradition/community."""
     _name = 'moonwitness.sidra.epistemic.status'
     _description = 'Sidra Epistemic Status'
+    _rec_name = 'urn'
     _inherit = ['moonwitness.sidra.base', 'moonwitness.sidra.provenance.mixin']
 
     status = fields.Selection([

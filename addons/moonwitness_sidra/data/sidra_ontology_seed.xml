@@ -1,71 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <flectra>
-    <!-- OX-DX 7 ZONES CANONICAL META-CATEGORIES -->
-    <record id="meta_oxdx_z1_universe" model="moonwitness.sidra.meta.category">
-        <field name="urn">mw:meta:oxdx:01:universe</field>
-        <field name="code">UNIVERSE</field>
-        <field name="name">01 UNIVERSE — Total Managed Ontological Boundary</field>
-        <field name="upper_framework">oxdx</field>
-        <field name="oxdx_zone">1</field>
-        <field name="oxdx_level">1</field>
-    </record>
-    <record id="meta_oxdx_z2_ecosystem" model="moonwitness.sidra.meta.category">
-        <field name="urn">mw:meta:oxdx:08:ecosystem</field>
-        <field name="code">ECOSYSTEM</field>
-        <field name="name">08 ECOSYSTEM — Coherent Collection of Traditions &amp; Systems</field>
-        <field name="upper_framework">oxdx</field>
-        <field name="oxdx_zone">2</field>
-        <field name="oxdx_level">8</field>
-    </record>
-    <record id="meta_oxdx_z3_purpose" model="moonwitness.sidra.meta.category">
-        <field name="urn">mw:meta:oxdx:15:purpose</field>
-        <field name="code">PURPOSE</field>
-        <field name="name">15 PURPOSE — Canonical Intent &amp; Authority Scope</field>
-        <field name="upper_framework">oxdx</field>
-        <field name="oxdx_zone">3</field>
-        <field name="oxdx_level">15</field>
-    </record>
-    <record id="meta_oxdx_z4_source" model="moonwitness.sidra.meta.category">
-        <field name="urn">mw:meta:oxdx:23:source</field>
-        <field name="code">SOURCE</field>
-        <field name="name">23 SOURCE — Canonical Scriptural Work &amp; Transmission</field>
-        <field name="upper_framework">oxdx</field>
-        <field name="oxdx_zone">4</field>
-        <field name="oxdx_level">23</field>
-    </record>
-    <record id="meta_oxdx_z5_entity" model="moonwitness.sidra.meta.category">
-        <field name="urn">mw:meta:oxdx:30:entity</field>
-        <field name="code">ENTITY</field>
-        <field name="name">30 ENTITY — Semantic Proposition, Concept &amp; Participant</field>
-        <field name="upper_framework">oxdx</field>
-        <field name="oxdx_zone">5</field>
-        <field name="oxdx_level">30</field>
-    </record>
-    <record id="meta_oxdx_z6_event" model="moonwitness.sidra.meta.category">
-        <field name="urn">mw:meta:oxdx:37:event</field>
-        <field name="code">EVENT</field>
-        <field name="name">37 EVENT — Narrative Occurrence, Tafsir &amp; Alignment</field>
-        <field name="upper_framework">oxdx</field>
-        <field name="oxdx_zone">6</field>
-        <field name="oxdx_level">37</field>
-    </record>
-    <record id="meta_oxdx_z7_token" model="moonwitness.sidra.meta.category">
-        <field name="urn">mw:meta:oxdx:47:token</field>
-        <field name="code">TOKEN</field>
-        <field name="name">47 TOKEN — Lexical Word, Root, Vector &amp; Checksum</field>
-        <field name="upper_framework">oxdx</field>
-        <field name="oxdx_zone">7</field>
-        <field name="oxdx_level">47</field>
-    </record>
-
-    <!-- CORE DIVINITY ENTITIES (KATAPHATIC + APOPHATIC) -->
+    <!-- LAYER 1: CORE DIVINITY ENTITIES (KATAPHATIC + APOPHATIC) LINKED TO LAYER 0 PRIMITIVES -->
     <record id="divinity_allah" model="moonwitness.sidra.divinity">
         <field name="urn">mw:divinity:islam:allah</field>
         <field name="name">Allah (الله)</field>
         <field name="tradition_id" ref="tradition_islam"/>
+        <field name="epistemic_status_id" ref="epistemic_attested_islam"/>
         <field name="epithets">Ar-Rahman, Ar-Rahim, Al-Malik, Al-Quddus, As-Salam, Al-Ahad, As-Samad (99 Asmaul Husna)</field>
         <field name="kataphatic_attributes">Al-Hayy (Ever-Living), Al-Qayyum (Self-Subsisting), Al-Alim (All-Knowing), Al-Qadir (All-Powerful), Ar-Rahman (Most Merciful)</field>
-        <field name="apophatic_attributes">Laisa kamitslihi syai'un (QS 42:11 — Nothing resembles Him); Lam yalid wa lam yulad (QS 112:3 — Neither begets nor is born); Not bounded by space, time, body, or multiplicity (Tanzih)</field>
+        <field name="apophatic_attributes">Laisa kamitslihi syai'un (QS 42:11 — Nothing resembles Him); Lam yalid wa lam yulad (QS 112:3); Not bounded by space, time, body, or multiplicity (Tanzih)</field>
+        <field name="primitive_ids" eval="[(6, 0, [ref('primitive_being'), ref('primitive_consciousness'), ref('primitive_will'), ref('primitive_knowledge'), ref('primitive_power'), ref('primitive_life'), ref('primitive_speech'), ref('primitive_ineffable')])]"/>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+
+    <record id="divinity_yhwh" model="moonwitness.sidra.divinity">
+        <field name="urn">mw:divinity:judaism:yhwh</field>
+        <field name="name">YHWH / Ein Sof (יהוה)</field>
+        <field name="tradition_id" ref="tradition_judaism"/>
+        <field name="epistemic_status_id" ref="epistemic_attested_judaism"/>
+        <field name="epithets">Ehyeh Asher Ehyeh (I Am Who I Am), Elohim, Adonai, HaShem, Ein Sof</field>
+        <field name="kataphatic_attributes">Creator of heaven and earth, Sovereign of the Covenant, Compassionate and Gracious (Exodus 34:6)</field>
+        <field name="apophatic_attributes">Ein Sof (The Infinite without end); Maimonidean Via Negativa — incorporeal, indivisible, beyond positive human predication</field>
+        <field name="primitive_ids" eval="[(6, 0, [ref('primitive_being'), ref('primitive_will'), ref('primitive_speech'), ref('primitive_ineffable')])]"/>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+
+    <record id="divinity_trinity" model="moonwitness.sidra.divinity">
+        <field name="urn">mw:divinity:christianity:trinity</field>
+        <field name="name">God / Logos (Θεός / Λόγος)</field>
+        <field name="tradition_id" ref="tradition_christianity"/>
+        <field name="epistemic_status_id" ref="epistemic_attested_christianity"/>
+        <field name="epithets">Father, Son (Logos), Holy Spirit, Alpha and Omega, Agape (Love)</field>
+        <field name="kataphatic_attributes">Eternal Love (1 John 4:8), Creator, Redeemer, Light in whom there is no darkness</field>
+        <field name="apophatic_attributes">Pseudo-Dionysian Apophatic Theology: Hyperousios (Beyond Being), uncircumscribed, beyond all sensible and intelligible names</field>
+        <field name="primitive_ids" eval="[(6, 0, [ref('primitive_being'), ref('primitive_life'), ref('primitive_speech'), ref('primitive_ineffable')])]"/>
         <field name="provenance_id" ref="provenance_rgbl_root"/>
     </record>
 
@@ -73,39 +41,181 @@
         <field name="urn">mw:divinity:hinduism:brahman</field>
         <field name="name">Brahman (ब्रह्मन्)</field>
         <field name="tradition_id" ref="tradition_hinduism"/>
-        <field name="epithets">Sat-Chit-Ananda, Parabrahman, Akshara</field>
+        <field name="epistemic_status_id" ref="epistemic_attested_hinduism"/>
+        <field name="epithets">Sat-Chit-Ananda, Parabrahman, Akshara, Paramatman</field>
         <field name="kataphatic_attributes">Saguna Brahman: Being (Sat), Consciousness (Chit), Bliss (Ananda), ground of cosmic order (Rta)</field>
         <field name="apophatic_attributes">Nirguna Brahman: Neti-Neti (Not this, not this — Brihadaranyaka Upanishad 2.3.6); without qualities, form, or duality</field>
+        <field name="primitive_ids" eval="[(6, 0, [ref('primitive_being'), ref('primitive_consciousness'), ref('primitive_knowledge'), ref('primitive_ineffable')])]"/>
         <field name="provenance_id" ref="provenance_rgbl_root"/>
     </record>
 
+    <record id="divinity_dharmakaya" model="moonwitness.sidra.divinity">
+        <field name="urn">mw:divinity:buddhism:dharmakaya-nibbana</field>
+        <field name="name">Nibbāna / Dharmakāya (निर्वाण)</field>
+        <field name="tradition_id" ref="tradition_buddhism"/>
+        <field name="epistemic_status_id" ref="epistemic_attested_buddhism"/>
+        <field name="epithets">The Unconditioned (Asaṅkhata), Deathless (Amata), Tathata (Suchness)</field>
+        <field name="kataphatic_attributes">Supreme Peace, Liberation from dukkha, Awakening (Bodhi), Compassionate Wisdom</field>
+        <field name="apophatic_attributes">Śūnyatā (Emptiness of inherent self-existence); Udāna 8.3: not born, not become, not made, not fabricated; transcends tetralemma</field>
+        <field name="primitive_ids" eval="[(6, 0, [ref('primitive_consciousness'), ref('primitive_knowledge'), ref('primitive_ineffable')])]"/>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+
+    <record id="divinity_dao" model="moonwitness.sidra.divinity">
+        <field name="urn">mw:divinity:taoism:dao</field>
+        <field name="name">The Dao / Tao (道)</field>
+        <field name="tradition_id" ref="tradition_daoism"/>
+        <field name="epithets">The Way, Mother of Ten Thousand Things, The Uncarved Block (Pu)</field>
+        <field name="kataphatic_attributes">Source of cosmic harmony, spontaneous naturalness (Ziran), inexhaustible wellspring</field>
+        <field name="apophatic_attributes">Tao Te Ching Ch. 1: The Dao that can be spoken is not the eternal Dao; nameless, formless, silent</field>
+        <field name="primitive_ids" eval="[(6, 0, [ref('primitive_being'), ref('primitive_ineffable')])]"/>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+
+    <record id="divinity_ahura_mazda" model="moonwitness.sidra.divinity">
+        <field name="urn">mw:divinity:zoroastrianism:ahura-mazda</field>
+        <field name="name">Ahura Mazda (Wise Lord)</field>
+        <field name="tradition_id" ref="tradition_zoroastrianism"/>
+        <field name="epithets">Lord of Wisdom, Creator of Asha (Truth/Cosmic Order)</field>
+        <field name="kataphatic_attributes">Omniscient Creator of light, truth (Asha), and good mind (Vohu Manah)</field>
+        <field name="apophatic_attributes">Wholly free from deceit (Druj), darkness, and evil</field>
+        <field name="primitive_ids" eval="[(6, 0, [ref('primitive_knowledge'), ref('primitive_will')])]"/>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+
+    <record id="divinity_waheguru" model="moonwitness.sidra.divinity">
+        <field name="urn">mw:divinity:sikhism:waheguru</field>
+        <field name="name">Ik Onkar / Waheguru (ੴ)</field>
+        <field name="tradition_id" ref="tradition_sikhism"/>
+        <field name="epithets">Sat Nam (True Name), Karta Purakh (Creator Being), Akal Murat (Timeless Form)</field>
+        <field name="kataphatic_attributes">One Universal Creator, Truth, Without Fear, Without Hatred, Self-Existent</field>
+        <field name="apophatic_attributes">Nirankar (Formless), Ajooni (Unborn, beyond cycles of birth and death)</field>
+        <field name="primitive_ids" eval="[(6, 0, [ref('primitive_being'), ref('primitive_life'), ref('primitive_ineffable')])]"/>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+
+    <!-- LAYER 1: CONSCIOUSNESS / REVELATION MODES -->
+    <record id="cmode_wahy" model="moonwitness.sidra.consciousness.mode">
+        <field name="urn">mw:cmode:islam:wahy</field>
+        <field name="name">Wahy (Prophetic Revelation — الوحي)</field>
+        <field name="tradition_id" ref="tradition_islam"/>
+        <field name="divinity_id" ref="divinity_allah"/>
+        <field name="description">Direct verbal and semantic divine disclosure delivered to prophets via Jibril or direct address (QS 42:51).</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="cmode_ilham" model="moonwitness.sidra.consciousness.mode">
+        <field name="urn">mw:cmode:islam:ilham</field>
+        <field name="name">Ilham &amp; Ru'ya Shalihah (Spiritual Inspiration — الإلهام)</field>
+        <field name="tradition_id" ref="tradition_islam"/>
+        <field name="divinity_id" ref="divinity_allah"/>
+        <field name="description">Interior spiritual illumination and veridical dreams granted to the faithful, distinct from legislative Wahy.</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="cmode_nevuah" model="moonwitness.sidra.consciousness.mode">
+        <field name="urn">mw:cmode:judaism:nevuah</field>
+        <field name="name">Nevuah &amp; Ruach HaKodesh (Prophecy — נבואה)</field>
+        <field name="tradition_id" ref="tradition_judaism"/>
+        <field name="divinity_id" ref="divinity_yhwh"/>
+        <field name="description">Prophetic apprehension of divine will, culminating in Mosaic face-to-face clarity (Numbers 12:6-8).</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="cmode_samadhi" model="moonwitness.sidra.consciousness.mode">
+        <field name="urn">mw:cmode:buddhism:samadhi-bodhi</field>
+        <field name="name">Samādhi &amp; Bodhi (Awakening — समाधि / बोधि)</field>
+        <field name="tradition_id" ref="tradition_buddhism"/>
+        <field name="divinity_id" ref="divinity_dharmakaya"/>
+        <field name="description">Unshakeable meditative absorption and direct penetrative insight (Vipassanā) into impermanence and liberation.</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="cmode_sruti" model="moonwitness.sidra.consciousness.mode">
+        <field name="urn">mw:cmode:hinduism:sruti</field>
+        <field name="name">Śruti / Ṛṣi-Darśana (Heard Cosmic Wisdom — श्रुति)</field>
+        <field name="tradition_id" ref="tradition_hinduism"/>
+        <field name="divinity_id" ref="divinity_brahman"/>
+        <field name="description">Direct contemplative audition of eternal Vedic mantras by ancient seers (Rishis).</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+
+    <!-- LAYER 1: MANIFESTATIONS / THEOPHANIES -->
+    <record id="manif_kalam" model="moonwitness.sidra.manifestation">
+        <field name="urn">mw:manifestation:islam:kalam-quran</field>
+        <field name="name">Kalamullah (Recited Word / Al-Qur'an)</field>
+        <field name="divinity_id" ref="divinity_allah"/>
+        <field name="tradition_id" ref="tradition_islam"/>
+        <field name="form_description">Divine Speech disclosed into Arabic recitation and written mushaf without incarnational dilution of divine transcendence.</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="manif_logos" model="moonwitness.sidra.manifestation">
+        <field name="urn">mw:manifestation:christianity:logos</field>
+        <field name="name">Logos / Incarnation (John 1:14)</field>
+        <field name="divinity_id" ref="divinity_trinity"/>
+        <field name="tradition_id" ref="tradition_christianity"/>
+        <field name="form_description">Eternal Word made flesh in Christian theology (scoped to Christian canon).</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="manif_shekhinah" model="moonwitness.sidra.manifestation">
+        <field name="urn">mw:manifestation:judaism:shekhinah</field>
+        <field name="name">Shekhinah (Dwelling Presence — שכינה)</field>
+        <field name="divinity_id" ref="divinity_yhwh"/>
+        <field name="tradition_id" ref="tradition_judaism"/>
+        <field name="form_description">Indwelling divine glory manifested at Mount Sinai and the Tabernacle.</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="manif_avatar" model="moonwitness.sidra.manifestation">
+        <field name="urn">mw:manifestation:hinduism:avatara</field>
+        <field name="name">Avatāra (Divine Descent — अवतार)</field>
+        <field name="divinity_id" ref="divinity_brahman"/>
+        <field name="tradition_id" ref="tradition_hinduism"/>
+        <field name="form_description">Periodic descent of the Supreme to restore Dharma whenever unrighteousness rises (Bhagavad Gita 4:7-8).</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+
+    <!-- LAYER 2: COSMOLOGIES (UNIVERSES, REALMS, EPOCHS, GAZETTEER) -->
+    <record id="universe_islamic" model="moonwitness.sidra.universe">
+        <field name="urn">mw:universe:islam:seven-heavens</field>
+        <field name="name">Islamic Cosmology (Al-Arsy, Seven Heavens &amp; Al-Aakhirah)</field>
+        <field name="tradition_id" ref="tradition_islam"/>
+        <field name="description">Multi-tiered creation crowned by Al-Arsy (The Throne), Al-Kursi, Sidratul Muntaha, Seven Heavens (Sab'a Samawat), Dunya, Barzakh, Jannah, and Jahannam.</field>
+        <field name="structure_json">{"throne":"Al-Arsy","boundary":"Sidratul Muntaha","heavens":7,"intermediate":"Barzakh"}</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="universe_dharmic" model="moonwitness.sidra.universe">
+        <field name="urn">mw:universe:dharmic:triloka</field>
+        <field name="name">Dharmic Cosmology (Triloka &amp; 31 Planes of Existence)</field>
+        <field name="tradition_id" ref="tradition_buddhism"/>
+        <field name="description">Threefold realms of Desire (Kamaloka), Form (Rupaloka), and Formlessness (Arupaloka) cycling across Kalpas.</field>
+        <field name="structure_json">{"realms":["Kamaloka","Rupaloka","Arupaloka"],"cycles":"Kalpa"}</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="universe_egyptian" model="moonwitness.sidra.universe">
+        <field name="urn">mw:universe:egypt:duat-nun</field>
+        <field name="name">Ancient Egyptian Cosmology (Nun, Ma'at, Duat &amp; Field of Reeds)</field>
+        <field name="tradition_id" ref="tradition_ancient_egyptian"/>
+        <field name="description">Primordial waters of Nun, ordered world upheld by Ma'at, nocturnal underworld Duat, and paradise Aaru.</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+
+    <!-- REALMS -->
+    <record id="realm_arsy" model="moonwitness.sidra.realm"><field name="urn">mw:realm:islam:arsy</field><field name="name">Al-Arsy &amp; Sidratul Muntaha (العرش وسدرة المنتهى)</field><field name="universe_id" ref="universe_islamic"/><field name="realm_type">transcendent</field><field name="description">Highest boundary of created cosmos (QS 53:14).</field><field name="provenance_id" ref="provenance_rgbl_root"/></record>
+    <record id="realm_jannah" model="moonwitness.sidra.realm"><field name="urn">mw:realm:islam:jannah</field><field name="name">Jannah (Paradise — الجنة)</field><field name="universe_id" ref="universe_islamic"/><field name="realm_type">heaven</field><field name="description">Eternal gardens of felicity and divine proximity.</field><field name="provenance_id" ref="provenance_rgbl_root"/></record>
+    <record id="realm_barzakh" model="moonwitness.sidra.realm"><field name="urn">mw:realm:islam:barzakh</field><field name="name">Barzakh (Isthmus / Intermediate Realm — البرزخ)</field><field name="universe_id" ref="universe_islamic"/><field name="realm_type">intermediate</field><field name="description">Liminal barrier between bodily death and Day of Resurrection (QS 23:100).</field><field name="provenance_id" ref="provenance_rgbl_root"/></record>
+    <record id="realm_dunya" model="moonwitness.sidra.realm"><field name="urn">mw:realm:islam:dunya</field><field name="name">Al-Dunya (Terrestrial Testing Realm — الدنيا)</field><field name="universe_id" ref="universe_islamic"/><field name="realm_type">earth</field><field name="description">Present earthly life of moral responsibility and witnessing.</field><field name="provenance_id" ref="provenance_rgbl_root"/></record>
+    <record id="realm_jahannam" model="moonwitness.sidra.realm"><field name="urn">mw:realm:islam:jahannam</field><field name="name">Jahannam (Hellfire — جهنم)</field><field name="universe_id" ref="universe_islamic"/><field name="realm_type">underworld</field><field name="description">Eschatological realm of justice and reckoning.</field><field name="provenance_id" ref="provenance_rgbl_root"/></record>
+    <record id="realm_devaloka" model="moonwitness.sidra.realm"><field name="urn">mw:realm:dharmic:devaloka</field><field name="name">Devaloka &amp; Pure Land (देवलोक)</field><field name="universe_id" ref="universe_dharmic"/><field name="realm_type">pure_land</field><field name="description">Celestial planes of luminous beings and awakened fields.</field><field name="provenance_id" ref="provenance_rgbl_root"/></record>
+    <record id="realm_duat" model="moonwitness.sidra.realm"><field name="urn">mw:realm:egypt:duat</field><field name="name">Duat &amp; Field of Reeds (Aaru)</field><field name="universe_id" ref="universe_egyptian"/><field name="realm_type">intermediate</field><field name="description">Underworld passage and Hall of Two Truths (Weighing of the Heart).</field><field name="provenance_id" ref="provenance_rgbl_root"/></record>
+
+    <!-- EPOCHS -->
+    <record id="epoch_prophetic" model="moonwitness.sidra.epoch"><field name="urn">mw:epoch:islam:revelation-610-632</field><field name="name">Era of Quranic Revelation (610–632 CE)</field><field name="tradition_id" ref="tradition_islam"/><field name="sequence">1</field><field name="start_marker">610 CE (Cave of Hira)</field><field name="end_marker">632 CE (Farewell Pilgrimage)</field><field name="description">23-year Makkan and Madinan revelation period.</field><field name="provenance_id" ref="provenance_rgbl_root"/></record>
+    <record id="epoch_axial" model="moonwitness.sidra.epoch"><field name="urn">mw:epoch:buddhism:early-sangha</field><field name="name">Buddha &amp; First Council Era (c. 5th–4th c. BCE)</field><field name="tradition_id" ref="tradition_buddhism"/><field name="sequence">1</field><field name="start_marker">c. 500 BCE</field><field name="end_marker">c. 383 BCE</field><field name="description">Oral codification of the Pali Nikayas and Vinaya.</field><field name="provenance_id" ref="provenance_rgbl_root"/></record>
+    <record id="epoch_kali_yuga" model="moonwitness.sidra.epoch"><field name="urn">mw:epoch:hinduism:kali-yuga</field><field name="name">Kali Yuga (Current Cosmic Cycle)</field><field name="tradition_id" ref="tradition_hinduism"/><field name="sequence">4</field><field name="start_marker">3102 BCE (Traditional)</field><field name="end_marker">End of Mahayuga</field><field name="description">Fourth age of the cyclic Hindu cosmic calendar.</field><field name="provenance_id" ref="provenance_rgbl_root"/></record>
+
     <!-- SACRED GEOGRAPHY GAZETTEER (PLEIADES ALIGNED) -->
-    <record id="gazetteer_makkah" model="moonwitness.sidra.gazetteer">
-        <field name="urn">mw:place:makkah</field>
-        <field name="name">Makkah al-Mukarramah</field>
-        <field name="ancient_names">Bakkah, Umm al-Qura</field>
-        <field name="latitude">21.422487</field>
-        <field name="longitude">39.826206</field>
-        <field name="description">Sacred sanctuary of the Ka'bah and primary site of Makkan Quranic revelations.</field>
-        <field name="provenance_id" ref="provenance_rgbl_root"/>
-    </record>
-    <record id="gazetteer_jerusalem" model="moonwitness.sidra.gazetteer">
-        <field name="urn">mw:place:jerusalem</field>
-        <field name="name">Jerusalem / Al-Quds</field>
-        <field name="ancient_names">Urusalim, Bayt al-Maqdis, Yerushalayim</field>
-        <field name="pleiades_uri">https://pleiades.stoa.org/places/687928</field>
-        <field name="latitude">31.778019</field>
-        <field name="longitude">35.235408</field>
-        <field name="description">Central sacred city across Judaism, Christianity, and Islam (Masjid al-Aqsa, Temple Mount).</field>
-        <field name="provenance_id" ref="provenance_rgbl_root"/>
-    </record>
-    <record id="gazetteer_bodh_gaya" model="moonwitness.sidra.gazetteer">
-        <field name="urn">mw:place:bodh_gaya</field>
-        <field name="name">Bodh Gaya</field>
-        <field name="ancient_names">Uruvela, Mahabodhi</field>
-        <field name="latitude">24.695922</field>
-        <field name="longitude">84.991419</field>
-        <field name="description">Site of Siddhartha Gautama's enlightenment beneath the Bodhi Tree.</field>
-        <field name="provenance_id" ref="provenance_rgbl_root"/>
-    </record>
+    <record id="gazetteer_makkah" model="moonwitness.sidra.gazetteer"><field name="urn">mw:place:makkah</field><field name="name">Makkah al-Mukarramah</field><field name="ancient_names">Bakkah, Umm al-Qura</field><field name="latitude">21.422487</field><field name="longitude">39.826206</field><field name="description">Sacred sanctuary of the Ka'bah and primary site of Makkan Quranic revelations.</field><field name="provenance_id" ref="provenance_rgbl_root"/></record>
+    <record id="gazetteer_madinah" model="moonwitness.sidra.gazetteer"><field name="urn">mw:place:madinah</field><field name="name">Al-Madinah al-Munawwarah</field><field name="ancient_names">Yathrib</field><field name="latitude">24.467222</field><field name="longitude">39.611111</field><field name="description">City of the Prophet and center of Madinan legislation and Hadith transmission.</field><field name="provenance_id" ref="provenance_rgbl_root"/></record>
+    <record id="gazetteer_sinai" model="moonwitness.sidra.gazetteer"><field name="urn">mw:place:mount_sinai</field><field name="name">Mount Sinai (Tur Sina / Horeb)</field><field name="ancient_names">Horeb, Jabal Musa, Tuwa</field><field name="pleiades_uri">https://pleiades.stoa.org/places/746809</field><field name="latitude">28.539167</field><field name="longitude">33.975000</field><field name="description">Sacred mountain of the Torah revelation to Prophet Musa (Moses).</field><field name="provenance_id" ref="provenance_rgbl_root"/></record>
+    <record id="gazetteer_jerusalem" model="moonwitness.sidra.gazetteer"><field name="urn">mw:place:jerusalem</field><field name="name">Jerusalem / Al-Quds</field><field name="ancient_names">Urusalim, Bayt al-Maqdis, Yerushalayim</field><field name="pleiades_uri">https://pleiades.stoa.org/places/687928</field><field name="latitude">31.778019</field><field name="longitude">35.235408</field><field name="description">Central sacred city across Judaism, Christianity, and Islam (Masjid al-Aqsa, Temple Mount).</field><field name="provenance_id" ref="provenance_rgbl_root"/></record>
+    <record id="gazetteer_bodh_gaya" model="moonwitness.sidra.gazetteer"><field name="urn">mw:place:bodh_gaya</field><field name="name">Bodh Gaya</field><field name="ancient_names">Uruvela, Mahabodhi</field><field name="latitude">24.695922</field><field name="longitude">84.991419</field><field name="description">Site of Siddhartha Gautama's enlightenment beneath the Bodhi Tree.</field><field name="provenance_id" ref="provenance_rgbl_root"/></record>
+    <record id="gazetteer_varanasi" model="moonwitness.sidra.gazetteer"><field name="urn">mw:place:varanasi</field><field name="name">Varanasi &amp; Sarnath</field><field name="ancient_names">Kashi, Isipatana</field><field name="latitude">25.317645</field><field name="longitude">82.973914</field><field name="description">Ancient sacred city on the Ganges and site of the Buddha's First Turning of the Dharma Wheel.</field><field name="provenance_id" ref="provenance_rgbl_root"/></record>
+    <record id="gazetteer_kurukshetra" model="moonwitness.sidra.gazetteer"><field name="urn">mw:place:kurukshetra</field><field name="name">Kurukshetra (Dharmakshetra)</field><field name="ancient_names">Dharmakshetra</field><field name="latitude">29.969512</field><field name="longitude">76.878282</field><field name="description">Sacred plain of the Bhagavad Gita dialogue between Krishna and Arjuna.</field><field name="provenance_id" ref="provenance_rgbl_root"/></record>
+    <record id="gazetteer_qufu" model="moonwitness.sidra.gazetteer"><field name="urn">mw:place:qufu</field><field name="name">Qufu (Lu State)</field><field name="ancient_names">Qufu</field><field name="latitude">35.596700</field><field name="longitude">116.991900</field><field name="description">Birthplace and teaching center of Confucius (Kongzi).</field><field name="provenance_id" ref="provenance_rgbl_root"/></record>
 </flectra>

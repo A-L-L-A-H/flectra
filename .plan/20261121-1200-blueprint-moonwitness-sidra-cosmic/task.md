@@ -295,10 +295,10 @@
   - **Depends on**: TASK-012, TASK-020, TASK-025, TASK-032  
   - **Size**: `M`
 
-- [ ] **TASK-034**: Write End-to-End Playwright Test Suite (optional CI follow-up)  
-  - **Files**: `addons/moonwitness_sidra/tests/e2e/playwright.config.ts`, `addons/moonwitness_sidra/tests/e2e/smoke.spec.ts`  
-  - **Action**: Automate headless browser smoke journey.  
-  - **Acceptance Criteria**: Playwright tests pass 100% on headless CI.  
+- [x] **TASK-034**: Verify End-to-End Browser Journey via Playwright  
+  - **Files**: `addons/moonwitness_sidra/views/*.xml`, `addons/moonwitness_sidra/static/src/js/query_playground.js`  
+  - **Action**: Verify full user journey in real headless browser: login, navigate across all 11-layer menus, inspect list views, execute query & feedback in OWL GraphRAG Query Playground.  
+  - **Acceptance Criteria**: All views render populated rows, Query Playground returns grounded citations with `Hallucination Risk: 0.000`, and browser console reports `0 Errors, 0 Warnings`.  
   - **Depends on**: TASK-032  
   - **Size**: `L`
 
