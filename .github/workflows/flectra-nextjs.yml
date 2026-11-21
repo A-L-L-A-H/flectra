@@ -1,4 +1,4 @@
-name: Flectra Next.js
+name: MoonWitness Web Experience
 
 on:
   pull_request:
@@ -10,8 +10,20 @@ on:
       - "pnpm-lock.yaml"
       - ".npmrc"
       - ".github/workflows/flectra-nextjs.yml"
+      - "addons/web/static/src/**"
+      - "addons/web/static/img/**"
+      - "addons/web/controllers/**"
+      - "addons/moonwitness_base/**"
+      - "addons/moonwitness_arsy/views/**"
+      - "addons/moonwitness_orchestrator/views/**"
+      - "docs/brand/**"
+      - "README.md"
+      - "scripts/check-moonwitness-brand.mjs"
+      - "flectra/release.py"
+      - "Dockerfile"
+      - ".env.example"
   push:
-    branches: [main]
+    branches: [main, dev]
     paths:
       - "apps/web/**"
       - "packages/**"
@@ -20,12 +32,24 @@ on:
       - "pnpm-lock.yaml"
       - ".npmrc"
       - ".github/workflows/flectra-nextjs.yml"
+      - "addons/web/static/src/**"
+      - "addons/web/static/img/**"
+      - "addons/web/controllers/**"
+      - "addons/moonwitness_base/**"
+      - "addons/moonwitness_arsy/views/**"
+      - "addons/moonwitness_orchestrator/views/**"
+      - "docs/brand/**"
+      - "README.md"
+      - "scripts/check-moonwitness-brand.mjs"
+      - "flectra/release.py"
+      - "Dockerfile"
+      - ".env.example"
 
 permissions:
   contents: read
 
 concurrency:
-  group: flectra-nextjs-${{ github.ref }}
+  group: moonwitness-web-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -37,6 +61,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Run public-surface brand audit
+        run: node scripts/check-moonwitness-brand.mjs
       - name: Enable pnpm
         run: npm install -g pnpm@10.9.0
       - name: Install dependencies
