@@ -13,6 +13,7 @@ on:
       - "addons/web/static/src/**"
       - "addons/web/static/img/**"
       - "addons/web/controllers/**"
+      - "addons/web/tests/**"
       - "addons/moonwitness_base/**"
       - "addons/moonwitness_arsy/views/**"
       - "addons/moonwitness_orchestrator/views/**"
