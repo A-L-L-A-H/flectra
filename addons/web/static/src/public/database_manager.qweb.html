@@ -1,8 +1,8 @@
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>Flectra</title>
-    <link rel="shortcut icon" href="/web/static/img/favicon.ico" type="image/x-icon" />
+    <title>MoonWitness</title>
+    <link rel="icon" href="/moonwitness_base/static/src/img/moonwitness-mark.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="/web/static/src/libs/fontawesome/css/font-awesome.css" />
     <link rel="stylesheet" href="/web/static/lib/bootstrap/dist/css/bootstrap.css" />
     <script src="/web/static/lib/bootstrap/js/dist/dom/data.js" ></script>
@@ -14,9 +14,20 @@
 
     <script src="/web/static/src/public/database_manager.js" ></script>
     <style>
-        a {
-            text-decoration: none;
-        }
+        :root { color-scheme: dark; }
+        body { min-height: 100vh; background: #0b0c0e; color: #f2eee6; }
+        a { color: #ffb36e; text-decoration: none; }
+        a:hover { color: #f28b3c; }
+        .o_database_list { margin-top: 3rem; padding: 2rem; background: #121417; border: 1px solid rgb(255 255 255 / 12%); }
+        .mw-database-mark { display: block; width: 74px; height: 74px; margin: 0 auto 1.5rem; }
+        .list-group-item { background: #191c20; color: #f2eee6; border-color: rgb(255 255 255 / 10%); }
+        .modal-content { color: #f2eee6; background: #121417; border: 1px solid rgb(255 255 255 / 13%); }
+        .modal-header, .modal-footer { border-color: rgb(255 255 255 / 10%); }
+        .form-control, .form-select { color: #f2eee6; background-color: #0b0c0e; border-color: rgb(255 255 255 / 18%); }
+        .form-control:focus, .form-select:focus { color: #f2eee6; background-color: #0b0c0e; border-color: #f28b3c; box-shadow: 0 0 0 .2rem rgb(242 139 60 / 18%); }
+        .btn-primary { --bs-btn-bg: #f28b3c; --bs-btn-border-color: #f28b3c; --bs-btn-color: #111214; --bs-btn-hover-bg: #ffb36e; --bs-btn-hover-border-color: #ffb36e; --bs-btn-hover-color: #111214; }
+        .text-muted { color: #9a9b9d !important; }
+        @media (max-width: 575px) { .o_database_list { margin-top: 1rem; padding: 1rem; } }
     </style>
 </head>
 <body>
@@ -24,13 +35,13 @@
         <!-- Database List -->
         <div class="row">
             <div class="col-lg-6 offset-lg-3 o_database_list">
-                <img src="/web/static/img/logo2.png" class="img-fluid d-block mx-auto"/>
+                <img src="/moonwitness_base/static/src/img/moonwitness-mark.svg" class="img-fluid d-block mx-auto mw-database-mark" alt="MoonWitness"/>
                 <t t-if="not list_db">
                     <div class="alert alert-danger text-center">The database manager has been disabled by the administrator</div>
                 </t>
                 <t t-elif="insecure and databases">
                     <div class="alert alert-warning">
-                        Warning, your Flectra database manager is not protected.<br/>
+                        Warning, your MoonWitness database manager is not protected.<br/>
                         Please <a href="#" data-bs-toggle="modal" data-bs-target=".o_database_master">set a master password</a> to secure it.
                     </div>
                 </t>
@@ -98,9 +109,6 @@
                         </div>
                         <div class="modal-body">
                             <t t-call="create_form" />
-                            <small class="text-muted">
-                                To enhance your experience, some data may be sent to Flectra online services. See our <a href="https://www.flectrahq.com/privacy" target="_blank">Privacy Policy</a>.
-                            </small>
                         </div>
                         <div class="modal-footer">
                             <input type="submit" value="Continue" class="btn btn-primary float-end"/>
@@ -141,7 +149,7 @@
                               </div>
                             <label for="radio_copy_true">This database might have been moved or copied.</label>
                             <p class="form-text">
-                                In order to avoid conflicts between databases, Flectra needs to know if this database was moved or copied.<br/>
+                                In order to avoid conflicts between databases, MoonWitness needs to know if this database was moved or copied.<br/>
                                 If you don't know, answer "This database is a copy".
                             </p>
                             <div class="form-check">
