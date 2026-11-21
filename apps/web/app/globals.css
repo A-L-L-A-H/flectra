@@ -1,0 +1,16 @@
+@import "@workspace/ui/globals.css";
+
+:root {
+  color-scheme: light;
+}
+
+html { min-height: 100%; }
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 88% 0%, rgba(249, 115, 22, 0.08), transparent 34rem),
+    var(--background);
+}
+
+::selection { background: rgba(249, 115, 22, 0.22); }
