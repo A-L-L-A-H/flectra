@@ -4,7 +4,7 @@ import {
   formatFieldValue,
   isStaticVisible,
   parseFormView,
-  type FlectraFieldMetadata,
+  type EngineFieldMetadata,
 } from "./form-view.ts";
 
 describe("parseFormView", () => {
@@ -41,7 +41,7 @@ describe("parseFormView", () => {
       </form>
     `;
 
-    const metadata: Record<string, FlectraFieldMetadata> = {
+    const metadata: Record<string, EngineFieldMetadata> = {
       state: {
         string: "Status",
         type: "selection",
@@ -133,7 +133,7 @@ describe("parseFormView", () => {
     assert.deepEqual(parseFormView("", {}), {
       ok: false,
       reason: "empty",
-      message: "Flectra did not return a form view architecture for this model.",
+      message: "No form view architecture was returned for this model.",
     });
 
     const malformed = parseFormView("<form><sheet><field name='x'></form>", {});

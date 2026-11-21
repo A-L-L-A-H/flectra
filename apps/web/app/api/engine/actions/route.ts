@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { getAuthenticatedFlectraClient, sameOrigin } from "@/lib/flectra-server";
+import { getAuthenticatedEngineClient, sameOrigin } from "@/lib/engine-server";
 import { privateNoStoreHeaders, readJsonObject } from "@/lib/http";
 
 export const runtime = "nodejs";
@@ -48,12 +48,12 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const { client } = await getAuthenticatedFlectraClient();
+    const { client } = await getAuthenticatedEngineClient();
     const result = await client.loadAction(actionId, additionalContext);
     return NextResponse.json({ result }, { headers: privateNoStoreHeaders() });
   } catch {
     // Upstream exception details can contain server paths and implementation data.
-    return NextResponse.json({ error: "Unable to load this Flectra action." }, {
+    return NextResponse.json({ error: "Unable to load this action." }, {
       status: 400,
       headers: privateNoStoreHeaders(),
     });

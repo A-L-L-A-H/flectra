@@ -1,13 +1,13 @@
-import { FlectraRpcError } from "./errors";
+import { EngineRpcError } from "./errors";
 import type {
-  FlectraRpcErrorPayload,
-  FlectraSessionInfo,
-  FlectraViewDefinition,
+  EngineRpcErrorPayload,
+  EngineSessionInfo,
+  EngineViewDefinition,
 } from "./types";
 
 type FetchImplementation = typeof fetch;
 
-type FlectraClientOptions = {
+type EngineClientOptions = {
   baseUrl: string;
   sessionId?: string;
   fetcher?: FetchImplementation;
@@ -15,27 +15,27 @@ type FlectraClientOptions = {
 
 type JsonRpcResponse<T> = {
   result?: T;
-  error?: FlectraRpcErrorPayload;
+  error?: EngineRpcErrorPayload;
 };
 
 function extractSessionId(headers: Headers): string | undefined {
   const extendedHeaders = headers as Headers & { getSetCookie?: () => string[] };
   const cookieHeaders = extendedHeaders.getSetCookie?.() ?? [headers.get("set-cookie") ?? ""];
   for (const cookie of cookieHeaders) {
-    const match = cookie.match(/(?:^|[,;]\s*)session_id=([^;,\s]+)/);
+    const match = cookie.match(/(?:^|[,;]\\s*)session_id=([^;,\\s]+)/);
     if (match?.[1]) return match[1];
   }
   return undefined;
 }
 
-export class FlectraClient {
+export class EngineClient {
   private readonly baseUrl: string;
   private readonly sessionId?: string;
   private readonly fetcher: FetchImplementation;
   private rpcId = 0;
 
-  constructor(options: FlectraClientOptions) {
-    if (!options.baseUrl.trim()) throw new Error("Flectra baseUrl is required.");
+  constructor(options: EngineClientOptions) {
+    if (!options.baseUrl.trim()) throw new Error("The engine endpoint is required.");
     this.baseUrl = options.baseUrl.endsWith("/") ? options.baseUrl : `${options.baseUrl}/`;
     this.sessionId = options.sessionId;
     this.fetcher = options.fetcher ?? fetch;
@@ -66,12 +66,12 @@ export class FlectraClient {
     try {
       payload = (await response.json()) as JsonRpcResponse<T>;
     } catch {
-      throw new Error(`Flectra returned a non-JSON response (HTTP ${response.status}).`);
+      throw new Error(`The application engine returned a non-JSON response (HTTP ${response.status}).`);
     }
 
     if (!response.ok || payload.error) {
-      if (payload.error) throw new FlectraRpcError(payload.error);
-      throw new Error(`Flectra request failed with HTTP ${response.status}.`);
+      if (payload.error) throw new EngineRpcError(payload.error);
+      throw new Error(`The application engine request failed with HTTP ${response.status}.`);
     }
 
     return { result: payload.result as T, response };
@@ -81,21 +81,21 @@ export class FlectraClient {
     db: string,
     login: string,
     password: string,
-  ): Promise<{ sessionId: string; sessionInfo: FlectraSessionInfo }> {
-    const { result, response } = await this.post<FlectraSessionInfo>(
+  ): Promise<{ sessionId: string; sessionInfo: EngineSessionInfo }> {
+    const { result, response } = await this.post<EngineSessionInfo>(
       "/web/session/authenticate",
       { db, login, password },
       undefined,
     );
     const sessionId = extractSessionId(response.headers);
     if (!result?.uid || !sessionId) {
-      throw new Error("Flectra did not establish an authenticated session.");
+      throw new Error("The application server did not establish an authenticated session.");
     }
     return { sessionId, sessionInfo: result };
   }
 
-  async getSessionInfo(): Promise<FlectraSessionInfo> {
-    const { result } = await this.post<FlectraSessionInfo>("/web/session/get_session_info", {});
+  async getSessionInfo(): Promise<EngineSessionInfo> {
+    const { result } = await this.post<EngineSessionInfo>("/web/session/get_session_info", {});
     return result;
   }
 
@@ -116,7 +116,7 @@ export class FlectraClient {
 
   async getViews<T = unknown>(
     model: string,
-    views: FlectraViewDefinition[],
+    views: EngineViewDefinition[],
     options: Record<string, unknown> = {},
     context: Record<string, unknown> = {},
   ): Promise<T> {
@@ -133,11 +133,11 @@ export class FlectraClient {
       cache: "no-store",
     });
 
-    if (!response.ok) throw new Error(`Flectra menu request failed with HTTP ${response.status}.`);
+    if (!response.ok) throw new Error(`The application menu request failed with HTTP ${response.status}.`);
     try {
       return (await response.json()) as T;
     } catch {
-      throw new Error("Flectra returned an invalid menu response.");
+      throw new Error("The application server returned an invalid menu response.");
     }
   }
 
@@ -153,11 +153,11 @@ export class FlectraClient {
   }
 }
 
-export { FlectraRpcError } from "./errors";
+export { EngineRpcError } from "./errors";
 export type {
-  FlectraCallKw,
-  FlectraRpcErrorPayload,
-  FlectraSessionInfo,
-  FlectraViewDefinition,
-  FlectraViewsResult,
+  EngineCallKw,
+  EngineRpcErrorPayload,
+  EngineSessionInfo,
+  EngineViewDefinition,
+  EngineViewsResult,
 } from "./types";

@@ -32,11 +32,11 @@ RUN python -m pip wheel --no-cache-dir --no-deps --wheel-dir=/wheels .
 FROM python:3.11-slim-bookworm AS runtime
 
 LABEL org.opencontainers.image.title="MoonWitness" \
-      org.opencontainers.image.description="MoonWitness ERP distribution powered by Flectra 3.0" \
+      org.opencontainers.image.description="MoonWitness self-hosted operational platform" \
       org.opencontainers.image.source="https://github.com/A-L-L-A-H/flectra" \
       org.opencontainers.image.licenses="LGPL-3"
 
-# Flectra runtime and Python defaults.
+# MoonWitness runtime and Python defaults.
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     HOME=/opt/flectra
@@ -92,7 +92,7 @@ RUN python -m pip install --no-cache-dir --no-index --find-links=/wheels -r /tmp
 
 WORKDIR /opt/flectra
 
-# Copy the Flectra source tree (the Docker build context is filtered by .dockerignore).
+# Copy the application source tree (the Docker build context is filtered by .dockerignore).
 COPY --chown=flectra:flectra . /opt/flectra
 
 # Install the packaged server configuration and executable wrapper.

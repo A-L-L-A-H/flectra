@@ -1,15 +1,15 @@
-export type FlectraSelectionOption = [string | number, string];
+export type EngineSelectionOption = [string | number, string];
 
-export type FlectraFieldMetadata = {
+export type EngineFieldMetadata = {
   string?: string;
   type?: string;
-  selection?: FlectraSelectionOption[];
+  selection?: EngineSelectionOption[];
   currency_field?: string;
 };
 
 export type FormViewResponse = {
   views?: Record<string, { arch?: string; id?: number | false }>;
-  models?: Record<string, Record<string, FlectraFieldMetadata>>;
+  models?: Record<string, Record<string, EngineFieldMetadata>>;
 };
 
 export type FormFieldItem =
@@ -19,7 +19,7 @@ export type FormFieldItem =
       label: string;
       fieldType: string;
       widget?: string;
-      selection?: FlectraSelectionOption[];
+      selection?: EngineSelectionOption[];
       currencyField?: string;
     }
   | {
@@ -333,7 +333,7 @@ export function isStaticVisible(attrs: Record<string, string>): boolean {
 
 function buildFieldItem(
   node: XmlNode,
-  metadata: Record<string, FlectraFieldMetadata>,
+  metadata: Record<string, EngineFieldMetadata>,
 ): FormFieldItem | null {
   const name = node.attrs.name?.trim();
   if (!name) return null;
@@ -382,13 +382,13 @@ function buildFieldItem(
 
 export function parseFormView(
   arch: string | undefined | null,
-  metadata: Record<string, FlectraFieldMetadata> | undefined | null,
+  metadata: Record<string, EngineFieldMetadata> | undefined | null,
 ): ParsedFormView {
   if (!arch || !arch.trim()) {
     return {
       ok: false,
       reason: "empty",
-      message: "Flectra did not return a form view architecture for this model.",
+      message: "No form view architecture was returned for this model.",
     };
   }
 
@@ -399,7 +399,7 @@ export function parseFormView(
     return {
       ok: false,
       reason: "malformed",
-      message: "Flectra returned a malformed XML form architecture.",
+      message: "The server returned a malformed XML form architecture.",
     };
   }
 
@@ -415,7 +415,7 @@ export function parseFormView(
     return {
       ok: false,
       reason: "empty",
-      message: "This Flectra form view is hidden by view modifiers.",
+      message: "This form view is hidden by view modifiers.",
     };
   }
 
@@ -482,7 +482,7 @@ export function parseFormView(
     return {
       ok: false,
       reason: "empty",
-      message: "No readable fields are available in this Flectra form view.",
+      message: "No readable fields are available in this form view.",
     };
   }
 
@@ -493,7 +493,7 @@ export function parseFormView(
   };
 }
 
-function parseFlectraDate(value: string): Date | null {
+function parseDate(value: string): Date | null {
   const match = value.trim().match(/^(\d{4})-(\d{2})-(\d{2})$/);
   if (!match) return null;
   const year = Number(match[1]);
@@ -510,7 +510,7 @@ function parseFlectraDate(value: string): Date | null {
   return parsed;
 }
 
-function parseFlectraDateTime(value: string): Date | null {
+function parseDateTime(value: string): Date | null {
   const trimmed = value.trim();
   const isoCandidate = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/.test(trimmed)
     ? `${trimmed.replace(" ", "T")}Z`
@@ -523,7 +523,7 @@ export function formatFieldValue(
   value: unknown,
   field: {
     fieldType?: string;
-    selection?: FlectraSelectionOption[];
+    selection?: EngineSelectionOption[];
     currencyField?: string;
   },
   record?: Record<string, unknown>,
@@ -570,7 +570,7 @@ export function formatFieldValue(
   }
 
   if (fieldType === "date" && typeof value === "string") {
-    const date = parseFlectraDate(value);
+    const date = parseDate(value);
     if (date) {
       return new Intl.DateTimeFormat("en-US", {
         dateStyle: "medium",
@@ -581,7 +581,7 @@ export function formatFieldValue(
   }
 
   if (fieldType === "datetime" && typeof value === "string") {
-    const date = parseFlectraDateTime(value);
+    const date = parseDateTime(value);
     if (date) {
       return `${new Intl.DateTimeFormat("en-US", {
         dateStyle: "medium",

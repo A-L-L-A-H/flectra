@@ -4,17 +4,17 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { AlertCircle, ArrowUpRight, ChevronLeft, ChevronRight, LoaderCircle, RefreshCw, Rows3 } from "lucide-react";
-import { Badge } from "@workspace/ui/components/badge";
-import { Button } from "@workspace/ui/components/button";
+import { Badge } from "@moonwitness/ui/components/badge";
+import { Button } from "@moonwitness/ui/components/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@workspace/ui/components/card";
-import { Skeleton } from "@workspace/ui/components/skeleton";
-import { FlectraBrowserClient, FlectraBrowserError } from "@workspace/flectra-client/browser";
+} from "@moonwitness/ui/components/card";
+import { Skeleton } from "@moonwitness/ui/components/skeleton";
+import { EngineBrowserClient, EngineBrowserError } from "@moonwitness/engine-client/browser";
 
 type FieldMetadata = {
   string?: string;
@@ -49,12 +49,12 @@ function isHiddenModifier(value: string | null): boolean {
 function parseListFields(arch: string, metadata: Record<string, FieldMetadata>): ListField[] {
   const document = new DOMParser().parseFromString(arch, "application/xml");
   if (document.querySelector("parsererror")) {
-    throw new Error("Flectra returned an invalid XML list architecture.");
+    throw new Error("The server returned an invalid XML list architecture.");
   }
 
   const root = document.documentElement;
   if (root.localName !== "list" && root.localName !== "tree") {
-    throw new Error("The selected Flectra view is not a supported list/tree view.");
+    throw new Error("The selected view is not a supported list/tree view.");
   }
 
   const fields: ListField[] = [];
@@ -98,7 +98,7 @@ export function ModelListView({
   context?: Record<string, unknown>;
 }) {
   const router = useRouter();
-  const client = useMemo(() => new FlectraBrowserClient(), []);
+  const client = useMemo(() => new EngineBrowserClient(), []);
   const [state, setState] = useState<LoadState>("loading");
   const [fields, setFields] = useState<ListField[]>([]);
   const [records, setRecords] = useState<RecordValue[]>([]);
@@ -110,10 +110,10 @@ export function ModelListView({
     const response = await client.getViews<ViewResponse>(model, [[false, "list"]], {}, context);
     const arch = response.views?.list?.arch ?? response.views?.tree?.arch;
     const metadata = response.models?.[model] ?? {};
-    if (!arch) throw new Error("Flectra did not return a list view for this model.");
+    if (!arch) throw new Error("No list view was returned for this model.");
 
     const visibleFields = parseListFields(arch, metadata);
-    if (visibleFields.length === 0) throw new Error("No readable columns are available in this Flectra list view.");
+    if (visibleFields.length === 0) throw new Error("No readable columns are available in this list view.");
 
     // Structured action filters/context are preserved. Python expressions
     // returned as strings are intentionally not evaluated in JavaScript.
@@ -140,7 +140,7 @@ export function ModelListView({
       setOffset(safeOffset);
       setState("ready");
     } catch (cause) {
-      if (cause instanceof FlectraBrowserError && cause.status === 401) {
+      if (cause instanceof EngineBrowserError && cause.status === 401) {
         window.location.replace("/login");
         return;
       }
@@ -163,7 +163,7 @@ export function ModelListView({
       })
       .catch((cause: unknown) => {
         if (cancelled) return;
-        if (cause instanceof FlectraBrowserError && cause.status === 401) {
+        if (cause instanceof EngineBrowserError && cause.status === 401) {
           window.location.replace("/login");
           return;
         }
@@ -186,7 +186,7 @@ export function ModelListView({
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-orange-600">Model / List view</p>
           <h1 className="mt-2 font-mono text-2xl font-semibold tracking-tight">{model}</h1>
-          <p className="mt-2 text-sm text-muted-foreground">Columns and readable records come from the active Flectra user session.</p>
+          <p className="mt-2 text-sm text-muted-foreground">Columns and readable records follow your active account permissions.</p>
         </div>
         <div className="flex items-center gap-2">
           {state === "ready" ? <Badge variant="outline">{total.toLocaleString()} records</Badge> : null}
@@ -203,7 +203,7 @@ export function ModelListView({
             <div className="flex size-9 items-center justify-center rounded-lg bg-orange-500/10 text-orange-700"><Rows3 className="size-4" /></div>
             <div>
               <CardTitle className="text-base">Records</CardTitle>
-              <CardDescription>Read-only list. Flectra remains responsible for access rights and record rules.</CardDescription>
+              <CardDescription>Read-only list. Access rights and record rules are enforced by the platform.</CardDescription>
             </div>
           </div>
         </CardHeader>
@@ -216,7 +216,7 @@ export function ModelListView({
             </div>
           ) : null}
           {state === "ready" ? records.length === 0 ? (
-            <p className="p-8 text-center text-sm text-muted-foreground">No records are available in this Flectra list view.</p>
+            <p className="p-8 text-center text-sm text-muted-foreground">No records are available in this list view.</p>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full min-w-[640px] border-collapse text-left text-sm">

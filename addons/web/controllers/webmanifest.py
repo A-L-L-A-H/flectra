@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 # Part of Flectra. See LICENSE file for full copyright and licensing details.
-import base64
 import json
 import mimetypes
 
@@ -45,22 +44,25 @@ class WebManifest(http.Controller):
         Using this metadata, user agents can provide developers with means to create user
         experiences that are more comparable to that of a native application.
         """
-        web_app_name = request.env['ir.config_parameter'].sudo().get_param('web.web_app_name', 'Flectra')
+        configured_name = request.env['ir.config_parameter'].sudo().get_param('web.web_app_name', 'MoonWitness')
+        web_app_name = configured_name.strip() if isinstance(configured_name, str) else 'MoonWitness'
+        if not web_app_name or web_app_name.casefold() in {'flectra', 'flectra 3.0'}:
+            web_app_name = 'MoonWitness'
         manifest = {
             'name': web_app_name,
             'scope': '/web',
             'start_url': '/web',
             'display': 'standalone',
-            'background_color': '#009efb',
-            'theme_color': '#009efb',
+            'background_color': '#0b0c0e',
+            'theme_color': '#f28b3c',
             'prefer_related_applications': False,
         }
-        icon_sizes = ['192x192', '512x512']
         manifest['icons'] = [{
-            'src': '/web/static/img/flectra-icon-%s.png' % size,
-            'sizes': size,
-            'type': 'image/png',
-        } for size in icon_sizes]
+            'src': '/moonwitness_base/static/src/img/moonwitness-mark.svg',
+            'sizes': 'any',
+            'type': 'image/svg+xml',
+            'purpose': 'any',
+        }]
         manifest['shortcuts'] = self._get_shortcuts()
         body = json.dumps(manifest, default=ustr)
         response = request.make_response(body, [
@@ -86,12 +88,7 @@ class WebManifest(http.Controller):
             body = f.read()
             return body
 
-    def _icon_path(self):
-        return 'web/static/img/flectra-icon-192x192.png'
-
     @http.route('/web/offline', type='http', auth='public', methods=['GET'])
     def offline(self):
         """ Returns the offline page delivered by the service worker """
-        return request.render('web.webclient_offline', {
-            'flectra_icon': base64.b64encode(file_open(self._icon_path(), 'rb').read())
-        })
+        return request.render('web.webclient_offline', {})

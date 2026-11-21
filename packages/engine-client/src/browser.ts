@@ -1,14 +1,14 @@
-export class FlectraBrowserError extends Error {
+export class EngineBrowserError extends Error {
   readonly status: number;
 
   constructor(message: string, status: number) {
     super(message);
-    this.name = "FlectraBrowserError";
+    this.name = "EngineBrowserError";
     this.status = status;
   }
 }
 
-export class FlectraBrowserClient {
+export class EngineBrowserClient {
   private async post<T>(route: string, body: unknown): Promise<T> {
     const response = await fetch(route, {
       method: "POST",
@@ -22,14 +22,14 @@ export class FlectraBrowserClient {
     try {
       payload = (await response.json()) as { result?: T; error?: string };
     } catch {
-      throw new FlectraBrowserError(
+      throw new EngineBrowserError(
         `The workspace API returned a non-JSON response (HTTP ${response.status}).`,
         response.status,
       );
     }
 
     if (!response.ok) {
-      throw new FlectraBrowserError(
+      throw new EngineBrowserError(
         payload.error || `The workspace request failed (HTTP ${response.status}).`,
         response.status,
       );
@@ -43,14 +43,14 @@ export class FlectraBrowserClient {
     options: Record<string, unknown> = {},
     context: Record<string, unknown> = {},
   ): Promise<T> {
-    return this.post<T>("/api/flectra/views", { model, views, options, context });
+    return this.post<T>("/api/engine/views", { model, views, options, context });
   }
 
   loadAction<T = unknown>(
     actionId: number | string,
     additionalContext: Record<string, unknown> = {},
   ): Promise<T> {
-    return this.post<T>("/api/flectra/actions", { actionId, additionalContext });
+    return this.post<T>("/api/engine/actions", { actionId, additionalContext });
   }
 
   searchRead<T = Record<string, unknown>>(
@@ -59,7 +59,7 @@ export class FlectraBrowserClient {
     fields: string[] = [],
     kwargs: Record<string, unknown> = {},
   ): Promise<T[]> {
-    return this.post<T[]>("/api/flectra/rpc", {
+    return this.post<T[]>("/api/engine/rpc", {
       model,
       method: "search_read",
       args: [domain],
@@ -72,7 +72,7 @@ export class FlectraBrowserClient {
     domain: unknown[] = [],
     context: Record<string, unknown> = {},
   ): Promise<number> {
-    return this.post<number>("/api/flectra/rpc", {
+    return this.post<number>("/api/engine/rpc", {
       model,
       method: "search_count",
       args: [domain],

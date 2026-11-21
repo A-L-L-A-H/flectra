@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { getFlectraErrorStatus } from "@/lib/flectra-errors";
-import { getAuthenticatedFlectraClient, sameOrigin } from "@/lib/flectra-server";
+import { getEngineErrorStatus } from "@/lib/engine-errors";
+import { getAuthenticatedEngineClient, sameOrigin } from "@/lib/engine-server";
 import { privateNoStoreHeaders, readJsonObject } from "@/lib/http";
 
 export const runtime = "nodejs";
@@ -81,17 +81,17 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const { client } = await getAuthenticatedFlectraClient();
+    const { client } = await getAuthenticatedEngineClient();
     const result = await client.getViews(model, normalizedViews, options, context);
     return NextResponse.json({ result }, { headers: privateNoStoreHeaders() });
   } catch (error) {
-    const status = getFlectraErrorStatus(error);
+    const status = getEngineErrorStatus(error);
     const message =
       status === 401
-        ? "Flectra session is no longer valid. Sign in again."
+        ? "Your session is no longer valid. Sign in again."
         : status === 403
-          ? "Flectra denied access to this view."
-          : "Unable to load Flectra view metadata.";
+          ? "Access to this view was denied."
+          : "Unable to load view metadata.";
     return NextResponse.json({ error: message }, {
       status,
       headers: privateNoStoreHeaders(),

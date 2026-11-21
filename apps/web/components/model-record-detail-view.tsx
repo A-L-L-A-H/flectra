@@ -3,11 +3,11 @@
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { AlertCircle, ArrowLeft, LoaderCircle, RefreshCw } from "lucide-react";
-import { Badge } from "@workspace/ui/components/badge";
-import { Button } from "@workspace/ui/components/button";
-import { Card, CardContent } from "@workspace/ui/components/card";
-import { Skeleton } from "@workspace/ui/components/skeleton";
-import { FlectraBrowserClient } from "@workspace/flectra-client/browser";
+import { Badge } from "@moonwitness/ui/components/badge";
+import { Button } from "@moonwitness/ui/components/button";
+import { Card, CardContent } from "@moonwitness/ui/components/card";
+import { Skeleton } from "@moonwitness/ui/components/skeleton";
+import { EngineBrowserClient } from "@moonwitness/engine-client/browser";
 import { ModelFormView } from "@/components/model-form-view";
 import { loadRecordDetail, type RecordDetailResult } from "@/lib/record-detail";
 
@@ -22,7 +22,7 @@ export function ModelRecordDetailView({
   model: string;
   recordId: number;
 }) {
-  const client = useMemo(() => new FlectraBrowserClient(), []);
+  const client = useMemo(() => new EngineBrowserClient(), []);
   const [state, setState] = useState<DetailViewState>({ status: "loading" });
 
   const refresh = useCallback(async () => {
@@ -112,7 +112,7 @@ export function ModelRecordDetailView({
           <CardContent className="p-8 text-center">
             <p className="text-base font-medium">Record not found</p>
             <p className="mt-2 text-sm text-muted-foreground">
-              This record does not exist or is not accessible with your Flectra session.
+              This record does not exist or is not accessible with your current account.
             </p>
             <Button asChild variant="outline" size="sm" className="mt-5">
               <Link href={listHref}>Return to list</Link>

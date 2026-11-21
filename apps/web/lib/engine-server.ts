@@ -1,20 +1,20 @@
 import "server-only";
 
 import { cookies } from "next/headers";
-import { FlectraClient } from "@workspace/flectra-client/server";
-import { MissingFlectraSessionError } from "@/lib/flectra-errors";
+import { EngineClient } from "@moonwitness/engine-client/server";
+import { MissingEngineSessionError } from "@/lib/engine-errors";
 
-export const FLECTRA_SESSION_COOKIE = "flectra_session";
+export const MOONWITNESS_SESSION_COOKIE = "moonwitness_session";
 
-export function getFlectraBaseUrl(): string {
-  const value = process.env.FLECTRA_URL?.trim();
-  if (!value) throw new Error("FLECTRA_URL is not configured.");
+export function getEngineBaseUrl(): string {
+  const value = process.env.MOONWITNESS_ENGINE_URL?.trim();
+  if (!value) throw new Error("MOONWITNESS_ENGINE_URL is not configured.");
 
   let url: URL;
   try {
     url = new URL(value);
   } catch {
-    throw new Error("FLECTRA_URL must be an absolute HTTP(S) URL.");
+    throw new Error("MOONWITNESS_ENGINE_URL must be an absolute HTTP(S) URL.");
   }
 
   if (
@@ -25,22 +25,22 @@ export function getFlectraBaseUrl(): string {
     url.search ||
     url.hash
   ) {
-    throw new Error("FLECTRA_URL must be an absolute HTTP(S) URL without credentials, query, or fragment.");
+    throw new Error("MOONWITNESS_ENGINE_URL must be an absolute HTTP(S) URL without credentials, query, or fragment.");
   }
 
   url.pathname = url.pathname.endsWith("/") ? url.pathname : `${url.pathname}/`;
   return url.toString();
 }
 
-export function createFlectraServerClient(sessionId?: string): FlectraClient {
-  return new FlectraClient({ baseUrl: getFlectraBaseUrl(), sessionId });
+export function createEngineClient(sessionId?: string): EngineClient {
+  return new EngineClient({ baseUrl: getEngineBaseUrl(), sessionId });
 }
 
-export async function getAuthenticatedFlectraClient() {
+export async function getAuthenticatedEngineClient() {
   const cookieStore = await cookies();
-  const sessionId = cookieStore.get(FLECTRA_SESSION_COOKIE)?.value;
-  if (!sessionId) throw new MissingFlectraSessionError();
-  return { sessionId, client: createFlectraServerClient(sessionId) };
+  const sessionId = cookieStore.get(MOONWITNESS_SESSION_COOKIE)?.value;
+  if (!sessionId) throw new MissingEngineSessionError();
+  return { sessionId, client: createEngineClient(sessionId) };
 }
 
 export function sameOrigin(request: Request): boolean {

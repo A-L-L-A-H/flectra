@@ -1,16 +1,33 @@
 @import "@workspace/ui/globals.css";
 
-:root {
-  color-scheme: light;
-}
+:root { color-scheme: dark; }
 
-html { min-height: 100%; }
+html {
+  min-height: 100%;
+  background: var(--mw-ink);
+  scroll-behavior: smooth;
+}
 
 body {
   min-height: 100vh;
-  background:
-    radial-gradient(ellipse at 88% 0%, rgba(249, 115, 22, 0.08), transparent 34rem),
-    var(--background);
+  background-color: var(--background);
+  background-image:
+    radial-gradient(ellipse 72rem 38rem at 92% -8%, rgb(242 139 60 / 10%), transparent 68%),
+    linear-gradient(to right, rgb(255 255 255 / 2.2%) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 2.2%) 1px, transparent 1px);
+  background-size: auto, 64px 64px, 64px 64px;
+  background-position: center top;
 }
 
-::selection { background: rgba(249, 115, 22, 0.22); }
+::selection { color: var(--mw-paper); background: rgb(242 139 60 / 35%); }
+:focus-visible { outline: 2px solid var(--mw-ember-soft); outline-offset: 3px; }
+a { text-underline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

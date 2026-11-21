@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'MoonWitness Orchestrator',
-    'summary': 'Flectra client for the Fastify services orchestrator (WhatsApp and future JS-only services)',
-    'description': "HTTP client for the moonwitness-orchestrator (Fastify) container. URL/token stored in ir.config_parameter: moonwitness_orchestrator.url / moonwitness_orchestrator.token (with fallback to moonwitness_arsy.orchestrator_url / moonwitness_arsy.orchestrator_token).",
+    'summary': 'Native workspace for connected services and messaging integrations',
+    'description': """
+Configuration and authenticated client for the MoonWitness service runtime.
+Service endpoint and access token are stored in system parameters:
+moonwitness_orchestrator.url and moonwitness_orchestrator.token.
+Legacy parameter aliases remain supported for existing deployments.
+    """,
     'version': '3.0.1.0.0',
     'category': 'Administration',
     'author': 'MoonWitness',

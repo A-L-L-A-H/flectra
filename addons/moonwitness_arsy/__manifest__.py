@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'MoonWitness ARSY',
-    'summary': 'Docker Manager panel inside Flectra: status, actions, logs, databases, backups',
+    'summary': 'Native operations console for containers, logs, databases, and backups',
     'description': """
-Manage the Docker Compose stack (flectra app, db, backups) from the Flectra UI.
-Talks to a hardened host agent over HTTP with a shared-secret token.
-No Docker socket is mounted into the Flectra container.
+Operate the MoonWitness runtime through the ARSY operations workspace.
+Communicates with the isolated host agent over authenticated HTTP.
+The application container never receives direct access to the Docker socket.
     """,
     'version': '3.0.1.0.0',
     'category': 'Administration',

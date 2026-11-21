@@ -7,7 +7,12 @@
     'category': 'Administration',
     'author': 'MoonWitness',
     'license': 'LGPL-3',
-    'depends': ['base'],
+    'depends': ['base', 'web'],
+    'assets': {
+        'web.assets_backend': [
+            'moonwitness_base/static/src/scss/brand.scss',
+        ],
+    },
     'data': [
         'security/moonwitness_base_security.xml',
         'views/moonwitness_base_menus.xml',

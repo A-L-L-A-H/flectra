@@ -1,0 +1,133 @@
+/* MoonWitness native workspace — shared visual treatment for the inherited web shell. */
+:root {
+  --mw-ink: #0b0c0e;
+  --mw-panel: #121417;
+  --mw-panel-raised: #191c20;
+  --mw-paper: #f2eee6;
+  --mw-ember: #f28b3c;
+  --mw-ember-soft: #ffb36e;
+  --mw-muted: #9a9b9d;
+}
+
+body.o_web_client {
+  color: var(--mw-paper);
+  background: var(--mw-ink);
+}
+
+.o_main_navbar {
+  color: var(--mw-paper) !important;
+  background: var(--mw-ink) !important;
+  border-bottom: 1px solid rgb(255 255 255 / 12%) !important;
+  box-shadow: 0 8px 28px rgb(0 0 0 / 22%);
+}
+
+.o_main_navbar .o_menu_brand,
+.o_main_navbar .o_nav_entry,
+.o_main_navbar .dropdown-toggle {
+  color: var(--mw-paper);
+}
+
+.o_main_navbar .o_nav_entry:hover,
+.o_main_navbar .dropdown-toggle:hover,
+.o_main_navbar .o_menu_brand:hover {
+  color: var(--mw-ember-soft);
+  background: rgb(255 255 255 / 5%);
+}
+
+.o_main_navbar .dropdown-menu {
+  color: var(--mw-paper);
+  background: var(--mw-panel);
+  border: 1px solid rgb(255 255 255 / 12%);
+  box-shadow: 0 16px 48px rgb(0 0 0 / 40%);
+}
+
+.o_main_navbar .dropdown-item {
+  color: var(--mw-paper);
+}
+
+.o_main_navbar .dropdown-item:hover,
+.o_main_navbar .dropdown-item:focus {
+  color: var(--mw-ember-soft);
+  background: rgb(242 139 60 / 12%);
+}
+
+.o_control_panel {
+  color: var(--mw-paper);
+  background: var(--mw-panel);
+  border-bottom: 1px solid rgb(255 255 255 / 10%);
+}
+
+.o_action_manager,
+.o_content {
+  color: var(--mw-paper);
+  background: var(--mw-ink);
+}
+
+.o_list_view,
+.o_form_view,
+.o_kanban_view,
+.o_search_panel {
+  color: var(--mw-paper);
+}
+
+.o_list_view .o_list_table thead,
+.o_list_view .o_list_table tfoot,
+.o_kanban_record {
+  color: var(--mw-paper);
+  background: var(--mw-panel);
+}
+
+.o_list_view .o_list_table tbody tr:hover {
+  background: rgb(242 139 60 / 7%);
+}
+
+.o_form_view .o_form_sheet_bg {
+  background: var(--mw-ink);
+}
+
+.o_form_view .o_form_sheet,
+.o_kanban_record {
+  border-color: rgb(255 255 255 / 12%);
+  box-shadow: none;
+}
+
+.o_web_client .btn-primary {
+  --bs-btn-bg: var(--mw-ember);
+  --bs-btn-border-color: var(--mw-ember);
+  --bs-btn-color: #111214;
+  --bs-btn-hover-bg: var(--mw-ember-soft);
+  --bs-btn-hover-border-color: var(--mw-ember-soft);
+  --bs-btn-hover-color: #111214;
+}
+
+.o_web_client input,
+.o_web_client textarea,
+.o_web_client select,
+.o_web_client .o_input {
+  color: var(--mw-paper);
+  background-color: var(--mw-panel);
+  border-color: rgb(255 255 255 / 16%);
+}
+
+.o_web_client input:focus,
+.o_web_client textarea:focus,
+.o_web_client select:focus,
+.o_web_client .o_input:focus {
+  border-color: var(--mw-ember);
+  box-shadow: 0 0 0 .2rem rgb(242 139 60 / 14%);
+}
+
+.o_web_client .text-muted,
+.o_web_client .text-500,
+.o_web_client .o_form_label {
+  color: var(--mw-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .o_web_client *,
+  .o_web_client *::before,
+  .o_web_client *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}

@@ -1,12 +1,12 @@
 import { notFound } from "next/navigation";
 import { ModelListView } from "@/components/model-list-view";
-import { getAuthenticatedFlectraClient } from "@/lib/flectra-server";
+import { getAuthenticatedEngineClient } from "@/lib/engine-server";
 
 type ActionPageProps = {
   params: Promise<{ action: string }>;
 };
 
-type FlectraWindowAction = {
+type EngineWindowAction = {
   type?: string;
   res_model?: string;
   domain?: unknown;
@@ -22,17 +22,17 @@ export default async function WorkspaceActionPage({ params }: ActionPageProps) {
   const actionId = Number(action);
   if (!Number.isSafeInteger(actionId) || actionId <= 0) notFound();
 
-  let definition: FlectraWindowAction;
+  let definition: EngineWindowAction;
 
   try {
-    const { client } = await getAuthenticatedFlectraClient();
-    definition = await client.loadAction<FlectraWindowAction>(actionId);
+    const { client } = await getAuthenticatedEngineClient();
+    definition = await client.loadAction<EngineWindowAction>(actionId);
   } catch {
     notFound();
   }
 
   // The first renderer intentionally supports read-only window actions only.
-  // Flectra still validates the action and model access on every RPC request.
+  // The native engine validates the action and model access on every RPC request.
   if (definition.type && definition.type !== "ir.actions.act_window") notFound();
   if (!definition.res_model || !/^[A-Za-z_][A-Za-z0-9_.]*$/.test(definition.res_model)) notFound();
 

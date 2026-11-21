@@ -1,4 +1,4 @@
-export type FlectraSessionInfo = {
+export type EngineSessionInfo = {
   uid: number | false;
   db?: string;
   name?: string;
@@ -7,22 +7,22 @@ export type FlectraSessionInfo = {
   [key: string]: unknown;
 };
 
-export type FlectraViewDefinition = [viewId: number | false, viewType: string];
+export type EngineViewDefinition = [viewId: number | false, viewType: string];
 
-export type FlectraViewsResult = {
+export type EngineViewsResult = {
   views: Record<string, { arch?: string; id?: number | false; [key: string]: unknown }>;
   models: Record<string, Record<string, Record<string, unknown>>>;
   [key: string]: unknown;
 };
 
-export type FlectraCallKw = {
+export type EngineCallKw = {
   model: string;
   method: string;
   args?: unknown[];
   kwargs?: Record<string, unknown>;
 };
 
-export type FlectraRpcErrorPayload = {
+export type EngineRpcErrorPayload = {
   code?: number;
   message?: string;
   data?: {

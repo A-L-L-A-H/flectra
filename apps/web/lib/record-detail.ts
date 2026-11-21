@@ -60,7 +60,7 @@ export async function loadRecordDetail(
 ): Promise<RecordDetailResult> {
   const model = params.model.trim();
   if (!isValidModelName(model)) {
-    return { status: "invalid", message: "A valid Flectra model name is required." };
+    return { status: "invalid", message: "A valid model name is required." };
   }
 
   const recordId =
