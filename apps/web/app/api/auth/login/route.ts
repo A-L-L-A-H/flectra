@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { EngineClient } from "@moonwitness/engine-client/server";
-import { LEGACY_SESSION_COOKIE, MOONWITNESS_SESSION_COOKIE, getEngineBaseUrl, sameOrigin } from "@/lib/engine-server";
+import { MOONWITNESS_SESSION_COOKIE, getEngineBaseUrl, sameOrigin } from "@/lib/engine-server";
 
 export const runtime = "nodejs";
 
@@ -67,7 +67,6 @@ export async function POST(request: NextRequest) {
         db: sessionInfo.db,
       },
     });
-    response.cookies.set(LEGACY_SESSION_COOKIE, "", { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "lax", path: "/", maxAge: 0 });
     response.cookies.set(MOONWITNESS_SESSION_COOKIE, sessionId, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
