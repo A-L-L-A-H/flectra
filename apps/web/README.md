@@ -27,9 +27,9 @@ The selected database must already exist. This application does not provision da
 
 - `apps/web`: Next.js App Router, sign-in, server-side BFF routes, workspace shell, and model views.
 - `packages/ui`: shared component source and central MoonWitness design tokens.
-- `packages/flectra-client`: internal adapter for the native session and JSON-RPC protocol.
+- Native engine client: internal adapter for the session and JSON-RPC protocol.
 
-The adapter package keeps its technical compatibility path for now. Its internal name is not a user-facing product label.
+The adapter retains its current internal import path for compatibility. That path is not a user-facing product label.
 
 ## Native navigation and read-only records
 
