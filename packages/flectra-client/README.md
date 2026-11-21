@@ -1,12 +1,16 @@
-# Flectra client
+# Native Engine Client
 
-Small adapter around the native Flectra JSON-RPC contract.
+Internal typed adapter for the MoonWitness application engine's session and JSON-RPC interfaces.
 
-- `./server` is for Next.js server code and talks directly to Flectra.
-- `./browser` is for client components and talks only to the Next.js BFF routes.
-- The browser never receives the upstream Flectra session identifier.
-- Model reads continue to use Flectra's native `/web/dataset/call_kw` endpoint through `search_read` and `search_count`.
-- View metadata is loaded through the model's native `get_views` method.
-- Actions are loaded through `/web/action/load`.
+## Responsibilities
 
-The browser-facing BFF permits only read operations needed by the initial list renderer. Do not expose arbitrary ORM methods, add a second ORM, duplicate access-control logic, or expose database credentials to client components. Flectra remains responsible for model access rights, field access, and record rules.
+- Normalize JSON-RPC requests and responses.
+- Support server-side session transport and browser-side same-origin transport.
+- Provide typed helpers for authentication, session information, menu loading, actions, views, and bounded read methods.
+- Normalize transport and RPC failures without exposing sensitive upstream exception details.
+
+## Boundaries
+
+This package is a protocol adapter, not a parallel ORM or authorization service. The engine remains authoritative for model access, fields, record rules, and business logic. Browser-facing calls are routed through the MoonWitness BFF and its allowlist.
+
+The package directory and import path remain an internal compatibility identifier for now. They are not a product name or an end-user label.
