@@ -44,7 +44,10 @@ class WebManifest(http.Controller):
         Using this metadata, user agents can provide developers with means to create user
         experiences that are more comparable to that of a native application.
         """
-        web_app_name = request.env['ir.config_parameter'].sudo().get_param('web.web_app_name', 'MoonWitness')
+        configured_name = request.env['ir.config_parameter'].sudo().get_param('web.web_app_name', 'MoonWitness')
+        web_app_name = configured_name.strip() if isinstance(configured_name, str) else 'MoonWitness'
+        if not web_app_name or web_app_name.casefold() in {'flectra', 'flectra 3.0'}:
+            web_app_name = 'MoonWitness'
         manifest = {
             'name': web_app_name,
             'scope': '/web',
