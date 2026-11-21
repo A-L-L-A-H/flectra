@@ -1,0 +1,14 @@
+{
+  "name": "@moonwitness/engine-client",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./browser": "./src/browser.ts",
+    "./server": "./src/server.ts"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
