@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <record id="view_moonwitness_action_form" model="ir.ui.view">
+        <field name="name">moonwitness.arsy.action.form</field>
+        <field name="model">moonwitness_arsy.action</field>
+        <field name="arch" type="xml">
+            <form string="MoonWitness ARSY">
+                <group>
+                    <field name="action_type"/>
+                    <field name="command" invisible="action_type != 'action'"/>
+                    <field name="service" invisible="action_type != 'logs'"/>
+                    <field name="tail" invisible="action_type != 'logs'"/>
+                    <field name="level" invisible="action_type != 'logs'"/>
+                    <field name="database" invisible="action_type not in ('backup',)"/>
+                    <field name="filename" invisible="action_type != 'restore'"/>
+                    <field name="force" invisible="action_type != 'restore'"/>
+                </group>
+                <footer>
+                    <button name="run" type="object" string="Execute" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+                <group string="Output">
+                    <field name="output" widget="text" nolabel="1"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_moonwitness_dashboard" model="ir.actions.act_window">
+        <field name="name">MoonWitness ARSY</field>
+        <field name="res_model">moonwitness_arsy.action</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</flectra>

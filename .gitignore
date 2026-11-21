@@ -43,6 +43,9 @@ setup/win32/static/postgresql*.exe
 .venv/
 
 # Node.js / pnpm monorepo
+!.env.example
+.env
+.env.*
 node_modules/
 **/node_modules/
 .pnpm-store/
@@ -53,3 +56,4 @@ node_modules/
 out/
 **/out/
 *.tsbuildinfo
+services/orchestrator/dist/

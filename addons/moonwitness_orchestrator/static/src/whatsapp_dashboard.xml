@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="moonwitness_orchestrator.WhatsAppDashboard">
+        <div class="o_moonwitness_wa p-4">
+            <h4>WhatsApp</h4>
+            <div class="alert alert-info" t-if="state.status">
+                Status: <strong t-esc="state.status"/>
+            </div>
+            <div class="alert alert-danger" t-if="state.error" t-esc="state.error"/>
+            <div class="text-center" t-if="state.qr">
+                <p>Scan dengan WhatsApp &gt; Perangkat Tertaut:</p>
+                <img t-att-src="state.qr" style="max-width:320px"/>
+                <p class="text-muted">QR kedaluwarsa ~60 detik; halaman otomatis memuat ulang QR saat pairing masih dibutuhkan.</p>
+            </div>
+            <div t-if="state.status === 'connected'">
+                <div class="mb-3">
+                    <label for="wa_to" class="form-label">Nomor Tujuan</label>
+                    <input id="wa_to" type="text" class="form-control" t-model="state.to" placeholder="62812xxxxxxx"/>
+                </div>
+                <div class="mb-3">
+                    <label for="wa_message" class="form-label">Pesan</label>
+                    <textarea id="wa_message" class="form-control" rows="3" t-model="state.message"/>
+                </div>
+                <button class="btn btn-primary" t-att-disabled="state.sending" t-on-click="send">Kirim</button>
+                <button class="btn btn-secondary" t-att-disabled="state.logging_out" t-on-click="logout">Logout</button>
+            </div>
+        </div>
+    </t>
+</templates>

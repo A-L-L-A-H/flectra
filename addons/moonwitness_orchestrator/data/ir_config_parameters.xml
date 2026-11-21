@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <data noupdate="1">
+        <record id="config_orchestrator_url" model="ir.config_parameter">
+            <field name="key">moonwitness_orchestrator.url</field>
+            <field name="value">http://orchestrator:8090</field>
+        </record>
+        <record id="config_orchestrator_token" model="ir.config_parameter">
+            <field name="key">moonwitness_orchestrator.token</field>
+            <field name="value"></field>
+        </record>
+    </data>
+</flectra>
