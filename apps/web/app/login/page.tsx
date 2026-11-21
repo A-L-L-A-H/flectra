@@ -4,14 +4,14 @@ import Link from "next/link";
 import { ArrowUpRight, ShieldCheck } from "lucide-react";
 import { LoginForm } from "@/components/login-form";
 import { MoonWitnessMark } from "@/components/moonwitness-mark";
-import { getAuthenticatedFlectraClient } from "@/lib/flectra-server";
+import { getAuthenticatedEngineClient } from "@/lib/engine-server";
 
 export const metadata: Metadata = { title: "Sign in" };
 
 export default async function LoginPage() {
   let authenticated = false;
   try {
-    const { client } = await getAuthenticatedFlectraClient();
+    const { client } = await getAuthenticatedEngineClient();
     const session = await client.getSessionInfo();
     authenticated = Boolean(session.uid);
   } catch {
