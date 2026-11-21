@@ -41,6 +41,14 @@
   - **Depends on**: TASK-003  
   - **Size**: `M`
 
+- [ ] **TASK-004B**: Implement Source Span Binding Model (WSI Stage 1)  
+  - **Goal**: Anchor external source spans and offsets without copying scripture text.  
+  - **Files**: `addons/moonwitness_sidra/models/source_binding.py`  
+  - **Action**: Create `moonwitness.sidra.source.binding` linking provenance, edition, char spans, and URN references.  
+  - **Acceptance Criteria**: Text spans can be bound to external RGBL Git revisions with verified byte offsets.  
+  - **Depends on**: TASK-004  
+  - **Size**: `S`
+
 - [ ] **TASK-005**: Implement Epistemic Status model  
   - **Goal**: Build scoped epistemic classification engine.  
   - **Files**: `addons/moonwitness_sidra/models/epistemic.py`  
@@ -154,6 +162,14 @@
   - **Depends on**: TASK-007, TASK-014  
   - **Size**: `M`
 
+- [ ] **TASK-018B**: Implement Hadith Isnad & Biographical Transmission Models (WSI Stage 9)  
+  - **Goal**: Model Hadith narrator chains, ketersambungan sanad, and Jarh wa Ta'dil credibility.  
+  - **Files**: `addons/moonwitness_sidra/models/transmission.py`  
+  - **Action**: Create `moonwitness.sidra.transmission.isnad` and `transmission.narrator` linked to Hadith passages.  
+  - **Acceptance Criteria**: Isnad graphs trace transmitter sequences and evaluate transmission continuity.  
+  - **Depends on**: TASK-007, TASK-014  
+  - **Size**: `M`
+
 - [ ] **TASK-019**: Ingest Remaining 51 Datasets via Importer Service  
   - **Files**: `addons/moonwitness_sidra/services/importer_service.py`  
   - **Action**: Execute batch ingestion across all 54 datasets (~265MB JSONL).  
@@ -177,6 +193,14 @@
   - **Action**: Create `lexicon`, `word` (surface, lemma, root, POS), and `morphology` (paradigm tables).  
   - **Acceptance Criteria**: Word records link to lexicons and passages with UD v2 POS tags.  
   - **Depends on**: TASK-007  
+  - **Size**: `M`
+
+- [ ] **TASK-021B**: Implement WSI Semantic Frame & Discourse Participant Models (WSI Stages 4 & 5)  
+  - **Goal**: Model core semantic propositions and communicative speech acts across sacred texts.  
+  - **Files**: `addons/moonwitness_sidra/models/semantic_frame.py`  
+  - **Action**: Create `moonwitness.sidra.semantic.frame` and `discourse.participant` models.  
+  - **Acceptance Criteria**: Passages link to semantic propositions with mapped discourse participant roles.  
+  - **Depends on**: TASK-021  
   - **Size**: `M`
 
 - [ ] **TASK-022**: Implement Translation Unit Model  
