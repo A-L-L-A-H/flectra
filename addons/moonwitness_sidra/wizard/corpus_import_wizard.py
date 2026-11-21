@@ -4,15 +4,14 @@ from flectra.exceptions import UserError
 
 
 class SidraCorpusImportWizard(models.TransientModel):
-    """UI wizard enabling administrators to trigger streaming corpus dataset ingestion."""
+    """UI wizard enabling administrators to load bundled default corpus or custom RGBL dataset directories."""
     _name = 'moonwitness.sidra.import.wizard'
     _description = 'Sidra Corpus Ingestion Wizard'
 
     dataset_dir = fields.Char(
-        string='Dataset Root Directory',
-        required=True,
+        string='Custom Dataset Root Directory',
         default='/tmp/corpus/datasets/quran-tanzil-uthmani',
-        help='Absolute path to uncompressed dataset folder containing manifest.json'
+        help='Optional path to a custom uncompressed dataset folder containing manifest.json'
     )
     tradition_code = fields.Char(
         string='Tradition Code',
@@ -27,8 +26,32 @@ class SidraCorpusImportWizard(models.TransientModel):
     )
     result_log = fields.Text(string='Ingestion Log', readonly=True)
 
+    def action_import_bundled(self):
+        self.ensure_one()
+        importer = self.env['moonwitness.sidra.importer.service']
+        try:
+            summary = importer.import_bundled_corpus(batch_size=self.batch_size)
+            self.result_log = (
+                f"SUCCESS: Bundled RGBL corpus loaded — "
+                f"{summary['datasets_loaded']} datasets, {summary['records_total']} records processed "
+                f"({len(summary['errors'])} errors)."
+            )
+        except Exception as e:
+            self.result_log = f"ERROR: Bundled ingestion failed: {str(e)}"
+            raise UserError(f"Bundled Corpus Ingestion Error: {str(e)}")
+
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'moonwitness.sidra.import.wizard',
+            'res_id': self.id,
+            'view_mode': 'form',
+            'target': 'new',
+        }
+
     def action_import(self):
         self.ensure_one()
+        if not self.dataset_dir:
+            raise UserError("Provide a Dataset Root Directory or click 'Load All Bundled Default Datasets'.")
         importer = self.env['moonwitness.sidra.importer.service']
         try:
             count = importer.import_dataset_from_dir(

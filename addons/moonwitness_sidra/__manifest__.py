@@ -46,6 +46,7 @@ Harmonizes:
             'moonwitness_sidra/static/src/xml/query_playground.xml',
         ],
     },
+    'post_init_hook': 'post_init_hook',
     'application': True,
     'auto_install': False,
     'installable': True,

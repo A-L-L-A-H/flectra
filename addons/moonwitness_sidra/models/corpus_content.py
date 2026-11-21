@@ -73,18 +73,38 @@ class SidraCorpusContent(models.Model):
 
     @api.depends('text', 'language')
     def _compute_text_search(self):
-        for rec in self:
-            if not rec.text:
-                rec.text_search = False
-                continue
-            normalized_text = rec._normalize_for_fts(rec.text, rec.language)
-            config = rec._get_ts_config(rec.language)
+        non_empty = self.filtered(lambda r: r.text)
+        empty = self - non_empty
+        for rec in empty:
+            rec.text_search = False
+        if not non_empty:
+            return
+        if len(non_empty) == 1:
+            rec = non_empty[0]
+            norm = rec._normalize_for_fts(rec.text, rec.language)
+            cfg = rec._get_ts_config(rec.language)
             try:
-                self.env.cr.execute("SELECT to_tsvector(%s, %s)", (config, normalized_text))
+                self.env.cr.execute("SELECT to_tsvector(%s::regconfig, %s)", (cfg, norm))
                 row = self.env.cr.fetchone()
-                rec.text_search = row[0] if row else False
+                rec.text_search = row[0] if row else norm
             except Exception:
-                rec.text_search = normalized_text
+                rec.text_search = norm
+            return
+
+        # Batched single-roundtrip PostgreSQL to_tsvector computation for bulk ingestion
+        configs = [r._get_ts_config(r.language) for r in non_empty]
+        norms = [r._normalize_for_fts(r.text, r.language) for r in non_empty]
+        try:
+            self.env.cr.execute(
+                "SELECT to_tsvector(cfg::regconfig, txt)::text FROM unnest(%s::text[], %s::text[]) AS t(cfg, txt)",
+                (configs, norms),
+            )
+            rows = self.env.cr.fetchall()
+            for rec, row in zip(non_empty, rows):
+                rec.text_search = row[0]
+        except Exception:
+            for rec, norm in zip(non_empty, norms):
+                rec.text_search = norm
 
     @api.model
     def _normalize_for_fts(self, text, language):

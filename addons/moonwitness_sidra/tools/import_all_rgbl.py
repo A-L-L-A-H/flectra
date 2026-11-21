@@ -74,6 +74,17 @@ def main():
         and os.path.exists(os.path.join(datasets_root, d, 'manifest.json'))
         and (allowed is None or d in allowed)
     )
+    # Order primary texts first, then translations, then alignments/assertions/lexicons
+    def ds_priority(name):
+        n = name.lower()
+        if 'alignment' in n or 'evidence' in n or 'research-graph' in n:
+            return (3, n)
+        if 'quranenc' in n or 'tafsir' in n or 'indonesian' in n:
+            return (2, n)
+        if 'lexicon' in n:
+            return (4, n)
+        return (1, n)
+    candidates.sort(key=ds_priority)
 
     reg = Registry.new(args.db)
     with reg.cursor() as cr:

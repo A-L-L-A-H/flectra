@@ -9,17 +9,22 @@
                     <div class="oe_title">
                         <h1>MoonWitness Sidra Corpus Ingestion</h1>
                     </div>
+                    <p class="text-muted">
+                        Seluruh 54 dataset korpus RGBL sudah dibundel di dalam addon ini dan otomatis dimuat saat instalasi.
+                        Klik tombol di bawah untuk memuat ulang atau mengimpor dataset kustom.
+                    </p>
                     <group>
+                        <field name="batch_size"/>
                         <field name="dataset_dir"/>
                         <field name="tradition_code"/>
-                        <field name="batch_size"/>
                     </group>
                     <group string="Execution Diagnostics" invisible="not result_log">
                         <field name="result_log" widget="text" nolabel="1"/>
                     </group>
                 </sheet>
                 <footer>
-                    <button name="action_import" string="Start Ingestion" type="object" class="btn-primary"/>
+                    <button name="action_import_bundled" string="Load All Bundled Default Datasets" type="object" class="btn-primary"/>
+                    <button name="action_import" string="Import Custom Folder" type="object" class="btn-secondary"/>
                     <button string="Close" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>
