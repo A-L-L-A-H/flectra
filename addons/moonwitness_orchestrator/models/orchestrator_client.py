@@ -84,6 +84,30 @@ class MoonwitnessOrchestratorClient(models.AbstractModel):
     def whatsapp_send(self, to, message):
         return self._request('POST', '/wa/send', {'to': to, 'message': message})
 
+    def whatsapp_send_sidra_query(self, to, query, tradition_code=None, limit=3):
+        cleaned_query = (query or '').strip()
+        if not cleaned_query:
+            raise OrchestratorError(_('Pertanyaan Sidra tidak boleh kosong.'))
+        if 'moonwitness.sidra.retriever.service' not in self.env:
+            raise OrchestratorError(_('Modul MoonWitness Sidra belum terpasang.'))
+        retriever = self.env['moonwitness.sidra.retriever.service'].sudo()
+        sidra_result = retriever.retrieve_and_log(
+            query=cleaned_query,
+            session_id='wa:%s' % (to or 'unknown'),
+            tradition_code=tradition_code,
+            limit=limit,
+        )
+        answer_text = sidra_result.get('answer') or _('Tidak ditemukan rujukan dalam korpus.')
+        send_result = self.whatsapp_send(to, answer_text)
+        return {
+            'sent': bool(send_result.get('sent', True)),
+            'to': send_result.get('to', to),
+            'query_log_id': sidra_result.get('query_log_id'),
+            'hallucination_score': sidra_result.get('hallucination_score', 0.0),
+            'verified_citations': sidra_result.get('verified_citations', 0),
+            'answer': answer_text,
+        }
+
     def whatsapp_logout(self):
         return self._request('POST', '/wa/logout', {})
 

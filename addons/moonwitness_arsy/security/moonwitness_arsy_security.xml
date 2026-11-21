@@ -4,5 +4,10 @@
         <field name="name">MoonWitness ARSY</field>
         <field name="category_id" ref="base.module_category_administration"/>
         <field name="comment">Members can control the Docker Compose stack via the host agent.</field>
+        <field name="implied_ids" eval="[(4, ref('moonwitness_base.group_moonwitness_base_user'))]"/>
+    </record>
+
+    <record id="moonwitness_base.group_moonwitness_base_admin" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('group_moonwitness_arsy'))]"/>
     </record>
 </flectra>

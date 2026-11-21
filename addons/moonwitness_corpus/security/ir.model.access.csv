@@ -1,5 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_mw_corpus_tradition_user,moonwitness.corpus.tradition user,model_moonwitness_corpus_tradition,base.group_user,1,0,0,0
-access_mw_corpus_work_user,moonwitness.corpus.work user,model_moonwitness_corpus_work,base.group_user,1,0,0,0
-access_mw_corpus_search_wizard_user,moonwitness.corpus.search.wizard user,model_moonwitness_corpus_search_wizard,base.group_user,1,1,1,1
-access_mw_corpus_search_result_user,moonwitness.corpus.search.result user,model_moonwitness_corpus_search_result,base.group_user,1,1,1,1

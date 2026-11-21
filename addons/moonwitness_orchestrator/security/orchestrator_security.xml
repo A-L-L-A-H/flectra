@@ -3,5 +3,10 @@
     <record id="group_moonwitness_orchestrator" model="res.groups">
         <field name="name">MoonWitness Orchestrator Admin</field>
         <field name="category_id" ref="base.module_category_administration"/>
+        <field name="implied_ids" eval="[(4, ref('moonwitness_base.group_moonwitness_base_user'))]"/>
+    </record>
+
+    <record id="moonwitness_base.group_moonwitness_base_admin" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('group_moonwitness_orchestrator'))]"/>
     </record>
 </flectra>

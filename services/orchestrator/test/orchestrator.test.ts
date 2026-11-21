@@ -642,4 +642,44 @@ describe('WhatsApp non-blocking startup, single-flight, reconnect, and shutdown'
       fs.rmSync(sessionDirActive, { recursive: true, force: true });
     }
   });
+
+  it('auto-replies to incoming /sidra <query> WhatsApp messages with verified Sidra answer', async () => {
+    const sidraCalls: Array<{ query: string; sessionId: string }> = [];
+    await withTestApp(
+      {
+        autoConnect: false,
+        deps: {
+          querySidra: async (query, sessionId) => {
+            sidraCalls.push({ query, sessionId });
+            return '[1] Quran 1:1 (Islam): "Dengan nama Allah Yang Maha Pengasih, Maha Penyayang."';
+          },
+        },
+      },
+      async ({ app, sockets }) => {
+        await app.ready();
+        await app.wa.connect();
+        sockets[0].emitter.emit('connection.update', { connection: 'open' });
+
+        sockets[0].emitter.emit('messages.upsert', {
+          messages: [
+            {
+              key: { remoteJid: '6281234567890@s.whatsapp.net', fromMe: false },
+              message: { conversation: '/sidra Maha Pengasih' },
+            },
+          ],
+        });
+
+        await delay(30);
+        assert.deepEqual(sidraCalls, [
+          { query: 'Maha Pengasih', sessionId: 'wa:6281234567890@s.whatsapp.net' },
+        ]);
+        assert.deepEqual(sockets[0].sentMessages, [
+          {
+            jid: '6281234567890@s.whatsapp.net',
+            text: '[1] Quran 1:1 (Islam): "Dengan nama Allah Yang Maha Pengasih, Maha Penyayang."',
+          },
+        ]);
+      },
+    );
+  });
 });

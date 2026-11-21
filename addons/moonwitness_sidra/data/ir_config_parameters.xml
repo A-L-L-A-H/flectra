@@ -8,4 +8,8 @@
         <field name="key">moonwitness_sidra.corpus_commit</field>
         <field name="value">bjo163/moonwitness-corpus@main</field>
     </record>
+    <record id="config_sidra_api_token" model="ir.config_parameter">
+        <field name="key">moonwitness_sidra.api_token</field>
+        <field name="value"></field>
+    </record>
 </flectra>

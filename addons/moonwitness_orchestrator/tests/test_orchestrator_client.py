@@ -3,7 +3,7 @@ import io
 import urllib.error
 from unittest import mock
 
-from flectra.tests.common import TransactionCase
+from flectra.tests.common import TransactionCase, tagged
 
 from ..models import orchestrator_client as client_module
 
@@ -104,3 +104,23 @@ class TestOrchestratorClient(TransactionCase):
 
         self.assertIn('belum dikonfigurasi', str(context.exception))
         mock_urlopen.assert_not_called()
+
+
+@tagged('post_install', '-at_install')
+class TestOrchestratorSidraIntegration(TransactionCase):
+    """Post-install integration test verifying moonwitness.orchestrator -> moonwitness.sidra bridge."""
+
+    def test_whatsapp_send_sidra_query_retrieves_and_sends(self):
+        client = self.env['moonwitness.orchestrator']
+        with mock.patch.object(
+            type(client), 'whatsapp_send', return_value={'sent': True, 'to': '628123456789@s.whatsapp.net'}
+        ) as mock_send:
+            res = client.whatsapp_send_sidra_query('+628123456789', 'Maha Pengasih', tradition_code='islam', limit=2)
+
+        self.assertTrue(res['sent'])
+        self.assertEqual(res['hallucination_score'], 0.0)
+        self.assertGreaterEqual(res['verified_citations'], 1)
+        self.assertIn('Quran', res['answer'])
+        mock_send.assert_called_once()
+
+

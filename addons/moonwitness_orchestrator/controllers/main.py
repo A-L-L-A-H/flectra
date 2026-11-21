@@ -24,6 +24,13 @@ class MoonwitnessOrchestratorController(http.Controller):
         self._guard()
         return request.env['moonwitness.orchestrator'].whatsapp_send(to, message)
 
+    @http.route('/moonwitness_orchestrator/wa_send_sidra', type='json', auth='user')
+    def wa_send_sidra(self, to, query, tradition_code=None, limit=3):
+        self._guard()
+        return request.env['moonwitness.orchestrator'].whatsapp_send_sidra_query(
+            to, query, tradition_code=tradition_code, limit=limit
+        )
+
     @http.route('/moonwitness_orchestrator/wa_logout', type='json', auth='user')
     def wa_logout(self):
         self._guard()

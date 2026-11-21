@@ -36,6 +36,7 @@ export interface WhatsappDependencies {
     printQRInTerminal: boolean;
   }) => WaSocketLike;
   qrToDataUrl: (text: string) => Promise<string>;
+  querySidra?: (query: string, sessionId: string) => Promise<string>;
 }
 
 export interface WhatsappPluginOptions {
@@ -77,6 +78,27 @@ const defaultDependencies: WhatsappDependencies = {
   makeWASocket: (config) =>
     makeWASocket(config as Parameters<typeof makeWASocket>[0]) as unknown as WaSocketLike,
   qrToDataUrl: (text) => QRCode.toDataURL(text),
+  querySidra: async (query: string, sessionId: string): Promise<string> => {
+    const sidraUrl = process.env.FLECTRA_SIDRA_URL || 'http://flectra:8069/sidra/api/query';
+    const token = process.env.ORCHESTRATOR_TOKEN || '';
+    const resp = await fetch(sidraUrl, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'x-orchestrator-token': token,
+      },
+      body: JSON.stringify({
+        jsonrpc: '2.0',
+        method: 'call',
+        params: { query, session_id: sessionId, limit: 3 },
+      }),
+    });
+    if (!resp.ok) {
+      throw new Error(`Sidra API HTTP ${resp.status}`);
+    }
+    const payload = (await resp.json()) as { result?: { ok?: boolean; answer?: string } };
+    return payload.result?.answer || 'Tidak ditemukan rujukan dalam korpus MoonWitness Sidra.';
+  },
 };
 
 export function normalizeWhatsAppRecipient(rawRecipient: string): string | null {
@@ -150,6 +172,7 @@ async function whatsappPlugin(
     if (!target) return;
     target.ev.removeAllListeners('connection.update');
     target.ev.removeAllListeners('creds.update');
+    target.ev.removeAllListeners('messages.upsert');
     target.end(undefined);
   }
 
@@ -212,6 +235,46 @@ async function whatsappPlugin(
 
         socket = nextSocket;
         nextSocket.ev.on('creds.update', saveCreds);
+        nextSocket.ev.on('messages.upsert', (rawUpsert: unknown) => {
+          if (generation !== reconnectGeneration || isClosed || socket !== nextSocket) {
+            return;
+          }
+          const upsert = rawUpsert as {
+            messages?: Array<{
+              key?: { remoteJid?: string; fromMe?: boolean };
+              message?: {
+                conversation?: string;
+                extendedTextMessage?: { text?: string };
+              };
+            }>;
+          };
+          for (const msg of upsert.messages || []) {
+            const remoteJid = msg.key?.remoteJid;
+            if (!remoteJid || msg.key?.fromMe) continue;
+            const text = (
+              msg.message?.conversation ||
+              msg.message?.extendedTextMessage?.text ||
+              ''
+            ).trim();
+            const match = text.match(/^(?:\/sidra|!sidra)\s+(.+)$/i);
+            if (!match || !deps.querySidra) continue;
+            const sidraQuery = match[1].trim();
+            if (!sidraQuery) continue;
+            void deps
+              .querySidra(sidraQuery, `wa:${remoteJid}`)
+              .then((answer) => {
+                if (socket === nextSocket && !isClosed) {
+                  return nextSocket.sendMessage(remoteJid, {
+                    text: answer.slice(0, MAX_MESSAGE_LENGTH),
+                  });
+                }
+                return undefined;
+              })
+              .catch((err: unknown) => {
+                app.log.error({ err: safeErrorSummary(err) }, 'Sidra WhatsApp query failed');
+              });
+          }
+        });
         nextSocket.ev.on('connection.update', (raw: unknown) => {
           if (generation !== reconnectGeneration || isClosed || socket !== nextSocket) {
             return;

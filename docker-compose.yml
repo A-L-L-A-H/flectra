@@ -109,6 +109,7 @@ services:
 
       # Security and optional features
       ADMIN_PASSWD: ${ADMIN_PASSWD:?Set ADMIN_PASSWD in .env}
+      ORCHESTRATOR_TOKEN: ${ORCHESTRATOR_TOKEN:-}
       LIST_DB: ${LIST_DB:-false}
       DEFAULT_PRODUCTIVITY_APPS: ${DEFAULT_PRODUCTIVITY_APPS:-false}
       PROXY_MODE: ${PROXY_MODE:-false}
