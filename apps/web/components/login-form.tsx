@@ -3,9 +3,9 @@
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { AlertCircle, ArrowRight, LoaderCircle } from "lucide-react";
-import { Button } from "@workspace/ui/components/button";
-import { Input } from "@workspace/ui/components/input";
-import { Label } from "@workspace/ui/components/label";
+import { Button } from "@moonwitness/ui/components/button";
+import { Input } from "@moonwitness/ui/components/input";
+import { Label } from "@moonwitness/ui/components/label";
 
 export function LoginForm() {
   const router = useRouter();
