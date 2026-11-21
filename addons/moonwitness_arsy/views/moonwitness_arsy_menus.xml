@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <menuitem id="menu_moonwitness_arsy_root"
+              name="MoonWitness ARSY"
+              parent="moonwitness_base.menu_moonwitness_root"
+              sequence="10"/>
+    <menuitem id="menu_moonwitness_arsy_action"
+              name="Docker Console"
+              parent="menu_moonwitness_arsy_root"
+              action="action_moonwitness_dashboard"
+              groups="group_moonwitness_arsy"
+              sequence="10"/>
+</flectra>

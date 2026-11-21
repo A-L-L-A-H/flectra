@@ -59,6 +59,8 @@ jobs:
         env:
           POSTGRES_PASSWORD: ci-postgres-password
           ADMIN_PASSWD: ci-flectra-master-password
+          PANEL_TOKEN: ci-panel-token
+          ORCHESTRATOR_TOKEN: ci-orchestrator-token
         run: docker compose config --quiet
 
       - name: Build Flectra image
