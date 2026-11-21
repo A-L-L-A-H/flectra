@@ -20,17 +20,19 @@ class WebManifestRoutesTest(HttpCaseWithUserDemo):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.headers["Content-Type"], "application/manifest+json")
         data = response.json()
-        self.assertEqual(data["name"], "Flectra")
+        self.assertEqual(data["name"], "MoonWitness")
         self.assertEqual(data["scope"], "/web")
         self.assertEqual(data["start_url"], "/web")
         self.assertEqual(data["display"], "standalone")
-        self.assertEqual(data["background_color"], "#009efb")
-        self.assertEqual(data["theme_color"], "#009efb")
+        self.assertEqual(data["background_color"], "#0b0c0e")
+        self.assertEqual(data["theme_color"], "#f28b3c")
         self.assertEqual(data["prefer_related_applications"], False)
-        self.assertCountEqual(data["icons"], [
-            {'src': '/web/static/img/flectra-icon-192x192.png', 'sizes': '192x192', 'type': 'image/png'},
-            {'src': '/web/static/img/flectra-icon-512x512.png', 'sizes': '512x512', 'type': 'image/png'}
-        ])
+        self.assertEqual(data["icons"], [{
+            'src': '/moonwitness_base/static/src/img/moonwitness-mark.svg',
+            'sizes': 'any',
+            'type': 'image/svg+xml',
+            'purpose': 'any',
+        }])
         self.assertGreaterEqual(len(data["shortcuts"]), 0)
         for shortcut in data["shortcuts"]:
             self.assertGreater(len(shortcut["name"]), 0)
@@ -46,17 +48,19 @@ class WebManifestRoutesTest(HttpCaseWithUserDemo):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.headers["Content-Type"], "application/manifest+json")
         data = response.json()
-        self.assertEqual(data["name"], "Flectra")
+        self.assertEqual(data["name"], "MoonWitness")
         self.assertEqual(data["scope"], "/web")
         self.assertEqual(data["start_url"], "/web")
         self.assertEqual(data["display"], "standalone")
-        self.assertEqual(data["background_color"], "#009efb")
-        self.assertEqual(data["theme_color"], "#009efb")
+        self.assertEqual(data["background_color"], "#0b0c0e")
+        self.assertEqual(data["theme_color"], "#f28b3c")
         self.assertEqual(data["prefer_related_applications"], False)
-        self.assertCountEqual(data["icons"], [
-            {'src': '/web/static/img/flectra-icon-192x192.png', 'sizes': '192x192', 'type': 'image/png'},
-            {'src': '/web/static/img/flectra-icon-512x512.png', 'sizes': '512x512', 'type': 'image/png'}
-        ])
+        self.assertEqual(data["icons"], [{
+            'src': '/moonwitness_base/static/src/img/moonwitness-mark.svg',
+            'sizes': 'any',
+            'type': 'image/svg+xml',
+            'purpose': 'any',
+        }])
         self.assertEqual(len(data["shortcuts"]), 0)
 
     def test_serviceworker(self):
@@ -82,11 +86,11 @@ class WebManifestRoutesTest(HttpCaseWithUserDemo):
         its presence from the head of the document.
         """
         self.authenticate("demo", "demo")
-        response = self.url_open("/web/static/img/flectra-icon-ios.png")
+        response = self.url_open("/moonwitness_base/static/description/icon.png")
         self.assertEqual(response.status_code, 200)
 
         document = self.url_open("/web")
         self.assertIn(
-            '<link rel="apple-touch-icon" href="/web/static/img/flectra-icon-ios.png"/>', document.text,
+            '<link rel="apple-touch-icon" href="/moonwitness_base/static/description/icon.png"/>', document.text,
             "Icon for iOS is present in the head of the document.",
         )
