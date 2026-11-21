@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
 from flectra import api, fields, models
+from flectra.exceptions import ValidationError
 
 # Pre-compiled regex for Semitic diacritic normalization
 ARABIC_DIACRITICS = re.compile(r'[\u064B-\u0652\u0670\u0640]')
@@ -52,11 +53,18 @@ class SidraCorpusContent(models.Model):
         store=True
     )
 
-    _sql_constraints = [
-        ('primary_per_expr_unique',
-         'UNIQUE(passage_id, expression_id, is_primary) WHERE is_primary = true',
-         'Only one primary content payload is permitted per passage and expression.')
-    ]
+    @api.constrains('passage_id', 'expression_id', 'is_primary')
+    def _check_unique_primary_content(self):
+        for rec in self:
+            if rec.is_primary and rec.passage_id and rec.expression_id:
+                duplicate = self.search([
+                    ('id', '!=', rec.id),
+                    ('passage_id', '=', rec.passage_id.id),
+                    ('expression_id', '=', rec.expression_id.id),
+                    ('is_primary', '=', True),
+                ], limit=1)
+                if duplicate:
+                    raise ValidationError('Only one primary content payload is permitted per passage and expression.')
 
     @api.depends('text')
     def _compute_char_count(self):
@@ -83,24 +91,33 @@ class SidraCorpusContent(models.Model):
         """Strip vocalization/diacritics for Semitic languages to enable flexible search."""
         if not text:
             return ''
-        if language == 'ara':
+        if language in ('ara', 'ar'):
             return ARABIC_DIACRITICS.sub('', text)
-        elif language == 'heb':
+        elif language in ('heb', 'he'):
             return HEBREW_DIACRITICS.sub('', text)
         return text
 
     @api.model
     def _get_ts_config(self, language):
-        """Map ISO 639-3 language codes to PostgreSQL FTS dictionary configurations."""
+        """Map ISO 639-1/639-3 language codes to PostgreSQL FTS dictionary configurations."""
         mapping = {
+            'ar': 'arabic',
             'ara': 'arabic',
+            'he': 'simple',
             'heb': 'simple',
             'grc': 'simple',
+            'el': 'simple',
             'pli': 'simple',
+            'pi': 'simple',
             'san': 'simple',
-            'ind': 'simple',
+            'sa': 'simple',
+            'id': 'indonesian',
+            'ind': 'indonesian',
+            'en': 'english',
             'eng': 'english',
+            'fr': 'french',
             'fra': 'french',
-            'deu': 'german'
+            'de': 'german',
+            'deu': 'german',
         }
         return mapping.get(language, 'simple')

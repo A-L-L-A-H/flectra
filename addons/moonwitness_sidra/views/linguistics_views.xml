@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <!-- LEXICON VIEWS -->
+    <record id="view_sidra_lexicon_tree" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.lexicon.tree</field>
+        <field name="model">moonwitness.sidra.lexicon</field>
+        <field name="arch" type="xml">
+            <tree string="Sacred Lexicons (OntoLex-Lemon)">
+                <field name="name"/>
+                <field name="language"/>
+                <field name="script"/>
+                <field name="tradition_id"/>
+                <field name="entry_count"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_sidra_lexicon" model="ir.actions.act_window">
+        <field name="name">Sacred Lexicons</field>
+        <field name="res_model">moonwitness.sidra.lexicon</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- WORD / INTERLINEAR VIEWS -->
+    <record id="view_sidra_word_tree" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.word.tree</field>
+        <field name="model">moonwitness.sidra.word</field>
+        <field name="arch" type="xml">
+            <tree string="Words &amp; Root Concordance">
+                <field name="passage_id"/>
+                <field name="token_index"/>
+                <field name="form"/>
+                <field name="lemma"/>
+                <field name="root"/>
+                <field name="pos"/>
+                <field name="gloss"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_sidra_word" model="ir.actions.act_window">
+        <field name="name">Words &amp; Roots</field>
+        <field name="res_model">moonwitness.sidra.word</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- WSI SEMANTIC FRAME VIEWS -->
+    <record id="view_sidra_semantic_frame_tree" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.semantic.frame.tree</field>
+        <field name="model">moonwitness.sidra.semantic.frame</field>
+        <field name="arch" type="xml">
+            <tree string="WSI Semantic Frames &amp; Propositions">
+                <field name="name"/>
+                <field name="passage_id"/>
+                <field name="frame_type"/>
+                <field name="polarity"/>
+                <field name="modality"/>
+                <field name="proposition_text"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_sidra_semantic_frame_form" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.semantic.frame.form</field>
+        <field name="model">moonwitness.sidra.semantic.frame</field>
+        <field name="arch" type="xml">
+            <form string="WSI Semantic Frame">
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                        <h3><field name="urn" readonly="1"/></h3>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="passage_id"/>
+                            <field name="frame_type"/>
+                            <field name="polarity"/>
+                            <field name="modality"/>
+                        </group>
+                        <group>
+                            <field name="provenance_id"/>
+                            <field name="epistemic_status_id"/>
+                            <field name="aqel_operator"/>
+                        </group>
+                    </group>
+                    <group string="Normalized Proposition">
+                        <field name="proposition_text" nolabel="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Discourse Participants">
+                            <field name="participant_ids">
+                                <tree editable="bottom">
+                                    <field name="urn"/>
+                                    <field name="name"/>
+                                    <field name="semantic_role"/>
+                                    <field name="entity_urn"/>
+                                    <field name="provenance_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Witness Patterns">
+                            <field name="witness_pattern_ids">
+                                <tree editable="bottom">
+                                    <field name="urn"/>
+                                    <field name="pattern_label"/>
+                                    <field name="review_state"/>
+                                    <field name="positive_direction"/>
+                                    <field name="provenance_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sidra_semantic_frame" model="ir.actions.act_window">
+        <field name="name">WSI Semantic Frames</field>
+        <field name="res_model">moonwitness.sidra.semantic.frame</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</flectra>

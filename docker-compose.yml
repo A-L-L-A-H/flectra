@@ -57,10 +57,10 @@ services:
       - flectra-network
 
   # -----------------------------------------------
-  # PostgreSQL Database (pgvector PostgreSQL 16)
+  # PostgreSQL Database (pgvector PostgreSQL 15 — compatible with existing db volume)
   # -----------------------------------------------
   db:
-    image: pgvector/pgvector:pg16
+    image: pgvector/pgvector:pg15
     container_name: flectra-db
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-flectra}
@@ -115,6 +115,7 @@ services:
 
     volumes:
       - flectra-data:/var/lib/flectra
+      - ./addons:/opt/flectra/addons:ro
       # Keep customer modules separate from the Flectra core addons.
       - ./custom-addons:/opt/flectra/custom-addons:ro
 

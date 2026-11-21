@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <!-- ASSERTION VIEWS -->
+    <record id="view_sidra_assertion_tree" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.assertion.tree</field>
+        <field name="model">moonwitness.sidra.assertion</field>
+        <field name="arch" type="xml">
+            <tree string="Scoped Assertions">
+                <field name="assertion_class"/>
+                <field name="tradition_id"/>
+                <field name="subject_urn"/>
+                <field name="predicate_id"/>
+                <field name="object_urn"/>
+                <field name="evidence_count"/>
+                <field name="statement"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_sidra_assertion_form" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.assertion.form</field>
+        <field name="model">moonwitness.sidra.assertion</field>
+        <field name="arch" type="xml">
+            <form string="Scoped Assertion">
+                <sheet>
+                    <div class="oe_title">
+                        <h3><field name="urn" readonly="1"/></h3>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="assertion_class"/>
+                            <field name="tradition_id"/>
+                            <field name="lineage_id"/>
+                            <field name="aqel_operator"/>
+                            <field name="master_category"/>
+                        </group>
+                        <group>
+                            <field name="subject_urn"/>
+                            <field name="predicate_id"/>
+                            <field name="object_urn"/>
+                            <field name="provenance_id"/>
+                            <field name="epistemic_status_id"/>
+                        </group>
+                    </group>
+                    <group string="Proposition Statement">
+                        <field name="statement" nolabel="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Evidence Anchors">
+                            <field name="evidence_ids">
+                                <tree editable="bottom">
+                                    <field name="urn"/>
+                                    <field name="passage_id"/>
+                                    <field name="relation"/>
+                                    <field name="excerpt"/>
+                                    <field name="provenance_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sidra_assertion" model="ir.actions.act_window">
+        <field name="name">Scoped Assertions</field>
+        <field name="res_model">moonwitness.sidra.assertion</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ALIGNMENT VIEWS -->
+    <record id="view_sidra_alignment_tree" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.alignment.tree</field>
+        <field name="model">moonwitness.sidra.alignment</field>
+        <field name="arch" type="xml">
+            <tree string="Cross-Tradition Alignments">
+                <field name="source_tradition_id"/>
+                <field name="source_passage_id"/>
+                <field name="alignment_type"/>
+                <field name="target_tradition_id"/>
+                <field name="target_passage_id"/>
+                <field name="strength"/>
+                <field name="method"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_sidra_alignment_form" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.alignment.form</field>
+        <field name="model">moonwitness.sidra.alignment</field>
+        <field name="arch" type="xml">
+            <form string="Cross-Tradition Alignment">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="urn"/>
+                            <field name="source_passage_id"/>
+                            <field name="source_tradition_id"/>
+                            <field name="alignment_type"/>
+                        </group>
+                        <group>
+                            <field name="target_passage_id"/>
+                            <field name="target_tradition_id"/>
+                            <field name="strength"/>
+                            <field name="method"/>
+                            <field name="provenance_id"/>
+                        </group>
+                    </group>
+                    <group string="Comparative Hermeneutic Notes">
+                        <field name="notes" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sidra_alignment" model="ir.actions.act_window">
+        <field name="name">Cross-Tradition Alignments</field>
+        <field name="res_model">moonwitness.sidra.alignment</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- MOTIF VIEWS -->
+    <record id="view_sidra_motif_tree" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.motif.tree</field>
+        <field name="model">moonwitness.sidra.motif</field>
+        <field name="arch" type="xml">
+            <tree string="Sacred Narrative Motifs">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="motif_index"/>
+                <field name="parent_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_sidra_motif" model="ir.actions.act_window">
+        <field name="name">Narrative Motifs</field>
+        <field name="res_model">moonwitness.sidra.motif</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- COMMENTARY VIEWS -->
+    <record id="view_sidra_commentary_tree" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.commentary.tree</field>
+        <field name="model">moonwitness.sidra.commentary</field>
+        <field name="arch" type="xml">
+            <tree string="Exegetical Commentaries">
+                <field name="passage_id"/>
+                <field name="author"/>
+                <field name="commentary_type"/>
+                <field name="layer"/>
+                <field name="school"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_sidra_commentary" model="ir.actions.act_window">
+        <field name="name">Tafsir &amp; Commentaries</field>
+        <field name="res_model">moonwitness.sidra.commentary</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</flectra>

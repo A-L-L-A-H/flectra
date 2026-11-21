@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <record id="predicate_mentions" model="moonwitness.sidra.predicate">
+        <field name="urn">mw:predicate:mentions</field>
+        <field name="label">mentions</field>
+    </record>
+    <record id="predicate_has_role" model="moonwitness.sidra.predicate">
+        <field name="urn">mw:predicate:has-role</field>
+        <field name="label">has role</field>
+    </record>
+    <record id="predicate_part_of" model="moonwitness.sidra.predicate">
+        <field name="urn">mw:predicate:part-of</field>
+        <field name="label">part of</field>
+    </record>
+    <record id="predicate_derived_from" model="moonwitness.sidra.predicate">
+        <field name="urn">mw:predicate:derived-from</field>
+        <field name="label">derived from</field>
+    </record>
+    <record id="predicate_broader_than" model="moonwitness.sidra.predicate">
+        <field name="urn">mw:predicate:broader-than</field>
+        <field name="label">broader than</field>
+    </record>
+    <record id="predicate_related_to" model="moonwitness.sidra.predicate">
+        <field name="urn">mw:predicate:related-to</field>
+        <field name="label">related to</field>
+    </record>
+    <record id="predicate_associated_with_geography" model="moonwitness.sidra.predicate">
+        <field name="urn">mw:predicate:associated-with-geography</field>
+        <field name="label">associated with geography</field>
+    </record>
+    <record id="predicate_designates" model="moonwitness.sidra.predicate">
+        <field name="urn">mw:predicate:designates</field>
+        <field name="label">designates</field>
+    </record>
+</flectra>

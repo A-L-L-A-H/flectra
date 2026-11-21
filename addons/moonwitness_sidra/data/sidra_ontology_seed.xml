@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <!-- OX-DX 7 ZONES CANONICAL META-CATEGORIES -->
+    <record id="meta_oxdx_z1_universe" model="moonwitness.sidra.meta.category">
+        <field name="urn">mw:meta:oxdx:01:universe</field>
+        <field name="code">UNIVERSE</field>
+        <field name="name">01 UNIVERSE — Total Managed Ontological Boundary</field>
+        <field name="upper_framework">oxdx</field>
+        <field name="oxdx_zone">1</field>
+        <field name="oxdx_level">1</field>
+    </record>
+    <record id="meta_oxdx_z2_ecosystem" model="moonwitness.sidra.meta.category">
+        <field name="urn">mw:meta:oxdx:08:ecosystem</field>
+        <field name="code">ECOSYSTEM</field>
+        <field name="name">08 ECOSYSTEM — Coherent Collection of Traditions &amp; Systems</field>
+        <field name="upper_framework">oxdx</field>
+        <field name="oxdx_zone">2</field>
+        <field name="oxdx_level">8</field>
+    </record>
+    <record id="meta_oxdx_z3_purpose" model="moonwitness.sidra.meta.category">
+        <field name="urn">mw:meta:oxdx:15:purpose</field>
+        <field name="code">PURPOSE</field>
+        <field name="name">15 PURPOSE — Canonical Intent &amp; Authority Scope</field>
+        <field name="upper_framework">oxdx</field>
+        <field name="oxdx_zone">3</field>
+        <field name="oxdx_level">15</field>
+    </record>
+    <record id="meta_oxdx_z4_source" model="moonwitness.sidra.meta.category">
+        <field name="urn">mw:meta:oxdx:23:source</field>
+        <field name="code">SOURCE</field>
+        <field name="name">23 SOURCE — Canonical Scriptural Work &amp; Transmission</field>
+        <field name="upper_framework">oxdx</field>
+        <field name="oxdx_zone">4</field>
+        <field name="oxdx_level">23</field>
+    </record>
+    <record id="meta_oxdx_z5_entity" model="moonwitness.sidra.meta.category">
+        <field name="urn">mw:meta:oxdx:30:entity</field>
+        <field name="code">ENTITY</field>
+        <field name="name">30 ENTITY — Semantic Proposition, Concept &amp; Participant</field>
+        <field name="upper_framework">oxdx</field>
+        <field name="oxdx_zone">5</field>
+        <field name="oxdx_level">30</field>
+    </record>
+    <record id="meta_oxdx_z6_event" model="moonwitness.sidra.meta.category">
+        <field name="urn">mw:meta:oxdx:37:event</field>
+        <field name="code">EVENT</field>
+        <field name="name">37 EVENT — Narrative Occurrence, Tafsir &amp; Alignment</field>
+        <field name="upper_framework">oxdx</field>
+        <field name="oxdx_zone">6</field>
+        <field name="oxdx_level">37</field>
+    </record>
+    <record id="meta_oxdx_z7_token" model="moonwitness.sidra.meta.category">
+        <field name="urn">mw:meta:oxdx:47:token</field>
+        <field name="code">TOKEN</field>
+        <field name="name">47 TOKEN — Lexical Word, Root, Vector &amp; Checksum</field>
+        <field name="upper_framework">oxdx</field>
+        <field name="oxdx_zone">7</field>
+        <field name="oxdx_level">47</field>
+    </record>
+
+    <!-- CORE DIVINITY ENTITIES (KATAPHATIC + APOPHATIC) -->
+    <record id="divinity_allah" model="moonwitness.sidra.divinity">
+        <field name="urn">mw:divinity:islam:allah</field>
+        <field name="name">Allah (الله)</field>
+        <field name="tradition_id" ref="tradition_islam"/>
+        <field name="epithets">Ar-Rahman, Ar-Rahim, Al-Malik, Al-Quddus, As-Salam, Al-Ahad, As-Samad (99 Asmaul Husna)</field>
+        <field name="kataphatic_attributes">Al-Hayy (Ever-Living), Al-Qayyum (Self-Subsisting), Al-Alim (All-Knowing), Al-Qadir (All-Powerful), Ar-Rahman (Most Merciful)</field>
+        <field name="apophatic_attributes">Laisa kamitslihi syai'un (QS 42:11 — Nothing resembles Him); Lam yalid wa lam yulad (QS 112:3 — Neither begets nor is born); Not bounded by space, time, body, or multiplicity (Tanzih)</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+
+    <record id="divinity_brahman" model="moonwitness.sidra.divinity">
+        <field name="urn">mw:divinity:hinduism:brahman</field>
+        <field name="name">Brahman (ब्रह्मन्)</field>
+        <field name="tradition_id" ref="tradition_hinduism"/>
+        <field name="epithets">Sat-Chit-Ananda, Parabrahman, Akshara</field>
+        <field name="kataphatic_attributes">Saguna Brahman: Being (Sat), Consciousness (Chit), Bliss (Ananda), ground of cosmic order (Rta)</field>
+        <field name="apophatic_attributes">Nirguna Brahman: Neti-Neti (Not this, not this — Brihadaranyaka Upanishad 2.3.6); without qualities, form, or duality</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+
+    <!-- SACRED GEOGRAPHY GAZETTEER (PLEIADES ALIGNED) -->
+    <record id="gazetteer_makkah" model="moonwitness.sidra.gazetteer">
+        <field name="urn">mw:place:makkah</field>
+        <field name="name">Makkah al-Mukarramah</field>
+        <field name="ancient_names">Bakkah, Umm al-Qura</field>
+        <field name="latitude">21.422487</field>
+        <field name="longitude">39.826206</field>
+        <field name="description">Sacred sanctuary of the Ka'bah and primary site of Makkan Quranic revelations.</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="gazetteer_jerusalem" model="moonwitness.sidra.gazetteer">
+        <field name="urn">mw:place:jerusalem</field>
+        <field name="name">Jerusalem / Al-Quds</field>
+        <field name="ancient_names">Urusalim, Bayt al-Maqdis, Yerushalayim</field>
+        <field name="pleiades_uri">https://pleiades.stoa.org/places/687928</field>
+        <field name="latitude">31.778019</field>
+        <field name="longitude">35.235408</field>
+        <field name="description">Central sacred city across Judaism, Christianity, and Islam (Masjid al-Aqsa, Temple Mount).</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="gazetteer_bodh_gaya" model="moonwitness.sidra.gazetteer">
+        <field name="urn">mw:place:bodh_gaya</field>
+        <field name="name">Bodh Gaya</field>
+        <field name="ancient_names">Uruvela, Mahabodhi</field>
+        <field name="latitude">24.695922</field>
+        <field name="longitude">84.991419</field>
+        <field name="description">Site of Siddhartha Gautama's enlightenment beneath the Bodhi Tree.</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+</flectra>

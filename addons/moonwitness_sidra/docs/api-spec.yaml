@@ -1,0 +1,94 @@
+openapi: 3.1.0
+info:
+  title: MoonWitness Sidra Knowledge Center API
+  version: 1.0.0
+  description: >
+    Provenance-first multi-tradition sacred corpus search, passage retrieval,
+    and GraphRAG hybrid query endpoints with anti-hallucination citation auditing.
+servers:
+  - url: http://127.0.0.1:8069
+paths:
+  /sidra/api/search:
+    post:
+      summary: Multilingual full-text search across sacred text payloads
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                jsonrpc: { type: string, example: "2.0" }
+                method: { type: string, example: "call" }
+                params:
+                  type: object
+                  required: [query]
+                  properties:
+                    query: { type: string }
+                    tradition_code: { type: string }
+                    language: { type: string }
+                    limit: { type: integer, default: 20 }
+                    offset: { type: integer, default: 0 }
+      responses:
+        '200':
+          description: Matching passages with total count and URN references
+  /sidra/api/passage/{passage_urn}:
+    get:
+      summary: Retrieve full passage payload, translations, and +-1 context window
+      parameters:
+        - name: passage_urn
+          in: path
+          required: true
+          schema:
+            type: string
+            example: mw:passage:quran:1:1
+      responses:
+        '200':
+          description: Passage details and context
+        '404':
+          description: Passage URN not found
+  /sidra/api/query:
+    post:
+      summary: Hybrid GraphRAG query endpoint (FTS + 2-hop KG CTE + RRF + Citation Audit)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                jsonrpc: { type: string, example: "2.0" }
+                method: { type: string, example: "call" }
+                params:
+                  type: object
+                  required: [query]
+                  properties:
+                    query: { type: string }
+                    session_id: { type: string }
+                    tradition_code: { type: string }
+                    language: { type: string }
+                    limit: { type: integer, default: 5 }
+      responses:
+        '200':
+          description: Grounded answer with verified citations and hallucination score
+  /sidra/api/feedback:
+    post:
+      summary: Submit scholar review feedback on a QueryLog record
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                jsonrpc: { type: string, example: "2.0" }
+                method: { type: string, example: "call" }
+                params:
+                  type: object
+                  required: [query_log_id, feedback]
+                  properties:
+                    query_log_id: { type: integer }
+                    feedback: { type: string, enum: [accurate, partial, hallucinated, harmful] }
+      responses:
+        '200':
+          description: Feedback recorded

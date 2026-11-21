@@ -28,7 +28,7 @@ class SidraAPIController(http.Controller):
                 domain.append(('passage_id.edition_id.expression_id.work_id.tradition_id', '=', trad.id))
 
         Content = request.env['moonwitness.sidra.content'].sudo()
-        domain.append(('text', 'ilike', query))
+        domain.extend(['|', ('text', 'ilike', query), ('text_search', 'ilike', query)])
 
         total_count = Content.search_count(domain)
         records = Content.search(domain, limit=limit, offset=offset)
@@ -99,33 +99,29 @@ class SidraAPIController(http.Controller):
 
     @http.route('/sidra/api/query', type='json', auth='public', methods=['POST'], csrf=False)
     def query_bot(self, **kwargs):
-        """GraphRAG query endpoint consumed by moonwitness-orchestrator WhatsApp bridge."""
+        """GraphRAG hybrid retrieval endpoint consumed by moonwitness-orchestrator WhatsApp bridge."""
         query = kwargs.get('query', '').strip()
         if not query:
             return {'ok': False, 'error': {'code': 'EMPTY_QUERY', 'message': 'Query cannot be empty'}}
 
-        # Search top matching passages
-        Content = request.env['moonwitness.sidra.content'].sudo()
-        matches = Content.search([('text', 'ilike', query)], limit=3)
+        retriever = request.env['moonwitness.sidra.retriever.service'].sudo()
+        return retriever.retrieve_and_log(
+            query=query,
+            session_id=kwargs.get('session_id'),
+            tradition_code=kwargs.get('tradition_code'),
+            language=kwargs.get('language'),
+            limit=min(int(kwargs.get('limit', 5)), 20),
+        )
 
-        citations = []
-        for m in matches:
-            citations.append({
-                'urn': m.passage_id.urn,
-                'ref': f"{m.passage_id.edition_id.expression_id.work_id.name} {m.passage_id.local_id}",
-                'text': m.text[:200]
-            })
-
-        answer = "Berdasarkan rujukan teks dalam korpus:"
-        if citations:
-            answer += "\n" + "\n".join([f"[{i+1}] {c['ref']}: \"{c['text']}\"" for i, c in enumerate(citations)])
-        else:
-            answer = "Tidak ditemukan ayat atau teks rujukan yang persis dengan kata kunci tersebut dalam korpus saat ini."
-
-        return {
-            'ok': True,
-            'answer': answer,
-            'citations': citations,
-            'hallucination_score': 0.0 if citations else 0.5,
-            'latency_ms': 120
-        }
+    @http.route('/sidra/api/feedback', type='json', auth='public', methods=['POST'], csrf=False)
+    def query_feedback(self, **kwargs):
+        """Record human feedback on a GraphRAG query log entry."""
+        log_id = kwargs.get('query_log_id')
+        feedback = kwargs.get('feedback')
+        if not log_id or feedback not in ('accurate', 'partial', 'hallucinated', 'harmful'):
+            return {'ok': False, 'error': {'code': 'INVALID_FEEDBACK', 'message': 'Valid query_log_id and feedback required'}}
+        log = request.env['moonwitness.sidra.query.log'].sudo().browse(int(log_id))
+        if not log.exists():
+            return {'ok': False, 'error': {'code': 'NOT_FOUND', 'message': 'Query log entry not found'}}
+        log.write({'user_feedback': feedback})
+        return {'ok': True, 'query_log_id': log.id, 'feedback': feedback}

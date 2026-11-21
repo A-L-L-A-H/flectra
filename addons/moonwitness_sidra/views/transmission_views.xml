@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <!-- NARRATOR (RIJAL) VIEWS -->
+    <record id="view_sidra_narrator_tree" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.transmission.narrator.tree</field>
+        <field name="model">moonwitness.sidra.transmission.narrator</field>
+        <field name="arch" type="xml">
+            <tree string="Hadith Narrators (Rijal)">
+                <field name="name"/>
+                <field name="kunya"/>
+                <field name="generation_tier"/>
+                <field name="reliability"/>
+                <field name="death_year_ah"/>
+                <field name="residence"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_sidra_narrator" model="ir.actions.act_window">
+        <field name="name">Narrators (Ilm ar-Rijal)</field>
+        <field name="res_model">moonwitness.sidra.transmission.narrator</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ISNAD VIEWS -->
+    <record id="view_sidra_isnad_tree" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.transmission.isnad.tree</field>
+        <field name="model">moonwitness.sidra.transmission.isnad</field>
+        <field name="arch" type="xml">
+            <tree string="Transmission Chains (Isnad)">
+                <field name="passage_id"/>
+                <field name="continuity"/>
+                <field name="overall_grade"/>
+                <field name="evaluator"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_sidra_isnad_form" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.transmission.isnad.form</field>
+        <field name="model">moonwitness.sidra.transmission.isnad</field>
+        <field name="arch" type="xml">
+            <form string="Isnad Chain">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="urn"/>
+                            <field name="passage_id"/>
+                            <field name="continuity"/>
+                        </group>
+                        <group>
+                            <field name="overall_grade"/>
+                            <field name="evaluator"/>
+                            <field name="provenance_id"/>
+                            <field name="epistemic_status_id"/>
+                        </group>
+                    </group>
+                    <group string="Transmitter Chain (Sanad)">
+                        <field name="narrator_ids" nolabel="1"/>
+                    </group>
+                    <group string="Raw Arabic Sanad">
+                        <field name="chain_text" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sidra_isnad" model="ir.actions.act_window">
+        <field name="name">Transmission Chains (Isnad)</field>
+        <field name="res_model">moonwitness.sidra.transmission.isnad</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</flectra>

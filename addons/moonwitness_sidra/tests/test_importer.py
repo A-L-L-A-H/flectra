@@ -73,7 +73,13 @@ class TestSidraImporter(TransactionCase):
             self.assertTrue(passage, "Passage must be created and resolvable by URN")
             self.assertEqual(passage.local_id, '1:1')
 
-            # 5. Verify Content and FTS diacritic normalization
+            # 5. Verify Content and FTS diacritic normalization + Arabic stemming
             content = self.Content.resolve_urn('mw:content:synthetic:1:1:ar')
             self.assertTrue(content, "Content must be created and resolvable by URN")
-            self.assertIn('الرحمن', content.text_search, "Search vector must normalize Semitic diacritics")
+            self.assertIn('الله', content.text_search, "Search vector must normalize Arabic diacritics")
+            self.assertIn('رحم', content.text_search, "Search vector must contain stemmed Arabic root")
+
+            # 6. Verify idempotency on re-import
+            self.importer.import_dataset_from_dir(tmpdir, tradition_code='islam', batch_size=10)
+            self.assertEqual(self.Passage.search_count([('urn', '=', 'mw:passage:synthetic:1:1')]), 1)
+            self.assertEqual(self.Content.search_count([('urn', '=', 'mw:content:synthetic:1:1:ar')]), 1)

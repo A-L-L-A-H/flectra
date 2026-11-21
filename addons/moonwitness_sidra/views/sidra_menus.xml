@@ -25,46 +25,197 @@
               action="action_sidra_work"
               sequence="20"/>
 
+    <menuitem id="menu_sidra_isnad"
+              name="Transmission Chains (Isnad)"
+              parent="menu_sidra_corpus_category"
+              action="action_sidra_isnad"
+              sequence="30"/>
+
+    <menuitem id="menu_sidra_narrators"
+              name="Narrators (Ilm ar-Rijal)"
+              parent="menu_sidra_corpus_category"
+              action="action_sidra_narrator"
+              sequence="40"/>
+
     <!-- TRADITIONS MENU -->
     <menuitem id="menu_sidra_traditions_category"
-              name="World Traditions"
+              name="Traditions &amp; Canons"
               parent="menu_sidra_root"
               sequence="20"/>
 
     <menuitem id="menu_sidra_tradition_list"
-              name="Traditions Directory"
+              name="World Traditions"
               parent="menu_sidra_traditions_category"
               action="action_sidra_tradition"
               sequence="10"/>
 
-    <!-- ONTOLOGY MENU -->
+    <menuitem id="menu_sidra_lineage_list"
+              name="Lineages &amp; Schools"
+              parent="menu_sidra_traditions_category"
+              action="action_sidra_lineage"
+              sequence="20"/>
+
+    <menuitem id="menu_sidra_canon_list"
+              name="Scriptural Canons"
+              parent="menu_sidra_traditions_category"
+              action="action_sidra_canon"
+              sequence="30"/>
+
+    <menuitem id="menu_sidra_institution_list"
+              name="Institutions"
+              parent="menu_sidra_traditions_category"
+              action="action_sidra_institution"
+              sequence="40"/>
+
+    <menuitem id="menu_sidra_practice_list"
+              name="Sacred Practices"
+              parent="menu_sidra_traditions_category"
+              action="action_sidra_practice"
+              sequence="50"/>
+
+    <!-- RESEARCH & HERMENEUTICS MENU -->
+    <menuitem id="menu_sidra_research_category"
+              name="Research &amp; Comparative"
+              parent="menu_sidra_root"
+              sequence="25"/>
+
+    <menuitem id="menu_sidra_assertion_list"
+              name="Scoped Assertions"
+              parent="menu_sidra_research_category"
+              action="action_sidra_assertion"
+              sequence="10"/>
+
+    <menuitem id="menu_sidra_alignment_list"
+              name="Cross-Tradition Alignments"
+              parent="menu_sidra_research_category"
+              action="action_sidra_alignment"
+              sequence="20"/>
+
+    <menuitem id="menu_sidra_motif_list"
+              name="Narrative Motifs"
+              parent="menu_sidra_research_category"
+              action="action_sidra_motif"
+              sequence="30"/>
+
+    <menuitem id="menu_sidra_commentary_list"
+              name="Tafsir &amp; Commentaries"
+              parent="menu_sidra_research_category"
+              action="action_sidra_commentary"
+              sequence="40"/>
+
+    <!-- LINGUISTICS & WSI MENU -->
+    <menuitem id="menu_sidra_linguistics_category"
+              name="Linguistics &amp; WSI"
+              parent="menu_sidra_root"
+              sequence="28"/>
+
+    <menuitem id="menu_sidra_lexicon_list"
+              name="Sacred Lexicons"
+              parent="menu_sidra_linguistics_category"
+              action="action_sidra_lexicon"
+              sequence="10"/>
+
+    <menuitem id="menu_sidra_word_list"
+              name="Words &amp; Roots"
+              parent="menu_sidra_linguistics_category"
+              action="action_sidra_word"
+              sequence="20"/>
+
+    <menuitem id="menu_sidra_semantic_frame_list"
+              name="WSI Semantic Frames"
+              parent="menu_sidra_linguistics_category"
+              action="action_sidra_semantic_frame"
+              sequence="30"/>
+
+    <!-- ONTOLOGY, DIVINITY & COSMOLOGY MENU -->
     <menuitem id="menu_sidra_ontology_category"
-              name="Ontology &amp; Primitives"
+              name="Ontology &amp; Divinity"
               parent="menu_sidra_root"
               sequence="30"/>
+
+    <menuitem id="menu_sidra_divinity_list"
+              name="Divinity &amp; Attributes"
+              parent="menu_sidra_ontology_category"
+              action="action_sidra_divinity"
+              sequence="10"/>
 
     <menuitem id="menu_sidra_primitive_list"
               name="Metaphysical Primitives"
               parent="menu_sidra_ontology_category"
               action="action_sidra_primitive"
+              sequence="20"/>
+
+    <menuitem id="menu_sidra_universe_list"
+              name="Cosmologies &amp; Realms"
+              parent="menu_sidra_ontology_category"
+              action="action_sidra_universe"
+              sequence="30"/>
+
+    <menuitem id="menu_sidra_gazetteer_list"
+              name="Sacred Gazetteer"
+              parent="menu_sidra_ontology_category"
+              action="action_sidra_gazetteer"
+              sequence="40"/>
+
+    <menuitem id="menu_sidra_meta_category_list"
+              name="OX-DX Meta-Ontology"
+              parent="menu_sidra_ontology_category"
+              action="action_sidra_meta_category"
+              sequence="50"/>
+
+    <!-- NARRATIVES MENU -->
+    <menuitem id="menu_sidra_narratives_category"
+              name="Narratives &amp; GOLEM"
+              parent="menu_sidra_root"
+              sequence="35"/>
+
+    <menuitem id="menu_sidra_story_list"
+              name="Sacred Stories"
+              parent="menu_sidra_narratives_category"
+              action="action_sidra_story"
               sequence="10"/>
 
-    <!-- DATASETS & INGESTION -->
+    <menuitem id="menu_sidra_character_list"
+              name="Characters (GOLEM)"
+              parent="menu_sidra_narratives_category"
+              action="action_sidra_character"
+              sequence="20"/>
+
+    <!-- INTELLIGENCE & DATASETS MENU -->
     <menuitem id="menu_sidra_datasets_category"
-              name="Datasets &amp; Ingestion"
+              name="Intelligence &amp; Datasets"
               parent="menu_sidra_root"
               sequence="40"
               groups="group_moonwitness_sidra_manager"/>
+
+    <menuitem id="menu_sidra_query_playground_menu"
+              name="GraphRAG Query Playground"
+              parent="menu_sidra_datasets_category"
+              action="action_sidra_query_playground"
+              sequence="5"
+              groups="group_moonwitness_sidra_reader"/>
+
+    <menuitem id="menu_sidra_query_log_menu"
+              name="GraphRAG Query &amp; Audit Log"
+              parent="menu_sidra_datasets_category"
+              action="action_sidra_query_log"
+              sequence="10"/>
+
+    <menuitem id="menu_sidra_kg_node_menu"
+              name="Knowledge Graph Nodes"
+              parent="menu_sidra_datasets_category"
+              action="action_sidra_kg_node"
+              sequence="20"/>
 
     <menuitem id="menu_sidra_import_wizard_menu"
               name="Import Corpus Wizard"
               parent="menu_sidra_datasets_category"
               action="action_sidra_import_wizard"
-              sequence="10"/>
+              sequence="30"/>
 
     <menuitem id="menu_sidra_ingest_jobs_menu"
               name="Ingestion Jobs"
               parent="menu_sidra_datasets_category"
               action="action_sidra_ingest_job"
-              sequence="20"/>
+              sequence="40"/>
 </flectra>

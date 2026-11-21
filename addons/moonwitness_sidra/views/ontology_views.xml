@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <!-- DIVINITY VIEWS -->
+    <record id="view_sidra_divinity_tree" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.divinity.tree</field>
+        <field name="model">moonwitness.sidra.divinity</field>
+        <field name="arch" type="xml">
+            <tree string="Divinity &amp; Ultimate Reality Entities">
+                <field name="name"/>
+                <field name="tradition_id"/>
+                <field name="aqel_operator"/>
+                <field name="urn"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_sidra_divinity_form" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.divinity.form</field>
+        <field name="model">moonwitness.sidra.divinity</field>
+        <field name="arch" type="xml">
+            <form string="Divinity Entity">
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                        <h3><field name="urn" readonly="1"/></h3>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="tradition_id"/>
+                            <field name="provenance_id"/>
+                            <field name="epistemic_status_id"/>
+                        </group>
+                        <group>
+                            <field name="aqel_operator"/>
+                            <field name="master_category"/>
+                            <field name="primitive_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Kataphatic (Via Positiva)">
+                            <field name="kataphatic_attributes"/>
+                        </page>
+                        <page string="Apophatic (Via Negativa / Tanzih)">
+                            <field name="apophatic_attributes"/>
+                        </page>
+                        <page string="Sacred Epithets / Names">
+                            <field name="epithets"/>
+                        </page>
+                        <page string="Revelation &amp; Manifestation">
+                            <field name="consciousness_mode_ids"/>
+                            <field name="manifestation_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sidra_divinity" model="ir.actions.act_window">
+        <field name="name">Divinity &amp; Attributes</field>
+        <field name="res_model">moonwitness.sidra.divinity</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- COSMOLOGY: UNIVERSE & REALM VIEWS -->
+    <record id="view_sidra_universe_tree" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.universe.tree</field>
+        <field name="model">moonwitness.sidra.universe</field>
+        <field name="arch" type="xml">
+            <tree string="Cosmological Universes">
+                <field name="name"/>
+                <field name="tradition_id"/>
+                <field name="urn"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_sidra_universe" model="ir.actions.act_window">
+        <field name="name">Cosmologies &amp; Realms</field>
+        <field name="res_model">moonwitness.sidra.universe</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- SACRED GAZETTEER VIEWS -->
+    <record id="view_sidra_gazetteer_tree" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.gazetteer.tree</field>
+        <field name="model">moonwitness.sidra.gazetteer</field>
+        <field name="arch" type="xml">
+            <tree string="Sacred Geography Gazetteer">
+                <field name="name"/>
+                <field name="ancient_names"/>
+                <field name="latitude"/>
+                <field name="longitude"/>
+                <field name="pleiades_uri"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_sidra_gazetteer" model="ir.actions.act_window">
+        <field name="name">Sacred Gazetteer (Pleiades)</field>
+        <field name="res_model">moonwitness.sidra.gazetteer</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- META-ONTOLOGY VIEWS -->
+    <record id="view_sidra_meta_category_tree" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.meta.category.tree</field>
+        <field name="model">moonwitness.sidra.meta.category</field>
+        <field name="arch" type="xml">
+            <tree string="OX-DX Upper Ontology Categories">
+                <field name="oxdx_zone"/>
+                <field name="oxdx_level"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="upper_framework"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_sidra_meta_category" model="ir.actions.act_window">
+        <field name="name">OX-DX Meta-Ontology</field>
+        <field name="res_model">moonwitness.sidra.meta.category</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</flectra>

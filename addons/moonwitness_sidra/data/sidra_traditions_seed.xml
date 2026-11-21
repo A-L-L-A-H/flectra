@@ -12,71 +12,880 @@
         <field name="urn">mw:tradition:islam</field>
         <field name="code">islam</field>
         <field name="name">Islam</field>
-        <field name="native_name">الإسلام</field>
         <field name="tradition_type">major_world_religion</field>
         <field name="historical_status">living</field>
-        <field name="geographic_origin">Arabian Peninsula (Makkah, Madinah)</field>
-        <field name="primary_languages">ara</field>
+        <field name="textuality">written_canon</field>
         <field name="provenance_id" ref="provenance_rgbl_root"/>
     </record>
-
-    <record id="tradition_christianity" model="moonwitness.sidra.tradition">
-        <field name="urn">mw:tradition:christianity</field>
-        <field name="code">christianity</field>
-        <field name="name">Christianity</field>
-        <field name="native_name">Christianitas</field>
-        <field name="tradition_type">major_world_religion</field>
-        <field name="historical_status">living</field>
-        <field name="geographic_origin">Levant (Jerusalem, Galilee)</field>
-        <field name="primary_languages">grc,heb,lat</field>
-        <field name="provenance_id" ref="provenance_rgbl_root"/>
-    </record>
-
-    <record id="tradition_buddhism" model="moonwitness.sidra.tradition">
-        <field name="urn">mw:tradition:buddhism</field>
-        <field name="code">buddhism</field>
-        <field name="name">Buddhism</field>
-        <field name="native_name">Buddhasāsana</field>
-        <field name="tradition_type">major_world_religion</field>
-        <field name="historical_status">living</field>
-        <field name="geographic_origin">Ancient India (Magadha, Kosala)</field>
-        <field name="primary_languages">pli,san</field>
-        <field name="provenance_id" ref="provenance_rgbl_root"/>
-    </record>
-
     <record id="tradition_judaism" model="moonwitness.sidra.tradition">
         <field name="urn">mw:tradition:judaism</field>
         <field name="code">judaism</field>
         <field name="name">Judaism</field>
-        <field name="native_name">Yahadut</field>
         <field name="tradition_type">major_world_religion</field>
         <field name="historical_status">living</field>
-        <field name="geographic_origin">Ancient Levant</field>
-        <field name="primary_languages">heb,arc</field>
+        <field name="textuality">written_canon</field>
         <field name="provenance_id" ref="provenance_rgbl_root"/>
     </record>
-
+    <record id="tradition_christianity" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:christianity</field>
+        <field name="code">christianity</field>
+        <field name="name">Christianity</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
     <record id="tradition_hinduism" model="moonwitness.sidra.tradition">
         <field name="urn">mw:tradition:hinduism</field>
         <field name="code">hinduism</field>
         <field name="name">Hinduism</field>
-        <field name="native_name">Sanātana Dharma</field>
         <field name="tradition_type">major_world_religion</field>
         <field name="historical_status">living</field>
-        <field name="geographic_origin">Indian Subcontinent</field>
-        <field name="primary_languages">san</field>
+        <field name="textuality">written_canon</field>
         <field name="provenance_id" ref="provenance_rgbl_root"/>
     </record>
-
-    <record id="tradition_taoism" model="moonwitness.sidra.tradition">
-        <field name="urn">mw:tradition:taoism</field>
-        <field name="code">taoism</field>
-        <field name="name">Taoism</field>
-        <field name="native_name">Dàojiào</field>
+    <record id="tradition_buddhism" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:buddhism</field>
+        <field name="code">buddhism</field>
+        <field name="name">Buddhism</field>
         <field name="tradition_type">major_world_religion</field>
         <field name="historical_status">living</field>
-        <field name="geographic_origin">Ancient China</field>
-        <field name="primary_languages">zho</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_daoism" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:daoism</field>
+        <field name="code">daoism</field>
+        <field name="name">Daoism</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_confucianism" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:confucianism</field>
+        <field name="code">confucianism</field>
+        <field name="name">Confucianism</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_zoroastrianism" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:zoroastrianism</field>
+        <field name="code">zoroastrianism</field>
+        <field name="name">Zoroastrianism</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_sikhism" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:sikhism</field>
+        <field name="code">sikhism</field>
+        <field name="name">Sikhism</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_jainism" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:jainism</field>
+        <field name="code">jainism</field>
+        <field name="name">Jainism</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_bahai" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:bahai</field>
+        <field name="code">bahai</field>
+        <field name="name">Bahá'í Faith</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_shinto" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:shinto</field>
+        <field name="code">shinto</field>
+        <field name="name">Shinto</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_samaritanism" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:samaritanism</field>
+        <field name="code">samaritanism</field>
+        <field name="name">Samaritanism</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_mandaeism" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:mandaeism</field>
+        <field name="code">mandaeism</field>
+        <field name="name">Mandaeism</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_yazidism" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:yazidism</field>
+        <field name="code">yazidism</field>
+        <field name="name">Yazidism</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_druze" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:druze</field>
+        <field name="code">druze</field>
+        <field name="name">Druze (Tawhid)</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_manichaeism" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:manichaeism</field>
+        <field name="code">manichaeism</field>
+        <field name="name">Manichaeism</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_yarsanism" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:yarsanism</field>
+        <field name="code">yarsanism</field>
+        <field name="name">Yarsanism (Ahl-e Haqq)</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_tengrism" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:tengrism</field>
+        <field name="code">tengrism</field>
+        <field name="name">Tengrism</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_cheondoism" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:cheondoism</field>
+        <field name="code">cheondoism</field>
+        <field name="name">Cheondoism (Donghak)</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_tenrikyo" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:tenrikyo</field>
+        <field name="code">tenrikyo</field>
+        <field name="name">Tenrikyo</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_caodai" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:caodai</field>
+        <field name="code">caodai</field>
+        <field name="name">Cao Dai (Đại Đạo Tam Kỳ Phổ Độ)</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_won_buddhism" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:won-buddhism</field>
+        <field name="code">won-buddhism</field>
+        <field name="name">Won Buddhism</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_yoruba_ifa" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:yoruba-ifa</field>
+        <field name="code">yoruba-ifa</field>
+        <field name="name">Yoruba Religion (Ifá)</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_gnosticism" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:gnosticism</field>
+        <field name="code">gnosticism</field>
+        <field name="name">Gnosticism</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_hermeticism" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:hermeticism</field>
+        <field name="code">hermeticism</field>
+        <field name="name">Hermeticism</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_theosophy" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:theosophy</field>
+        <field name="code">theosophy</field>
+        <field name="name">Theosophy</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_maori_tradition" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:maori-tradition</field>
+        <field name="code">maori-tradition</field>
+        <field name="name">Māori Traditional Religion</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_syriac_christianity" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:syriac-christianity</field>
+        <field name="code">syriac-christianity</field>
+        <field name="name">Syriac Christianity</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_ethiopian_orthodox" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:ethiopian-orthodox</field>
+        <field name="code">ethiopian-orthodox</field>
+        <field name="name">Ethiopian Orthodox Tewahedo Tradition</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_ancient_egyptian" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:ancient-egyptian</field>
+        <field name="code">ancient-egyptian</field>
+        <field name="name">Ancient Egyptian Religion</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_mesopotamian" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:mesopotamian</field>
+        <field name="code">mesopotamian</field>
+        <field name="name">Mesopotamian Religion (Sumerian &amp; Akkadian)</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_greco_roman_paganism" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:greco-roman-paganism</field>
+        <field name="code">greco-roman-paganism</field>
+        <field name="name">Classical Greco-Roman Religion</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_norse_germanic" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:norse-germanic</field>
+        <field name="code">norse-germanic</field>
+        <field name="name">Norse &amp; Germanic Religion</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_slavic_tradition" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:slavic-tradition</field>
+        <field name="code">slavic-tradition</field>
+        <field name="name">Slavic Religious &amp; Traditional Literature</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_mayan_religion" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:mayan-religion</field>
+        <field name="code">mayan-religion</field>
+        <field name="name">Maya Traditional Religion</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_nahua_aztec" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:nahua-aztec</field>
+        <field name="code">nahua-aztec</field>
+        <field name="name">Nahua &amp; Aztec Religious Tradition</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_andean_inca" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:andean-inca</field>
+        <field name="code">andean-inca</field>
+        <field name="name">Andean &amp; Inca Religious Tradition</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_akan_tradition" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:akan-tradition</field>
+        <field name="code">akan-tradition</field>
+        <field name="name">Akan Traditional Religion</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_hawaiian_tradition" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:hawaiian-tradition</field>
+        <field name="code">hawaiian-tradition</field>
+        <field name="name">Hawaiian Traditional Religion</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_lingayatism" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:lingayatism</field>
+        <field name="code">lingayatism</field>
+        <field name="name">Lingayatism (Veerashaiva Tradition)</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_swaminarayan" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:swaminarayan</field>
+        <field name="code">swaminarayan</field>
+        <field name="name">Swaminarayan Sampradaya</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_alevi_bektashi" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:alevi-bektashi</field>
+        <field name="code">alevi-bektashi</field>
+        <field name="name">Alevism and Bektashi Tradition</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_alawite_tradition" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:alawite-tradition</field>
+        <field name="code">alawite-tradition</field>
+        <field name="name">Alawite Tradition (Nusayrism)</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_sogdian_tradition" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:sogdian-tradition</field>
+        <field name="code">sogdian-tradition</field>
+        <field name="name">Sogdian Religious &amp; Textual Tradition</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_ravidassia" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:ravidassia</field>
+        <field name="code">ravidassia</field>
+        <field name="name">Ravidassia Dharm</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_kabir_panth" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:kabir-panth</field>
+        <field name="code">kabir-panth</field>
+        <field name="name">Kabir Panth Tradition</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_ayyavazhi" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:ayyavazhi</field>
+        <field name="code">ayyavazhi</field>
+        <field name="name">Ayyavazhi Tradition</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_ryukyuan_tradition" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:ryukyuan-tradition</field>
+        <field name="code">ryukyuan-tradition</field>
+        <field name="name">Ryukyuan Indigenous Religion</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_dogon_tradition" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:dogon-tradition</field>
+        <field name="code">dogon-tradition</field>
+        <field name="name">Dogon Traditional Cosmogony</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_haudenosaunee_tradition" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:haudenosaunee-tradition</field>
+        <field name="code">haudenosaunee-tradition</field>
+        <field name="name">Haudenosaunee (Iroquois) Sacred Tradition</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_ugaritic_religion" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:ugaritic-religion</field>
+        <field name="code">ugaritic-religion</field>
+        <field name="name">Ugaritic Canaanite Religion</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_celtic_religion" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:celtic-religion</field>
+        <field name="code">celtic-religion</field>
+        <field name="name">Celtic Sacred &amp; Mythological Tradition</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_radhasoami" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:radhasoami</field>
+        <field name="code">radhasoami</field>
+        <field name="name">Radhasoami Satsang Tradition</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_brahmo_samaj" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:brahmo-samaj</field>
+        <field name="code">brahmo-samaj</field>
+        <field name="name">Brahmo Samaj Tradition</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_arya_samaj" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:arya-samaj</field>
+        <field name="code">arya-samaj</field>
+        <field name="name">Arya Samaj Tradition</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_hoa_hao" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:hoa-hao</field>
+        <field name="code">hoa-hao</field>
+        <field name="name">Phật Giáo Hòa Hảo (Hoa Hao Tradition)</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_vodun_tradition" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:vodun-tradition</field>
+        <field name="code">vodun-tradition</field>
+        <field name="name">Fon &amp; Vodun Religious Tradition</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_dinka_tradition" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:dinka-tradition</field>
+        <field name="code">dinka-tradition</field>
+        <field name="name">Dinka Traditional Religion &amp; Cosmogony</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_lakota_tradition" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:lakota-tradition</field>
+        <field name="code">lakota-tradition</field>
+        <field name="name">Lakota Sacred Ceremonial Tradition</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_dine_navajo_tradition" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:dine-navajo-tradition</field>
+        <field name="code">dine-navajo-tradition</field>
+        <field name="name">Diné (Navajo) Sacred Tradition</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_samoan_tradition" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:samoan-tradition</field>
+        <field name="code">samoan-tradition</field>
+        <field name="name">Samoan Sacred Cosmogony &amp; Oral Lore</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_etruscan_religion" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:etruscan-religion</field>
+        <field name="code">etruscan-religion</field>
+        <field name="name">Etruscan Sacred &amp; Ritual Tradition</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_mithraism" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:mithraism</field>
+        <field name="code">mithraism</field>
+        <field name="name">Mithraic Mysteries &amp; Liturgical Tradition</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_dadu_panth" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:dadu-panth</field>
+        <field name="code">dadu-panth</field>
+        <field name="name">Dadu Panth</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_jeungsanism" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:jeungsanism</field>
+        <field name="code">jeungsanism</field>
+        <field name="name">Jeungsanism</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_yiguandao" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:yiguandao</field>
+        <field name="code">yiguandao</field>
+        <field name="name">Yiguandao</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_igbo_odinani" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:igbo-odinani</field>
+        <field name="code">igbo-odinani</field>
+        <field name="name">Igbo Odinani</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_serer_religion" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:serer-religion</field>
+        <field name="code">serer-religion</field>
+        <field name="name">Serer Religion (A Roog)</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_cherokee_tradition" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:cherokee-tradition</field>
+        <field name="code">cherokee-tradition</field>
+        <field name="name">Cherokee Traditional Religion</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_inuit_tradition" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:inuit-tradition</field>
+        <field name="code">inuit-tradition</field>
+        <field name="name">Inuit Traditional Religion</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_tongan_tradition" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:tongan-tradition</field>
+        <field name="code">tongan-tradition</field>
+        <field name="name">Tongan Traditional Religion</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_fijian_tradition" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:fijian-tradition</field>
+        <field name="code">fijian-tradition</field>
+        <field name="name">Fijian Traditional Religion</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_shabak_tradition" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:shabak-tradition</field>
+        <field name="code">shabak-tradition</field>
+        <field name="name">Shabak Tradition</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_baltic_tradition" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:baltic-tradition</field>
+        <field name="code">baltic-tradition</field>
+        <field name="name">Baltic Religion (Romuva &amp; Dievturyba)</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_canaanite_phoenician" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:canaanite-phoenician</field>
+        <field name="code">canaanite-phoenician</field>
+        <field name="name">Canaanite-Phoenician Religion</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="textuality">written_canon</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_ainu_tradition" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:ainu-tradition</field>
+        <field name="code">ainu-tradition</field>
+        <field name="name">Ainu Traditional Religion</field>
+        <field name="native_name">アイヌの信仰 (Ainu Kamuy yukar)</field>
+        <field name="tradition_type">indigenous_tradition</field>
+        <field name="historical_status">living</field>
+        <field name="geographic_origin">East Asia (Hokkaido, Sakhalin, Kurils)</field>
+        <field name="textuality">oral_corpus</field>
+        <field name="description">Indigenous religious and spiritual tradition of the Ainu people centered on Kamuy (divine spiritual beings and nature forces), epic Yukar narratives, and sacred sending rituals (Iomante).</field>
+        <field name="primary_languages">ain,ja</field>
+        <field name="aliases">Ainu Religion, Kamuy Faith, Ainu Kamuy Cult</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_waaqeffanna" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:waaqeffanna</field>
+        <field name="code">waaqeffanna</field>
+        <field name="name">Waaqeffanna (Oromo Traditional Monotheism)</field>
+        <field name="native_name">Waaqeffannaa (Amantii Waaqaa Tokkichaa)</field>
+        <field name="tradition_type">indigenous_tradition</field>
+        <field name="historical_status">living</field>
+        <field name="geographic_origin">East Africa (Horn of Africa, Ethiopia, Kenya)</field>
+        <field name="textuality">oral_corpus</field>
+        <field name="description">Indigenous monotheistic faith of the Oromo people centered on Waaqa Tokkicha (the Supreme Creator God), Safuu (cosmic moral order), and sacred seasonal Irreecha thanksgiving rituals.</field>
+        <field name="primary_languages">orm,en</field>
+        <field name="aliases">Oromo Religion, Waaqism, Waaqa Faith</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_guarani_tradition" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:guarani-tradition</field>
+        <field name="code">guarani-tradition</field>
+        <field name="name">Guaraní Traditional Religion</field>
+        <field name="native_name">Jeroky Ñembo’e (Tekoha Guaraní)</field>
+        <field name="tradition_type">indigenous_tradition</field>
+        <field name="historical_status">living</field>
+        <field name="geographic_origin">South America (Paraguay, Gran Chaco, Brazil, Argentina, Bolivia)</field>
+        <field name="textuality">oral_corpus</field>
+        <field name="description">Indigenous cosmological and sacred tradition of the Guaraní peoples centered on Ñande Ru Tenonde (Our True Father of the Beginning) and the quest for Yvy Marãe’ỹ (the Land Without Evil).</field>
+        <field name="primary_languages">gug,es,en</field>
+        <field name="aliases">Mbyá Guaraní Religion, Guaraní Cosmovision, Paĩ Tavyterã Tradition</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_mapuche_tradition" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:mapuche-tradition</field>
+        <field name="code">mapuche-tradition</field>
+        <field name="name">Mapuche Religion &amp; Cosmovision</field>
+        <field name="native_name">Mapuche Az Mapu (Admapu)</field>
+        <field name="tradition_type">indigenous_tradition</field>
+        <field name="historical_status">living</field>
+        <field name="geographic_origin">South America (Wallmapu, Chile, Argentina)</field>
+        <field name="textuality">oral_corpus</field>
+        <field name="description">Indigenous Andean-Patagonian spiritual tradition of the Mapuche nation centered on Ngünechen (the Supreme Sustainer of Life), the sacred ceremonial Nguillatun, and Machi healing wisdom.</field>
+        <field name="primary_languages">arn,es,en</field>
+        <field name="aliases">Mapuche Cosmovision, Admapu Law, Religion Mapuche</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_australian_aboriginal_traditions" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:australian-aboriginal-traditions</field>
+        <field name="code">australian-aboriginal-traditions</field>
+        <field name="name">Australian Aboriginal Dreaming Traditions</field>
+        <field name="native_name">Jukurrpa / Altyerrenge / Wangarr</field>
+        <field name="tradition_type">indigenous_tradition</field>
+        <field name="historical_status">living</field>
+        <field name="geographic_origin">Oceania (Australia)</field>
+        <field name="textuality">oral_corpus</field>
+        <field name="description">The ancient spiritual and cosmological traditions of First Nations Australians centered on The Dreaming (Jukurrpa/Wangarr), sacred Songlines, and ancestral Creation Beings.</field>
+        <field name="primary_languages">aus,en</field>
+        <field name="aliases">The Dreaming, Aboriginal Religion, Jukurrpa Law</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_micronesian_tradition" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:micronesian-tradition</field>
+        <field name="code">micronesian-tradition</field>
+        <field name="name">Micronesian Traditional Religion</field>
+        <field name="native_name">Ani / Sou Koun / Chechesuked</field>
+        <field name="tradition_type">indigenous_tradition</field>
+        <field name="historical_status">living</field>
+        <field name="geographic_origin">Pacific (Micronesia, Pohnpei, Chuuk, Palau, Yap, Marshalls)</field>
+        <field name="textuality">oral_corpus</field>
+        <field name="description">Indigenous religious traditions of Micronesian archipelagoes centered on ancestral navigator deities, celestial spirits (Ani), and sacred megalithic sanctuaries (Nan Madol).</field>
+        <field name="primary_languages">pon,pau,en</field>
+        <field name="aliases">Pohnpeian Tradition, Palauan Tradition, Micronesian Cosmovision</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_batak_parmalim" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:batak-parmalim</field>
+        <field name="code">batak-parmalim</field>
+        <field name="name">Batak Parmalim (Ugamo Malim)</field>
+        <field name="native_name">Ugamo Malim (Hakehason Batak)</field>
+        <field name="tradition_type">indigenous_tradition</field>
+        <field name="historical_status">living</field>
+        <field name="geographic_origin">Southeast Asia (Sumatra, Indonesia)</field>
+        <field name="textuality">written_canon</field>
+        <field name="description">Indigenous monotheistic and ancestral tradition of the Batak Toba people centered on Debata Mulajadi Na Bolon (the Supreme Creator God) and holy rituals guided by the Ihutan.</field>
+        <field name="primary_languages">btk,id,en</field>
+        <field name="aliases">Ugamo Malim, Agama Parmalim, Batak Religion</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_dayak_kaharingan" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:dayak-kaharingan</field>
+        <field name="code">dayak-kaharingan</field>
+        <field name="name">Kaharingan (Dayak Traditional Religion)</field>
+        <field name="native_name">Agama Hindu Kaharingan (Basarah)</field>
+        <field name="tradition_type">indigenous_tradition</field>
+        <field name="historical_status">living</field>
+        <field name="geographic_origin">Southeast Asia (Borneo, Kalimantan, Indonesia)</field>
+        <field name="textuality">written_canon</field>
+        <field name="description">Indigenous cosmological and sacred scripture-based religion of the Dayak peoples of Borneo centered on Ranying Hatalla Langit, the sacred Panaturan scripture, and Tiwah rites.</field>
+        <field name="primary_languages">nij,id,en</field>
+        <field name="aliases">Kaharingan, Agama Kaharingan, Dayak Religion</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_kejawen" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:kejawen</field>
+        <field name="code">kejawen</field>
+        <field name="name">Kejawen (Javanese Spiritual Wisdom)</field>
+        <field name="native_name">Kapitayan / Kebatinan / Kawruh Jiwa</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="geographic_origin">Southeast Asia (Java, Indonesia)</field>
+        <field name="textuality">written_canon</field>
+        <field name="description">Indigenous Javanese spiritual, philosophical, and cosmological tradition centered on Sang Hyang Taya (The Ultimate Void/Transcendent), Manunggaling Kawula Gusti, and sacred Serat wisdom literature.</field>
+        <field name="primary_languages">jav,id,en</field>
+        <field name="aliases">Kapitayan, Javanese Religion, Kebatinan, Aliran Kepercayaan</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_phrygian_religion" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:phrygian-religion</field>
+        <field name="code">phrygian-religion</field>
+        <field name="name">Phrygian Religion</field>
+        <field name="native_name">Matar Kubileya Cult</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">historical</field>
+        <field name="geographic_origin">Anatolia (Phrygia, Modern Turkey)</field>
+        <field name="textuality">written_canon</field>
+        <field name="description">Ancient Indo-European religion of the Kingdom of Phrygia centered on the Great Mother Goddess Matar Kubileya, rock-cut monumental facades, and sacred inscriptions.</field>
+        <field name="primary_languages">xpg,grc,en</field>
+        <field name="aliases">Phrygian Cult of Cybele, Anatolian Mother Goddess Tradition</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_hittite_hurrian_religion" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:hittite-hurrian-religion</field>
+        <field name="code">hittite-hurrian-religion</field>
+        <field name="name">Hittite &amp; Hurrian Religion</field>
+        <field name="native_name">DINGIR-MEŠ ŠA KUR ḪATTI (Thousand Gods of Hatti)</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">historical</field>
+        <field name="geographic_origin">Anatolia &amp; Northern Levant (Hattusa, Boghazköy, Mitanni)</field>
+        <field name="textuality">written_canon</field>
+        <field name="description">Ancient Near Eastern religious tradition of the Hittite Empire and Hurrian realm centered on the Storm God Teshub, the Sun Goddess of Arinna, and the mythic Kumarbi epic cycle.</field>
+        <field name="primary_languages">hit,hur,en,de</field>
+        <field name="aliases">Hittite Religion, Hurrian Religion, Religion of Hatti</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_elamite_religion" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:elamite-religion</field>
+        <field name="code">elamite-religion</field>
+        <field name="name">Elamite Religion</field>
+        <field name="native_name">Inshushinak &amp; Napirisha Tradition</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">historical</field>
+        <field name="geographic_origin">Ancient Near East (Elam, Susa, Chogha Zanbil, Iran)</field>
+        <field name="textuality">written_canon</field>
+        <field name="description">Ancient indigenous Near Eastern religion of Elam centered on Inshushinak (Lord of Susa and Judge of the Dead), Napirisha, and the sacred ziggurat complex of Dur Untash (Chogha Zanbil).</field>
+        <field name="primary_languages">elx,en,fr</field>
+        <field name="aliases">Religion of Elam, Elamite Tradition, Inshushinak Cult</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_minoan_religion" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:minoan-religion</field>
+        <field name="code">minoan-religion</field>
+        <field name="name">Minoan Religion</field>
+        <field name="native_name">Aegean Potnia Theron Tradition</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">historical</field>
+        <field name="geographic_origin">Aegean (Crete, Knossos, Phaistos)</field>
+        <field name="textuality">written_canon</field>
+        <field name="description">Bronze Age Aegean religion of Minoan Crete centered on the Great Goddess, the Potnia Theron (Mistress of Animals), sacred peak sanctuaries, and Linear A inscribed libation vessels.</field>
+        <field name="primary_languages">omn,grc,en</field>
+        <field name="aliases">Minoan Cretan Religion, Aegean Bronze Age Religion</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+    <record id="tradition_sami_tradition" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:sami-tradition</field>
+        <field name="code">sami-tradition</field>
+        <field name="name">Sámi Traditional Religion</field>
+        <field name="native_name">Sámi Osku / Noaidevuohta</field>
+        <field name="tradition_type">indigenous_tradition</field>
+        <field name="historical_status">historical</field>
+        <field name="geographic_origin">Northern Europe (Sápmi, Norway, Sweden, Finland, Russia)</field>
+        <field name="textuality">oral_corpus</field>
+        <field name="description">Indigenous circumpolar animistic and shamanic tradition of the Sámi people centered on the Sun (Beaivi), Mother Goddesses (Máttaráhkká), Noaidi drum ceremonies, and sacred Sieidi rocks.</field>
+        <field name="primary_languages">sme,no,sv,en</field>
+        <field name="aliases">Sámi Shamanism, Lappish Religion, Sámi Cosmovision</field>
         <field name="provenance_id" ref="provenance_rgbl_root"/>
     </record>
 </flectra>

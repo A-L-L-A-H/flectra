@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <!-- LINEAGE VIEWS (MPTT) -->
+    <record id="view_sidra_lineage_tree" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.lineage.tree</field>
+        <field name="model">moonwitness.sidra.lineage</field>
+        <field name="arch" type="xml">
+            <tree string="Lineages &amp; Schools of Thought">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="tradition_id"/>
+                <field name="parent_id"/>
+                <field name="urn"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_sidra_lineage_form" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.lineage.form</field>
+        <field name="model">moonwitness.sidra.lineage</field>
+        <field name="arch" type="xml">
+            <form string="Lineage / School">
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                        <h3><field name="urn" readonly="1"/></h3>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="tradition_id"/>
+                            <field name="parent_id"/>
+                        </group>
+                        <group>
+                            <field name="provenance_id"/>
+                            <field name="epistemic_status_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description"/>
+                        </page>
+                        <page string="Sub-lineages">
+                            <field name="child_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Associated Canons">
+                            <field name="canon_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="scope"/>
+                                    <field name="authority_level"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sidra_lineage" model="ir.actions.act_window">
+        <field name="name">Lineages &amp; Schools</field>
+        <field name="res_model">moonwitness.sidra.lineage</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- CANON VIEWS -->
+    <record id="view_sidra_canon_tree" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.canon.tree</field>
+        <field name="model">moonwitness.sidra.canon</field>
+        <field name="arch" type="xml">
+            <tree string="Scriptural Canons">
+                <field name="name"/>
+                <field name="tradition_id"/>
+                <field name="lineage_id"/>
+                <field name="scope"/>
+                <field name="authority_level"/>
+                <field name="attestation_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_sidra_canon_form" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.canon.form</field>
+        <field name="model">moonwitness.sidra.canon</field>
+        <field name="arch" type="xml">
+            <form string="Scriptural Canon">
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                        <h3><field name="urn" readonly="1"/></h3>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="tradition_id"/>
+                            <field name="lineage_id"/>
+                            <field name="scope"/>
+                        </group>
+                        <group>
+                            <field name="authority_level"/>
+                            <field name="attestation_date"/>
+                            <field name="provenance_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Canon Work Matrix">
+                            <field name="canon_work_ids">
+                                <tree editable="bottom">
+                                    <field name="work_id"/>
+                                    <field name="status"/>
+                                    <field name="authority_note"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Formation History">
+                            <field name="description"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sidra_canon" model="ir.actions.act_window">
+        <field name="name">Scriptural Canons</field>
+        <field name="res_model">moonwitness.sidra.canon</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- INSTITUTION VIEWS -->
+    <record id="view_sidra_institution_tree" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.institution.tree</field>
+        <field name="model">moonwitness.sidra.institution</field>
+        <field name="arch" type="xml">
+            <tree string="Institutions">
+                <field name="name"/>
+                <field name="institution_type"/>
+                <field name="tradition_id"/>
+                <field name="lineage_id"/>
+                <field name="location"/>
+                <field name="founded_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_sidra_institution" model="ir.actions.act_window">
+        <field name="name">Institutions</field>
+        <field name="res_model">moonwitness.sidra.institution</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- PRACTICE VIEWS -->
+    <record id="view_sidra_practice_tree" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.practice.tree</field>
+        <field name="model">moonwitness.sidra.practice</field>
+        <field name="arch" type="xml">
+            <tree string="Sacred Practices &amp; Rituals">
+                <field name="name"/>
+                <field name="practice_type"/>
+                <field name="frequency"/>
+                <field name="tradition_id"/>
+                <field name="lineage_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_sidra_practice" model="ir.actions.act_window">
+        <field name="name">Sacred Practices</field>
+        <field name="res_model">moonwitness.sidra.practice</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</flectra>

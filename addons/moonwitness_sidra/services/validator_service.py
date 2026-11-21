@@ -29,7 +29,9 @@ class SidraValidatorService(models.AbstractModel):
         findings = []
         families = {
             'moonwitness.sidra.provenance': 'mw:provenance:',
-            'moonwitness.sidra.epistemic.status': 'mw:epistemic:'
+            'moonwitness.sidra.epistemic.status': 'mw:epistemic:',
+            'moonwitness.sidra.assertion': 'mw:assertion:',
+            'moonwitness.sidra.evidence': 'mw:evidence:',
         }
         for model_name, expected_prefix in families.items():
             if model_name not in self.env:

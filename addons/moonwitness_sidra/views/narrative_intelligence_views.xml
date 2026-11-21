@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <!-- STORY VIEWS -->
+    <record id="view_sidra_story_tree" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.story.tree</field>
+        <field name="model">moonwitness.sidra.story</field>
+        <field name="arch" type="xml">
+            <tree string="Sacred Stories &amp; Narrative Arcs">
+                <field name="name"/>
+                <field name="tradition_id"/>
+                <field name="narrative_type"/>
+                <field name="aqel_operator"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_sidra_story" model="ir.actions.act_window">
+        <field name="name">Sacred Stories</field>
+        <field name="res_model">moonwitness.sidra.story</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- CHARACTER (GOLEM) VIEWS -->
+    <record id="view_sidra_character_tree" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.character.tree</field>
+        <field name="model">moonwitness.sidra.character</field>
+        <field name="arch" type="xml">
+            <tree string="Sacred Characters (GOLEM)">
+                <field name="name"/>
+                <field name="epithets"/>
+                <field name="tradition_id"/>
+                <field name="character_type"/>
+                <field name="ontological_status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_sidra_character" model="ir.actions.act_window">
+        <field name="name">Characters (GOLEM)</field>
+        <field name="res_model">moonwitness.sidra.character</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- KNOWLEDGE GRAPH VIEWS -->
+    <record id="view_sidra_kg_node_tree" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.kg.node.tree</field>
+        <field name="model">moonwitness.sidra.kg.node</field>
+        <field name="arch" type="xml">
+            <tree string="Knowledge Graph Nodes">
+                <field name="label"/>
+                <field name="entity_type"/>
+                <field name="entity_urn"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_sidra_kg_node" model="ir.actions.act_window">
+        <field name="name">Knowledge Graph Nodes</field>
+        <field name="res_model">moonwitness.sidra.kg.node</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- QUERY LOG & HALLUCINATION AUDIT VIEWS -->
+    <record id="view_sidra_query_log_tree" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.query.log.tree</field>
+        <field name="model">moonwitness.sidra.query.log</field>
+        <field name="arch" type="xml">
+            <tree string="GraphRAG Query &amp; Hallucination Audit Log">
+                <field name="create_date"/>
+                <field name="session_id"/>
+                <field name="query_text"/>
+                <field name="strategy"/>
+                <field name="verified_citations_count"/>
+                <field name="hallucination_score"/>
+                <field name="user_feedback"/>
+                <field name="latency_ms"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_sidra_query_log" model="ir.actions.act_window">
+        <field name="name">Query Log &amp; Audit</field>
+        <field name="res_model">moonwitness.sidra.query.log</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_sidra_query_playground" model="ir.actions.client">
+        <field name="name">GraphRAG Query Playground</field>
+        <field name="tag">moonwitness_sidra.query_playground</field>
+    </record>
+</flectra>
