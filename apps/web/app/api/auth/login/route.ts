@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { FlectraClient } from "@workspace/flectra-client/server";
+import { FlectraClient } from "@moonwitness/engine-client/server";
 import { FLECTRA_SESSION_COOKIE, getFlectraBaseUrl, sameOrigin } from "@/lib/flectra-server";
 
 export const runtime = "nodejs";
