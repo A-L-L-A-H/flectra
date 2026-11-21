@@ -1,13 +1,13 @@
-import { FlectraRpcError } from "./errors";
+import { EngineRpcError } from "./errors";
 import type {
-  FlectraRpcErrorPayload,
-  FlectraSessionInfo,
-  FlectraViewDefinition,
+  EngineRpcErrorPayload,
+  EngineSessionInfo,
+  EngineViewDefinition,
 } from "./types";
 
 type FetchImplementation = typeof fetch;
 
-type FlectraClientOptions = {
+type EngineClientOptions = {
   baseUrl: string;
   sessionId?: string;
   fetcher?: FetchImplementation;
@@ -15,7 +15,7 @@ type FlectraClientOptions = {
 
 type JsonRpcResponse<T> = {
   result?: T;
-  error?: FlectraRpcErrorPayload;
+  error?: EngineRpcErrorPayload;
 };
 
 function extractSessionId(headers: Headers): string | undefined {
@@ -28,13 +28,13 @@ function extractSessionId(headers: Headers): string | undefined {
   return undefined;
 }
 
-export class FlectraClient {
+export class EngineClient {
   private readonly baseUrl: string;
   private readonly sessionId?: string;
   private readonly fetcher: FetchImplementation;
   private rpcId = 0;
 
-  constructor(options: FlectraClientOptions) {
+  constructor(options: EngineClientOptions) {
     if (!options.baseUrl.trim()) throw new Error("The engine endpoint is required.");
     this.baseUrl = options.baseUrl.endsWith("/") ? options.baseUrl : `${options.baseUrl}/`;
     this.sessionId = options.sessionId;
@@ -70,7 +70,7 @@ export class FlectraClient {
     }
 
     if (!response.ok || payload.error) {
-      if (payload.error) throw new FlectraRpcError(payload.error);
+      if (payload.error) throw new EngineRpcError(payload.error);
       throw new Error(`The application engine request failed with HTTP ${response.status}.`);
     }
 
@@ -81,8 +81,8 @@ export class FlectraClient {
     db: string,
     login: string,
     password: string,
-  ): Promise<{ sessionId: string; sessionInfo: FlectraSessionInfo }> {
-    const { result, response } = await this.post<FlectraSessionInfo>(
+  ): Promise<{ sessionId: string; sessionInfo: EngineSessionInfo }> {
+    const { result, response } = await this.post<EngineSessionInfo>(
       "/web/session/authenticate",
       { db, login, password },
       undefined,
@@ -94,8 +94,8 @@ export class FlectraClient {
     return { sessionId, sessionInfo: result };
   }
 
-  async getSessionInfo(): Promise<FlectraSessionInfo> {
-    const { result } = await this.post<FlectraSessionInfo>("/web/session/get_session_info", {});
+  async getSessionInfo(): Promise<EngineSessionInfo> {
+    const { result } = await this.post<EngineSessionInfo>("/web/session/get_session_info", {});
     return result;
   }
 
@@ -116,7 +116,7 @@ export class FlectraClient {
 
   async getViews<T = unknown>(
     model: string,
-    views: FlectraViewDefinition[],
+    views: EngineViewDefinition[],
     options: Record<string, unknown> = {},
     context: Record<string, unknown> = {},
   ): Promise<T> {
@@ -153,11 +153,11 @@ export class FlectraClient {
   }
 }
 
-export { FlectraRpcError } from "./errors";
+export { EngineRpcError } from "./errors";
 export type {
-  FlectraCallKw,
-  FlectraRpcErrorPayload,
-  FlectraSessionInfo,
-  FlectraViewDefinition,
-  FlectraViewsResult,
+  EngineCallKw,
+  EngineRpcErrorPayload,
+  EngineSessionInfo,
+  EngineViewDefinition,
+  EngineViewsResult,
 } from "./types";
