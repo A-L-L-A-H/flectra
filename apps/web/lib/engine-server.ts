@@ -5,10 +5,9 @@ import { EngineClient } from "@moonwitness/engine-client/server";
 import { MissingEngineSessionError } from "@/lib/engine-errors";
 
 export const MOONWITNESS_SESSION_COOKIE = "moonwitness_session";
-export const LEGACY_SESSION_COOKIE = "flectra_session";
 
 export function getEngineBaseUrl(): string {
-  const value = (process.env.MOONWITNESS_ENGINE_URL || process.env.FLECTRA_URL)?.trim();
+  const value = process.env.MOONWITNESS_ENGINE_URL?.trim();
   if (!value) throw new Error("MOONWITNESS_ENGINE_URL is not configured.");
 
   let url: URL;
@@ -39,7 +38,7 @@ export function createEngineClient(sessionId?: string): EngineClient {
 
 export async function getAuthenticatedEngineClient() {
   const cookieStore = await cookies();
-  const sessionId = cookieStore.get(MOONWITNESS_SESSION_COOKIE)?.value ?? cookieStore.get(LEGACY_SESSION_COOKIE)?.value;
+  const sessionId = cookieStore.get(MOONWITNESS_SESSION_COOKIE)?.value;
   if (!sessionId) throw new MissingEngineSessionError();
   return { sessionId, client: createEngineClient(sessionId) };
 }
