@@ -1,9 +1,10 @@
 import { NextResponse, type NextRequest } from "next/server";
 import {
-  createFlectraServerClient,
-  FLECTRA_SESSION_COOKIE,
+  createEngineClient,
+  LEGACY_SESSION_COOKIE,
+  MOONWITNESS_SESSION_COOKIE,
   sameOrigin,
-} from "@/lib/flectra-server";
+} from "@/lib/engine-server";
 
 export const runtime = "nodejs";
 
@@ -15,17 +16,24 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const sessionId = request.cookies.get(FLECTRA_SESSION_COOKIE)?.value;
+  const sessionId = request.cookies.get(MOONWITNESS_SESSION_COOKIE)?.value ?? request.cookies.get(LEGACY_SESSION_COOKIE)?.value;
   if (sessionId) {
     try {
-      await createFlectraServerClient(sessionId).destroySession();
+      await createEngineClient(sessionId).destroySession();
     } catch {
       // Always clear the local cookie when the upstream session has expired.
     }
   }
 
   const response = NextResponse.redirect(new URL("/login", request.url), 303);
-  response.cookies.set(FLECTRA_SESSION_COOKIE, "", {
+  response.cookies.set(LEGACY_SESSION_COOKIE, "", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+    maxAge: 0,
+  });
+  response.cookies.set(MOONWITNESS_SESSION_COOKIE, "", {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
