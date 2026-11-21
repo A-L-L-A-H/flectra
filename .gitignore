@@ -7,6 +7,7 @@ _build/
 !.mailmap
 !.gitlab-ci.yml
 !.env.example
+!.plan/
 
 # Local environment files and secrets
 .env
