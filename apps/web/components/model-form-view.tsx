@@ -1,12 +1,12 @@
 import { FileWarning, Lock } from "lucide-react";
-import { Badge } from "@workspace/ui/components/badge";
+import { Badge } from "@moonwitness/ui/components/badge";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@workspace/ui/components/card";
+} from "@moonwitness/ui/components/card";
 import { formatFieldValue, type ParsedFormView } from "@/lib/form-view";
 
 export function ModelFormView({
