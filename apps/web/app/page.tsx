@@ -1,122 +1,114 @@
 import Link from "next/link";
-import { ArrowUpRight, Boxes, Braces, Layers3, Workflow } from "lucide-react";
-import { Badge } from "@workspace/ui/components/badge";
+import { ArrowUpRight, Braces, Database, Layers3, ShieldCheck, Workflow } from "lucide-react";
 import { Button } from "@workspace/ui/components/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@workspace/ui/components/card";
+import { MoonWitnessMark } from "@/components/moonwitness-mark";
+
+const runtimeLayers = [
+  { step: "01", name: "Core engine", detail: "Python · ORM · business rules", status: "FOUNDATION" },
+  { step: "02", name: "Secure session + RPC", detail: "Server-side session · bounded requests", status: "TRUST BOUNDARY" },
+  { step: "03", name: "MoonWitness experience", detail: "Next.js · model-driven workspace", status: "USER SURFACE" },
+];
 
 const foundations = [
-  {
-    icon: Workflow,
-    title: "Native Flectra engine",
-    description: "Keep models, ORM, actions, views, access rules, and business logic in Flectra.",
-  },
-  {
-    icon: Layers3,
-    title: "Model-driven interface",
-    description: "Load view architecture and field metadata, then render it with React components.",
-  },
-  {
-    icon: Boxes,
-    title: "Shared UI source",
-    description: "Own and evolve the shadcn/ui components in packages/ui across future apps.",
-  },
+  { icon: Database, index: "A / ENGINE", title: "Native at the core", description: "Models, data integrity, business rules, and access control remain part of one coherent system." },
+  { icon: ShieldCheck, index: "B / TRUST", title: "One source of access", description: "Authentication and permission-filtered navigation follow the active account and its rights." },
+  { icon: Layers3, index: "C / EXPERIENCE", title: "Built around the work", description: "A responsive interface turns model metadata into a focused space for records and operations." },
 ];
 
 export default function HomePage() {
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col px-6 py-8 sm:px-10">
-      <header className="flex items-center justify-between border-b border-border pb-6">
-        <div className="flex items-center gap-3">
-          <div className="flex size-10 items-center justify-center rounded-xl bg-zinc-950 text-white">
-            <Braces className="size-5" />
-          </div>
-          <div>
-            <p className="text-sm font-semibold tracking-tight">MoonWitness</p>
-            <p className="text-xs text-muted-foreground">Powered by Flectra</p>
-          </div>
-        </div>
-        <Badge variant="outline">Powered by Flectra</Badge>
+    <main className="mx-auto flex min-h-screen w-full max-w-[1440px] flex-col px-5 sm:px-8 lg:px-12">
+      <header className="flex min-h-20 items-center justify-between border-b border-white/10">
+        <Link href="/" className="group inline-flex items-center gap-3" aria-label="MoonWitness home">
+          <MoonWitnessMark className="size-10 text-mw-ember" />
+          <span className="leading-none">
+            <span className="block text-sm font-black tracking-[0.18em] text-mw-paper">MOONWITNESS</span>
+            <span className="mt-1.5 block font-mono text-[9px] tracking-[0.22em] text-mw-muted">OPERATING PLATFORM</span>
+          </span>
+        </Link>
+        <Link href="/login" className="inline-flex items-center gap-2 border border-white/15 px-3 py-2 text-xs font-semibold text-mw-paper transition hover:border-mw-ember/70 hover:text-mw-ember-soft">
+          SIGN IN <ArrowUpRight className="size-3.5" />
+        </Link>
       </header>
 
-      <section className="grid flex-1 items-center gap-12 py-16 lg:grid-cols-[1.15fr_0.85fr] lg:py-24">
-        <div className="max-w-2xl">
-          <p className="mb-5 text-xs font-semibold uppercase tracking-[0.24em] text-orange-600">
-            MoonWitness · Powered by Flectra
-          </p>
-          <h1 className="text-5xl font-semibold leading-[1.04] tracking-[-0.055em] sm:text-6xl">
-            Keep the engine.
-            <span className="mt-2 block text-muted-foreground">Rebuild the experience.</span>
+      <section className="grid flex-1 items-center gap-12 py-16 lg:grid-cols-[1.12fr_0.88fr] lg:gap-16 lg:py-24">
+        <div className="max-w-3xl">
+          <div className="mb-7 flex items-center gap-3">
+            <span className="h-px w-9 bg-mw-ember" />
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.24em] text-mw-ember-soft">A living platform for connected work</p>
+          </div>
+          <h1 className="text-5xl font-black leading-[0.98] tracking-[-0.065em] text-mw-paper sm:text-6xl lg:text-7xl">
+            See the whole.
+            <span className="mt-2 block text-mw-ember">Understand</span>
+            <span className="block">the moving parts.</span>
           </h1>
-          <p className="mt-7 max-w-xl text-base leading-7 text-muted-foreground">
-            MoonWitness is a separate Next.js application powered by Flectra&apos;s native JSON-RPC,
-            ORM, actions, and model-view metadata. No parallel ORM and no replacement
-            of the existing Flectra web addon.
+          <p className="mt-8 max-w-xl text-base leading-8 text-zinc-400 sm:text-lg">
+            MoonWitness brings records, systems, people, and operations into one coherent experience.
+            Less visual noise. More signal. A clearer path through the work.
           </p>
-          <div className="mt-9 flex flex-wrap items-center gap-3">
-            <Button asChild size="lg">
-              <Link href="/login">
-                Open MoonWitness
-                <ArrowUpRight className="ml-2 size-4" />
-              </Link>
+          <div className="mt-9 flex flex-wrap items-center gap-4">
+            <Button asChild size="lg" className="h-12 rounded-none px-6 font-bold">
+              <Link href="/login">ENTER MOONWITNESS <ArrowUpRight className="ml-2 size-4" /></Link>
             </Button>
-            <span className="text-xs text-muted-foreground">Requires a reachable Flectra server</span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-zinc-500">Secure workspace access</span>
+          </div>
+          <div className="mt-14 flex flex-wrap items-center gap-x-7 gap-y-3 border-t border-white/10 pt-5">
+            <span className="font-mono text-[10px] tracking-[0.16em] text-zinc-500">BUILT AROUND</span>
+            <span className="inline-flex items-center gap-2 text-xs text-zinc-300"><Braces className="size-3.5 text-mw-ember" /> Native data models</span>
+            <span className="inline-flex items-center gap-2 text-xs text-zinc-300"><Workflow className="size-3.5 text-mw-ember" /> Connected workflows</span>
           </div>
         </div>
 
-        <Card className="overflow-hidden border-zinc-800 bg-zinc-950 text-zinc-50 shadow-2xl shadow-zinc-950/10">
-          <CardHeader className="border-b border-white/10">
-            <div className="flex items-center justify-between">
-              <Badge className="border-orange-400/30 bg-orange-400/10 text-orange-300" variant="outline">
-                Architecture
-              </Badge>
-              <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-500">01 / 03</span>
-            </div>
-            <CardTitle className="pt-3 text-xl text-white">One source of truth</CardTitle>
-            <CardDescription className="text-zinc-400">
-              Flectra owns the data and business rules. Next.js owns the user experience.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-3 p-5">
-            {[
-              ["apps/web", "Next.js App Router", "text-orange-300"],
-              ["packages/ui", "Shared shadcn components", "text-sky-300"],
-              ["packages/flectra-client", "Native RPC adapter", "text-emerald-300"],
-              ["Flectra core", "ORM · Security · Addons", "text-zinc-300"],
-            ].map(([name, detail, color], index) => (
-              <div key={name} className="flex items-center gap-4 rounded-lg border border-white/10 bg-white/[0.035] p-3">
-                <span className="font-mono text-xs text-zinc-600">0{index + 1}</span>
-                <div className="min-w-0 flex-1">
-                  <p className={`font-mono text-sm ${color}`}>{name}</p>
-                  <p className="mt-1 text-xs text-zinc-500">{detail}</p>
-                </div>
+        <div className="relative">
+          <div className="absolute -right-8 -top-8 hidden size-40 rounded-full border border-mw-ember/15 lg:block" />
+          <div className="relative border border-white/12 bg-mw-panel/90">
+            <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
+              <div className="flex items-center gap-2">
+                <span className="size-2 rounded-full bg-mw-ember shadow-[0_0_14px_rgba(242,139,60,0.7)]" />
+                <span className="font-mono text-[10px] font-semibold tracking-[0.2em] text-mw-paper">SYSTEM / ARCHITECTURE</span>
               </div>
-            ))}
-          </CardContent>
-        </Card>
+              <span className="font-mono text-[10px] text-zinc-600">MW.001</span>
+            </div>
+            <div className="p-5 sm:p-7">
+              {runtimeLayers.map((layer, index) => (
+                <div key={layer.step} className="relative grid grid-cols-[42px_1fr] gap-4 pb-8 last:pb-0">
+                  <div className="relative flex justify-center">
+                    <span className="z-10 flex size-9 items-center justify-center border border-mw-ember/40 bg-mw-panel font-mono text-xs text-mw-ember">{layer.step}</span>
+                    {index !== runtimeLayers.length - 1 ? <span className="absolute top-9 h-full w-px bg-gradient-to-b from-mw-ember/50 to-white/5" /> : null}
+                  </div>
+                  <div className="min-w-0 border-b border-white/8 pb-7 last:border-0 last:pb-0">
+                    <p className="font-mono text-[9px] tracking-[0.18em] text-mw-ember-soft">{layer.status}</p>
+                    <h2 className="mt-2 text-base font-semibold text-mw-paper sm:text-lg">{layer.name}</h2>
+                    <p className="mt-1 text-xs text-zinc-500">{layer.detail}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="flex items-center justify-between border-t border-white/10 bg-white/[0.025] px-5 py-3">
+              <span className="font-mono text-[9px] tracking-[0.16em] text-zinc-500">ONE COHERENT PLATFORM</span>
+              <span className="font-mono text-[9px] text-mw-ember-soft">MOONWITNESS / CORE</span>
+            </div>
+          </div>
+          <p className="mt-3 text-right font-mono text-[9px] tracking-[0.12em] text-zinc-600">DESIGNED AS ONE PRODUCT · BUILT TO EVOLVE</p>
+        </div>
       </section>
 
-      <section className="grid gap-4 border-t border-border py-8 md:grid-cols-3">
-        {foundations.map(({ icon: Icon, title, description }) => (
-          <div key={title} className="flex gap-4 py-2">
-            <div className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-border bg-card">
-              <Icon className="size-4 text-orange-600" />
+      <section className="grid border-y border-white/10 py-8 md:grid-cols-3">
+        {foundations.map(({ icon: Icon, index, title, description }, itemIndex) => (
+          <div key={index} className={itemIndex === 0 ? "py-3 pr-7" : "border-t border-white/10 py-3 md:border-l md:border-t-0 md:px-7"}>
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-[9px] tracking-[0.2em] text-mw-ember-soft">{index}</span>
+              <Icon className="size-4 text-zinc-500" />
             </div>
-            <div>
-              <h2 className="text-sm font-semibold">{title}</h2>
-              <p className="mt-1 text-sm leading-6 text-muted-foreground">{description}</p>
-            </div>
+            <h2 className="mt-5 text-sm font-semibold text-mw-paper">{title}</h2>
+            <p className="mt-2 max-w-sm text-xs leading-6 text-zinc-500">{description}</p>
           </div>
         ))}
       </section>
-      <footer className="flex flex-wrap justify-between gap-2 border-t border-border pt-5 text-xs text-muted-foreground">
-        <span>MoonWitness · Powered by Flectra.</span>
-        <span>Flectra stays backward-compatible.</span>
+
+      <footer className="flex flex-wrap items-center justify-between gap-3 py-6">
+        <span className="font-mono text-[9px] tracking-[0.16em] text-zinc-600">MOONWITNESS / A CLEARER WINDOW INTO THE WORK</span>
+        <span className="font-mono text-[9px] tracking-[0.12em] text-zinc-600">MOONWITNESS PLATFORM</span>
       </footer>
     </main>
   );
