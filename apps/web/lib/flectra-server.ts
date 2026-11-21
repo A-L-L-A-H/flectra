@@ -1,7 +1,7 @@
 import "server-only";
 
 import { cookies } from "next/headers";
-import { FlectraClient } from "@workspace/flectra-client/server";
+import { FlectraClient } from "@moonwitness/engine-client/server";
 import { MissingFlectraSessionError } from "@/lib/flectra-errors";
 
 export const FLECTRA_SESSION_COOKIE = "flectra_session";
