@@ -40,6 +40,14 @@ class WebManifestRoutesTest(HttpCaseWithUserDemo):
             self.assertGreater(len(shortcut["icons"]), 0)
             self.assertTrue(shortcut["url"].startswith("/web#menu_id="))
 
+
+    def test_webmanifest_legacy_configured_brand_is_normalized(self):
+        """Previously stored product labels must not leak into the installed app manifest."""
+        self.env['ir.config_parameter'].sudo().set_param('web.web_app_name', 'Flectra 3.0')
+        response = self.url_open("/web/manifest.webmanifest")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["name"], "MoonWitness")
+
     def test_webmanifest_unauthenticated(self):
         """
         This route returns a well formed backend's WebManifest
