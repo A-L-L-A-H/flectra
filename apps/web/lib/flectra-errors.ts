@@ -2,7 +2,7 @@ import { FlectraRpcError } from "@workspace/flectra-client";
 
 export class MissingFlectraSessionError extends Error {
   constructor() {
-    super("Flectra session is missing.");
+    super("The account session is missing.");
     this.name = "MissingFlectraSessionError";
   }
 }
