@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { FlectraClient } from "@moonwitness/engine-client/server";
-import { FLECTRA_SESSION_COOKIE, getFlectraBaseUrl, sameOrigin } from "@/lib/flectra-server";
+import { EngineClient } from "@moonwitness/engine-client/server";
+import { LEGACY_SESSION_COOKIE, MOONWITNESS_SESSION_COOKIE, getEngineBaseUrl, sameOrigin } from "@/lib/engine-server";
 
 export const runtime = "nodejs";
 
@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const client = new FlectraClient({ baseUrl: getFlectraBaseUrl() });
+    const client = new EngineClient({ baseUrl: getEngineBaseUrl() });
     const { sessionId, sessionInfo } = await client.authenticate(db, login, password);
 
     const response = NextResponse.json({
@@ -67,7 +67,8 @@ export async function POST(request: NextRequest) {
         db: sessionInfo.db,
       },
     });
-    response.cookies.set(FLECTRA_SESSION_COOKIE, sessionId, {
+    response.cookies.set(LEGACY_SESSION_COOKIE, "", { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "lax", path: "/", maxAge: 0 });
+    response.cookies.set(MOONWITNESS_SESSION_COOKIE, sessionId, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
@@ -78,7 +79,7 @@ export async function POST(request: NextRequest) {
     // Never expose upstream RPC details or credentials in authentication errors.
     return noStore(
       NextResponse.json(
-        { error: "Flectra sign-in failed. Check the server URL, database, and credentials." },
+        { error: "Unable to sign in. Check the server URL, database, and credentials." },
         { status: 401 },
       ),
     );
