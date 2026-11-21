@@ -1,13 +1,13 @@
-import type { FlectraRpcErrorPayload } from "./types";
+import type { EngineRpcErrorPayload } from "./types";
 
-export class FlectraRpcError extends Error {
+export class EngineRpcError extends Error {
   readonly code?: number;
   readonly exceptionName?: string;
-  readonly details?: FlectraRpcErrorPayload["data"];
+  readonly details?: EngineRpcErrorPayload["data"];
 
-  constructor(payload: FlectraRpcErrorPayload) {
+  constructor(payload: EngineRpcErrorPayload) {
     super(payload.data?.message || payload.message || "The remote procedure call failed.");
-    this.name = "FlectraRpcError";
+    this.name = "EngineRpcError";
     this.code = payload.code;
     this.exceptionName = payload.data?.name;
     this.details = payload.data;
