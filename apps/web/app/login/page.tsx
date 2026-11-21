@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 import { ArrowUpRight, ShieldCheck } from "lucide-react";
 import { LoginForm } from "@/components/login-form";
 import { MoonWitnessMark } from "@/components/moonwitness-mark";
@@ -64,7 +65,7 @@ export default async function LoginPage() {
             <ShieldCheck className="mt-0.5 size-4 shrink-0 text-mw-ember" />
             Your session remains in a secure HttpOnly cookie and is never exposed to browser JavaScript.
           </p>
-          <a href="/" className="mt-8 inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.12em] text-zinc-500 transition hover:text-mw-paper">BACK TO OVERVIEW <ArrowUpRight className="size-3.5" /></a>
+          <Link href="/" className="mt-8 inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.12em] text-zinc-500 transition hover:text-mw-paper">BACK TO OVERVIEW <ArrowUpRight className="size-3.5" /></Link>
         </div>
       </section>
     </main>
