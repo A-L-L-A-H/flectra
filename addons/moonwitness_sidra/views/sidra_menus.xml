@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <!-- TOP-LEVEL ROOT MENU UNDER MOONWITNESS -->
+    <menuitem id="menu_sidra_root"
+              name="Sidra Knowledge Center"
+              parent="moonwitness_base.menu_moonwitness_root"
+              sequence="30"
+              groups="group_moonwitness_sidra_reader"/>
+
+    <!-- CORPUS & TEXTS MENU -->
+    <menuitem id="menu_sidra_corpus_category"
+              name="Corpus &amp; Texts"
+              parent="menu_sidra_root"
+              sequence="10"/>
+
+    <menuitem id="menu_sidra_passages"
+              name="Passages &amp; Verses"
+              parent="menu_sidra_corpus_category"
+              action="action_sidra_passage"
+              sequence="10"/>
+
+    <menuitem id="menu_sidra_works"
+              name="Sacred Works"
+              parent="menu_sidra_corpus_category"
+              action="action_sidra_work"
+              sequence="20"/>
+
+    <!-- TRADITIONS MENU -->
+    <menuitem id="menu_sidra_traditions_category"
+              name="World Traditions"
+              parent="menu_sidra_root"
+              sequence="20"/>
+
+    <menuitem id="menu_sidra_tradition_list"
+              name="Traditions Directory"
+              parent="menu_sidra_traditions_category"
+              action="action_sidra_tradition"
+              sequence="10"/>
+
+    <!-- ONTOLOGY MENU -->
+    <menuitem id="menu_sidra_ontology_category"
+              name="Ontology &amp; Primitives"
+              parent="menu_sidra_root"
+              sequence="30"/>
+
+    <menuitem id="menu_sidra_primitive_list"
+              name="Metaphysical Primitives"
+              parent="menu_sidra_ontology_category"
+              action="action_sidra_primitive"
+              sequence="10"/>
+
+    <!-- DATASETS & INGESTION -->
+    <menuitem id="menu_sidra_datasets_category"
+              name="Datasets &amp; Ingestion"
+              parent="menu_sidra_root"
+              sequence="40"
+              groups="group_moonwitness_sidra_manager"/>
+
+    <menuitem id="menu_sidra_import_wizard_menu"
+              name="Import Corpus Wizard"
+              parent="menu_sidra_datasets_category"
+              action="action_sidra_import_wizard"
+              sequence="10"/>
+
+    <menuitem id="menu_sidra_ingest_jobs_menu"
+              name="Ingestion Jobs"
+              parent="menu_sidra_datasets_category"
+              action="action_sidra_ingest_job"
+              sequence="20"/>
+</flectra>

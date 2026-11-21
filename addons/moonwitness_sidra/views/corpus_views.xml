@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <!-- WORK VIEWS -->
+    <record id="view_sidra_work_tree" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.work.tree</field>
+        <field name="model">moonwitness.sidra.work</field>
+        <field name="arch" type="xml">
+            <tree string="Sacred Works &amp; Scriptures">
+                <field name="name"/>
+                <field name="kind"/>
+                <field name="tradition_id"/>
+                <field name="language_original"/>
+                <field name="expression_count"/>
+                <field name="urn"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_sidra_work_form" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.work.form</field>
+        <field name="model">moonwitness.sidra.work</field>
+        <field name="arch" type="xml">
+            <form string="Sacred Work">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name"/></h1>
+                        <h3><field name="urn" readonly="1"/></h3>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="kind"/>
+                            <field name="tradition_id"/>
+                            <field name="language_original"/>
+                        </group>
+                        <group>
+                            <field name="date_composed"/>
+                            <field name="provenance_id"/>
+                            <field name="epistemic_status_id"/>
+                            <field name="aqel_operator"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Overview &amp; History">
+                            <field name="description"/>
+                        </page>
+                        <page string="Expressions &amp; Translations">
+                            <field name="expression_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="language"/>
+                                    <field name="script"/>
+                                    <field name="content_type"/>
+                                    <field name="edition_count"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sidra_work" model="ir.actions.act_window">
+        <field name="name">Sacred Works</field>
+        <field name="res_model">moonwitness.sidra.work</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- PASSAGE VIEWS -->
+    <record id="view_sidra_passage_tree" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.passage.tree</field>
+        <field name="model">moonwitness.sidra.passage</field>
+        <field name="arch" type="xml">
+            <tree string="Sacred Passages &amp; Verses">
+                <field name="local_id"/>
+                <field name="unit"/>
+                <field name="sequence"/>
+                <field name="edition_id"/>
+                <field name="primary_text"/>
+                <field name="urn"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_sidra_passage_form" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.passage.form</field>
+        <field name="model">moonwitness.sidra.passage</field>
+        <field name="arch" type="xml">
+            <form string="Sacred Passage">
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="local_id"/></h1>
+                        <h3><field name="urn" readonly="1"/></h3>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="unit"/>
+                            <field name="sequence"/>
+                            <field name="edition_id"/>
+                            <field name="container_id"/>
+                        </group>
+                        <group>
+                            <field name="citation_scheme_id"/>
+                            <field name="provenance_id"/>
+                            <field name="epistemic_status_id"/>
+                            <field name="aqel_operator"/>
+                        </group>
+                    </group>
+                    <group string="Primary Text">
+                        <field name="primary_text" nolabel="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Verbatim Language Payloads">
+                            <field name="content_ids">
+                                <tree>
+                                    <field name="language"/>
+                                    <field name="is_primary"/>
+                                    <field name="char_count"/>
+                                    <field name="text"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Sub-passages" invisible="not child_passage_ids">
+                            <field name="child_passage_ids">
+                                <tree>
+                                    <field name="local_id"/>
+                                    <field name="unit"/>
+                                    <field name="primary_text"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_sidra_passage_search" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.passage.search</field>
+        <field name="model">moonwitness.sidra.passage</field>
+        <field name="arch" type="xml">
+            <search string="Search Passages">
+                <field name="local_id"/>
+                <field name="urn"/>
+                <field name="primary_text"/>
+                <field name="edition_id"/>
+                <filter string="Surahs" name="unit_surah" domain="[('unit', '=', 'surah')]"/>
+                <filter string="Ayahs" name="unit_ayah" domain="[('unit', '=', 'ayah')]"/>
+                <filter string="Verses" name="unit_verse" domain="[('unit', '=', 'verse')]"/>
+                <filter string="Hadiths" name="unit_hadith" domain="[('unit', '=', 'hadith')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Edition" name="group_edition" context="{'group_by': 'edition_id'}"/>
+                    <filter string="Unit" name="group_unit" context="{'group_by': 'unit'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_sidra_passage" model="ir.actions.act_window">
+        <field name="name">Passages &amp; Verses</field>
+        <field name="res_model">moonwitness.sidra.passage</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_sidra_passage_search"/>
+    </record>
+
+    <!-- TRADITION VIEWS -->
+    <record id="view_sidra_tradition_tree" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.tradition.tree</field>
+        <field name="model">moonwitness.sidra.tradition</field>
+        <field name="arch" type="xml">
+            <tree string="World Traditions">
+                <field name="name"/>
+                <field name="native_name"/>
+                <field name="code"/>
+                <field name="tradition_type"/>
+                <field name="historical_status"/>
+                <field name="primary_languages"/>
+                <field name="work_count"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_sidra_tradition" model="ir.actions.act_window">
+        <field name="name">World Traditions</field>
+        <field name="res_model">moonwitness.sidra.tradition</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- PRIMITIVE VIEWS -->
+    <record id="view_sidra_primitive_tree" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.primitive.tree</field>
+        <field name="model">moonwitness.sidra.primitive</field>
+        <field name="arch" type="xml">
+            <tree string="Metaphysical Primitives">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="definition"/>
+                <field name="urn"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_sidra_primitive" model="ir.actions.act_window">
+        <field name="name">Ontological Primitives</field>
+        <field name="res_model">moonwitness.sidra.primitive</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- INGEST JOB VIEWS -->
+    <record id="view_sidra_ingest_job_tree" model="ir.ui.view">
+        <field name="name">moonwitness.sidra.ingest.job.tree</field>
+        <field name="model">moonwitness.sidra.ingest.job</field>
+        <field name="arch" type="xml">
+            <tree string="Ingestion Checkpoint Jobs">
+                <field name="dataset_id"/>
+                <field name="status"/>
+                <field name="records_processed"/>
+                <field name="checksum_verified"/>
+                <field name="started_at"/>
+                <field name="completed_at"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_sidra_ingest_job" model="ir.actions.act_window">
+        <field name="name">Ingestion Jobs</field>
+        <field name="res_model">moonwitness.sidra.ingest.job</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</flectra>

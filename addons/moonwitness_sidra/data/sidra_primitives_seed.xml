@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <record id="primitive_being" model="moonwitness.sidra.primitive">
+        <field name="urn">mw:primitive:being</field>
+        <field name="code">being</field>
+        <field name="name">Being (Wujud / Asti)</field>
+        <field name="definition">Primary ontological reality of existence prior to differentiation.</field>
+        <field name="apophatic_note">Not a physical object, not bounded in space or time, not composed of parts.</field>
+        <field name="kataphatic_note">Self-subsisting actuality from which contingent reality derives.</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+
+    <record id="primitive_consciousness" model="moonwitness.sidra.primitive">
+        <field name="urn">mw:primitive:consciousness</field>
+        <field name="code">consciousness</field>
+        <field name="name">Consciousness (Idrak / Cit / Vijnana)</field>
+        <field name="definition">Awareness, knowing capacity, and reflective presence.</field>
+        <field name="apophatic_note">Not reducible to passive material substrate.</field>
+        <field name="kataphatic_note">Self-illuminating awareness through which reality is observed.</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+
+    <record id="primitive_will" model="moonwitness.sidra.primitive">
+        <field name="urn">mw:primitive:will</field>
+        <field name="code">will</field>
+        <field name="name">Will / Agency (Iradah / Sankalpa)</field>
+        <field name="definition">Volitional orientation and intentional determination.</field>
+        <field name="apophatic_note">Not compelled by external mechanical causality.</field>
+        <field name="kataphatic_note">Creative choice initiating causal unfolding.</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+
+    <record id="primitive_knowledge" model="moonwitness.sidra.primitive">
+        <field name="urn">mw:primitive:knowledge</field>
+        <field name="code">knowledge</field>
+        <field name="name">Knowledge (Ilm / Jnana / Sophia)</field>
+        <field name="definition">Comprehensive encompassment of truth and intelligible forms.</field>
+        <field name="apophatic_note">Free from ignorance, error, or temporal occlusion.</field>
+        <field name="kataphatic_note">Omniscient presence grasping all entities in their actuality.</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+
+    <record id="primitive_power" model="moonwitness.sidra.primitive">
+        <field name="urn">mw:primitive:power</field>
+        <field name="code">power</field>
+        <field name="name">Power / Actuality (Qudrah / Sakti)</field>
+        <field name="definition">Capacity to bring potentiality into manifest existence.</field>
+        <field name="apophatic_note">Free from fatigue, limitation, or dependency on instruments.</field>
+        <field name="kataphatic_note">Sovereign omnipotence ordering the universe.</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+
+    <record id="primitive_life" model="moonwitness.sidra.primitive">
+        <field name="urn">mw:primitive:life</field>
+        <field name="code">life</field>
+        <field name="name">Life (Hayat / Prana / Zoe)</field>
+        <field name="definition">Eternal vitality that animates existence.</field>
+        <field name="apophatic_note">Not subject to biological decay or mortality.</field>
+        <field name="kataphatic_note">Ever-living source of cosmic vitality.</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+
+    <record id="primitive_speech" model="moonwitness.sidra.primitive">
+        <field name="urn">mw:primitive:speech</field>
+        <field name="code">speech</field>
+        <field name="name">Speech / Word (Kalam / Logos / Vak)</field>
+        <field name="definition">Creative and communicative articulation of divine order.</field>
+        <field name="apophatic_note">Not created through acoustic sound waves or biological vocal cords.</field>
+        <field name="kataphatic_note">Self-revealing communicative disclosure addressing humanity.</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+
+    <record id="primitive_ineffable" model="moonwitness.sidra.primitive">
+        <field name="urn">mw:primitive:ineffable</field>
+        <field name="code">ineffable</field>
+        <field name="name">Ineffable (Al-Ghayb al-Mutlaq / Neti-Neti / Sunyata)</field>
+        <field name="definition">That which transcends all linguistic, conceptual, and cognitive categorization.</field>
+        <field name="apophatic_note">Cannot be named, predicated, categorized, or circumscribed.</field>
+        <field name="kataphatic_note">The ultimate transcendent mystery grounding all sacred silence.</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+</flectra>

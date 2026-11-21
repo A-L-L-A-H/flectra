@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <record id="config_sidra_corpus_path" model="ir.config_parameter">
+        <field name="key">moonwitness_sidra.corpus_path</field>
+        <field name="value">/tmp/corpus</field>
+    </record>
+    <record id="config_sidra_corpus_commit" model="ir.config_parameter">
+        <field name="key">moonwitness_sidra.corpus_commit</field>
+        <field name="value">bjo163/moonwitness-corpus@main</field>
+    </record>
+</flectra>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <record id="provenance_rgbl_root" model="moonwitness.sidra.provenance">
+        <field name="urn">mw:provenance:rgbl:v0.1</field>
+        <field name="source_url">https://github.com/bjo163/moonwitness-corpus</field>
+        <field name="rights">Creative Commons Attribution 4.0 / Public Domain</field>
+        <field name="acquired_by">pipeline</field>
+        <field name="pipeline_version">v0.1.0</field>
+    </record>
+
+    <record id="tradition_islam" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:islam</field>
+        <field name="code">islam</field>
+        <field name="name">Islam</field>
+        <field name="native_name">الإسلام</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="geographic_origin">Arabian Peninsula (Makkah, Madinah)</field>
+        <field name="primary_languages">ara</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+
+    <record id="tradition_christianity" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:christianity</field>
+        <field name="code">christianity</field>
+        <field name="name">Christianity</field>
+        <field name="native_name">Christianitas</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="geographic_origin">Levant (Jerusalem, Galilee)</field>
+        <field name="primary_languages">grc,heb,lat</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+
+    <record id="tradition_buddhism" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:buddhism</field>
+        <field name="code">buddhism</field>
+        <field name="name">Buddhism</field>
+        <field name="native_name">Buddhasāsana</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="geographic_origin">Ancient India (Magadha, Kosala)</field>
+        <field name="primary_languages">pli,san</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+
+    <record id="tradition_judaism" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:judaism</field>
+        <field name="code">judaism</field>
+        <field name="name">Judaism</field>
+        <field name="native_name">Yahadut</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="geographic_origin">Ancient Levant</field>
+        <field name="primary_languages">heb,arc</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+
+    <record id="tradition_hinduism" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:hinduism</field>
+        <field name="code">hinduism</field>
+        <field name="name">Hinduism</field>
+        <field name="native_name">Sanātana Dharma</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="geographic_origin">Indian Subcontinent</field>
+        <field name="primary_languages">san</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+
+    <record id="tradition_taoism" model="moonwitness.sidra.tradition">
+        <field name="urn">mw:tradition:taoism</field>
+        <field name="code">taoism</field>
+        <field name="name">Taoism</field>
+        <field name="native_name">Dàojiào</field>
+        <field name="tradition_type">major_world_religion</field>
+        <field name="historical_status">living</field>
+        <field name="geographic_origin">Ancient China</field>
+        <field name="primary_languages">zho</field>
+        <field name="provenance_id" ref="provenance_rgbl_root"/>
+    </record>
+</flectra>

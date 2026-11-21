@@ -9,7 +9,7 @@
 ## Phase 1: Foundation, Provenance & Core Corpus (Weeks 1–4)
 
 ### Group 1.1: Scaffolding, Security & Foundational Mixins
-- [ ] **TASK-001**: Scaffold `moonwitness_sidra` addon directory and manifest  
+- [x] **TASK-001**: Scaffold `moonwitness_sidra` addon directory and manifest  
   - **Goal**: Create the standard Flectra addon skeleton and manifest declaration.  
   - **Files**: `addons/moonwitness_sidra/__init__.py`, `addons/moonwitness_sidra/__manifest__.py`  
   - **Action**: Declare addon with `name='MoonWitness Sidra'`, `version='3.0.1.0.0'`, `depends=['base', 'base_setup', 'moonwitness_base']`, `application=True`.  
@@ -17,7 +17,7 @@
   - **Depends on**: None  
   - **Size**: `S`
 
-- [ ] **TASK-002**: Define Sidra security groups and basic ACL rules  
+- [x] **TASK-002**: Define Sidra security groups and basic ACL rules  
   - **Goal**: Create role-based security groups (Reader, Scholar, Manager) and initial ACL CSV.  
   - **Files**: `addons/moonwitness_sidra/security/sidra_security.xml`, `addons/moonwitness_sidra/security/ir.model.access.csv`  
   - **Action**: Define `group_moonwitness_sidra_reader`, `group_moonwitness_sidra_scholar`, `group_moonwitness_sidra_manager` under category `module_category_administration`.  
@@ -25,7 +25,7 @@
   - **Depends on**: TASK-001  
   - **Size**: `S`
 
-- [ ] **TASK-003**: Implement abstract foundation mixins (Provenance, Epistemic, AQEL)  
+- [x] **TASK-003**: Implement abstract foundation mixins (Provenance, Epistemic, AQEL)  
   - **Goal**: Provide standard inheritance mixins for all subsequent models without raw SQL.  
   - **Files**: `addons/moonwitness_sidra/models/__init__.py`, `addons/moonwitness_sidra/models/mixins.py`  
   - **Action**: Implement `SidraProvenanceMixin` (`provenance_id`), `SidraEpistemicMixin` (`epistemic_status_id`, `confidence`), and `SidraAqelMixin` (`aqel_category`, `master_classification`).  
@@ -33,7 +33,7 @@
   - **Depends on**: TASK-001  
   - **Size**: `M`
 
-- [ ] **TASK-004**: Implement Provenance, Assessor, and Audit Log models  
+- [x] **TASK-004**: Implement Provenance, Assessor, and Audit Log models  
   - **Goal**: Build Layer -1 provenance tracking infrastructure.  
   - **Files**: `addons/moonwitness_sidra/models/provenance.py`  
   - **Action**: Create `moonwitness.sidra.provenance` (`source_url`, `source_descriptor`, `rights`, `acquired_at`), `moonwitness.sidra.assessor` (`name`, `type`), and `moonwitness.sidra.audit.log`.  
@@ -41,7 +41,7 @@
   - **Depends on**: TASK-003  
   - **Size**: `M`
 
-- [ ] **TASK-004B**: Implement Source Span Binding Model (WSI Stage 1)  
+- [x] **TASK-004B**: Implement Source Span Binding Model (WSI Stage 1)  
   - **Goal**: Anchor external source spans and offsets without copying scripture text.  
   - **Files**: `addons/moonwitness_sidra/models/source_binding.py`  
   - **Action**: Create `moonwitness.sidra.source.binding` linking provenance, edition, char spans, and URN references.  
@@ -49,7 +49,7 @@
   - **Depends on**: TASK-004  
   - **Size**: `S`
 
-- [ ] **TASK-005**: Implement Epistemic Status model  
+- [x] **TASK-005**: Implement Epistemic Status model  
   - **Goal**: Build scoped epistemic classification engine.  
   - **Files**: `addons/moonwitness_sidra/models/epistemic.py`  
   - **Action**: Create `moonwitness.sidra.epistemic.status` with `status` (`attested`, `inferred`, `contested`, `rejected`, `unknown`), `scope` (JSONB/Char), `assessor_id`, `confidence`.  
@@ -58,7 +58,7 @@
   - **Size**: `S`
 
 ### Group 1.2: Layer 4 Text Corpus Models
-- [ ] **TASK-006**: Implement FRBR Work and Expression models  
+- [x] **TASK-006**: Implement FRBR Work and Expression models  
   - **Goal**: Declare abstract intellectual work and language-specific expressions.  
   - **Files**: `addons/moonwitness_sidra/models/corpus_work.py`, `addons/moonwitness_sidra/models/corpus_expression.py`  
   - **Action**: Create `moonwitness.sidra.work` (`name`, `kind`, `tradition_id`) and `moonwitness.sidra.expression` (`language`, `script`, `content_type`, `translation_of`).  
@@ -66,7 +66,7 @@
   - **Depends on**: TASK-005  
   - **Size**: `M`
 
-- [ ] **TASK-007**: Implement Edition, Citation Scheme, Passage, and Content models  
+- [x] **TASK-007**: Implement Edition, Citation Scheme, Passage, and Content models  
   - **Goal**: Complete the LRMoo textual hierarchy for verbatim scriptural anchoring.  
   - **Files**: `addons/moonwitness_sidra/models/corpus_edition.py`, `addons/moonwitness_sidra/models/corpus_passage.py`, `addons/moonwitness_sidra/models/corpus_content.py`  
   - **Action**: Implement `edition` (manifestation metadata), `citation.scheme` (CTS URN), `passage` (hierarchical segments with `container_id`), and `content` (verbatim text payload).  
@@ -75,7 +75,7 @@
   - **Size**: `L`
 
 ### Group 1.3: Importer, Validator, & Search Controller
-- [ ] **TASK-008**: Implement P1-006 Semantic Validator Service  
+- [x] **TASK-008**: Implement P1-006 Semantic Validator Service  
   - **Goal**: Provide automated enforcement of RGBL v0.1 invariants in Python.  
   - **Files**: `addons/moonwitness_sidra/services/__init__.py`, `addons/moonwitness_sidra/services/validator_service.py`  
   - **Action**: Implement checks for `record-family-id-kind`, `nonblank-kind`, `deterministic-id-mismatch`, `scope-required`, and `translation-identity`.  
@@ -83,7 +83,7 @@
   - **Depends on**: TASK-007  
   - **Size**: `M`
 
-- [ ] **TASK-009**: Implement Streaming JSONL Corpus Importer Service  
+- [x] **TASK-009**: Implement Streaming JSONL Corpus Importer Service  
   - **Goal**: Build high-performance batch ingestion engine for RGBL datasets.  
   - **Files**: `addons/moonwitness_sidra/services/importer_service.py`  
   - **Action**: Implement streaming JSONL reader, SHA256 checksum verification, and chunked batch `create()` (1,000 records/batch).  
@@ -91,7 +91,7 @@
   - **Depends on**: TASK-008  
   - **Size**: `L`
 
-- [ ] **TASK-010**: Implement Corpus Ingestion Wizard UI  
+- [x] **TASK-010**: Implement Corpus Ingestion Wizard UI  
   - **Goal**: Allow triggering dataset imports directly from Flectra web client.  
   - **Files**: `addons/moonwitness_sidra/wizard/__init__.py`, `addons/moonwitness_sidra/wizard/corpus_import_wizard.py`, `addons/moonwitness_sidra/wizard/corpus_import_wizard_views.xml`  
   - **Action**: Create `moonwitness.sidra.import.wizard` (TransientModel) with dataset selector, commit SHA, and progress feedback.  
@@ -99,7 +99,7 @@
   - **Depends on**: TASK-009  
   - **Size**: `M`
 
-- [ ] **TASK-011**: Implement Full-Text Search API Controller  
+- [x] **TASK-011**: Implement Full-Text Search API Controller  
   - **Goal**: Expose `/sidra/api/search` endpoint for external and UI consumers.  
   - **Files**: `addons/moonwitness_sidra/controllers/__init__.py`, `addons/moonwitness_sidra/controllers/main.py`  
   - **Action**: Create HTTP route accepting JSON query parameters and returning matching passages with FTS ranking.  
@@ -107,7 +107,7 @@
   - **Depends on**: TASK-007  
   - **Size**: `M`
 
-- [ ] **TASK-012**: Create Phase 1 Views and Root Menu Hierarchy  
+- [x] **TASK-012**: Create Phase 1 Views and Root Menu Hierarchy  
   - **Goal**: Provide clean backend navigation under Moonwitness root menu.  
   - **Files**: `addons/moonwitness_sidra/views/sidra_menus.xml`, `addons/moonwitness_sidra/views/corpus_views.xml`  
   - **Action**: Add Sidra menus under `moonwitness_base.menu_moonwitness_root`; create tree and form views for Work, Expression, Edition, Passage.  
@@ -115,7 +115,7 @@
   - **Depends on**: TASK-007  
   - **Size**: `M`
 
-- [ ] **TASK-013**: Write Automated Smoke & Invariant Tests for Phase 1  
+- [x] **TASK-013**: Write Automated Smoke & Invariant Tests for Phase 1  
   - **Goal**: Continuous validation of Phase 1 functionality in CI.  
   - **Files**: `addons/moonwitness_sidra/tests/__init__.py`, `addons/moonwitness_sidra/tests/test_validator.py`, `addons/moonwitness_sidra/tests/test_importer.py`  
   - **Action**: Write unit tests verifying P1-006 rules, model CRUD, and synthetic dataset import.  
