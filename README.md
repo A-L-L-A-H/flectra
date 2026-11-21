@@ -26,7 +26,7 @@ The architecture keeps the core data and authorization model authoritative while
 | `addons/moonwitness_orchestrator` | Connected-service configuration and WhatsApp workspace |
 | `apps/web` | Next.js workspace and public entry experience |
 | `packages/ui` | Shared UI components and MoonWitness design tokens |
-| `packages/flectra-client` | Typed client adapter for the native JSON-RPC protocol |
+| Native engine client | Typed adapter for the session and JSON-RPC protocol |
 | `services/orchestrator` | TypeScript/Fastify integration service |
 | `docker-agent` | Go host agent with controlled access to the container runtime |
 | `docker-compose.yml` | Local multi-service deployment |
