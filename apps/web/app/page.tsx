@@ -37,31 +37,31 @@ export default function HomePage() {
             <Braces className="size-5" />
           </div>
           <div>
-            <p className="text-sm font-semibold tracking-tight">FLECTRA / WEB</p>
-            <p className="text-xs text-muted-foreground">Experience layer</p>
+            <p className="text-sm font-semibold tracking-tight">MoonWitness</p>
+            <p className="text-xs text-muted-foreground">Powered by Flectra</p>
           </div>
         </div>
-        <Badge variant="outline">Monorepo foundation</Badge>
+        <Badge variant="outline">Powered by Flectra</Badge>
       </header>
 
       <section className="grid flex-1 items-center gap-12 py-16 lg:grid-cols-[1.15fr_0.85fr] lg:py-24">
         <div className="max-w-2xl">
           <p className="mb-5 text-xs font-semibold uppercase tracking-[0.24em] text-orange-600">
-            Flectra · Next.js · shadcn/ui
+            MoonWitness · Powered by Flectra
           </p>
           <h1 className="text-5xl font-semibold leading-[1.04] tracking-[-0.055em] sm:text-6xl">
             Keep the engine.
             <span className="mt-2 block text-muted-foreground">Rebuild the experience.</span>
           </h1>
           <p className="mt-7 max-w-xl text-base leading-7 text-muted-foreground">
-            A separate Next.js application that uses Flectra&apos;s native JSON-RPC,
+            MoonWitness is a separate Next.js application powered by Flectra&apos;s native JSON-RPC,
             ORM, actions, and model-view metadata. No parallel ORM and no replacement
             of the existing Flectra web addon.
           </p>
           <div className="mt-9 flex flex-wrap items-center gap-3">
             <Button asChild size="lg">
               <Link href="/login">
-                Connect to Flectra
+                Open MoonWitness
                 <ArrowUpRight className="ml-2 size-4" />
               </Link>
             </Button>
@@ -115,8 +115,8 @@ export default function HomePage() {
         ))}
       </section>
       <footer className="flex flex-wrap justify-between gap-2 border-t border-border pt-5 text-xs text-muted-foreground">
+        <span>MoonWitness · Powered by Flectra.</span>
         <span>Flectra stays backward-compatible.</span>
-        <span>Built as an independent frontend workspace.</span>
       </footer>
     </main>
   );

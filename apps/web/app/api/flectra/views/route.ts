@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { getFlectraErrorStatus } from "@/lib/flectra-errors";
 import { getAuthenticatedFlectraClient, sameOrigin } from "@/lib/flectra-server";
 import { privateNoStoreHeaders, readJsonObject } from "@/lib/http";
 
@@ -83,9 +84,16 @@ export async function POST(request: NextRequest) {
     const { client } = await getAuthenticatedFlectraClient();
     const result = await client.getViews(model, normalizedViews, options, context);
     return NextResponse.json({ result }, { headers: privateNoStoreHeaders() });
-  } catch {
-    return NextResponse.json({ error: "Unable to load Flectra view metadata." }, {
-      status: 400,
+  } catch (error) {
+    const status = getFlectraErrorStatus(error);
+    const message =
+      status === 401
+        ? "Flectra session is no longer valid. Sign in again."
+        : status === 403
+          ? "Flectra denied access to this view."
+          : "Unable to load Flectra view metadata.";
+    return NextResponse.json({ error: message }, {
+      status,
       headers: privateNoStoreHeaders(),
     });
   }

@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { AlertCircle, ChevronLeft, ChevronRight, LoaderCircle, RefreshCw, Rows3 } from "lucide-react";
+import { AlertCircle, ArrowUpRight, ChevronLeft, ChevronRight, LoaderCircle, RefreshCw, Rows3 } from "lucide-react";
 import { Badge } from "@workspace/ui/components/badge";
 import { Button } from "@workspace/ui/components/button";
 import {
@@ -95,6 +97,7 @@ export function ModelListView({
   domain?: unknown[];
   context?: Record<string, unknown>;
 }) {
+  const router = useRouter();
   const client = useMemo(() => new FlectraBrowserClient(), []);
   const [state, setState] = useState<LoadState>("loading");
   const [fields, setFields] = useState<ListField[]>([]);
@@ -103,29 +106,34 @@ export function ModelListView({
   const [offset, setOffset] = useState(0);
   const [error, setError] = useState("");
 
+  const fetchPage = useCallback(async (requestedOffset: number) => {
+    const response = await client.getViews<ViewResponse>(model, [[false, "list"]], {}, context);
+    const arch = response.views?.list?.arch ?? response.views?.tree?.arch;
+    const metadata = response.models?.[model] ?? {};
+    if (!arch) throw new Error("Flectra did not return a list view for this model.");
+
+    const visibleFields = parseListFields(arch, metadata);
+    if (visibleFields.length === 0) throw new Error("No readable columns are available in this Flectra list view.");
+
+    // Structured action filters/context are preserved. Python expressions
+    // returned as strings are intentionally not evaluated in JavaScript.
+    const count = await client.searchCount(model, domain, context);
+    const safeOffset = count === 0 ? 0 : Math.min(requestedOffset, Math.floor((count - 1) / PAGE_SIZE) * PAGE_SIZE);
+    const rows = await client.searchRead<RecordValue>(
+      model,
+      domain,
+      visibleFields.map((field) => field.name),
+      { limit: PAGE_SIZE, offset: safeOffset, context },
+    );
+
+    return { visibleFields, rows, count, safeOffset };
+  }, [client, context, domain, model]);
+
   const load = useCallback(async (requestedOffset: number) => {
     setState("loading");
     setError("");
     try {
-      const response = await client.getViews<ViewResponse>(model, [[false, "list"]], {}, context);
-      const arch = response.views?.list?.arch ?? response.views?.tree?.arch;
-      const metadata = response.models?.[model] ?? {};
-      if (!arch) throw new Error("Flectra did not return a list view for this model.");
-
-      const visibleFields = parseListFields(arch, metadata);
-      if (visibleFields.length === 0) throw new Error("No readable columns are available in this Flectra list view.");
-
-      // Structured action filters/context are preserved. Python expressions
-      // returned as strings are intentionally not evaluated in JavaScript.
-      const count = await client.searchCount(model, domain, context);
-      const safeOffset = count === 0 ? 0 : Math.min(requestedOffset, Math.floor((count - 1) / PAGE_SIZE) * PAGE_SIZE);
-      const rows = await client.searchRead<RecordValue>(
-        model,
-        domain,
-        visibleFields.map((field) => field.name),
-        { limit: PAGE_SIZE, offset: safeOffset, context },
-      );
-
+      const { visibleFields, rows, count, safeOffset } = await fetchPage(requestedOffset);
       setFields(visibleFields);
       setRecords(rows);
       setTotal(count);
@@ -139,11 +147,33 @@ export function ModelListView({
       setError(cause instanceof Error ? cause.message : "Unable to load this model.");
       setState("error");
     }
-  }, [client, context, domain, model]);
+  }, [fetchPage]);
 
   useEffect(() => {
-    void load(0);
-  }, [load]);
+    let cancelled = false;
+    fetchPage(0)
+      .then(({ visibleFields, rows, count, safeOffset }) => {
+        if (cancelled) return;
+        setFields(visibleFields);
+        setRecords(rows);
+        setTotal(count);
+        setOffset(safeOffset);
+        setError("");
+        setState("ready");
+      })
+      .catch((cause: unknown) => {
+        if (cancelled) return;
+        if (cause instanceof FlectraBrowserError && cause.status === 401) {
+          window.location.replace("/login");
+          return;
+        }
+        setError(cause instanceof Error ? cause.message : "Unable to load this model.");
+        setState("error");
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [fetchPage]);
 
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
   const currentPage = Math.floor(offset / PAGE_SIZE) + 1;
@@ -190,8 +220,55 @@ export function ModelListView({
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full min-w-[640px] border-collapse text-left text-sm">
-                <thead className="bg-muted/50 text-xs text-muted-foreground"><tr>{fields.map((field) => <th key={field.name} scope="col" className="whitespace-nowrap px-4 py-3 font-medium">{field.label}</th>)}</tr></thead>
-                <tbody>{records.map((record) => <tr key={record.id} className="border-t border-border transition-colors hover:bg-muted/30">{fields.map((field) => <td key={field.name} className="max-w-[320px] truncate px-4 py-3 text-foreground">{displayValue(record[field.name], field.type)}</td>)}</tr>)}</tbody>
+                <thead className="bg-muted/50 text-xs text-muted-foreground">
+                  <tr>
+                    {fields.map((field) => <th key={field.name} scope="col" className="whitespace-nowrap px-4 py-3 font-medium">{field.label}</th>)}
+                    <th scope="col" className="w-10 px-3 py-3 text-right font-medium"><span className="sr-only">Open</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {records.map((record) => {
+                    const validId = Number.isSafeInteger(record.id) && record.id > 0;
+                    const detailHref = validId
+                      ? `/workspace/models/${encodeURIComponent(model)}/${record.id}`
+                      : null;
+                    return (
+                      <tr
+                        key={record.id}
+                        onClick={detailHref ? (event) => {
+                          const target = event.target as HTMLElement | null;
+                          if (target?.closest("a, button")) return;
+                          router.push(detailHref);
+                        } : undefined}
+                        className={detailHref ? "cursor-pointer border-t border-border transition-colors hover:bg-muted/30" : "border-t border-border"}
+                      >
+                        {fields.map((field, index) => {
+                          const text = displayValue(record[field.name], field.type);
+                          return (
+                            <td key={field.name} className="max-w-[320px] truncate px-4 py-3 text-foreground">
+                              {index === 0 && detailHref ? (
+                                <Link href={detailHref} className="font-medium hover:underline">
+                                  {text}
+                                </Link>
+                              ) : text}
+                            </td>
+                          );
+                        })}
+                        <td className="px-3 py-3 text-right text-muted-foreground">
+                          {detailHref ? (
+                            <Link
+                              href={detailHref}
+                              aria-label={`Open record ${record.id}`}
+                              className="inline-flex size-7 items-center justify-center rounded-md hover:bg-muted hover:text-foreground"
+                            >
+                              <ArrowUpRight className="size-4" />
+                            </Link>
+                          ) : null}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
               </table>
             </div>
           ) : null}
@@ -200,13 +277,13 @@ export function ModelListView({
           <div className="flex items-center justify-between gap-3 border-t border-border px-4 py-3">
             <p className="text-xs text-muted-foreground">Page {currentPage} of {totalPages} · {total.toLocaleString()} records</p>
             <div className="flex items-center gap-2">
-              <Button type="button" size="sm" variant="outline" onClick={() => void load(Math.max(0, offset - PAGE_SIZE))} disabled={!hasPrevious || state === "loading"}><ChevronLeft className="mr-1 size-4" />Previous</Button>
-              <Button type="button" size="sm" variant="outline" onClick={() => void load(offset + PAGE_SIZE)} disabled={!hasNext || state === "loading"}>Next<ChevronRight className="ml-1 size-4" /></Button>
+              <Button type="button" size="sm" variant="outline" onClick={() => void load(Math.max(0, offset - PAGE_SIZE))} disabled={!hasPrevious}><ChevronLeft className="mr-1 size-4" />Previous</Button>
+              <Button type="button" size="sm" variant="outline" onClick={() => void load(offset + PAGE_SIZE)} disabled={!hasNext}>Next<ChevronRight className="ml-1 size-4" /></Button>
             </div>
           </div>
         ) : null}
       </Card>
-      <p className="text-xs text-muted-foreground">Initial scope: standard list columns, basic values, refresh, and pagination. Editing, relational widgets, dynamic modifiers, search panels, and advanced view types remain out of scope.</p>
+      <p className="text-xs text-muted-foreground">Read-only list view. Select any row to inspect its record detail view.</p>
     </div>
   );
 }

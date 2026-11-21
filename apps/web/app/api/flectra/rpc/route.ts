@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { FlectraRpcError } from "@workspace/flectra-client";
+import { getFlectraErrorStatus } from "@/lib/flectra-errors";
 import { getAuthenticatedFlectraClient, sameOrigin } from "@/lib/flectra-server";
 import { privateNoStoreHeaders, readJsonObject } from "@/lib/http";
 
@@ -36,17 +36,8 @@ function isBoundedDomain(value: unknown, depth = 0, budget = { nodes: 0 }): valu
   return true;
 }
 
-function errorStatus(error: unknown): number {
-  if (!(error instanceof FlectraRpcError)) return 400;
-  const exceptionName = error.exceptionName ?? "";
-  if (/SessionExpired|SessionInvalid/i.test(exceptionName)) return 401;
-  if (/AccessError/i.test(exceptionName)) return 403;
-  if (/AccessDenied/i.test(exceptionName)) return 401;
-  return 400;
-}
-
 function safeErrorMessage(error: unknown): string {
-  const status = errorStatus(error);
+  const status = getFlectraErrorStatus(error);
   if (status === 401) return "Flectra session is no longer valid. Sign in again.";
   if (status === 403) return "Flectra denied access to this data.";
   return "Flectra could not complete this read request.";
@@ -162,7 +153,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ result }, { headers: privateNoStoreHeaders() });
   } catch (error) {
     return NextResponse.json({ error: safeErrorMessage(error) }, {
-      status: errorStatus(error),
+      status: getFlectraErrorStatus(error),
       headers: privateNoStoreHeaders(),
     });
   }

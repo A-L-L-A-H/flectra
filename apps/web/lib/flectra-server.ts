@@ -2,6 +2,7 @@ import "server-only";
 
 import { cookies } from "next/headers";
 import { FlectraClient } from "@workspace/flectra-client/server";
+import { MissingFlectraSessionError } from "@/lib/flectra-errors";
 
 export const FLECTRA_SESSION_COOKIE = "flectra_session";
 
@@ -38,7 +39,7 @@ export function createFlectraServerClient(sessionId?: string): FlectraClient {
 export async function getAuthenticatedFlectraClient() {
   const cookieStore = await cookies();
   const sessionId = cookieStore.get(FLECTRA_SESSION_COOKIE)?.value;
-  if (!sessionId) throw new Error("Flectra session is missing.");
+  if (!sessionId) throw new MissingFlectraSessionError();
   return { sessionId, client: createFlectraServerClient(sessionId) };
 }
 

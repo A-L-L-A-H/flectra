@@ -63,10 +63,13 @@ export default async function WorkspaceLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  let userName = "Flectra user";
+  let database = "Connected database";
+  let navigation: WorkspaceNavigationItem[] = [];
+
   try {
     const { client } = await getAuthenticatedFlectraClient();
     const session = await client.getSessionInfo();
-    let navigation: WorkspaceNavigationItem[] = [];
 
     // Flectra's native menu loader applies the current user's menu groups and
     // access configuration. Do not reconstruct a second permission system.
@@ -78,17 +81,19 @@ export default async function WorkspaceLayout({
       // route; model reads still remain protected by native ACLs and record rules.
     }
 
-    const userName = session.name || session.username || session.login || "Flectra user";
-    return (
-      <WorkspaceShell
-        userName={String(userName)}
-        database={String(session.db || "Connected database")}
-        navigation={navigation}
-      >
-        {children}
-      </WorkspaceShell>
-    );
+    userName = String(session.name || session.username || session.login || "Flectra user");
+    database = String(session.db || "Connected database");
   } catch {
     redirect("/login");
   }
+
+  return (
+    <WorkspaceShell
+      userName={userName}
+      database={database}
+      navigation={navigation}
+    >
+      {children}
+    </WorkspaceShell>
+  );
 }

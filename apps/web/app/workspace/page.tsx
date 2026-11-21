@@ -13,10 +13,10 @@ export default function WorkspacePage() {
     <div className="space-y-8">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-orange-600">Workspace / Overview</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-orange-600">MoonWitness / Overview</p>
           <h1 className="mt-2 text-3xl font-semibold tracking-tight">Welcome back.</h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Your Next.js frontend is authenticated against the native Flectra session.
+            MoonWitness is authenticated against your native Flectra session. Powered by Flectra.
           </p>
         </div>
         <Badge variant="outline" className="gap-2 border-emerald-600/30 text-emerald-700">
@@ -69,7 +69,7 @@ export default function WorkspacePage() {
         <CardContent>
           <p className="text-sm text-muted-foreground">
             Choose an application from the left navigation. Available entries are supplied by
-            Flectra's native menu loader; each selected window action opens the read-only model renderer.
+            Flectra&apos;s native menu loader; each selected window action opens the read-only model renderer.
           </p>
         </CardContent>
       </Card>

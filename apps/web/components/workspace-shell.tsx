@@ -24,8 +24,8 @@ export function WorkspaceShell({ children, userName, database, navigation }: Wor
             <Blocks className="size-4" />
           </div>
           <div>
-            <p className="text-sm font-semibold tracking-wide">FLECTRA</p>
-            <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-500">Next workspace</p>
+            <p className="text-sm font-semibold tracking-wide">MoonWitness</p>
+            <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-500">Powered by Flectra</p>
           </div>
         </div>
         <div className="flex-1 overflow-y-auto px-4 py-5">
@@ -68,8 +68,8 @@ export function WorkspaceShell({ children, userName, database, navigation }: Wor
       <div className="md:pl-64">
         <header className="sticky top-0 z-10 flex h-16 items-center justify-between border-b border-border bg-background/90 px-5 backdrop-blur sm:px-8">
           <div>
-            <p className="text-sm font-semibold">Workspace</p>
-            <p className="text-xs text-muted-foreground">Connected to Flectra</p>
+            <p className="text-sm font-semibold">MoonWitness Workspace</p>
+            <p className="text-xs text-muted-foreground">Powered by Flectra</p>
           </div>
           <Link href="/" className="inline-flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground">
             Front page <ArrowUpRight className="size-3.5" />

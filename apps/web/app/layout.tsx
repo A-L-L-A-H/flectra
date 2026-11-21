@@ -3,10 +3,10 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Flectra Workspace",
-    template: "%s · Flectra Workspace",
+    default: "MoonWitness",
+    template: "%s · MoonWitness",
   },
-  description: "A Next.js experience layer powered by the native Flectra engine.",
+  description: "MoonWitness workspace experience layer, powered by Flectra.",
 };
 
 export default function RootLayout({

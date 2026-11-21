@@ -54,7 +54,7 @@ export function LoginForm() {
       <CardHeader>
         <CardTitle>Flectra credentials</CardTitle>
         <CardDescription>
-          Sign in with your existing Flectra database account. Your upstream session stays in a secure,
+          Sign in to MoonWitness with your existing Flectra database account. Your upstream session stays in a secure,
           HttpOnly cookie and is never exposed to browser JavaScript.
         </CardDescription>
       </CardHeader>

@@ -2,6 +2,7 @@
   "name": "@flectra/web",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "imports": {
     "#components/*": "./components/*.tsx",
     "#lib/*": "./lib/*.ts",
@@ -12,7 +13,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test lib/record-detail.test.ts lib/form-view.test.ts"
   },
   "dependencies": {
     "@workspace/flectra-client": "workspace:*",
