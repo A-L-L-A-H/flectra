@@ -1,110 +1,118 @@
 # MoonWitness
 
-MoonWitness is an operational platform powered by **Flectra 3.0** as its Python ERP/ORM engine and web compatibility layer. This repository contains the Flectra 3.0 server runtime alongside first-party MoonWitness addons, a TypeScript/Fastify services orchestrator, a Go host agent (ARSY), and the Docker Compose stack used to run them locally.
+**A self-hosted operational platform for connected work.**
 
-> **Branch scope (main):** This README documents only the components currently present on the main branch. Work still in open pull requests—such as the Next.js workspace (PR #1), the MoonWitness Corpus addon (PR #2), and Docker runtime hardening (PR #3)—is not yet merged into main.
+MoonWitness unifies structured records, application workflows, host operations, and connected services in one extensible platform. The repository contains the Python application engine, first-party MoonWitness applications, a separate Next.js experience layer, the ARSY host agent, a services orchestrator, and a Docker Compose deployment.
 
-## Architecture Overview
+## Platform architecture
 
-`	ext
-                       ┌──────────────────────────────────────────┐
-  Browser / RPC ──────▶│  flectra (Python / Flectra 3.0 Engine)   │
-  :8069 / :8072        │  - addons/moonwitness_base               │
-                       │  - addons/moonwitness_arsy               │
-                       │  - addons/moonwitness_orchestrator       │
-                       └───────┬──────────────────┬───────────────┘
-                               │                  │
-                 SQL :5432     │                  │ Internal HTTP (shared-secret tokens)
-                               ▼                  ├──────────────────────────┐
-                       ┌───────────────┐          ▼                          ▼
-                       │ db (Postgres) │  ┌────────────────────┐    ┌────────────────────────┐
-                       │ postgres:15   │  │ arsy-agent (Go)    │    │ orchestrator (Fastify) │
-                       └───────────────┘  │ docker-agent/      │    │ services/orchestrator/ │
-                                          │ owns docker.sock   │    │ :8090 (WhatsApp/Baileys│
-                                          │ + /backups         │    │ + persistent sessions) │
-                                          └────────────────────┘    └────────────────────────┘
-`
+| Layer | Responsibility |
+| --- | --- |
+| Core engine | Python runtime, PostgreSQL ORM, model metadata, access rules, actions, reports, and RPC |
+| MoonWitness applications | Shared platform foundation, ARSY operations, service orchestration, and domain modules |
+| Web experience | Next.js App Router, secure server-side sessions, shared UI package, and model-driven read-only workspace |
+| Host operations | Go agent for container status, controlled actions, logs, database backup, and restore |
+| Connected services | TypeScript/Fastify service runtime for integrations such as WhatsApp |
+| Persistence | PostgreSQL plus named volumes for application data, backups, and integration sessions |
 
-- **ERP/ORM Engine (lectra)**: Flectra 3.0 Python runtime serving the web client, ORM, database manager, and RPC endpoints on ports 8069 (HTTP) and 8072 (WebSocket/Gevent).
-- **First-Party Addons (ddons/moonwitness_*)**:
-  - [addons/moonwitness_base](addons/moonwitness_base): Shared abstract base model (moonwitness.base), root MoonWitness application menu, and base administration security groups.
-  - [addons/moonwitness_arsy](addons/moonwitness_arsy): Host and stack operations panel inside Flectra (moonwitness_arsy.agent / moonwitness_arsy.action) that communicates with the Go ARSY agent over HTTP using a shared token (without mounting docker.sock into the Flectra container).
-  - [addons/moonwitness_orchestrator](addons/moonwitness_orchestrator): Flectra client (moonwitness.orchestrator) and backend WhatsApp dashboard communicating with the Fastify orchestrator over HTTP.
-- **Services Orchestrator ([services/orchestrator](services/orchestrator))**: TypeScript/Fastify service listening internally on port 8090 for JavaScript-native integrations (currently WhatsApp via @whiskeysockets/baileys with session storage under /data/wa-session).
-- **ARSY Host Agent ([docker-agent](docker-agent))**: Go 1.22 HTTP agent with exclusive access to /var/run/docker.sock and the rsy-backups volume for container status, actions, logs, and PostgreSQL backup/restore operations.
-- **PostgreSQL (db)**: PostgreSQL 15 container storing Flectra and MoonWitness relational data on the lectra-db-data volume.
+The architecture keeps the core data and authorization model authoritative while allowing the MoonWitness experience to evolve independently. The Next.js workspace does not create a parallel ORM or a second authorization system.
 
-## Repository Layout
+## Repository map
 
 | Path | Purpose |
 | --- | --- |
-| [flectra/](flectra/) | Flectra 3.0 Python core server, ORM, CLI, and release metadata |
-| [addons/moonwitness_base](addons/moonwitness_base) | Shared MoonWitness base addon, root menu, and security groups |
-| [addons/moonwitness_arsy](addons/moonwitness_arsy) | MoonWitness ARSY addon for managing the stack through rsy-agent |
-| [addons/moonwitness_orchestrator](addons/moonwitness_orchestrator) | MoonWitness Orchestrator addon and WhatsApp dashboard UI |
-| [services/orchestrator](services/orchestrator) | TypeScript/Fastify orchestrator service (moonwitness-orchestrator) |
-| [docker-agent](docker-agent) | Go 1.22 ARSY host agent (github.com/A-L-L-A-H/flectra/docker-agent) |
-| [Dockerfile](Dockerfile) | Python 3.11 container image for the Flectra 3.0 engine |
-| [entrypoint.sh](entrypoint.sh) | Container startup, PostgreSQL wait, config generation, and optional DB init |
-| [docker-compose.yml](docker-compose.yml) | Local multi-service stack (db, lectra, rsy-agent, orchestrator) |
-| [.env.example](.env.example) | Template environment variables for Docker Compose |
-| [.gitlab-ci.yml](.gitlab-ci.yml) | Upstream Flectra GitLab CI pipeline definition |
-| [setup.py](setup.py) | Python package definition (keeps the lectra package/import name) |
+| `addons/moonwitness_base` | Shared application foundation, root application menu, and security groups |
+| `addons/moonwitness_arsy` | Host and stack operations interface |
+| `addons/moonwitness_orchestrator` | Connected-service configuration and WhatsApp workspace |
+| `apps/web` | Next.js workspace and public entry experience |
+| `packages/ui` | Shared UI components and MoonWitness design tokens |
+| `packages/flectra-client` | Typed client adapter for the native JSON-RPC protocol |
+| `services/orchestrator` | TypeScript/Fastify integration service |
+| `docker-agent` | Go host agent with controlled access to the container runtime |
+| `docker-compose.yml` | Local multi-service deployment |
+| `docs/brand` | Product identity and experience rules |
 
-## Prerequisites
+## Run with Docker Compose
 
-- **Docker Engine** and **Docker Compose** (v2) to run the full stack
-- Optional for standalone component development outside Docker:
-  - Python 3.10+ (Docker image uses Python 3.11) and PostgreSQL 15
-  - Node.js 20+ and npm for [services/orchestrator](services/orchestrator)
-  - Go 1.22+ for [docker-agent](docker-agent)
+### 1. Configure secrets
 
-## Local Setup (Docker Compose)
+```bash
+cp .env.example .env
+```
 
-1. Copy the environment template and set strong secrets:
+Edit `.env` and set unique, strong values for the database password, platform master password, and internal service tokens. Do not commit the real `.env` file.
 
-   `ash
-   cp .env.example .env
-   `
+### 2. Build and start
 
-2. Edit .env and configure the variables used by [docker-compose.yml](docker-compose.yml):
+```bash
+docker compose up -d --build
+```
 
-   | Variable | Default / Required | Description |
-   | --- | --- | --- |
-   | POSTGRES_USER | lectra | PostgreSQL role used by db, lectra, and rsy-agent |
-   | POSTGRES_PASSWORD | **Required** | PostgreSQL password (db and lectra) |
-   | POSTGRES_DB | lectra | Default PostgreSQL database name |
-   | ADMIN_PASSWD | **Required** | Flectra master database manager password |
-   | FLECTRA_BIND_IP | 127.0.0.1 | Host interface for published Flectra ports |
-   | FLECTRA_PORT | 8069 | Published HTTP port for Flectra |
-   | FLECTRA_GEVENT_PORT | 8072 | Published WebSocket/Gevent port for Flectra |
-   | DEFAULT_PRODUCTIVITY_APPS | alse (	rue in .env.example) | Enable default productivity apps flag |
-   | INIT_DB | alse | If 	rue, initialize POSTGRES_DB with ase on first boot; if alse, use the database manager |
-   | PANEL_TOKEN | **Required** | Shared secret authenticating moonwitness_arsy to rsy-agent |
-   | ORCHESTRATOR_TOKEN | **Required** | Shared secret authenticating moonwitness_orchestrator to orchestrator |
+The native application interface is published on port `8069` by default. Create or select a database through the database manager, then install the MoonWitness applications:
 
-3. Build and start the stack:
+- `moonwitness_base`
+- `moonwitness_arsy`
+- `moonwitness_orchestrator`
 
-   `ash
-   docker compose up -d --build
-   `
+The stack also exposes the event-driven integration service internally on port `8090`. The host agent remains on the private Compose network and must not be published directly to the public internet.
 
-4. Open the web UI at http://127.0.0.1:8069 (or your configured FLECTRA_BIND_IP and FLECTRA_PORT), create or select a database via the database manager, and install moonwitness_base, moonwitness_arsy, and moonwitness_orchestrator.
+### 3. Configure connected services
 
-5. Configure the addon system parameters (ir.config_parameter) inside Flectra to match your .env tokens:
-   - moonwitness_arsy.agent_url and moonwitness_arsy.agent_token (PANEL_TOKEN)
-   - moonwitness_arsy.orchestrator_url and moonwitness_arsy.orchestrator_token (ORCHESTRATOR_TOKEN)
+Set the service endpoint and matching secret in the platform system settings:
 
-## Open Pull Requests (Not Yet on main)
+- `moonwitness_arsy.agent_url` and `moonwitness_arsy.agent_token`
+- `moonwitness_orchestrator.url` and `moonwitness_orchestrator.token`
 
-The following capabilities are tracked in open pull requests and are **not** part of the main branch yet:
+Use the same secrets as the corresponding Compose environment variables. Keep service endpoints private to the Compose network unless a reviewed deployment design requires otherwise.
 
-- **PR #1**: Next.js workspace frontend
-- **PR #2**: MoonWitness Corpus addon
-- **PR #3**: Docker runtime hardening
+## Run the Next.js experience
 
-## Attribution and License
+Requirements: Node.js 22+ and pnpm 10.
 
-MoonWitness builds on **Flectra 3.0** (by FlectraHQ) and its upstream **Odoo / OpenERP** foundation. The Python package and import namespace remain lectra for full compatibility with Flectra 3.0 addons and tooling.
+Set the server-only engine endpoint:
 
-This project is distributed under the **GNU Lesser General Public License v3.0 (LGPL-3)**. See [LICENSE](LICENSE) for full copyright and licensing details.
+```bash
+MOONWITNESS_ENGINE_URL=http://localhost:8069
+```
+
+Then run from the repository root:
+
+```bash
+pnpm install --frozen-lockfile
+pnpm dev
+```
+
+Open `http://localhost:3000/login` and sign in with an existing database account.
+
+### Session and access boundaries
+
+- Authentication delegates to the configured native application server.
+- The upstream session identifier stays in an HttpOnly, same-site cookie.
+- Browser JavaScript never receives the session identifier.
+- Login and logout enforce same-origin requests.
+- Server-side requests use bounded payloads and private no-store responses.
+- The current workspace renderer is read-only. It does not evaluate Python expressions or invent a parallel permission model.
+- Available navigation is derived from the active account's native menu permissions.
+
+## Development checks
+
+From the repository root:
+
+```bash
+pnpm lint
+pnpm typecheck
+pnpm test
+pnpm build
+```
+
+The services orchestrator has its own test and build commands in `services/orchestrator`. The host agent uses Go's standard `go test ./...` and `go vet ./...` checks.
+
+## Product identity
+
+MoonWitness is the sole product identity across the user experience, application surfaces, and operational documentation. See [the brand system](docs/brand/moonwitness-brand.md) before introducing new UI or customer-facing copy.
+
+Technical compatibility identifiers may remain in the source where changing them would alter stored data, APIs, or installation behavior. Such identifiers are not product labels; changes require explicit migration steps and tests.
+
+## Third-party notices
+
+This codebase includes adapted upstream components. Original copyright and license notices must remain intact. See [LICENSE](LICENSE), [COPYRIGHT](COPYRIGHT), and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
