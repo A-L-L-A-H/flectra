@@ -7,14 +7,14 @@ import { MissingFlectraSessionError } from "@/lib/flectra-errors";
 export const FLECTRA_SESSION_COOKIE = "flectra_session";
 
 export function getFlectraBaseUrl(): string {
-  const value = process.env.FLECTRA_URL?.trim();
-  if (!value) throw new Error("FLECTRA_URL is not configured.");
+  const value = (process.env.MOONWITNESS_ENGINE_URL || process.env.FLECTRA_URL)?.trim();
+  if (!value) throw new Error("MOONWITNESS_ENGINE_URL is not configured.");
 
   let url: URL;
   try {
     url = new URL(value);
   } catch {
-    throw new Error("FLECTRA_URL must be an absolute HTTP(S) URL.");
+    throw new Error("MOONWITNESS_ENGINE_URL must be an absolute HTTP(S) URL.");
   }
 
   if (
@@ -25,7 +25,7 @@ export function getFlectraBaseUrl(): string {
     url.search ||
     url.hash
   ) {
-    throw new Error("FLECTRA_URL must be an absolute HTTP(S) URL without credentials, query, or fragment.");
+    throw new Error("MOONWITNESS_ENGINE_URL must be an absolute HTTP(S) URL without credentials, query, or fragment.");
   }
 
   url.pathname = url.pathname.endsWith("/") ? url.pathname : `${url.pathname}/`;
