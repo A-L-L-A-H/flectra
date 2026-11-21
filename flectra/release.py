@@ -17,11 +17,11 @@ version = '.'.join(str(s) for s in version_info[:2]) + RELEASE_LEVELS_DISPLAY[ve
 series = serie = major_version = '.'.join(str(s) for s in version_info[:2])
 
 product_name = 'MoonWitness'
-description = 'MoonWitness Server (powered by Flectra 3.0)'
-long_desc = '''MoonWitness is an operational platform powered by the Flectra 3.0 Python ERP
-and ORM engine. It combines first-party MoonWitness addons, host management,
-and service orchestration with Flectra's modular web client, PostgreSQL ORM,
-customizable reports, and XML-RPC interfaces.
+description = 'MoonWitness Platform Server'
+long_desc = '''MoonWitness is a modular operational platform with a Python application
+engine, PostgreSQL-backed data models, native access control, extensible
+applications, connected services, host operations, customizable reports,
+and interoperable RPC interfaces.
 '''
 classifiers = """Development Status :: 5 - Production/Stable
 License :: OSI Approved :: GNU Lesser General Public License v3
