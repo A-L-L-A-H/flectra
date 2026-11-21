@@ -7,7 +7,7 @@ import { Badge } from "@moonwitness/ui/components/badge";
 import { Button } from "@moonwitness/ui/components/button";
 import { Card, CardContent } from "@moonwitness/ui/components/card";
 import { Skeleton } from "@moonwitness/ui/components/skeleton";
-import { FlectraBrowserClient } from "@moonwitness/engine-client/browser";
+import { EngineBrowserClient } from "@moonwitness/engine-client/browser";
 import { ModelFormView } from "@/components/model-form-view";
 import { loadRecordDetail, type RecordDetailResult } from "@/lib/record-detail";
 
@@ -22,7 +22,7 @@ export function ModelRecordDetailView({
   model: string;
   recordId: number;
 }) {
-  const client = useMemo(() => new FlectraBrowserClient(), []);
+  const client = useMemo(() => new EngineBrowserClient(), []);
   const [state, setState] = useState<DetailViewState>({ status: "loading" });
 
   const refresh = useCallback(async () => {
