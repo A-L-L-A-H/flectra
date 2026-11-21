@@ -388,7 +388,7 @@ export function parseFormView(
     return {
       ok: false,
       reason: "empty",
-      message: "Flectra did not return a form view architecture for this model.",
+      message: "No form view architecture was returned for this model.",
     };
   }
 
@@ -399,7 +399,7 @@ export function parseFormView(
     return {
       ok: false,
       reason: "malformed",
-      message: "Flectra returned a malformed XML form architecture.",
+      message: "The server returned a malformed XML form architecture.",
     };
   }
 
@@ -415,7 +415,7 @@ export function parseFormView(
     return {
       ok: false,
       reason: "empty",
-      message: "This Flectra form view is hidden by view modifiers.",
+      message: "This form view is hidden by view modifiers.",
     };
   }
 
@@ -482,7 +482,7 @@ export function parseFormView(
     return {
       ok: false,
       reason: "empty",
-      message: "No readable fields are available in this Flectra form view.",
+      message: "No readable fields are available in this form view.",
     };
   }
 
