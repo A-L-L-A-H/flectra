@@ -3,11 +3,11 @@
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { AlertCircle, ArrowLeft, LoaderCircle, RefreshCw } from "lucide-react";
-import { Badge } from "@workspace/ui/components/badge";
-import { Button } from "@workspace/ui/components/button";
-import { Card, CardContent } from "@workspace/ui/components/card";
-import { Skeleton } from "@workspace/ui/components/skeleton";
-import { FlectraBrowserClient } from "@workspace/flectra-client/browser";
+import { Badge } from "@moonwitness/ui/components/badge";
+import { Button } from "@moonwitness/ui/components/button";
+import { Card, CardContent } from "@moonwitness/ui/components/card";
+import { Skeleton } from "@moonwitness/ui/components/skeleton";
+import { FlectraBrowserClient } from "@moonwitness/engine-client/browser";
 import { ModelFormView } from "@/components/model-form-view";
 import { loadRecordDetail, type RecordDetailResult } from "@/lib/record-detail";
 
