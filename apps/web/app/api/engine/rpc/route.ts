@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { getFlectraErrorStatus } from "@/lib/flectra-errors";
-import { getAuthenticatedFlectraClient, sameOrigin } from "@/lib/flectra-server";
+import { getEngineErrorStatus } from "@/lib/engine-errors";
+import { getAuthenticatedEngineClient, sameOrigin } from "@/lib/engine-server";
 import { privateNoStoreHeaders, readJsonObject } from "@/lib/http";
 
 export const runtime = "nodejs";
@@ -37,7 +37,7 @@ function isBoundedDomain(value: unknown, depth = 0, budget = { nodes: 0 }): valu
 }
 
 function safeErrorMessage(error: unknown): string {
-  const status = getFlectraErrorStatus(error);
+  const status = getEngineErrorStatus(error);
   if (status === 401) return "Your session is no longer valid. Sign in again.";
   if (status === 403) return "Access to this data was denied.";
   return "Unable to complete this read request.";
@@ -148,12 +148,12 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const { client } = await getAuthenticatedFlectraClient();
+    const { client } = await getAuthenticatedEngineClient();
     const result = await client.callKw(model, method, args, kwargs);
     return NextResponse.json({ result }, { headers: privateNoStoreHeaders() });
   } catch (error) {
     return NextResponse.json({ error: safeErrorMessage(error) }, {
-      status: getFlectraErrorStatus(error),
+      status: getEngineErrorStatus(error),
       headers: privateNoStoreHeaders(),
     });
   }
