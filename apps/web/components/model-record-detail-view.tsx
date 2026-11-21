@@ -112,7 +112,7 @@ export function ModelRecordDetailView({
           <CardContent className="p-8 text-center">
             <p className="text-base font-medium">Record not found</p>
             <p className="mt-2 text-sm text-muted-foreground">
-              This record does not exist or is not accessible with your Flectra session.
+              This record does not exist or is not accessible with your current account.
             </p>
             <Button asChild variant="outline" size="sm" className="mt-5">
               <Link href={listHref}>Return to list</Link>
