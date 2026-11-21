@@ -1,15 +1,15 @@
 # MoonWitness Sidra — Master Architectural Design
 
 **Scope**: `blueprint-moonwitness-sidra-cosmic`  
-**Status**: APPROVED RECONCILIATION BLUEPRINT  
+**Status**: APPROVED RECONCILIATION MASTER BLUEPRINT  
 **Target Module**: `addons/moonwitness_sidra`  
 **Governing Ecosystem**: `bjo163/*` and `A-L-L-A-H/*`
 
 ---
 
-## 1. Executive Summary & Philosophical Alignment
+## 1. Executive Summary & Philosophical Foundations
 
-MoonWitness Sidra is the central knowledge engine of the MoonWitness ecosystem. It harmonizes the visionary foundations laid across the user's repositories:
+MoonWitness Sidra serves as the epistemological heart of the MoonWitness ecosystem, unifying the foundational frameworks created across the user's repositories:
 - **`bjo163/universal-ontology-engine` (OX-DX)**: The 49-level universal resolution spine (*"Quran Inspired ALLAH my Beloved — FROM STRUCTURE TO EXPERIENCE"*).
 - **`bjo163/witness-semantic-engine` (WSI)**: The 14-stage downstream semantic analysis engine (Blueprint 3.2-draft, Machine Contract 0.2.0).
 - **`bjo163/AQEL`**: The Arabic-first programming and semantic inference architecture (`حقيقة`, `قاعدة`, `استنتج`, `تحقق`, `اشرح`).
@@ -153,7 +153,9 @@ Drawing from `bjo163/AQEL`, Sidra equips researchers with a rigorous truth-verif
 | Decision Area | Selected Approach | Alternative Rejected | Rationale |
 | :--- | :--- | :--- | :--- |
 | **Schema Generation** | Pure Flectra Declarative ORM | Raw PostgreSQL SQL DDL | Eliminates brittle custom migrations; maintains full compatibility with Flectra backup, export, and upgrade lifecycles. |
+| **Entity Addressing** | Integer `id` (PK) + Unique Indexed `urn` | String `id TEXT PRIMARY KEY` | Preserves Flectra ORM base class compatibility while maintaining deterministic URN compatibility with RGBL v0.1. |
 | **Vector Storage** | Native `pgvector` inside PostgreSQL 16 | Dedicated Vector DB (Qdrant/Milvus) | Zero-config deployment: runs in the existing Docker container without introducing external infrastructure complexity. |
 | **Search Engine** | PostgreSQL GIN Full-Text Search + tsvector | Elasticsearch / MeiliSearch | Sufficient for 6M+ passages with sub-400ms latency while avoiding additional memory overhead. |
 | **Lineage Representation**| Modified Preorder Tree Traversal (MPTT) | Adjacency List / External Graph | Enables fast recursive ancestor and descendant lookups directly within SQL queries using `parent_path`. |
-| **Corpus Ingestion** | Chunked Streaming JSONL Importer (1000/batch) | ORM row-by-row `create()` | Overcomes Python ORM memory overhead, achieving complete 265MB corpus ingestion in under 30 minutes. |
+| **Corpus Ingestion** | Two-Pass Ingestion with Cache Invalidation | Single-pass monolithic ORM load | Prevents OOM heap exhaustion on 265MB JSONL; loads core text spine in Phase 2 and semantic enrichments in Phases 3/4. |
+| **Graph Traversal** | Native PostgreSQL Recursive CTE | Apache AGE (C-extension) | Rejects external C-extension build dependencies in PostgreSQL; achieves < 35ms 2-hop graph queries natively. |
