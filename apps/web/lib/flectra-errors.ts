@@ -1,4 +1,4 @@
-import { FlectraRpcError } from "@workspace/flectra-client";
+import { FlectraRpcError } from "@moonwitness/engine-client";
 
 export class MissingFlectraSessionError extends Error {
   constructor() {
