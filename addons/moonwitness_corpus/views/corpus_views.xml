@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <record id="view_mw_corpus_tradition_tree" model="ir.ui.view">
+        <field name="name">moonwitness.corpus.tradition.tree</field>
+        <field name="model">moonwitness.corpus.tradition</field>
+        <field name="arch" type="xml">
+            <tree create="false" edit="false" delete="false">
+                <field name="name"/>
+                <field name="external_id"/>
+                <field name="dataset_count"/>
+                <field name="total_records"/>
+                <field name="primary_language"/>
+                <field name="scripts"/>
+                <field name="last_synced"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_mw_corpus_work_tree" model="ir.ui.view">
+        <field name="name">moonwitness.corpus.work.tree</field>
+        <field name="model">moonwitness.corpus.work</field>
+        <field name="arch" type="xml">
+            <tree create="false" edit="false" delete="false">
+                <field name="name"/>
+                <field name="external_id"/>
+                <field name="kind"/>
+                <field name="work_type"/>
+                <field name="tradition"/>
+                <field name="last_synced"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_mw_corpus_search_wizard_form" model="ir.ui.view">
+        <field name="name">moonwitness.corpus.search.wizard.form</field>
+        <field name="model">moonwitness.corpus.search.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Search MoonWitness Corpus">
+                <group>
+                    <field name="query" placeholder="Search canonical corpus records..."/>
+                    <field name="tradition_id" options="{'no_create': True}"/>
+                    <field name="limit"/>
+                </group>
+                <group>
+                    <button name="action_search" type="object" string="Search Corpus"
+                            class="oe_highlight" icon="fa-search"/>
+                    <field name="result_count" readonly="1"/>
+                    <field name="has_more" readonly="1"/>
+                </group>
+                <field name="status_message" readonly="1" nolabel="1"
+                       invisible="not status_message"/>
+                <field name="result_ids" nolabel="1" readonly="1">
+                    <tree create="false" edit="false" delete="false">
+                        <field name="name"/>
+                        <field name="external_id"/>
+                        <field name="kind"/>
+                        <field name="tradition"/>
+                        <field name="language"/>
+                        <field name="external_url" widget="url"/>
+                    </tree>
+                </field>
+                <footer>
+                    <button string="Close" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_mw_corpus_traditions" model="ir.actions.act_window">
+        <field name="name">Traditions</field>
+        <field name="res_model">moonwitness.corpus.tradition</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{'create': False, 'edit': False, 'delete': False}</field>
+    </record>
+
+    <record id="action_mw_corpus_works" model="ir.actions.act_window">
+        <field name="name">Works</field>
+        <field name="res_model">moonwitness.corpus.work</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{'create': False, 'edit': False, 'delete': False}</field>
+    </record>
+
+    <record id="action_mw_corpus_search" model="ir.actions.act_window">
+        <field name="name">Search Corpus</field>
+        <field name="res_model">moonwitness.corpus.search.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_mw_corpus_root" name="MoonWitness" sequence="85"
+              groups="base.group_user"/>
+    <menuitem id="menu_mw_corpus_search" name="Search Corpus"
+              parent="menu_mw_corpus_root" action="action_mw_corpus_search"
+              sequence="10" groups="base.group_user"/>
+    <menuitem id="menu_mw_corpus_works" name="Works"
+              parent="menu_mw_corpus_root" action="action_mw_corpus_works"
+              sequence="20" groups="base.group_user"/>
+    <menuitem id="menu_mw_corpus_traditions" name="Traditions"
+              parent="menu_mw_corpus_root" action="action_mw_corpus_traditions"
+              sequence="30" groups="base.group_user"/>
+</flectra>
