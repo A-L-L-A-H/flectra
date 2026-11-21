@@ -236,7 +236,7 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
                 <meta name="theme-color" content="#009efb"/>
                 <link rel="manifest" href="/web/manifest.webmanifest" crossorigin="use-credentials"/>
-                <link rel="apple-touch-icon" href="/web/static/img/flectra-icon-ios.png"/>
+                <link rel="apple-touch-icon" href="/moonwitness_base/static/description/icon.png"/>
                 <script type="text/javascript">
                     // Block to avoid leaking variables in the script scope
                     {
