@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { WorkspaceShell, type WorkspaceNavigationItem } from "@/components/workspace-shell";
-import { getAuthenticatedFlectraClient } from "@/lib/flectra-server";
+import { getAuthenticatedEngineClient } from "@/lib/engine-server";
 
 type NativeMenu = {
   id?: number | string;
@@ -68,7 +68,7 @@ export default async function WorkspaceLayout({
   let navigation: WorkspaceNavigationItem[] = [];
 
   try {
-    const { client } = await getAuthenticatedFlectraClient();
+    const { client } = await getAuthenticatedEngineClient();
     const session = await client.getSessionInfo();
 
     // The native menu loader applies the current user's menu groups and
