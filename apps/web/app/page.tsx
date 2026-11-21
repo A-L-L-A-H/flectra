@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight, Braces, Database, Layers3, ShieldCheck, Workflow } from "lucide-react";
-import { Button } from "@workspace/ui/components/button";
+import { Button } from "@moonwitness/ui/components/button";
 import { MoonWitnessMark } from "@/components/moonwitness-mark";
 
 const runtimeLayers = [
